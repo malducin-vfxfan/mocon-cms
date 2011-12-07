@@ -82,7 +82,6 @@ class PagesController extends AppController {
  * @return void
  */
 	public function view($slug = null) {
-//Configure::write('debug', 0);
 		$this->Page->recursive = -1;
 		if (!$slug) {
 			throw new NotFoundException('Invalid Page.');
