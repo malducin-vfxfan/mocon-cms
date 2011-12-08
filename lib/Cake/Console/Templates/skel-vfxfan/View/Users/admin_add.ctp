@@ -9,10 +9,6 @@
  * @link          http://vfxfan.com VFXfan
  * @package       $packagename$
  * @subpackage    users
- * @version       $Id$
- * @modifiedby    malducin
- * @lastmodified  $Date$
- * @revision      $Revision$
  */
 ?>
 <div class="row">
