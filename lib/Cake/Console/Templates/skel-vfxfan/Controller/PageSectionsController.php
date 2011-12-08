@@ -130,4 +130,5 @@ class PageSectionsController extends AppController {
 		$this->Session->setFlash('Page Section was not deleted.', 'default', array('class' => 'message failure'));
 		$this->redirect(array('action' => 'admin_index'));
 	}
+
 }
