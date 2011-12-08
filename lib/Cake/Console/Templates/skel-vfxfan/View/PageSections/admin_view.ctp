@@ -61,6 +61,31 @@
 				<?php echo $pageSection['PageSection']['modified']; ?>
 				&nbsp;
 			</dd>
+			<dt>Images Folder</dt>
+			<dd>
+				/img/pages/<?php echo sprintf("%010d", $pageSection['Page']['id']); ?>
+				&nbsp;
+			</dd>
 		</dl>
 	</section>
+</div>
+<div class="row">
+	<aside class="admin-related">
+		<h3>Page Images</h3>
+		<table class="bordered-table zebra-striped">
+			<tr>
+				<th>Filename</th>
+				<th>Actions</th>
+			</tr>
+			<?php foreach ($images as $image): ?>
+			<tr>
+				<td><?php echo $this->Html->link($image, '/img/pages/'.sprintf("%010d", $pageSection['Page']['id']).'/'.$image, array('target' => '_blank')); ?></td>
+				<td>
+					<?php echo $this->Html->link('View', '/img/pages/'.sprintf("%010d", $pageSection['Page']['id']).'/'.$image, array('class' => 'btn', 'target' => '_blank')); ?>
+					<?php echo $this->Form->postLink('Delete', array('action' => 'admin_delete_file', $pageSection['Page']['id'], $image), array('class' => 'btn danger'), 'Are you sure you want to delete this image?'); ?>
+				</td>
+			</tr>
+			<?php endforeach; ?>
+		</table>
+	</aside>
 </div>

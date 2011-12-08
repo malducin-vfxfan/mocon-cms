@@ -127,4 +127,26 @@ class PageSection extends AppModel {
 		return $data;
 	}
 
+/**
+ * listFiles method
+ *
+ * @param string $id
+ * @return void
+ */
+	public function listFiles($id = null) {
+		if (!$id) return;
+
+		$directory = IMAGES.'pages'.DS.sprintf("%010d", $id);
+		$files = new DirectoryIterator($directory);
+		$images = array();
+
+		foreach ($files as $filename) {
+			if ($filename->isFile()) {
+				$images[] = $filename->getBasename();
+			}
+		}
+
+		return $images;
+	}
+
 }
