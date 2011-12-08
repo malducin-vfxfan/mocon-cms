@@ -20,9 +20,18 @@ $config = array(
 	),
 	'JqueryUi' => array(
 		'version' => '',
-		'theme' => 'vader'
+		'theme' => ''
 	),
 	'GoogleAnalytics' => array(
 		'trackerCode' => '',
-	)
+	),
+	'GoogleMaps' => array(
+		'key' => ''
+	),
+	'Twitter' => array(
+		'feed' => ''
+	),
+	'YouTube' => array(
+		'feed' => ''
+	),
 );
