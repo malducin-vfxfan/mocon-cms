@@ -23,7 +23,7 @@
 	</section>
 	<section class="admin-content">
 		<h2>Edit a Page</h2>
-		<?php echo $this->Form->create('Page', array('class' => 'form-stacked'));?>
+		<?php echo $this->Form->create('Page', array('class' => 'form-stacked', 'type' => 'file'));?>
 			<fieldset>
 				<legend>Admin Edit Page</legend>
 				<?php
@@ -31,8 +31,18 @@
 					echo $this->Form->input('title', array('div' => 'clearfix'));
 					echo $this->Form->input('slug', array('div' => 'clearfix'));
 					echo $this->Form->input('main', array('div' => 'clearfix'));
+					echo $this->Form->input('File.image', array('div' => 'clearfix', 'type' => 'file'));
 				?>
 			</fieldset>
 		<?php echo $this->Form->end('Submit');?>
+		<h3>Images</h3>
+		<table class="bordered-table zebra-striped">
+		<?php foreach ($images as $image): ?>
+			<tr>
+				<td><?php echo $this->Html->link($image, '/img/pages/'.sprintf("%010d", $this->Form->value('Page.id')).'/'.$image, array('target' => '_blank')); ?></td>
+				<td><?php echo $this->Form->postLink('Delete', array('action' => 'admin_delete_file', $this->Form->value('Page.id'), $image), array('class' => 'btn danger'), 'Are you sure you want to delete this image?'); ?></td>
+			</tr>
+		<?php endforeach; ?>
+		</table>
 	</section>
 </div>

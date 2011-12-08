@@ -123,6 +123,7 @@ class PagesController extends AppController {
 		$page = $this->Page->read(null, $id);
 		$this->set(compact('page'));
 		$this->set('title_for_layout', 'Page: '.$page['Page']['title']);
+		$this->set('images', $this->Page->listFiles($page['Page']['id']));
 	}
 
 /**
@@ -159,6 +160,7 @@ class PagesController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Page->save($this->request->data)) {
+				$this->Upload->uploadImageThumb('img'.DS.'pages'.DS.sprintf("%010d", $id), $this->data['File']['image']);
 				$this->Session->setFlash('The Page has been saved.', 'default', array('class' => 'message success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
@@ -168,6 +170,7 @@ class PagesController extends AppController {
 			$this->request->data = $this->Page->read(null, $id);
 		}
 		$this->set('title_for_layout', 'Edit Page');
+		$this->set('images', $this->Page->listFiles($id));
 	}
 
 /**
@@ -191,6 +194,33 @@ class PagesController extends AppController {
 		}
 		$this->Session->setFlash('Page was not deleted.', 'default', array('class' => 'message failure'));
 		$this->redirect(array('action' => 'admin_index'));
+	}
+
+/**
+ * admin_deleteFile method
+ *
+ * @param string $id
+ * @param string $filename
+ * @return void
+ */
+	public function admin_delete_file($id = null, $filename = null) {
+		$this->layout = 'default_admin';
+		if (!$this->request->is('post')) {
+			throw new MethodNotAllowedException();
+		}
+		$this->Page->id = $id;
+		if (!$this->Page->exists()) {
+			throw new NotFoundException('Invalid Page.');
+		}
+		if (!$filename) {
+			throw new NotFoundException('Invalid Image.');
+		}
+		if ($this->Page->deleteFile($id, $filename)) {
+			$this->Session->setFlash('File deleted.', 'default', array('class' => 'message success'));
+			$this->redirect(array('action'=>'admin_view', $id));
+		}
+		$this->Session->setFlash('File was not deleted.', 'default', array('class' => 'message failure'));
+		$this->redirect(array('action' => 'admin_view', $id));
 	}
 
 }
