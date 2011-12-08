@@ -65,7 +65,7 @@
  * - `handler` - callback - The callback to handle exceptions. You can set this to any callback type,
  *   including anonymous functions.
  * - `renderer` - string - The class responsible for rendering uncaught exceptions.  If you choose a custom class you
- *   should place the file for that class in app/Error. This class needs to implement a render method.
+ *   should place the file for that class in app/Lib/Error. This class needs to implement a render method.
  * - `log` - boolean - Should Exceptions be logged?
  *
  * @see ErrorHandler for more information on exception handling and configuration.
@@ -144,7 +144,7 @@
  *
  * ## Options
  *
- * - `Session.name` - The name of the cookie to use. Defaults to 'CAKEPHP'
+ * - `Session.cookie` - The name of the cookie to use. Defaults to 'CAKEPHP'
  * - `Session.timeout` - The number of minutes you want sessions to live for. This timeout is handled by CakePHP
  * - `Session.cookieTimeout` - The number of minutes you want session cookies to live for.
  * - `Session.checkAgent` - Do you want the user agent to be checked when starting sessions? You might want to set the
@@ -160,7 +160,7 @@
  *
  * The built in defaults are:
  *
- * - 'php' -Uses settings defined in your php.ini.
+ * - 'php' - Uses settings defined in your php.ini.
  * - 'cake' - Saves session files in CakePHP's /tmp directory.
  * - 'database' - Uses CakePHP's database sessions.
  * - 'cache' - Use the Cache class to save sessions.
@@ -195,8 +195,8 @@
  * Will append a querystring parameter containing the time the file was modified. This is
  * useful for invalidating browser caches.
  *
- * Set to `true` to apply timestamps, when debug = 0, or set to 'force' to always enable
- * timestamping.
+ * Set to `true` to apply timestamps when debug > 0. Set to 'force' to always enable
+ * timestamping regardless of debug value.
  */
 	//Configure::write('Asset.timestamp', true);
 /**
@@ -224,8 +224,8 @@
 	Configure::write('Acl.database', 'default');
 
 /**
- * If you are on PHP 5.3 uncomment this line and correct your server timezone
- * to fix the date & time related errors.
+ * Uncomment this line and correct your server timezone to fix
+ * any date & time related errors.
  */
 	//date_default_timezone_set('UTC');
 
@@ -246,7 +246,6 @@
  * 		'serialize' => true, [optional]
  *	));
  *
- *
  * APC (http://pecl.php.net/package/APC)
  *
  * 	 Cache::config('default', array(
@@ -262,11 +261,10 @@
  *		'engine' => 'Xcache', //[required]
  *		'duration'=> 3600, //[optional]
  *		'probability'=> 100, //[optional]
- * 		'prefix' => Inflector::slug(APP_DIR) . '_', //[optional] prefix every cache file with this string
+ *		'prefix' => Inflector::slug(APP_DIR) . '_', //[optional] prefix every cache file with this string
  *		'user' => 'user', //user from xcache.admin.user settings
- *      'password' => 'password', //plaintext password (xcache.admin.pass)
+ *		'password' => 'password', //plaintext password (xcache.admin.pass)
  *	));
- *
  *
  * Memcache (http://www.danga.com/memcached/)
  *
@@ -280,9 +278,16 @@
  * 		), //[optional]
  * 		'persistent' => true, // [optional] set this to false for non-persistent connections
  * 		'compress' => false, // [optional] compress data in Memcache (slower, but uses less memory)
- * 		'persistent' => true, // [optional] set this to false for non-persistent connections
  *	));
  *
+ *  Wincache (http://php.net/wincache)
+ *
+ * 	 Cache::config('default', array(
+ *		'engine' => 'Wincache', //[required]
+ *		'duration'=> 3600, //[optional]
+ *		'probability'=> 100, //[optional]
+ *		'prefix' => Inflector::slug(APP_DIR) . '_', //[optional]  prefix every cache file with this string
+ *	));
  */
 
 /**
@@ -291,7 +296,7 @@
  *
  */
 $engine = 'File';
-if (extension_loaded('apc') && (php_sapi_name() !== 'cli' || ini_get('apc.enable_cli'))) {
+if (extension_loaded('apc') && function_exists('apc_dec') && (php_sapi_name() !== 'cli' || ini_get('apc.enable_cli'))) {
 	$engine = 'Apc';
 }
 
@@ -314,7 +319,7 @@ Cache::config('_cake_core_', array(
 ));
 
 /**
- * Configure the cache for model, and datasource caches.  This cache configuration
+ * Configure the cache for model and datasource caches.  This cache configuration
  * is used to store schema descriptions, and table listings in connections.
  */
 Cache::config('_cake_model_', array(
