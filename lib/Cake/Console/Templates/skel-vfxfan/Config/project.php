@@ -34,4 +34,7 @@ $config = array(
 	'YouTube' => array(
 		'feed' => ''
 	),
+	'TinyMCE' => array(
+		'active' => false
+	),
 );
