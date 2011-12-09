@@ -27,6 +27,16 @@ class PageSectionsController extends AppController {
 	public $components = array('Brita');
 
 /**
+ * beforeFilter method
+ *
+ * @return void
+ */
+ 	public function beforeFilter() {
+ 		parent::beforeFilter();
+ 		$this->Security->requireAuth(array('admin_tinymceImageList'));
+ 	}
+
+/**
  * admin_index method
  *
  * @return void
@@ -129,6 +139,22 @@ class PageSectionsController extends AppController {
 		}
 		$this->Session->setFlash('Page Section was not deleted.', 'default', array('class' => 'message failure'));
 		$this->redirect(array('action' => 'admin_index'));
+	}
+
+/**
+ * admin_tinymceImageList method
+ *
+ * @param string $id
+ * @return mixed
+ */
+	public function admin_tinymceImageList($id = null) {
+		$this->layout = 'ajax';
+
+		 if (!$id) return;
+
+		$images = $this->PageSection->listFiles($id);
+		$this->set(compact('images'));
+		$this->set('page_id', $id);
 	}
 
 }

@@ -10,6 +10,9 @@
  * @package       $packagename$
  * @subpackage    posts
  */
+if (Configure::read('TinyMCE.active')) {
+	echo $this->element('TinyMCE/config_basic', array('external_image_list_url' => $this->Html->url(array('controller' => 'page_sections', 'action' => 'admin_tinymceImageList', $this->Form->value('Page.id')))));
+}
 ?>
 <div class="row">
 	<section class="admin-actions">

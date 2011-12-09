@@ -10,7 +10,10 @@
  * @package       $packagename$
  * @subpackage    pages
  */
- $this->Html->script(array('forms_pages'), array('inline' => false));
+$this->Html->script(array('forms_pages'), array('inline' => false));
+if (Configure::read('TinyMCE.active')) {
+	echo $this->element('TinyMCE/config_basic', array('external_image_list_url' => $this->Html->url(array('controller' => 'page_sections', 'action' => 'admin_tinymceImageList', $this->Form->value('Page.id')))));
+}
 ?>
 <div class="row">
 	<section class="admin-actions">
