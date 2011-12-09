@@ -185,9 +185,9 @@ class Page extends AppModel {
 	public function listFiles($id = null) {
 		if (!$id) return;
 
+		$images = array();
 		$directory = IMAGES.'pages'.DS.sprintf("%010d", $id);
 		$files = new DirectoryIterator($directory);
-		$images = array();
 
 		foreach ($files as $filename) {
 			if ($filename->isFile()) {
@@ -195,6 +195,7 @@ class Page extends AppModel {
 			}
 		}
 
+		sort($images);
 		return $images;
 	}
 
