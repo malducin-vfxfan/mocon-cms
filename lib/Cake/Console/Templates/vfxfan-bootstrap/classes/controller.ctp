@@ -7,10 +7,12 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    templates
+ * @package       templates
+ * @subpackage    templates.vfxfan-bootstrap.controller
  */
 
+$packagename = strtolower(Inflector::underscore($controllerName));
+$subpackagename = $packagename.'.controller';
 echo "<?php\n";
 $docString = <<<DOCSTRING
 /**
@@ -21,8 +23,8 @@ $docString = <<<DOCSTRING
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       \$packagename\$
- * @subpackage    $controllerName
+ * @package       $packagename
+ * @subpackage    $subpackagename
  */
 DOCSTRING;
 echo $docString."\n";

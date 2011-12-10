@@ -7,9 +7,11 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009, 2011, ILMfan (http://ilmfan.com)
  * @link          http://ilmfan.com ILMfan
- * @package       $packagename$
- * @subpackage    templates
+ * @package       templates
+ * @subpackage    templates.vfxfan-bootstrap.views.view
  */
+$packagename = strtolower(Inflector::slug($pluralHumanName));
+$subpackagename = $packagename.'.views.view';
 ?>
 <?php echo "<?php\n"; ?>
 /**
@@ -20,8 +22,8 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    <?php echo $pluralHumanName."\n"; ?>
+ * @subpackage    <?php echo $packagename."\n"; ?>
+ * @subpackage    <?php echo $subpackagename."\n"; ?>
  */
 <?php echo "?>\n"; ?>
 <div class="row">
