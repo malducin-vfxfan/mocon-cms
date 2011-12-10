@@ -1473,13 +1473,6 @@ div.paging span.current {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
     padding: 4px;
 }
-.framed:before, .framed:after {
-    content: "";
-    display: table;
-}
-.framed:after {
-    clear: both;
-}
 a > img:hover {
     border-color: #0069D6;
     box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
