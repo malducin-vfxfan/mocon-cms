@@ -114,10 +114,10 @@ class EventsController extends AppController {
 			$this->Event->create();
 			if ($this->Event->save($this->request->data)) {
 				$this->Upload->uploadImageThumb('img'.DS.'events', $this->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->data['File']['image']['name']));
-				$this->Session->setFlash('The Event has been saved');
+				$this->Session->setFlash('The Event has been saved', 'default', array('class' => 'message success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Event could not be saved. Please, try again.');
+				$this->Session->setFlash('The Event could not be saved. Please, try again.', 'default', array('class' => 'message failure'));
 			}
 		}
 		$this->set('title_for_layout', 'Add Event');
@@ -138,10 +138,10 @@ class EventsController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Event->save($this->request->data)) {
 				$this->Upload->uploadImageThumb('img'.DS.'events', $this->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->data['File']['image']['name']));
-				$this->Session->setFlash('The Event has been saved');
+				$this->Session->setFlash('The Event has been saved', 'default', array('class' => 'message success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Event could not be saved. Please, try again.');
+				$this->Session->setFlash('The Event could not be saved. Please, try again.', 'default', array('class' => 'message failure'));
 			}
 		} else {
 			$this->request->data = $this->Event->read(null, $id);
@@ -165,10 +165,10 @@ class EventsController extends AppController {
 			throw new NotFoundException('Invalid Event');
 		}
 		if ($this->Event->delete()) {
-			$this->Session->setFlash('Event deleted');
+			$this->Session->setFlash('Event deleted', 'default', array('class' => 'message success'));
 			$this->redirect(array('action'=>'admin_index'));
 		}
-		$this->Session->setFlash('Event was not deleted');
+		$this->Session->setFlash('Event was not deleted', 'default', array('class' => 'message failure'));
 		$this->redirect(array('action' => 'admin_index'));
 	}
 }
