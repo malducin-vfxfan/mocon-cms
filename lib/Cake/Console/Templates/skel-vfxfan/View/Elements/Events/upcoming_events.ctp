@@ -11,9 +11,9 @@
  * @package       events
  * @subpackage    events.elements
  */
-$posts = $this->requestAction(array('controller' => 'events', 'action' => 'latest_events'));
+$events = $this->requestAction(array('controller' => 'events', 'action' => 'upcomingEvents'));
 ?>
-<h2>Latest Events</h2>
+<h2>Upcoming Events</h2>
 <?php foreach ($events as $event): ?>
 <article class="contents" id="event-contents">
 	<figure class="image-right"><?php echo $this->FormatImage->idImage('events', $event['Event']['id']); ?></figure>
