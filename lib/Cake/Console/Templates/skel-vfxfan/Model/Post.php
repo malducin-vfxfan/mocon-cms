@@ -38,7 +38,7 @@ class Post extends AppModel {
 	public $validate = array(
 		'title' => array(
 			'notempty' => array(
-				'rule' => array('notempty'),
+				'rule' => array('notEmpty'),
 				'message' => 'This field cannot be left blank.',
 				'required' => true,
 				'last' => true // Stop validation after this rule
@@ -171,6 +171,22 @@ class Post extends AppModel {
 	}
 
 /**
+ * _cleanData method
+ *
+ * Cleans data array from forms.
+ *
+ * @param array $data Array of data to clean.
+ * @return array
+ */
+	private function _cleanData($data) {
+		$data['Post']['title'] = MySanitize::cleanSafe($data['Post']['title']);
+		$data['Post']['summary'] = MySanitize::cleanSafe($data['Post']['summary']);
+		$data['Post']['slug'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Post']['slug'], array('quotes' => ENT_NOQUOTES)), array(' ', '-', '_'));
+		$data['Post']['user_id'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Post']['user_id'], array('quotes' => ENT_NOQUOTES)), array(' ', '-', '_'));
+		return $data;
+	}
+
+/**
  * getLatest method
  *
  * Return the most recent posts and caches the content.
@@ -186,22 +202,6 @@ class Post extends AppModel {
 			Cache::write('latest_posts', $latest_posts);
 		}
 		return $latest_posts;
-	}
-
-/**
- * _cleanData method
- *
- * Cleans data array from forms.
- *
- * @param array $data Array of data to clean.
- * @return array
- */
-	private function _cleanData($data) {
-		$data['Post']['title'] = MySanitize::cleanSafe($data['Post']['title']);
-		$data['Post']['summary'] = MySanitize::cleanSafe($data['Post']['summary']);
-		$data['Post']['slug'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Post']['slug'], array('quotes' => ENT_NOQUOTES)), array(' ', '-', '_'));
-		$data['Post']['user_id'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Post']['user_id'], array('quotes' => ENT_NOQUOTES)), array(' ', '-', '_'));
-		return $data;
 	}
 
 }
