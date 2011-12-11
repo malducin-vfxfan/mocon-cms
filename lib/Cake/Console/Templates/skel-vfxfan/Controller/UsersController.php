@@ -141,7 +141,7 @@ class UsersController extends AppController {
 			}
 			else {
 				$this->request->data('User.password', $this->request->data('User.passwd'));
-				unset($this->data['User']['passwd']);
+				unset($this->request->data['User']['passwd']);
 				if ($this->User->save($this->request->data)) {
 					$this->Session->setFlash('The User has been saved.', 'default', array('class' => 'message success'));
 					$this->redirect(array('action' => 'admin_index'));

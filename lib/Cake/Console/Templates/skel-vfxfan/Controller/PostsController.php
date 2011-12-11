@@ -125,10 +125,10 @@ class PostsController extends AppController {
 		$this->layout = 'default_admin';
 		if ($this->request->is('post')) {
 			$this->Post->create();
-			$this->data['Post']['user_id'] = $this->Auth->user('id');
-			$this->data['Post']['content'] = $this->brita->purify($this->data['Post']['content']);
+			$this->request->data['Post']['user_id'] = $this->Auth->user('id');
+			$this->request->data['Post']['content'] = $this->brita->purify($this->request->data['Post']['content']);
 			if ($this->Post->save($this->request->data)) {
-				$this->Upload->uploadImageThumb('img'.DS.'posts', $this->data['File']['image'], $this->Upload->convertFilenameToId($this->Post->id, $this->data['File']['image']['name']));
+				$this->Upload->uploadImageThumb('img'.DS.'posts', $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Post->id, $this->request->data['File']['image']['name']));
 				$this->Session->setFlash('The Post has been saved.', 'default', array('class' => 'message success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
@@ -154,7 +154,7 @@ class PostsController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Post->save($this->request->data)) {
-				$this->Upload->uploadImageThumb('img'.DS.'posts', $this->data['File']['image'], $this->Upload->convertFilenameToId($this->Post->id, $this->data['File']['image']['name']));
+				$this->Upload->uploadImageThumb('img'.DS.'posts', $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Post->id, $this->request->data['File']['image']['name']));
 				$this->Session->setFlash('The Post has been saved.', 'default', array('class' => 'message success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {

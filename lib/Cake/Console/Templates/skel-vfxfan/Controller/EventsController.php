@@ -113,7 +113,7 @@ class EventsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Event->create();
 			if ($this->Event->save($this->request->data)) {
-				$this->Upload->uploadImageThumb('img'.DS.'events', $this->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->data['File']['image']['name']));
+				$this->Upload->uploadImageThumb('img'.DS.'events', $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->request->data['File']['image']['name']));
 				$this->Session->setFlash('The Event has been saved', 'default', array('class' => 'message success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
@@ -137,7 +137,7 @@ class EventsController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Event->save($this->request->data)) {
-				$this->Upload->uploadImageThumb('img'.DS.'events', $this->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->data['File']['image']['name']));
+				$this->Upload->uploadImageThumb('img'.DS.'events', $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->request->data['File']['image']['name']));
 				$this->Session->setFlash('The Event has been saved', 'default', array('class' => 'message success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {

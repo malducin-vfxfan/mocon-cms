@@ -76,7 +76,7 @@ class PageSectionsController extends AppController {
 		$this->layout = 'default_admin';
 		if ($this->request->is('post')) {
 			$this->PageSection->create();
-			$this->data['PageSection']['content'] = $this->brita->purify($this->data['PageSection']['content']);
+			$this->request->data['PageSection']['content'] = $this->brita->purify($this->request->data['PageSection']['content']);
 			if ($this->PageSection->save($this->request->data)) {
 				$this->Session->setFlash('The Page Section has been saved.', 'default', array('class' => 'message success'));
 				$this->redirect(array('action' => 'admin_view', $this->PageSection->id));
@@ -103,7 +103,7 @@ class PageSectionsController extends AppController {
 			throw new NotFoundException('Invalid Page Section.');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
-			$this->data['PageSection']['content'] = $this->brita->purify($this->data['PageSection']['content']);
+			$this->request->data['PageSection']['content'] = $this->brita->purify($this->request->data['PageSection']['content']);
 			if ($this->PageSection->save($this->request->data)) {
 				$this->Session->setFlash('The Page Section has been saved.', 'default', array('class' => 'message success'));
 				$this->redirect(array('action' => 'admin_view', $this->PageSection->id));
