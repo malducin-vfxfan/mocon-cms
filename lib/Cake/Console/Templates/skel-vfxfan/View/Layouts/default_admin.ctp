@@ -53,12 +53,13 @@
 						</ul>
 					</li>
 					<li class="dropdown">
-						<?php echo $this->Html->link('Content', '#', array('class' => 'dropdown-toggle')); ?>
+						<?php echo $this->Html->link('Basic Content', '#', array('class' => 'dropdown-toggle')); ?>
 						<ul class="dropdown-menu">
 							<li><?php echo $this->Html->link('Menu Items', array('controller' => 'menus', 'action' => 'admin_index')); ?></li>
 							<li><?php echo $this->Html->link('Pages', array('controller' => 'pages', 'action' => 'admin_index')); ?></li>
 							<li><?php echo $this->Html->link('Page Sections', array('controller' => 'page_sections', 'action' => 'admin_index')); ?></li>
 							<li><?php echo $this->Html->link('Posts', array('controller' => 'posts', 'action' => 'admin_index')); ?></li>
+							<li><?php echo $this->Html->link('Events', array('controller' => 'events', 'action' => 'admin_index')); ?></li>
 						</ul>
 					</li>
 					<li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'admin_logout')); ?></li>
