@@ -181,7 +181,7 @@ class Event extends AppModel {
  * @param int $num_posts Number of recent posts to display and cache.
  * @return array
  */
-	public function getLatest($num_events = 5) {
+	public function getUpcoming($num_events = 5) {
 		$latest_events = Cache::read('latest_events');
 		if (!$latest_events) {
 			$this->recursive = 0;
