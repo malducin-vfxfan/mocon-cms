@@ -11,7 +11,7 @@
  * @subpackage    templates.vfxfan-bootstrap.views.view
  */
 $packagename = strtolower(Inflector::slug($pluralHumanName));
-$subpackagename = $packagename.'.views.view';
+$subpackagename = $packagename.'.views';
 ?>
 <?php echo "<?php\n"; ?>
 /**

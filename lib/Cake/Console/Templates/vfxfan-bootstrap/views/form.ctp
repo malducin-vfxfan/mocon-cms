@@ -11,7 +11,7 @@
  * @subpackage    templates.vfxfan-bootstrap.views.form
  */
 $packagename = strtolower(Inflector::slug($pluralHumanName));
-$subpackagename = $packagename.'.views.form';
+$subpackagename = $packagename.'.views';
 ?>
 <?php echo "<?php\n"; ?>
 /**
