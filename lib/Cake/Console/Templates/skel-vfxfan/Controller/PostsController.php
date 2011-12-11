@@ -38,7 +38,7 @@ class PostsController extends AppController {
  */
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('latest_posts');
+		$this->Auth->allow('latestPosts');
 	}
 
 /**
@@ -82,7 +82,7 @@ class PostsController extends AppController {
  * @param int $num_posts
  * @return array
  */
-	public function latest_posts($num_posts = 5) {
+	public function latestPosts($num_posts = 5) {
 		$posts = $this->Post->getLatest($num_posts);
 		return $posts;
     }

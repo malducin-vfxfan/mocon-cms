@@ -10,7 +10,7 @@
  * @package       $packagename$
  * @subpackage    posts
  */
-$posts = $this->requestAction(array('controller' => 'posts', 'action' => 'latest_posts'));
+$posts = $this->requestAction(array('controller' => 'posts', 'action' => 'latestPosts'));
 ?>
 <h2>Latest News</h2>
 <?php foreach ($posts as $post): ?>
