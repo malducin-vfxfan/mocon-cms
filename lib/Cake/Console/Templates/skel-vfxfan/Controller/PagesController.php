@@ -135,7 +135,7 @@ class PagesController extends AppController {
 		$this->layout = 'default_admin';
 		if ($this->request->is('post')) {
 			$this->Page->create();
-			unset($this->Page->Pagesection->validate['page_id']);
+			unset($this->Page->PageSection->validate['page_id']);
 			if ($this->Page->saveAssociated($this->request->data, array('atomic' => false))) {
 				$this->Session->setFlash('The Page has been saved.', 'default', array('class' => 'message success'));
 				$this->redirect(array('action' => 'admin_index'));
