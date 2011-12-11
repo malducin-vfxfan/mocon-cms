@@ -23,7 +23,7 @@
 				<time class="date-created" datetime="<?php echo date(DATE_ATOM, strtotime($post['Post']['created'])); ?>">
 					<?php echo strftime("%B %d, %Y %H:%M:%S", strtotime($post['Post']['created'])); ?>
 				</time>
-				<div class="author">by <?php echo $post['User']['username']; ?></div>
+				<p>by <span class="author"><?php echo $post['User']['username']; ?></span></p>
 			</div>
 			<p class="contents-summary"><?php echo $post['Post']['summary']; ?></p>
 		    <p><?php echo $this->Html->link('Read more »', array('controller' => 'posts', 'action' => 'view', $post['Post']['slug'])); ?></p>
