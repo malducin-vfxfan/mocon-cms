@@ -32,7 +32,7 @@ if (Configure::read('TinyMCE.active')) {
 					echo $this->Form->input('title', array('div' => 'clearfix'));
 					echo $this->Form->input('content', array('div' => 'clearfix', 'class' => 'span7'));
 					echo $this->Form->input('page_id', array('div' => 'clearfix', 'selected' => $selected));
-					echo $this->Form->input('section', array('div' => 'clearfix', 'default' => 0));
+					echo $this->Form->input('section', array('div' => 'clearfix', 'default' => 0, 'type' => 'number', 'min' => 0));
 				?>
 			</fieldset>
 		<?php echo $this->Form->end('Submit');?>

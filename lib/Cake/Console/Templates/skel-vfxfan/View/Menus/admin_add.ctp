@@ -27,7 +27,7 @@
 					echo $this->Form->input('name', array('div' => 'clearfix'));
 					echo $this->Form->input('link', array('div' => 'clearfix', 'default' => '#'));
 					echo $this->Form->input('parent_id', array('div' => 'clearfix'));
-					echo $this->Form->input('priority', array('div' => 'clearfix'));
+					echo $this->Form->input('priority', array('div' => 'clearfix', 'type' => 'number', 'min' => 0));
 				?>
 			</fieldset>
 		<?php echo $this->Form->end('Submit');?>
