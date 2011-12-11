@@ -23,3 +23,8 @@
 		<?php echo $this->element('Posts/latest_posts'); ?>
 	</section>
 </div>
+<div class="row">
+	<section class="page-content">
+		<?php echo $this->element('Events/upcoming_events'); ?>
+	</section>
+</div>
