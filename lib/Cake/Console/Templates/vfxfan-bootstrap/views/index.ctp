@@ -30,7 +30,7 @@ $subpackagename = $packagename.'.views';
 	<section class="admin-main-content">
 		<h3>Actions</h3>
 		<ul class="action-buttons-list">
-			<li><?php echo "<?php echo \$this->Html->link('New " . $singularHumanName . "', array('action' => 'add'), array('class' => 'btn')); ?>";?></li>
+			<li><?php echo "<?php echo \$this->Html->link('New " . $singularHumanName . "', array('action' => 'admin_add'), array('class' => 'btn')); ?>";?></li>
 		</ul>
 	</section>
 	<section class="admin-main-content">
