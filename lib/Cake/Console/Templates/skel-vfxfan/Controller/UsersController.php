@@ -26,10 +26,6 @@ class UsersController extends AppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
 		Security::setHash('sha256');
- 		if ($this->request->action == 'admin_login') {
- 			$this->Security->csrfExpires = '+30 minutes';
- 			$this->Security->csrfUseOnce = false;
- 		}
 	}
 
 /**
