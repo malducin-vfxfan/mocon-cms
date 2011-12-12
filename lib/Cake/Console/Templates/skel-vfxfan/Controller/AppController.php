@@ -63,6 +63,7 @@ class AppController extends Controller {
 
 		// set security options
 		$this->Security->csrfExpires = '+10 minutes';
+		$this->Security->blackHoleCallback = 'blackhole';
 		$this->Security->requireAuth(array('admin_index', 'admin_view', 'admin_add', 'admin_edit', 'admin_delete'));
 		$this->Security->requireGet(array('admin_index', 'admin_view', 'admin_logout'));
 		$this->Security->requirePost(array('admin_delete'));
@@ -96,6 +97,25 @@ class AppController extends Controller {
 			}
 		}
 		return true;
+	}
+
+/**
+ * blackhole method
+ *
+ * @return void
+ */
+	public function blackhole($type) {
+		if ($type == 'csrf') {
+			$this->Session->setFlash('The Form has expired, please try again.', 'default', array('class' => 'message failure'));
+			$this->redirect(array('action' => $this->request->action));
+		}
+		elseif ($type == 'auth') {
+			$this->Session->setFlash('There was a problem with the action (probably validation), please try again.', 'default', array('class' => 'message failure'));
+			$this->redirect(array('action' => $this->request->action));
+		}
+		else {
+			throw new NotFoundException('Invalid action.');
+		}
 	}
 
 }
