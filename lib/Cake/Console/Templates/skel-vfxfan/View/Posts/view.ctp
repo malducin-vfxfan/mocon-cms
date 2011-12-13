@@ -22,6 +22,11 @@
 				<?php echo strftime("%B %d, %Y %H:%M:%S", strtotime($post['Post']['created'])); ?>
 			</time>
 			<p>by <span class="author"><?php echo $post['User']['username']; ?></span></p>
+			<?php
+				if (Configure::read('AddThis.posts')) {
+					echo $this->element('AddThis/post', array('slug' => $post['Post']['slug'], 'post_title' => $post['Post']['title']));
+				}
+			?>
 		</div>
 		<p class="contents-summary">
 			<?php echo $post['Post']['summary']; ?>

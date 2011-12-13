@@ -21,6 +21,11 @@ $posts = $this->requestAction(array('controller' => 'posts', 'action' => 'latest
 				<time class="date-created" datetime="<?php echo date(DATE_ATOM, strtotime($post['Post']['created'])); ?>">
 					<?php echo strftime("%B %d, %Y %H:%M:%S", strtotime($post['Post']['created'])); ?>
 				</time>
+				<?php
+					if (Configure::read('AddThis.posts')) {
+						echo $this->element('AddThis/post', array('slug' => $post['Post']['slug'], 'post_title' => $post['Post']['title']));
+					}
+				?>
 				<div class="author">by <?php echo $post['User']['username']; ?></div>
 			</div>
 			<p class="contents-summary"><?php echo $post['Post']['summary']; ?></p>
