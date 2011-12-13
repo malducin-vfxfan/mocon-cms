@@ -105,9 +105,12 @@ Cache::config('default', Cache::settings('short'));
  *
  */
 
+CakePlugin::load('Slimbox2');
+CakePlugin::load('Recaptcha', array('bootstrap' => true));
+
 /**
  * Custom project configuration file.
  *
  */
 
- Configure::load('project');
+Configure::load('project');
