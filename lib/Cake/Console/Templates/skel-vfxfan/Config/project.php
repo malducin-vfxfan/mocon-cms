@@ -15,26 +15,40 @@ $config = array(
 		'keywords' => 'keywords',
 		'description' => 'description'
 	),
+	'AddThis' => array(
+		'pubid' => '',
+		'title' => '',
+		'style_32' => false,
+		'posts' => true,
+	),
 	'Jquery' => array(
-		'version' => ''
+		'version' => '',
 	),
 	'JqueryUi' => array(
 		'version' => '',
-		'theme' => ''
+		'theme' => '',
 	),
 	'GoogleAnalytics' => array(
 		'trackerCode' => '',
 	),
 	'GoogleMaps' => array(
-		'key' => ''
-	),
-	'Twitter' => array(
-		'feed' => ''
-	),
-	'YouTube' => array(
-		'feed' => ''
+		'key' => '',
 	),
 	'TinyMCE' => array(
-		'active' => false
+		'active' => false,
+	),
+	'Twitter' => array(
+		'profile' => 'malducin',
+		'widget_width' => '300',
+		'widget_height' => '300',
+		'widget_num_tweets' => '4',
+		'widget_shell_bg' => '#333333',
+		'widget_shell_color' => '#ffffff',
+		'widget_tweets_bg' => '#000000',
+		'widget_tweets_color' => '#ffffff',
+		'widget_tweets_links' => '#0069d6',
+	),
+	'YouTube' => array(
+		'feed' => '',
 	),
 );
