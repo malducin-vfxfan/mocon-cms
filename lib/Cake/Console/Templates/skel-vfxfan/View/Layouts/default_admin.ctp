@@ -62,6 +62,18 @@
 							<li><?php echo $this->Html->link('Events', array('controller' => 'events', 'action' => 'admin_index')); ?></li>
 						</ul>
 					</li>
+					<li class="dropdown">
+						<?php echo $this->Html->link('Other Content', '#', array('class' => 'dropdown-toggle')); ?>
+						<ul class="dropdown-menu">
+							<li><?php echo $this->Html->link('Albums', array('controller' => 'albums', 'action' => 'admin_index')); ?></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<?php echo $this->Html->link('Misc.', '#', array('class' => 'dropdown-toggle')); ?>
+						<ul class="dropdown-menu">
+							<li><?php echo $this->Html->link('Contact Form', array('controller' => 'contact_forms', 'action' => 'admin_index')); ?></li>
+						</ul>
+					</li>
 					<li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'admin_logout')); ?></li>
 				</ul>
 			</div>
