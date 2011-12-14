@@ -6,11 +6,13 @@
  * configuration. It adds the option to add the target attribute to the
  * anchor tag.
  *
+ * HTMLPurifier can be found at http://htmlpurifier.org/
+ *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    brita
+ * @package       component
+ * @subpackage    component.brita
  */
 App::import('Vendor', 'HTMLPurifier', array('file' => 'htmlpurifier'.DS.'library'.DS.'HTMLPurifier.auto.php'));
 /**
@@ -30,6 +32,8 @@ class BritaComponent extends Component {
 
 /**
  * startup method
+ *
+ * Set HTMLPurifier options
  *
  * @param reference $controller
  * @return void

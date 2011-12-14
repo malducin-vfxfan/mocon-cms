@@ -10,8 +10,8 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    upload
+ * @package       component
+ * @subpackage    component.upload
  */
 /**
  * Upload Component
@@ -38,6 +38,9 @@ class UploadComponent extends Component {
 /**
  * convertFilenameToId method
  *
+ * Convert a filename to a zero padded 10 character length name
+ * based on an id. It appends the filename extension.
+ *
  * @param $id string
  * @param $filename string
  * @return string
@@ -48,6 +51,22 @@ class UploadComponent extends Component {
 
 /**
  * uploadImageThumb method
+ *
+ * Uploads an image to the given folder, Uses the original image
+ * name if none is specified. It also check to see that the file
+ * uploaded is of the correct type specified in the $permitted_images
+ * array.
+ *
+ * Several options can be specified:
+ *
+ * - create_thumb if true, create a thumbnail of the image, to be saved
+ *   in a thumbnails folde specified in the $folder parameter. Default
+ *   is false.
+ * - twidth is the thumbnail maximum width, default 100px.
+ * - theight is the thumbnail maximum height, default 100px.
+ * - base_dir base directory for the folder where to store  the images,
+ *   defaults to the webroot. Could be set to something like TMP to
+ *   store outside the webroot.
  *
  * @param $folder string
  * @param $data array
@@ -151,6 +170,17 @@ class UploadComponent extends Component {
 /**
  * uploadFile method
  *
+ * Uploads an file to the given folder, Uses the original image
+ * name if none is specified. It also check to see that the file
+ * uploaded is of the correct type specified in the $permitted_files
+ * array.
+ *
+ * One option can be specified:
+ *
+ * - base_dir base directory for the folder where to store the files,
+ *   defaults to the webroot. Could be set to something like TMP to
+ *   store outside the webroot.
+ *
  * @param $foder string
  * @param $data array
  * @param $filename string
@@ -198,6 +228,10 @@ class UploadComponent extends Component {
 
 /**
  * _checkTypes method
+ *
+ * Check to see if the uploaded file is of a permitted MIME type. It
+ * includes the option to specify what type of file to check: images
+ * or general files and defaults to images.
  *
  * @param $form_data_type array
  * @param $file_type array
