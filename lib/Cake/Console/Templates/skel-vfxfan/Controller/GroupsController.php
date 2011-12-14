@@ -2,13 +2,13 @@
 /**
  * Groups controller.
  *
- * Groups controller.
+ * Groups actions.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    groups
+ * @package       groups
+ * @subpackage    groups.controller
  */
 App::uses('AppController', 'Controller');
 /**

@@ -48,10 +48,15 @@ class AppController extends Controller {
 /**
  * beforeFilter method
  *
+ * Set application wide settings, mainly security related ones. By
+ * default let views named indexand view be always accesible. Also set
+ * CSRF duration, a blackhole callback and security of basic admin
+ * methods depending on the request type.
+ *
  * @return void
  */
 	public function beforeFilter() {
-		// alwats allow index and view access
+		// always allow index and view access
 		$this->Auth->allow('index', 'view');
 
 		// disable authentication redirect, controll it in the login and logout methods
@@ -84,6 +89,13 @@ class AppController extends Controller {
 /**
  * isAuthorized method
  *
+ * Generic application wide controller based authorization. By default
+ * admin action require that the user be logged in and belong to the
+ * Admin group. All other actions are allowed be default.
+ *
+ * In order to use, the authorize setting in beforeFilter must be
+ * commented out.
+ *
  * @return boolean
  */
 	public function isAuthorized() {
@@ -101,6 +113,14 @@ class AppController extends Controller {
 
 /**
  * blackhole method
+ *
+ * Generic application wide blackhole callback. If the problem is
+ * related to CSRF protection of forms, mainly that the token has
+ * expired, it redirects to the action again, thus regenarating the
+ * token. If the problem is Auth related, mainly action mismatches or
+ * forms that don't validate, it redirects to the action again. All
+ * other problems throw a Not Found Exception, which shows the 400
+ * error page that redirects to the main page.
  *
  * @return void
  */

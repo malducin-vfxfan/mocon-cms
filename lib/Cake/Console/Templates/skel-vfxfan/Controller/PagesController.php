@@ -2,13 +2,15 @@
 /**
  * Pages controller.
  *
- * Pages controller.
+ * Pages actions. Can save related page sections during the creation
+ * of a new page, but validation of extra sections is skipped. Also
+ * upload page images one at a time and delete them.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    pages
+ * @package       pages
+ * @subpackage    pages.controller
  */
 App::uses('AppController', 'Controller');
 /**
@@ -47,6 +49,10 @@ class PagesController extends AppController {
 
 /**
  * beforeFilter method
+ *
+ * Disable other page section fields from validation during creation
+ * of new page. The for loop limit should match the maximum number of
+ * possible page sections (established on the page forms script).
  *
  * @return void
  */
@@ -129,13 +135,20 @@ class PagesController extends AppController {
 /**
  * admin_add method
  *
+ * Saves a new page and its sections. In order to use a non-
+ * transactional DB (like MySQL ISAM tables), associated data (page
+ * sections) is not saved atomically (in one transaction) and the
+ * page_id field of each section is not validated.
+ *
  * @return void
  */
 	public function admin_add() {
 		$this->layout = 'default_admin';
 		if ($this->request->is('post')) {
 			$this->Page->create();
+			// do not validate page_id of the page sections
 			unset($this->Page->PageSection->validate['page_id']);
+			// save associated data non-atomically since we're nor using transactions
 			if ($this->Page->saveAssociated($this->request->data, array('atomic' => false))) {
 				$this->Session->setFlash('The Page has been saved.', 'default', array('class' => 'message success'));
 				$this->redirect(array('action' => 'admin_index'));
@@ -148,6 +161,8 @@ class PagesController extends AppController {
 
 /**
  * admin_edit method
+ *
+ * Edit a page with the possibility of uploading one image at a time.
  *
  * @param string $id
  * @return void
@@ -198,6 +213,8 @@ class PagesController extends AppController {
 
 /**
  * admin_deleteFile method
+ *
+ * Delete one image file of a page.
  *
  * @param string $id
  * @param string $filename

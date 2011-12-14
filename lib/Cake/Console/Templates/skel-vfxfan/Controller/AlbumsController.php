@@ -2,7 +2,8 @@
 /**
  * Albums controller.
  *
- * Albums controller.
+ * Albums actions. Can upload and delete album images at a time,
+ * though FTP would be faster.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
@@ -165,6 +166,8 @@ class AlbumsController extends AppController {
 /**
  * admin_uploadAlbumImage method
  *
+ * Upload one album image and create its thumbnail.
+ *
  * @param string $id
  * @return void
  */
@@ -187,7 +190,9 @@ class AlbumsController extends AppController {
 	}
 
 /**
- * admin_uploadAlbumImage method
+ * admin_deleteAlbumImage method
+ *
+ * Delete one album image and its thumbnail.
  *
  * @param string $id
  * @return void

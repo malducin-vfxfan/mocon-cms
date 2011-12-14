@@ -2,13 +2,13 @@
 /**
  * Events controller.
  *
- * Events controller.
+ * Events actions.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    Events
+ * @package       events
+ * @subpackage    events.controller
  */
 App::uses('AppController', 'Controller');
 /**
@@ -66,6 +66,8 @@ class EventsController extends AppController {
 
 /**
  * upcomingEvents method
+ *
+ * return a list of upcomin events.
  *
  * @return void
  */

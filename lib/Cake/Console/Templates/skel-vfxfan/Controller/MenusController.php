@@ -2,13 +2,16 @@
 /**
  * Menus controller.
  *
- * Menus controller.
+ * Menus actions. Actually it handles menu items for one menu.
+ * The root is assumed to have an id of 0, so all top level menu
+ * items have a parent_id of 0. During add and edit operations this
+ * root value is added to the list of available parent items.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    menus
+ * @package       menus
+ * @subpackage    menus.controller
  */
 App::uses('AppController', 'Controller');
 /**

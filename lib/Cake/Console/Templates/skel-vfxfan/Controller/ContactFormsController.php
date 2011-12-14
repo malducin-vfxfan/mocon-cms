@@ -1,8 +1,11 @@
 <?php
 /**
- * ContactForms controller.
+ * Contact Forms controller.
  *
- * ContactForms controller.
+ * Contact Forms actions. Store a contact form message and send an
+ * email notification. Use the Recaptcha plugin from lamanabie at:
+ * https://github.com/lamanabie/cakephp-recaptcha to make the form
+ * more secure.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
@@ -27,34 +30,10 @@ class ContactFormsController extends AppController {
 	var $components = array('Recaptcha.Recaptcha' => array('actions' => array('index')));
 
 /**
- * beforeFilter method
- *
- * @return void
- */
-//	public function beforeFilter() {
-//		parent::beforeFilter();
-//		$this->Security->blackHoleCallback = 'blackhole';
-//	}
-
-/**
- * blackhole method
- *
- * @return void
- */
-//	public function blackhole($type) {
-//		if ($this->request->action == 'index') {
-//			if ($type == 'csrf') {
-//				$this->Session->setFlash('The Contact Form has expired, please try again.', 'default', array('class' => 'message failure'));
-//				$this->redirect(array('action' => 'index'));
-//			}
-//			else {
-//				throw new NotFoundException('Invalid Contact Form message.');
-//			}
-//		}
-//	}
-
-/**
  * index method
+ *
+ * Saves the message first and then send th message id to the send
+ * message action.
  *
  * @return void
  */
@@ -126,6 +105,8 @@ class ContactFormsController extends AppController {
 
 /**
  * _sendContactEmail method
+ *
+ * Send a notification email that a new contact message has been saved.
  *
  * @param string $id
  * @return void

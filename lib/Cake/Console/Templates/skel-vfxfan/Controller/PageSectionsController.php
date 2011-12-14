@@ -2,13 +2,13 @@
 /**
  * Page Sections controller.
  *
- * Page Sections controller.
+ * Page Sections actions.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    page_sections
+ * @package       page_sections
+ * @subpackage    page_sections.controller
  */
 App::uses('AppController', 'Controller');
 /**
@@ -28,6 +28,8 @@ class PageSectionsController extends AppController {
 
 /**
  * beforeFilter method
+ *
+ * Enable the TinyMCE image list method.
  *
  * @return void
  */
@@ -143,6 +145,9 @@ class PageSectionsController extends AppController {
 
 /**
  * admin_tinymceImageList method
+ *
+ * Generate a list of image files of a page to be displayed in the
+ * TinyMCE editor image chooser if it's being used.
  *
  * @param string $id
  * @return mixed

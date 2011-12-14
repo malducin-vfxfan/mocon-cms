@@ -2,13 +2,13 @@
 /**
  * Posts controller.
  *
- * Posts controller.
+ * Posts actions.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    posts
+ * @package       posts
+ * @subpackage    posts.controller
  */
 App::uses('AppController', 'Controller');
 /**
@@ -78,6 +78,8 @@ class PostsController extends AppController {
 
 /**
  * latest_posts method
+ *
+ * Return a list of the latest posts.
  *
  * @param int $num_posts
  * @return array

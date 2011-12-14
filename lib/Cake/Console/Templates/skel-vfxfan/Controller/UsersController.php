@@ -2,13 +2,13 @@
 /**
  * Users controller.
  *
- * Users controller.
+ * Users actions.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    users
+ * @package       users
+ * @subpackage    users.controller
  */
 App::uses('AppController', 'Controller');
 /**
@@ -115,6 +115,11 @@ class UsersController extends AppController {
 
 /**
  * admin_edit method
+ *
+ * Uses a dummy password field (passwd) to see if a new user password
+ * is being set. If no new password is being set it only save the
+ * username and group id. If a new password is set the dummy field is
+ * used to fill the password field to be hashed upon saving.
  *
  * @param string $id
  * @return void
