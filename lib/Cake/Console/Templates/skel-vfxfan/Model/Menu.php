@@ -2,13 +2,18 @@
 /**
  * Menu model.
  *
- * Menu model.
+ * Manage Menu data. The model manages the menu items and use a
+ * parent_id filed so that they can be organized in a hierarchy and
+ * correctly displayed using threaded find operations. Link can be
+ * internal (like /pages/index) or a full external URL (with http://).
+ * Priority is used to order menu items in the same branch and a
+ * priority of 0 hides the menu item.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    menus
+ * @package       menus
+ * @subpackage    menus.model
  */
 App::uses('AppModel', 'Model');
 App::uses('MySanitize', 'Utility');

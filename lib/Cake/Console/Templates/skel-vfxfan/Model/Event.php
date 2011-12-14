@@ -2,7 +2,7 @@
 /**
  * Event model.
  *
- * Event model.
+ * Manage Event data.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
@@ -140,7 +140,7 @@ class Event extends AppModel {
  * beforeDelete method
  *
  * @param boolean $cascade
- * @return void
+ * @return boolean
  */
 	public function beforeDelete($cascade) {
 		$directory = IMAGES.'events';

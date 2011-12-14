@@ -2,13 +2,13 @@
 /**
  * User model.
  *
- * User model.
+ * Manage User data. Users belong to a group.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    users
+ * @package       users
+ * @subpackage    users.model
  */
 App::uses('AppModel', 'Model');
 App::uses('MySanitize', 'Utility');
@@ -131,6 +131,8 @@ class User extends AppModel {
 
 /**
  * beforeSave method
+ *
+ * Hashes the password field before saving.
  *
  * @param array $options Array of options to use.
  * @return boolean

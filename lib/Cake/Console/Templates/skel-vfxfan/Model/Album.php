@@ -2,7 +2,10 @@
 /**
  * Album model.
  *
- * Album model.
+ * Manage Album data. Albuma have a thumbnail and their image folder
+ * contains a thumbnails folder. It assumes the actual image and
+ * thumbnail have the same name, the only thing that distinguishes
+ * them is their location.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
@@ -94,6 +97,9 @@ class Album extends AppModel {
 /**
  * beforeValidate method
  *
+ * If id doesn't exist (when adding a new record), create a slug from
+ * the lowercase inflection of the album name.
+ *
  * @return boolean
  */
 	public function beforeValidate() {
@@ -109,6 +115,8 @@ class Album extends AppModel {
 /**
  * afterSave method
  *
+ * Create the album images folder and the thumbnails folder inside it.
+ *
  * @param boolean $created
  * @return void
  */
@@ -121,6 +129,11 @@ class Album extends AppModel {
 
 /**
  * beforeDelete method
+ *
+ * Delete all images inside the thumbnails folder and the image album
+ * folder and reove the folders. Then remove the folder thumbnail.
+ * It returns tue hen the operation completes, even if there's a
+ * problem removing something.
  *
  * @param boolean $cascade
  * @return boolean
@@ -178,6 +191,8 @@ class Album extends AppModel {
 /**
  * getAlbumThumbnails method
  *
+ * Return a sorted list of all images in an album thumbnails folder.
+ *
  * @param string $id
  * @return array
  */
@@ -200,6 +215,11 @@ class Album extends AppModel {
 
 /**
  * deleteFile method
+ *
+ * delete and album file inside the album images folder. It deletes
+ * both the image and its thummbnail. Returns true if both images are
+ * deleted, false otherwise. This means it could potentially return
+ * false if one image is deleted but not the other.
  *
  * @param string $id
  * @param string $filename

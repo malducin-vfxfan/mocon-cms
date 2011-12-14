@@ -2,13 +2,15 @@
 /**
  * Page model.
  *
- * Page model.
+ * Manage Page data. Pages only contain basic info: the overall title,
+ * the slug and whether the page is set to be the main page. Content
+ * is stored in the page sections.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    pages
+ * @package       pages
+ * @subpackage    pages.model
  */
 App::uses('AppModel', 'Model');
 App::uses('MySanitize', 'Utility');
@@ -116,6 +118,9 @@ class Page extends AppModel {
 /**
  * beforeValidate method
  *
+ * If id doesn't exist (when adding a new record), create a slug from
+ * the lowercase inflection of the page title.
+ *
  * @return boolean
  */
 	public function beforeValidate() {
@@ -131,6 +136,8 @@ class Page extends AppModel {
 /**
  * afterSave method
  *
+ * Create a folder to place the page images, based on the page id.
+ *
  * @param boolean $created
  * @return void
  */
@@ -142,6 +149,8 @@ class Page extends AppModel {
 
 /**
  * beforeDelete method
+ *
+ * Delete all images in the page folder and then remove the folder.
  *
  * @param boolean $cascade
  * @return boolean
@@ -179,8 +188,10 @@ class Page extends AppModel {
 /**
  * listFiles method
  *
+ * List all file name in the page image folder given its id.
+ *
  * @param string $id
- * @return void
+ * @return array
  */
 	public function listFiles($id = null) {
 		if (!$id) return;
@@ -201,6 +212,9 @@ class Page extends AppModel {
 
 /**
  * deleteFile method
+ *
+ * Delete one file from the page images folder given the page id and
+ * the filename.
  *
  * @param string $id
  * @param string $filename

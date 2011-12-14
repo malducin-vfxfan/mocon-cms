@@ -2,13 +2,16 @@
 /**
  * Page Section model.
  *
- * Page Section  model.
+ * Manage Page Section data. A page section must belong to a page, and
+ * contains the actual content. The section field indicates the order
+ * to display the section, and a value of 0 indicates an not published
+ * (not displayed) section.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    page_sections
+ * @package       page_sections
+ * @subpackage    page_sections.model
  */
 App::uses('AppModel', 'Model');
 App::uses('MySanitize', 'Utility');
@@ -130,8 +133,12 @@ class PageSection extends AppModel {
 /**
  * listFiles method
  *
+ * Return a list of file names inside the page images folder.
+ * Useful when editing content and the images have already been
+ * uploaded.
+ *
  * @param string $id
- * @return void
+ * @return array
  */
 	public function listFiles($id = null) {
 		if (!$id) return;

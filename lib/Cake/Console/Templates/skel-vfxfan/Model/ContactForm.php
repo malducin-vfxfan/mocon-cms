@@ -2,7 +2,7 @@
 /**
  * ContactForm model.
  *
- * ContactForm model.
+ * Manage Contact Form data.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)

@@ -2,13 +2,13 @@
 /**
  * Post model.
  *
- * Post model.
+ * Manage Post data.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    posts
+ * @package       posts
+ * @subpackage    posts.model
  */
 App::uses('AppModel', 'Model');
 App::uses('MySanitize', 'Utility');
@@ -129,6 +129,9 @@ class Post extends AppModel {
 /**
  * beforeValidate method
  *
+ * If id doesn't exist (when adding a new record), create a slug from
+ * the lowercase inflection of the post title.
+ *
  * @return boolean
  */
 	public function beforeValidate() {
@@ -144,6 +147,8 @@ class Post extends AppModel {
 /**
  * afterSave method
  *
+ * Delete the latest posts cache everytime a new post is added.
+ *
  * @param boolean $created
  * @return void
  */
@@ -154,8 +159,10 @@ class Post extends AppModel {
 /**
  * beforeDelete method
  *
+ * Delete any images related to the post.
+ *
  * @param boolean $cascade
- * @return void
+ * @return boolean
  */
 	public function beforeDelete($cascade) {
 		$directory = IMAGES.'posts';
