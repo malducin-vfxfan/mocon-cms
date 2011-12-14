@@ -45,6 +45,7 @@
 			<div class="container">
 				<?php echo $this->Html->link('TravelHQ', '/', array('class' => 'brand')); ?>
 				<?php echo $this->element('Menus/bootstrap'); ?>
+				<?php echo $this->element('GoogleSearch/simple_search'); ?>
 			</div>
 		</div>
 	</nav> <!-- /topbar -->
