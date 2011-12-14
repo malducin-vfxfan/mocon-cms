@@ -2,7 +2,10 @@
 /**
  * Albums admin view view.
  *
- * Albums admin view view.
+ * Displays thumbnails in a row of 6 span2 columns and center the
+ * images. Uses the Slimbox2 script to display the images in a lightbox:
+ * http://www.digitalia.be/software/slimbox2
+ * Slimbox2 must be loaded as a plugin in the bootstrap file.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)

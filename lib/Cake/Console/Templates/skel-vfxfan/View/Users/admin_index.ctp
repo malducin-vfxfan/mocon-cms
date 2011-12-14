@@ -2,13 +2,11 @@
 /**
  * Users admin index view.
  *
- * Users admin index view.
- *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    users
+ * @package       users
+ * @subpackage    users.views
  */
 ?>
 <div class="row">

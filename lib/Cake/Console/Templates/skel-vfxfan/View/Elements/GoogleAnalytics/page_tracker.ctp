@@ -2,13 +2,13 @@
 /**
  * Google Analytics page tracker element.
  *
- * Google Analytics page tracker element.
+ * Should be placed at the bottom of the head section of a layout.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    google_analytics
+ * @package       google
+ * @subpackage    google.analytics.views.elements
  */
 $ga_code = Configure::read('GoogleAnalytics.trackerCode');
 if ($ga_code):

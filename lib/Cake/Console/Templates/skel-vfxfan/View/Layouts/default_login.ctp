@@ -2,13 +2,11 @@
 /**
  * Default login layout.
  *
- * Default login layout.
- *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    layouts
+ * @package       app
+ * @subpackage    app.views.layouts.default.login
  */
 ?>
 <!doctype html>
@@ -16,7 +14,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>
-		TravelHQ - Admin -
+		Site - Admin -
 		<?php echo $title_for_layout; ?>
 	</title>
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -41,7 +39,7 @@
 	<nav class="topbar">
 		<div class="fill">
 			<div class="container">
-				<?php echo $this->Html->link('TravelHQ', '/', array('class' => 'brand')); ?>
+				<?php echo $this->Html->link('Site', '/', array('class' => 'brand')); ?>
 			</div>
 		</div>
 	</nav> <!-- /topbar -->
@@ -49,7 +47,7 @@
 	<div class="container">
 		<div class="content">
 			<header class="page-header">
-				<h1>TravelHQ Admin Login</h1>
+				<h1>Site Admin Login</h1>
 			</header>
 			<div class="row">
 		        <div class="login" id="flash-messages">

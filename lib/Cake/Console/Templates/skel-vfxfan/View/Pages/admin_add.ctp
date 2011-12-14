@@ -2,13 +2,11 @@
 /**
  * Pages admin add view.
  *
- * Pages admin add view.
- *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    pages
+ * @package       pages
+ * @subpackage    pages.views
  */
 $this->Html->script(array('forms_pages'), array('inline' => false));
 if (Configure::read('TinyMCE.active')) {

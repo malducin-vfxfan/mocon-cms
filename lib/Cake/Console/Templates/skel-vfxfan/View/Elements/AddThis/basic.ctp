@@ -6,7 +6,7 @@
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
  * @package       add_this
- * @subpackage    add_this.elements
+ * @subpackage    add_this.views.elements
  */
 $addthis_pubid = Configure::read('AddThis.pubid');
 if ($addthis_pubid):

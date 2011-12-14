@@ -2,13 +2,11 @@
 /**
  * Pages admin edit view.
  *
- * Pages admin edit view.
- *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    pages
+ * @package       pages
+ * @subpackage    pages.views
  */
 ?>
 <div class="row">

@@ -2,13 +2,11 @@
 /**
  * Error 500 view.
  *
- * Error 500 view.
- *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    error_views
+ * @package       errors
+ * @subpackage    errors.views
  */
 ?>
 <div class="row">
@@ -29,7 +27,7 @@
 		?>
 		<script type="text/javascript">
 			function redirectHome() {
-				window.location = 'http://travelhq.vfxfan.com/';
+				window.location = '<?php echo FULL_BASE_URL; ?>';
 			}
 			setTimeout('redirectHome()', 7000);
 		</script>

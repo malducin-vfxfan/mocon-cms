@@ -6,7 +6,7 @@
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
  * @package       twitter
- * @subpackage    twitter.elements.widget
+ * @subpackage    twitter.views.elements.widget
  */
 $twitter_profile = Configure::read('Twitter.profile');
 if ($twitter_profile):

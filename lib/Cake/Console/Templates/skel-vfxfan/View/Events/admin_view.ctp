@@ -2,13 +2,11 @@
 /**
  * Events admin view view.
  *
- * Events admin view view.
- *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
  * @subpackage    events
- * @subpackage    events.views.admin
+ * @subpackage    events.views
  */
 ?>
 <div class="row">

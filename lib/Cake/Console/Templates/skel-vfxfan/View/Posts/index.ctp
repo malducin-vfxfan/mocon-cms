@@ -1,14 +1,12 @@
 <?php
 /**
- * Short description.
- *
- * Long description.
+ * Posts index view.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, ILMfan (http://ilmfan.com)
  * @link          http://ilmfan.com ILMfan
- * @package       $packagename$
- * @subpackage    posts
+ * @package       posts
+ * @subpackage    posts.views
  */
 ?>
 <div class="row">

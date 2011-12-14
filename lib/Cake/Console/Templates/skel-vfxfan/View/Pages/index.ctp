@@ -1,14 +1,14 @@
 <?php
 /**
- * Short description.
+ * Pages index view.
  *
- * Long description.
+ * Main page (root) of the site.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    pages
+ * @package       pages
+ * @subpackage    pages.views
  */
 ?>
 <div class="row">

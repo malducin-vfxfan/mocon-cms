@@ -2,14 +2,14 @@
 /**
  * Latest Events element.
  *
- * Calls the latest_events methos of the events system to get a short
+ * Calls the upcoming_events method of the events system to get a short
  * list of events to display (mainly in the main page).
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
  * @package       events
- * @subpackage    events.elements
+ * @subpackage    events.views.elements
  */
 $events = $this->requestAction(array('controller' => 'events', 'action' => 'upcomingEvents'));
 ?>

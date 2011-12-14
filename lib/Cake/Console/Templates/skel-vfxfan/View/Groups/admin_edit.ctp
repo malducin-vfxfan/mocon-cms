@@ -2,13 +2,11 @@
 /**
  * Groups admin edit view.
  *
- * Groups admin edit view.
- *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    groups
+ * @package       groups
+ * @subpackage    groups.views
  */
 ?>
 <div class="row">

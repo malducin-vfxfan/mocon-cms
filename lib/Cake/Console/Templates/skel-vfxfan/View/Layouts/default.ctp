@@ -2,13 +2,11 @@
 /**
  * Default layout.
  *
- * Default layout.
- *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    layouts
+ * @package       app
+ * @subpackage    app.views.layouts.default
  */
 ?>
 <!doctype html>
@@ -16,7 +14,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>
-		TravelHQ -
+		Site -
 		<?php echo $title_for_layout; ?>
 	</title>
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -44,7 +42,7 @@
 	<nav class="topbar" data-dropdown="dropdown">
 		<div class="fill">
 			<div class="container">
-				<?php echo $this->Html->link('TravelHQ', '/', array('class' => 'brand')); ?>
+				<?php echo $this->Html->link('Site', '/', array('class' => 'brand')); ?>
 				<?php echo $this->element('Menus/bootstrap'); ?>
 				<?php echo $this->element('GoogleSearch/simple_search'); ?>
 			</div>
@@ -55,7 +53,7 @@
 		<div class="content">
 			<header class="page-header">
 				<hgroup>
-					<h1>TravelHQ <small>- Tripping Around</small></h1>
+					<h1>Site <small>- tagline</small></h1>
 				</hgroup>
 			</header>
 			<div class="row">

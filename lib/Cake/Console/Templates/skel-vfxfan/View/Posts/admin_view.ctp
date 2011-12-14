@@ -2,13 +2,11 @@
 /**
  * Posts admin view view.
  *
- * Posts admin view view.
- *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    posts
+ * @package       posts
+ * @subpackage    posts.views
  */
 ?>
 <div class="row">

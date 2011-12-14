@@ -2,13 +2,13 @@
 /**
  * Menus default element.
  *
- * Menus default element.
+ * Display an unordred nested list of menu items.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    menus
+ * @package       menus
+ * @subpackage    menus.views.elements
  */
 
 /**
@@ -17,6 +17,8 @@
  * Recursively iterate over a threaded array of menu items to display using
  * an unordered list.
  *
+ * @param array threaded menu array to display
+ * @param Object an instance of the Html Helper
  * @return void
  */
 

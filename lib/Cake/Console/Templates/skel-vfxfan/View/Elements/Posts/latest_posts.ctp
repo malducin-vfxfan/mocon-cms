@@ -2,13 +2,14 @@
 /**
  * Latest Posts element.
  *
- * Latest Posts element.
+ * Calls the latest_posts method of the posts system to get a short
+ * list of posts to display (mainly in the main page).
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    posts
+ * @package       posts
+ * @subpackage    posts.views.elements
  */
 $posts = $this->requestAction(array('controller' => 'posts', 'action' => 'latestPosts'));
 ?>

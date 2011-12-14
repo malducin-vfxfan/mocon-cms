@@ -2,13 +2,11 @@
 /**
  * Page Sections admin add view.
  *
- * Page Sections admin add view.
- *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    page_sections
+ * @package       page_sections
+ * @subpackage    page_sections.views
  */
 if (Configure::read('TinyMCE.active')) {
 	echo $this->element('TinyMCE/config_basic', array('external_image_list_url' => $this->Html->url(array('controller' => 'page_sections', 'action' => 'admin_tinymceImageList', $this->Form->value('Page.id')))));

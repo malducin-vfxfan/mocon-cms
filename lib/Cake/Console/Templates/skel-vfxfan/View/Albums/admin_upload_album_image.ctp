@@ -1,8 +1,6 @@
 <?php
 /**
- * Albums admin view.
- *
- * Albums admin view.
+ * Albums admin upload image view.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)

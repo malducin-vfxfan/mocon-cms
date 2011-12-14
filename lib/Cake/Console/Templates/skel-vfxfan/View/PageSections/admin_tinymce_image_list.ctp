@@ -2,15 +2,15 @@
 /**
  * Image List view for TinyMCE editor.
  *
- * Image List view for TinyMCE editor. Gets a list of images for a page and
- * builds a Javascript array for use in the TinyMCE editor in the
- * page sections.
+ * Image List view for TinyMCE editor. Gets a list of images for a
+ * page and builds a Javascript array for use in the TinyMCE editor
+ * in the page sections.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    tinymce
+ * @package       page_sections
+ * @subpackage    page_sections..views
  */
 $images_list = array();
 $page_folder = sprintf("%010d", $page_id);

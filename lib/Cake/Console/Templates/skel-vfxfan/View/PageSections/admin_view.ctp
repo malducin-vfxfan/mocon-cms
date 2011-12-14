@@ -2,13 +2,11 @@
 /**
  * Page Sections admin view view.
  *
- * Page Sections admin view view.
- *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       $packagename$
- * @subpackage    page_sections
+ * @package       page_sections
+ * @subpackage    page_sections.views
  */
 ?>
 <div class="row">
