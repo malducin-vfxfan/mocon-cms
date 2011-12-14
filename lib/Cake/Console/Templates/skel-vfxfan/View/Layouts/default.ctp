@@ -29,6 +29,7 @@
 		echo $this->Html->meta(array('name' => 'generator', 'content' => 'VFXfan CMS'));
 		echo $this->Html->meta(array('name' => 'keywords', 'content' => Configure::read('Meta.keywords')));
 		echo $this->Html->meta(array('name' => 'description', 'content' => Configure::read('Meta.description')));
+		echo $this->Html->meta('Latest News', '/posts/index.rss', array('type' => 'rss'));
 		echo $this->Html->meta('icon');
 
 		echo $this->Html->css('project');
