@@ -67,7 +67,7 @@ class Menu extends AppModel {
 			),
 			'maxlength' => array(
 				'rule' => array('maxLength', 64),
-				'message' => 'Links must be no larger than 32 characters long.',
+				'message' => 'Links must be no larger than 64 characters long.',
 				'required' => false,
 				'last' => true, // Stop validation after this rule
 			),
