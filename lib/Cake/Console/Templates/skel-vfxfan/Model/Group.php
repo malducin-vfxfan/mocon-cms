@@ -2,7 +2,7 @@
 /**
  * Group model.
  *
- * manage Group data. Groups can have many users.
+ * Manage Group data. Groups can have many users.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
