@@ -1409,9 +1409,7 @@ button.btn::-moz-focus-inner, input.btn[type="submit"]::-moz-focus-inner {
     list-style-type: none;
 }
 .error-message {
-    background-color: #C43C35;
-    border-radius: 3px 3px 3px 3px;
-    color: #FFFFFF;
+    color: #C43C35;
     font-size: 9.75px;
     font-weight: bold;
     padding: 1px 3px 2px;
@@ -1494,15 +1492,15 @@ figcaption, .image-caption {
     display: block;
     float: right;
 }
-.date-created, .date-modified {
+.date-created, .date-modified, .date-start, .date-end {
     font-style: italic;
 }
-.author {
+.author, .event-location {
     font-weight: bold;
 }
 .contents-summary {
     font-style: italic;
 }
-#post-contents {
+#post-contents, #event-contents, #album-contents {
     min-height: 110px;
 }
