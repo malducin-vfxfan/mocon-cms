@@ -32,7 +32,9 @@
 
 		echo $this->Html->css('project');
 
-		echo $this->Html->script(Configure::read('Jquery.version'));
+		if (Configure::read('Jquery.version')) {
+			echo $this->Html->script(Configure::read('Jquery.version'));
+		}
 		echo $this->Html->script(array('bootstrap-dropdown', 'nav'));
 		echo $scripts_for_layout;
 		echo $this->element('GoogleAnalytics/page_tracker');

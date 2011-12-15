@@ -31,7 +31,9 @@
 
 		echo $this->Html->css('project');
 
-		echo $this->Html->script(Configure::read('Jquery.version'));
+		if (Configure::read('Jquery.version')) {
+			echo $this->Html->script(Configure::read('Jquery.version'));
+		}
 		echo $scripts_for_layout;
 	?>
 </head>
