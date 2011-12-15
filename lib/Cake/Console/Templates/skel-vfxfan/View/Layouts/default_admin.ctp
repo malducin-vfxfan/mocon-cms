@@ -42,7 +42,6 @@
 			<div class="container">
 				<?php echo $this->Html->link('Site', '/', array('class' => 'brand')); ?>
 				<ul class="nav">
-					<li class="active"><?php echo $this->Html->link('Home', array('controller' => 'posts', 'action' => 'admin_index')); ?></li>
 					<li class="dropdown">
 						<?php echo $this->Html->link('Basic Admin', '#', array('class' => 'dropdown-toggle')); ?>
 						<ul class="dropdown-menu">
