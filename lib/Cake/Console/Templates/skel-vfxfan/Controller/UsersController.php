@@ -42,7 +42,7 @@ class UsersController extends AppController {
 				return $this->redirect(array('controller' => 'posts', 'action' => 'admin_index'));
 			}
 			else {
-				$this->Session->setFlash('Username or password is incorrect', 'default', array('class' => 'message failure'), 'auth');
+				$this->Session->setFlash('Username or password is incorrect.', 'default', array('class' => 'message failure'), 'auth');
 			}
 		}
 		$this->set('title_for_layout', 'Login');
@@ -83,7 +83,7 @@ class UsersController extends AppController {
 		$this->User->recursive = 0;
 		$this->User->id = $id;
 		if (!$this->User->exists()) {
-			throw new NotFoundException('Invalid User');
+			throw new NotFoundException('Invalid User.');
 		}
 		$user = $this->User->read(null, $id);
 		$this->set(compact('user'));

@@ -98,7 +98,7 @@ class EventsController extends AppController {
 		$this->layout = 'default_admin';
 		$this->Event->id = $id;
 		if (!$this->Event->exists()) {
-			throw new NotFoundException('Invalid Event');
+			throw new NotFoundException('Invalid Event.');
 		}
 		$event = $this->Event->read(null, $id);
 		$this->set(compact('event'));
@@ -135,7 +135,7 @@ class EventsController extends AppController {
 		$this->layout = 'default_admin';
 		$this->Event->id = $id;
 		if (!$this->Event->exists()) {
-			throw new NotFoundException('Invalid Event');
+			throw new NotFoundException('Invalid Event.');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Event->save($this->request->data)) {
@@ -164,7 +164,7 @@ class EventsController extends AppController {
 		}
 		$this->Event->id = $id;
 		if (!$this->Event->exists()) {
-			throw new NotFoundException('Invalid Event');
+			throw new NotFoundException('Invalid Event.');
 		}
 		if ($this->Event->delete()) {
 			$this->Session->setFlash('Event deleted.', 'default', array('class' => 'message success'));

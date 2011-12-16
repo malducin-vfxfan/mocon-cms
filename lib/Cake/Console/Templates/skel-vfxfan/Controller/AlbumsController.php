@@ -85,7 +85,7 @@ class AlbumsController extends AppController {
 		$this->layout = 'default_admin';
 		$this->Album->id = $id;
 		if (!$this->Album->exists()) {
-			throw new NotFoundException('Invalid Album');
+			throw new NotFoundException('Invalid Album.');
 		}
 		$album = $this->Album->read(null, $id);
 		$images = $this->Album->getAlbumThumbnails($album['Album']['id']);
@@ -124,7 +124,7 @@ class AlbumsController extends AppController {
 		$this->layout = 'default_admin';
 		$this->Album->id = $id;
 		if (!$this->Album->exists()) {
-			throw new NotFoundException('Invalid Album');
+			throw new NotFoundException('Invalid Album.');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Album->save($this->request->data)) {
@@ -175,7 +175,7 @@ class AlbumsController extends AppController {
 		$this->layout = 'default_admin';
 		$this->Album->id = $id;
 		if (!$this->Album->exists()) {
-			throw new NotFoundException('Invalid Album');
+			throw new NotFoundException('Invalid Album.');
 		}
 		if ($this->request->is('post')) {
 			$result = $this->Upload->uploadImageThumb('img'.DS.'albums'.DS.sprintf("%010d", $id), $this->request->data['File']['image'], $this->request->data['File']['image']['name'], array('create_thumb' => true));
@@ -211,7 +211,7 @@ class AlbumsController extends AppController {
 
 		$this->Album->id = $id;
 		if (!$this->Album->exists()) {
-			throw new NotFoundException('Invalid Album');
+			throw new NotFoundException('Invalid Album.');
 		}
 
 		if ($this->Album->deleteFile($id, $image)) {
