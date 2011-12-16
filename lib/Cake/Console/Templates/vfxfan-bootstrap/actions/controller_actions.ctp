@@ -32,7 +32,7 @@
 	public function <?php echo $admin ?>view($id = null) {
 		$this-><?php echo $currentModelName; ?>->id = $id;
 		if (!$this-><?php echo $currentModelName; ?>->exists()) {
-			throw new NotFoundException('Invalid <?php echo strtolower($singularHumanName); ?>');
+			throw new NotFoundException('Invalid <?php echo strtolower($singularHumanName); ?>.');
 		}
 		$<?php echo $singularName; ?> = $this-><?php echo $currentModelName; ?>->read(null, $id);
 		$this->set(compact('<?php echo $singularName; ?>'));
@@ -89,7 +89,7 @@
 	public function <?php echo $admin; ?>edit($id = null) {
 		$this-><?php echo $currentModelName; ?>->id = $id;
 		if (!$this-><?php echo $currentModelName; ?>->exists()) {
-			throw new NotFoundException('Invalid <?php echo strtolower($singularHumanName); ?>');
+			throw new NotFoundException('Invalid <?php echo strtolower($singularHumanName); ?>.');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this-><?php echo $currentModelName; ?>->save($this->request->data)) {
@@ -137,7 +137,7 @@
 		}
 		$this-><?php echo $currentModelName; ?>->id = $id;
 		if (!$this-><?php echo $currentModelName; ?>->exists()) {
-			throw new NotFoundException('Invalid <?php echo strtolower($singularHumanName); ?>');
+			throw new NotFoundException('Invalid <?php echo strtolower($singularHumanName); ?>.');
 		}
 		if ($this-><?php echo $currentModelName; ?>->delete()) {
 <?php if ($wannaUseSession): ?>
