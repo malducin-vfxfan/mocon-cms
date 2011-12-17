@@ -241,6 +241,12 @@ a:hover {
     margin-left: 20px;
     width: 220px;
 }
+.latest-posts, .upcoming-events {
+    display: inline;
+    float: left;
+    margin-left: 20px;
+    width: 460px;
+}
 p {
     font-size: 13px;
     font-weight: normal;
