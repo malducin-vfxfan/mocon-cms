@@ -59,7 +59,7 @@
 				</hgroup>
 			</header>
 			<div class="row">
-		        <div class="login" id="flash-messages">
+		        <div class="page-content" id="flash-messages">
 					<?php echo $this->Session->flash('auth'); ?>
 					<?php echo $this->Session->flash(); ?>
 				</div>

@@ -19,10 +19,10 @@
 </div>
 <div>&nbsp;</div>
 <div class="row">
-	<section class="span6">
+	<section class="latest-posts">
 		<?php echo $this->element('Posts/latest_posts'); ?>
 	</section>
-	<section class="span6">
+	<section class="upcoming-events">
 		<?php echo $this->element('Events/upcoming_events'); ?>
 	</section>
 </div>
