@@ -107,15 +107,9 @@ class FormatImageHelper extends AppHelper {
 		}
 
 		if ($image_name) {
-			list($width, $height, $attr) = getimagesize(IMAGES.$location.DS.$image_name);
-			$options['width'] = $width;
-			$options['height'] = $height;
 			$img_link = $this->Html->image($location.'/'.$image_name, $options);
 		}
 		else {
-			list($width, $height, $attr) = getimagesize(IMAGES.$location.DS.'default.png');
-			$options['width'] = $width;
-			$options['height'] = $height;
 			$img_link = $this->Html->image($location.'/'.'default.png', $options);
 		}
 
