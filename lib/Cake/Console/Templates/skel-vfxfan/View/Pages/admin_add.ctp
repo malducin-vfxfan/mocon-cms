@@ -24,7 +24,7 @@ if (Configure::read('TinyMCE.active')) {
 		</ul>
 	</section>
 	<section class="admin-content">
-		<h2>Add a page</h2>
+		<h2>Add a Page</h2>
 		<?php echo $this->Form->create('Page', array('class' => 'form-stacked'));?>
 			<fieldset>
 				<legend>Admin Add Page</legend>
