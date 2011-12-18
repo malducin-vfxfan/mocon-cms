@@ -34,11 +34,6 @@
 				<?php echo $pageSection['PageSection']['title']; ?>
 				&nbsp;
 			</dd>
-			<dt>Content</dt>
-			<dd>
-				<?php echo $pageSection['PageSection']['content']; ?>
-				&nbsp;
-			</dd>
 			<dt>Page</dt>
 			<dd>
 				<?php echo $this->Html->link($pageSection['Page']['title'], array('controller' => 'pages', 'action' => 'admin_view', $pageSection['Page']['id'])); ?>
@@ -65,6 +60,12 @@
 				&nbsp;
 			</dd>
 		</dl>
+	</section>
+</div>
+<div class="row">
+	<section class="admin-main-content">
+		<h2>Content</h2>
+		<?php echo $pageSection['PageSection']['content']; ?>
 	</section>
 </div>
 <div class="row">
