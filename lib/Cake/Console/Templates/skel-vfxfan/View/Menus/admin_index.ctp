@@ -34,12 +34,12 @@
 			foreach ($menus as $menu):
 		?>
 			<tr>
-				<td><?php echo h($menu['Menu']['id']); ?>&nbsp;</td>
-				<td><?php echo h($menu['Menu']['name']); ?>&nbsp;</td>
-				<td><?php echo h($menu['Menu']['parent_id']); ?>&nbsp;</td>
-				<td><?php echo h($menu['Menu']['priority']); ?>&nbsp;</td>
-				<td><?php echo h($menu['Menu']['created']); ?>&nbsp;</td>
-				<td><?php echo h($menu['Menu']['modified']); ?>&nbsp;</td>
+				<td><?php echo $menu['Menu']['id']; ?>&nbsp;</td>
+				<td><?php echo $menu['Menu']['name']; ?>&nbsp;</td>
+				<td><?php echo $menu['Menu']['parent_id']; ?>&nbsp;</td>
+				<td><?php echo $menu['Menu']['priority']; ?>&nbsp;</td>
+				<td><?php echo $menu['Menu']['created']; ?>&nbsp;</td>
+				<td><?php echo $menu['Menu']['modified']; ?>&nbsp;</td>
 				<td>
 					<?php echo $this->Html->link('View', array('action' => 'admin_view', $menu['Menu']['id']), array('class' => 'btn')); ?>
 					<?php echo $this->Html->link('Edit', array('action' => 'admin_edit', $menu['Menu']['id']), array('class' => 'btn')); ?>
