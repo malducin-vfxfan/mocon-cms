@@ -55,7 +55,8 @@
 		<div class="content">
 			<header class="page-header">
 				<hgroup>
-					<h1>Site <small>- tagline</small></h1>
+					<h1>Site</h1>
+					<h2>tagline</h2>
 				</hgroup>
 			</header>
 			<div class="row">
