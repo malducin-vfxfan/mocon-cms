@@ -20,12 +20,10 @@ echo $this->Html->script(array('/slimbox2/js/slimbox2'), array('inline' => false
 	<article class="page-content" id="album-contents">
 		<header>
 			<h1>Album: <?php echo $album['Album']['name']; ?></h1>
-		</header>
-		<div class="content-info">
 			<time class="date-created" datetime="<?php echo date(DATE_ATOM, strtotime($album['Album']['created'])); ?>">
 				<?php echo strftime("%B %d, %Y %H:%M:%S", strtotime($album['Album']['created'])); ?>
 			</time>
-		</div>
+		</header>
 		<p><?php echo $album['Album']['description']; ?></p>
 	</article>
 </div>

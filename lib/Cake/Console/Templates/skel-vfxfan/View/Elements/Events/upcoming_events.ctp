@@ -17,8 +17,8 @@ $events = $this->requestAction(array('controller' => 'events', 'action' => 'upco
 <?php foreach ($events as $event): ?>
 <article class="contents" id="event-contents">
 	<figure class="image-right"><?php echo $this->FormatImage->idImage('events', $event['Event']['id']); ?></figure>
-	<h3><?php echo $event['Event']['name']; ?></h3>
-	<div class="content-info">
+	<header>
+		<h3><?php echo $event['Event']['name']; ?></h3>
 		<time class="date-start" datetime="<?php echo $event['Event']['date_start']; ?>">
 			<?php echo strftime("%B %d, %Y", strtotime($event['Event']['date_start'])); ?>
 		</time>
@@ -26,14 +26,12 @@ $events = $this->requestAction(array('controller' => 'events', 'action' => 'upco
 		<time class="date-end" datetime="<?php echo $event['Event']['date_end']; ?>">
 			<?php echo strftime("%B %d, %Y", strtotime($event['Event']['date_end'])); ?>
 		</time>
-		<p>@ <span class="event-location"><?php echo $event['Event']['location']; ?></span>
-		<?php if ($event['Event']['webpage']): ?>
-			<br />
-			Web: <?php echo $this->Html->link($event['Event']['webpage'], $event['Event']['webpage'], array('target' => '_blank')); ?></p>
-		<?php endif; ?>
-		</p>
-	</div>
+		<p>@ <span class="event-location"><?php echo $event['Event']['location']; ?></span></p>
+	</header>
 	<p><?php echo $event['Event']['description']; ?></p>
+	<?php if ($event['Event']['webpage']): ?>
+		<p>Web: <?php echo $this->Html->link($event['Event']['webpage'], $event['Event']['webpage'], array('target' => '_blank')); ?></p>
+	<?php endif; ?>
 </article>
 <hr />
 <?php endforeach; ?>

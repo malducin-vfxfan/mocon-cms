@@ -17,12 +17,14 @@ $posts = $this->requestAction(array('controller' => 'posts', 'action' => 'latest
 <?php foreach ($posts as $post): ?>
 		<article class="contents" id="post-contents">
 			<figure class="image-right"><?php echo $this->FormatImage->idImage('posts', $post['Post']['id']); ?></figure>
-			<h3><?php echo $post['Post']['title']; ?></h3>
-			<div class="content-info">
+			<header>
+				<h3><?php echo $post['Post']['title']; ?></h3>
 				<time class="date-created" datetime="<?php echo date(DATE_ATOM, strtotime($post['Post']['created'])); ?>">
 					<?php echo strftime("%B %d, %Y %H:%M:%S", strtotime($post['Post']['created'])); ?>
 				</time>
-				<div class="author">by <?php echo $post['User']['username']; ?></div>
+				<p class="author">by <?php echo $post['User']['username']; ?></p>
+			</header>
+			<div>
 				<?php
 					if (Configure::read('AddThis.posts')) {
 						echo $this->element('AddThis/post', array('slug' => $post['Post']['slug'], 'post_title' => $post['Post']['title']));
@@ -30,7 +32,7 @@ $posts = $this->requestAction(array('controller' => 'posts', 'action' => 'latest
 				?>
 			</div>
 			<p class="contents-summary"><?php echo $post['Post']['summary']; ?></p>
-		    <p><?php echo $this->Html->link('Read more »', array('controller' => 'posts', 'action' => 'view', $post['Post']['slug'])); ?></p>
+			<p><?php echo $this->Html->link('Read more »', array('controller' => 'posts', 'action' => 'view', $post['Post']['slug'])); ?></p>
 		</article>
 		<hr />
 <?php endforeach; ?>

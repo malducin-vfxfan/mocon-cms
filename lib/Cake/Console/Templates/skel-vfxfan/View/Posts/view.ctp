@@ -14,12 +14,12 @@
 		<figure class="image-right"><?php echo $this->FormatImage->idImage('posts', $post['Post']['id']); ?></figure>
 		<header>
 			<h1><?php echo $post['Post']['title']; ?></h1>
-		</header>
-		<div class="content-info">
 			<time class="date-created" datetime="<?php echo date(DATE_ATOM, strtotime($post['Post']['created'])); ?>">
 				<?php echo strftime("%B %d, %Y %H:%M:%S", strtotime($post['Post']['created'])); ?>
 			</time>
 			<p>by <span class="author"><?php echo $post['User']['username']; ?></span></p>
+		</header>
+		<div>
 			<?php
 				if (Configure::read('AddThis.posts')) {
 					echo $this->element('AddThis/post', array('slug' => $post['Post']['slug'], 'post_title' => $post['Post']['title']));
