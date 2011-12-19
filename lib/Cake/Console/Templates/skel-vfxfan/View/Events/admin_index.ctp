@@ -56,7 +56,7 @@
 			echo $this->Paginator->prev('« previous', array(), null, array('class' => 'prev disabled'));
 			echo $this->Paginator->numbers(array('separator' => ''));
 			echo $this->Paginator->next('next »', array(), null, array('class' => 'next disabled'));
-			echo $this->Paginator->first('last');
+			echo $this->Paginator->last('last');
 		?>
 		</div>
 	</section>
