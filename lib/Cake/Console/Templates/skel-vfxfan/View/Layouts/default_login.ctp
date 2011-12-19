@@ -49,8 +49,10 @@
 	<div class="container">
 		<div class="content">
 			<header class="page-header">
-				<h1>Site</h1>
-				<h2>Admin Login</h2>
+				<hgroup>
+					<h1>Site</h1>
+					<h2>Admin Login</h2>
+				</hgroup>
 			</header>
 			<div class="row">
 		        <div class="login" id="flash-messages">
