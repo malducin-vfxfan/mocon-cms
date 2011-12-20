@@ -166,6 +166,7 @@ foreach ($relations as $alias => $details):
 		</div>
 		<?php echo "<?php endif; ?>\n\n";?>
 		<section class="admin-view-related-actions">
+			<h4>Related Actions</h4>
 			<ul class="action-buttons-list">
 				<li><?php echo "<?php echo \$this->Html->link('New " . Inflector::humanize(Inflector::underscore($alias)) . "', array('controller' => '{$details['controller']}', 'action' => 'admin_add'), array('class' => 'btn'));?>";?> </li>
 			</ul>

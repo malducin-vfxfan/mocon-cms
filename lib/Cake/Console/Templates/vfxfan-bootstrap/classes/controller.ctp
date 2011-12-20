@@ -2,8 +2,6 @@
 /**
  * Controller template.
  *
- * Controller template.
- *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
@@ -18,7 +16,7 @@ $docString = <<<DOCSTRING
 /**
  * $controllerName controller.
  *
- * $controllerName controller.
+ * $controllerName actions.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
