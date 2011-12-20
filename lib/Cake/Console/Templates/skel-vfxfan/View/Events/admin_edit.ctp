@@ -8,6 +8,10 @@
  * @subpackage    events
  * @subpackage    events.views
  */
+$year_range = Configure::read('Admin.date_select.year_range');
+
+if (Configure::read('Admin.date_select.max_year')) $max_year = Configure::read('Admin.date_select.max_year');
+else $max_year = date('Y') + $year_range;
 ?>
 <div class="row">
 	<section class="admin-actions">
@@ -25,8 +29,8 @@
 				<?php
 					echo $this->Form->input('id', array('div' => 'clearfix'));
 					echo $this->Form->input('name', array('div' => 'clearfix'));
-					echo $this->Form->input('date_start', array('div' => 'clearfix'));
-					echo $this->Form->input('date_end', array('div' => 'clearfix'));
+					echo $this->Form->input('date_start', array('div' => 'clearfix', 'maxYear' => $max_year));
+					echo $this->Form->input('date_end', array('div' => 'clearfix', 'maxYear' => $max_year));
 					echo $this->Form->input('location', array('div' => 'clearfix'));
 					echo $this->Form->input('description', array('div' => 'clearfix'));
 					echo $this->Form->input('webpage', array('div' => 'clearfix', 'type' => 'url'));
