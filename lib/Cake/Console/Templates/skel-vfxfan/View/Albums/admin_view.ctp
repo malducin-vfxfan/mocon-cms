@@ -25,32 +25,32 @@ echo $this->Html->script(array('/slimbox2/js/slimbox2'), array('inline' => false
 	<section class="admin-content">
 		<h2><?php  echo 'Album';?></h2>
 		<dl>
-			<dt><?php echo 'Id'; ?></dt>
+			<dt>Id</dt>
 			<dd>
 				<?php echo $album['Album']['id']; ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo 'Name'; ?></dt>
+			<dt>Name</dt>
 			<dd>
 				<?php echo $album['Album']['name']; ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo 'Description'; ?></dt>
+			<dt>Description</dt>
 			<dd>
 				<?php echo $album['Album']['description']; ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo 'Slug'; ?></dt>
+			<dt>Slug</dt>
 			<dd>
 				<?php echo $album['Album']['slug']; ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo 'Created'; ?></dt>
+			<dt>Created</dt>
 			<dd>
 				<?php echo $album['Album']['created']; ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo 'Modified'; ?></dt>
+			<dt>Modified</dt>
 			<dd>
 				<?php echo $album['Album']['modified']; ?>
 				&nbsp;

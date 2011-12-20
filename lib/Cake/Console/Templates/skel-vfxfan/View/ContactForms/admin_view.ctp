@@ -20,32 +20,32 @@
 	<section class="admin-content">
 		<h2><?php  echo 'Contact Form';?></h2>
 		<dl>
-			<dt><?php echo 'Id'; ?></dt>
+			<dt>Id</dt>
 			<dd>
 				<?php echo $contactForm['ContactForm']['id']; ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo 'Name'; ?></dt>
+			<dt>Name</dt>
 			<dd>
 				<?php echo $contactForm['ContactForm']['name']; ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo 'Email'; ?></dt>
+			<dt>Email</dt>
 			<dd>
 				<?php echo $this->Html->link($contactForm['ContactForm']['email'], 'mailto:'.$contactForm['ContactForm']['email']); ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo 'Message'; ?></dt>
+			<dt>Message</dt>
 			<dd>
 				<?php echo $contactForm['ContactForm']['message']; ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo 'Created'; ?></dt>
+			<dt>Created</dt>
 			<dd>
 				<?php echo $contactForm['ContactForm']['created']; ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo 'Modified'; ?></dt>
+			<dt>Modified</dt>
 			<dd>
 				<?php echo $contactForm['ContactForm']['modified']; ?>
 				&nbsp;

@@ -21,7 +21,7 @@
 		<h2>Edit a Menu Item</h2>
 		<?php echo $this->Form->create('Menu', array('class' => 'form-stacked'));?>
 			<fieldset>
-				<legend>Admin Edit Menu</legend>
+				<legend>Admin Edit Menu Item</legend>
 				<?php
 					echo $this->Form->input('id', array('div' => 'clearfix'));
 					echo $this->Form->input('name', array('div' => 'clearfix'));

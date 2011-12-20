@@ -22,10 +22,10 @@ else $max_year = date('Y') + $year_range;
 		</ul>
 	</section>
 	<section class="admin-content">
-		<h2><?php echo 'Admin Edit a Event'; ?></h2>
+		<h2>Admin Edit an Event</h2>
 		<?php echo $this->Form->create('Event', array('class' => 'form-stacked', 'type' => 'file'));?>
 			<fieldset>
-				<legend><?php echo 'Admin Edit Event'; ?></legend>
+				<legend>Admin Edit Event</legend>
 				<?php
 					echo $this->Form->input('id', array('div' => 'clearfix'));
 					echo $this->Form->input('name', array('div' => 'clearfix'));

@@ -20,49 +20,49 @@
 		</ul>
 	</section>
 	<section class="admin-content">
-		<h2><?php  echo 'Event';?></h2>
+		<h2>Event</h2>
 		<dl>
-			<dt><?php echo 'Id'; ?></dt>
+			<dt>Id</dt>
 			<dd>
 				<?php echo $event['Event']['id']; ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo 'Name'; ?></dt>
+			<dt>Name</dt>
 			<dd>
 				<?php echo $event['Event']['name']; ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo 'Date Start'; ?></dt>
+			<dt>Date Start</dt>
 			<dd>
 				<?php echo $event['Event']['date_start']; ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo 'Date End'; ?></dt>
+			<dt>Date End</dt>
 			<dd>
 				<?php echo $event['Event']['date_end']; ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo 'Location'; ?></dt>
+			<dt>Location</dt>
 			<dd>
 				<?php echo $event['Event']['location']; ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo 'Description'; ?></dt>
+			<dt>Description</dt>
 			<dd>
 				<?php echo $event['Event']['description']; ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo 'Webpage'; ?></dt>
+			<dt>Webpage</dt>
 			<dd>
 				<?php echo $event['Event']['webpage']; ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo 'Created'; ?></dt>
+			<dt>Created</dt>
 			<dd>
 				<?php echo $event['Event']['created']; ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo 'Modified'; ?></dt>
+			<dt>Modified</dt>
 			<dd>
 				<?php echo $event['Event']['modified']; ?>
 				&nbsp;

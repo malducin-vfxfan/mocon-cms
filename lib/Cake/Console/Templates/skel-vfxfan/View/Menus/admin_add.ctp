@@ -20,7 +20,7 @@
 		<h2>Add a Menu Item</h2>
 		<?php echo $this->Form->create('Menu', array('class' => 'form-stacked'));?>
 			<fieldset>
-				<legend>Admin Add Menu</legend>
+				<legend>Admin Add Menu Item</legend>
 				<?php
 					echo $this->Form->input('name', array('div' => 'clearfix'));
 					echo $this->Form->input('link', array('div' => 'clearfix', 'default' => '#'));

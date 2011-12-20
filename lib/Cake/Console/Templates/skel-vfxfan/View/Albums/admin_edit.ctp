@@ -18,10 +18,10 @@
 		</ul>
 	</section>
 	<section class="admin-content">
-		<h2><?php echo 'Admin Edit a Album'; ?></h2>
+		<h2>Admin Edit a Album</h2>
 		<?php echo $this->Form->create('Album', array('class' => 'form-stacked', 'type' => 'file'));?>
 			<fieldset>
-				<legend><?php echo 'Admin Edit Album'; ?></legend>
+				<legend>Admin Edit Album</legend>
 				<?php
 					echo $this->Form->input('id', array('div' => 'clearfix'));
 					echo $this->Form->input('name', array('div' => 'clearfix'));

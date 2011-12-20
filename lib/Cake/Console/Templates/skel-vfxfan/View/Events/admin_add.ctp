@@ -24,10 +24,10 @@ else $max_year = date('Y') + $year_range;
 		</ul>
 	</section>
 	<section class="admin-content">
-		<h2><?php echo 'Admin Add a Event'; ?></h2>
+		<h2>Admin Add am Event</h2>
 		<?php echo $this->Form->create('Event', array('class' => 'form-stacked', 'type' => 'file'));?>
 			<fieldset>
-				<legend><?php echo 'Admin Add Event'; ?></legend>
+				<legend>Admin Add Event</legend>
 				<?php
 					echo $this->Form->input('name', array('div' => 'clearfix'));
 					echo $this->Form->input('date_start', array('div' => 'clearfix', 'minYear' => $min_year, 'maxYear' => $max_year));
