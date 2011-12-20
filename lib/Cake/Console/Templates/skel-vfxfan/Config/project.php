@@ -15,6 +15,13 @@ $config = array(
 		'keywords' => 'keywords',
 		'description' => 'description'
 	),
+	'Admin' => array(
+		'date_select' => array(
+			'min_year' => '',
+			'max_year' => '',
+			'year_range' => 5,
+		),
+	),
 	'AddThis' => array(
 		'pubid' => '',
 		'title' => '',
