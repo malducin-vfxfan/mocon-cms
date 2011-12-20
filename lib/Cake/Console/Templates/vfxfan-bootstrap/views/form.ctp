@@ -2,8 +2,6 @@
 /**
  * View form template.
  *
- * View form template.
- *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009, 2011, ILMfan (http://ilmfan.com)
  * @link          http://ilmfan.com ILMfan
@@ -15,8 +13,6 @@ $subpackagename = $packagename.'.views';
 ?>
 <?php echo "<?php\n"; ?>
 /**
- * <?php echo $pluralHumanName; ?> admin view.
- *
  * <?php echo $pluralHumanName; ?> admin view.
  *
  * @author        Manuel Alducin
@@ -40,7 +36,7 @@ $subpackagename = $packagename.'.views';
 			foreach ($data as $alias => $details) {
 				if ($details['controller'] != $this->name && !in_array($details['controller'], $done)) {
 					echo "\t\t\t<li><?php echo \$this->Html->link('List " . Inflector::humanize($details['controller']) . "', array('controller' => '{$details['controller']}', 'action' => 'admin_index'), array('class' => 'btn')); ?> </li>\n";
-					echo "\t\t\t<li><?php echo \$this->Html->link('New " . Inflector::humanize(Inflector::underscore($alias)) . "', array('controller' => '{$details['controller']}', 'action' => admin_'add'), array('class' => 'btn')); ?> </li>\n";
+					echo "\t\t\t<li><?php echo \$this->Html->link('New " . Inflector::humanize(Inflector::underscore($alias)) . "', array('controller' => '{$details['controller']}', 'action' => 'admin_add'), array('class' => 'btn')); ?> </li>\n";
 					$done[] = $details['controller'];
 				}
 			}
@@ -49,10 +45,10 @@ $subpackagename = $packagename.'.views';
 		</ul>
 	</section>
 	<section class="admin-content">
-		<h2><?php printf("<?php echo '%s a %s'; ?>", Inflector::humanize($action), $singularHumanName); ?></h2>
+		<h2><?php printf("%s a %s", Inflector::humanize($action), $singularHumanName); ?></h2>
 		<?php echo "<?php echo \$this->Form->create('{$modelClass}', array('class' => 'form-stacked'));?>\n";?>
 			<fieldset>
-				<legend><?php printf("<?php echo '%s %s'; ?>", Inflector::humanize($action), $singularHumanName); ?></legend>
+				<legend><?php printf("%s %s", Inflector::humanize($action), $singularHumanName); ?></legend>
 <?php
 		echo "\t\t\t\t<?php\n";
 		foreach ($fields as $field) {

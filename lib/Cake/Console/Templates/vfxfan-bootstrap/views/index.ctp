@@ -2,8 +2,6 @@
 /**
  * View index template.
  *
- * View index template.
- *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009, 2011, ILMfan (http://ilmfan.com)
  * @link          http://ilmfan.com ILMfan
@@ -15,8 +13,6 @@ $subpackagename = $packagename.'.views';
 ?>
 <?php echo "<?php\n"; ?>
 /**
- * <?php echo $pluralHumanName; ?> admin index view.
- *
  * <?php echo $pluralHumanName; ?> admin index view.
  *
  * @author        Manuel Alducin
