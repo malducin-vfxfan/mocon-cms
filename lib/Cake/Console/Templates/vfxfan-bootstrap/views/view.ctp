@@ -107,11 +107,12 @@ $i = 0;
 foreach ($relations as $alias => $details):
 	$otherSingularVar = Inflector::variable($alias);
 	$otherPluralHumanName = Inflector::humanize($details['controller']);
+	$otherPluralVar = Inflector::variable(Inflector::pluralize($alias));
 	?>
 <div class="row">
 	<aside class="admin-related">
 		<h3><?php echo "Related " . $otherPluralHumanName; ?></h3>
-		<?php echo "<?php if (!empty(\${$singularVar}['{$alias}'])): ?>\n";?>
+		<?php echo "<?php if (!empty(\${$otherPluralVar})): ?>\n";?>
 		<table class="bordered-table zebra-striped">
 			<tr>
 <?php
@@ -123,19 +124,19 @@ foreach ($relations as $alias => $details):
 			</tr>
 <?php
 	echo "\t\t\t<?php\n";
-	echo "\t\t\t\t\$i = 0\n";
-	echo "\t\t\t\tforeach (\${$singularVar}['{$alias}'] as \${$otherSingularVar}):\n";
+	echo "\t\t\t\t\$i = 0;\n";
+	echo "\t\t\t\tforeach (\${$otherPluralVar} as \${$otherSingularVar}):\n";
 	echo "\t\t\t?>\n";
 	echo "\t\t\t<tr>\n";
 
 	foreach ($details['fields'] as $field) {
-		echo "\t\t\t\t<td><?php echo \${$otherSingularVar}['{$field}'];?></td>\n";
+		echo "\t\t\t\t<td><?php echo \${$otherSingularVar}['{$alias}']['{$field}'];?></td>\n";
 	}
 
 	echo "\t\t\t\t<td>\n";
-	echo "\t\t\t\t\t<?php echo \$this->Html->link('View', array('controller' => '{$details['controller']}', 'action' => 'admin_view', \${$otherSingularVar}['{$details['primaryKey']}']), array('class' => 'btn')); ?>\n";
-	echo "\t\t\t\t\t<?php echo \$this->Html->link('Edit', array('controller' => '{$details['controller']}', 'action' => 'admin_edit', \${$otherSingularVar}['{$details['primaryKey']}']), array('class' => 'btn')); ?>\n";
-	echo "\t\t\t\t\t<?php echo \$this->Form->postLink('Delete', array('controller' => '{$details['controller']}', 'action' => 'admin_delete', \${$otherSingularVar}['{$details['primaryKey']}']), array('class' => 'btn danger'), sprintf('Are you sure you want to delete # %s?', \${$otherSingularVar}['{$details['primaryKey']}'])); ?>\n";
+	echo "\t\t\t\t\t<?php echo \$this->Html->link('View', array('controller' => '{$details['controller']}', 'action' => 'admin_view', \${$otherSingularVar}['{$alias}']['{$details['primaryKey']}']), array('class' => 'btn')); ?>\n";
+	echo "\t\t\t\t\t<?php echo \$this->Html->link('Edit', array('controller' => '{$details['controller']}', 'action' => 'admin_edit', \${$otherSingularVar}['{$alias}']['{$details['primaryKey']}']), array('class' => 'btn')); ?>\n";
+	echo "\t\t\t\t\t<?php echo \$this->Form->postLink('Delete', array('controller' => '{$details['controller']}', 'action' => 'admin_delete', \${$otherSingularVar}['{$alias}']['{$details['primaryKey']}']), array('class' => 'btn danger'), sprintf('Are you sure you want to delete # %s?', \${$otherSingularVar}['{$alias}']['{$details['primaryKey']}'])); ?>\n";
 	echo "\t\t\t\t</td>\n";
 	echo "\t\t\t</tr>\n";
 

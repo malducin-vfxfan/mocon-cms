@@ -35,7 +35,7 @@
 		$<?php echo $singularName; ?> = $this-><?php echo $currentModelName; ?>->read(null, $id);
 		$this->set(compact('<?php echo $singularName; ?>'));
 		$this->set('title_for_layout', '<?php echo ucfirst($singularName); ?>: ');
-		// if model has a hasMany relationship don't forget to add pagination here in the view
+		// if model has a hasMany relationship don't forget to add pagination here and in the view
 		// similar to the Groups controller
 		// $this->Group->User->recursive = -1;
 		// $this->set('users', $this->paginate('User', array('User.group_id' => $group['Group']['id'])));
