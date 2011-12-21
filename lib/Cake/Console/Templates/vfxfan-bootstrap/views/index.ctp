@@ -59,7 +59,7 @@ $subpackagename = $packagename.'.views';
 	echo "\t\t\t\t<td>\n";
 	echo "\t\t\t\t\t<?php echo \$this->Html->link('View', array('action' => 'admin_view', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'btn')); ?>\n";
  	echo "\t\t\t\t\t<?php echo \$this->Html->link('Edit', array('action' => 'admin_edit', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'btn')); ?>\n";
- 	echo "\t\t\t\t\t<?php echo \$this->Form->postLink('Delete', array('action' => 'admin_delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'btn'), sprintf('Are you sure you want to delete # %s?', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?>\n";
+ 	echo "\t\t\t\t\t<?php echo \$this->Form->postLink('Delete', array('action' => 'admin_delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'btn danger'), sprintf('Are you sure you want to delete # %s?', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?>\n";
 	echo "\t\t\t\t</td>\n";
 	echo "\t\t\t</tr>\n";
 
