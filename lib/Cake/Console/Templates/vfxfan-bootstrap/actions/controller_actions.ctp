@@ -32,6 +32,7 @@
 		if (!$this-><?php echo $currentModelName; ?>->exists()) {
 			throw new NotFoundException('Invalid <?php echo strtolower($singularHumanName); ?>.');
 		}
+		// $this-><?php echo $currentModelName; ?>->unbindModel(array('hasMany' => array('')));
 		$<?php echo $singularName; ?> = $this-><?php echo $currentModelName; ?>->read(null, $id);
 		$this->set(compact('<?php echo $singularName; ?>'));
 		$this->set('title_for_layout', '<?php echo ucfirst($singularName); ?>: ');
