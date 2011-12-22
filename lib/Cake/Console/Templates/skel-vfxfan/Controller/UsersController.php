@@ -85,6 +85,7 @@ class UsersController extends AppController {
 		if (!$this->User->exists()) {
 			throw new NotFoundException('Invalid User.');
 		}
+		$this->User->unbindModel(array('hasMany' => array('Post')));
 		$user = $this->User->read(null, $id);
 		$this->set(compact('user'));
 		$this->set('title_for_layout', 'User: '.$user['User']['username']);
