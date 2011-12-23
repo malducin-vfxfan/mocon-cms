@@ -15,7 +15,7 @@
 
 		<?php foreach ($events as $event): ?>
 		<article class="contents" id="event-contents">
-			<figure class="image-right"><?php echo $this->FormatImage->idImage('events', $event['Event']['id']); ?></figure>
+			<?php echo $this->FormatImage->idImage('events', $event['Event']['id'], array('class' => 'framed image-right')); ?>
 			<header>
 				<h2><?php echo $event['Event']['name']; ?></h2>
 				<time class="date-start" datetime="<?php echo $event['Event']['date_start']; ?>">

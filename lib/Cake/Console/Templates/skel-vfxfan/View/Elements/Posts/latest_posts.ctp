@@ -16,7 +16,7 @@ $posts = $this->requestAction(array('controller' => 'posts', 'action' => 'latest
 <h2>Latest News</h2>
 <?php foreach ($posts as $post): ?>
 		<article class="contents" id="post-contents">
-			<figure class="image-right"><?php echo $this->FormatImage->idImage('posts', $post['Post']['id']); ?></figure>
+			<?php echo $this->FormatImage->idImage('posts', $post['Post']['id'], array('class' => 'framed image-right')); ?>
 			<header>
 				<h3><?php echo $post['Post']['title']; ?></h3>
 				<time class="date-created" datetime="<?php echo date(DATE_ATOM, strtotime($post['Post']['created'])); ?>">

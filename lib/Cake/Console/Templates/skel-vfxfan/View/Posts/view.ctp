@@ -11,7 +11,7 @@
 ?>
 <div class="row">
 	<article class="page-content" id="post-contents">
-		<figure class="image-right"><?php echo $this->FormatImage->idImage('posts', $post['Post']['id']); ?></figure>
+		<?php echo $this->FormatImage->idImage('posts', $post['Post']['id'], array('class' => 'framed image-right')); ?>
 		<header>
 			<h1><?php echo $post['Post']['title']; ?></h1>
 			<time class="date-created" datetime="<?php echo date(DATE_ATOM, strtotime($post['Post']['created'])); ?>">

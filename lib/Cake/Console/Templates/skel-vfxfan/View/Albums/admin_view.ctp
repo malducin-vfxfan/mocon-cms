@@ -79,7 +79,7 @@ echo $this->Html->script(array('/slimbox2/js/slimbox2'), array('inline' => false
 		endif;
 ?>
 		<div class="span2">
-			<figure><?php echo $this->Html->link($this->Html->image($images_path.'thumbnails/'.$image, array('class' => 'framed image-center', 'alt' => $image, 'title' => $image)), '/img/'.$images_path.$image, array('rel' => 'lightbox-project', 'escape' => false)) ;?><figure>
+			<?php echo $this->Html->link($this->Html->image($images_path.'thumbnails/'.$image, array('class' => 'framed image-center', 'alt' => $image, 'title' => $image)), '/img/'.$images_path.$image, array('rel' => 'lightbox-project', 'escape' => false)) ;?>
 			<div>
 				<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteAlbumImage', $album['Album']['id'], $image), array('class' => 'btn danger'), sprintf('Are you sure you want to delete # %s?', $image)); ?>
 			</div>
