@@ -47,6 +47,7 @@ echo $this->Html->script(array('/slimbox2/js/slimbox2'), array('inline' => false
 		if (($i%6 == 5) || ($i == $last)):
 ?>
 </div> <!-- end thumbnails row -->
+<div>&nbsp;</div>
 <?php
 		endif;
 ?>
