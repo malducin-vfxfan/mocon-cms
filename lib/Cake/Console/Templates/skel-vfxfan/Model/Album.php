@@ -226,7 +226,7 @@ class Album extends AppModel {
  * @return boolean
  */
 	public function deleteFile($id = null, $filename = null) {
-		if (!id or !$filename) return false;
+		if (!$id || !$filename) return false;
 
 		$del_thumb = unlink(IMAGES.'albums'.DS.sprintf("%010d", $this->id).DS.'thumbnails'.DS.$filename);
 		$del_image = unlink(IMAGES.'albums'.DS.sprintf("%010d", $this->id).DS.$filename);
