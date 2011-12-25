@@ -10,7 +10,7 @@
  */
 ?>
 <div class="row">
-	<article class="page-content" id="post-contents">
+	<article class="page-content post-contents">
 		<?php echo $this->FormatImage->idImage('posts', $post['Post']['id'], array('class' => 'framed image-right')); ?>
 		<header>
 			<h1><?php echo $post['Post']['title']; ?></h1>

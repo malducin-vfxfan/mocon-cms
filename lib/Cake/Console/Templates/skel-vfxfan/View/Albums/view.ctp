@@ -17,7 +17,7 @@ echo $this->Html->css('/slimbox2/css/slimbox2', null, array('inline' => false));
 echo $this->Html->script(array('/slimbox2/js/slimbox2'), array('inline' => false));
 ?>
 <div class="row">
-	<article class="page-content" id="album-contents">
+	<article class="page-content">
 		<header>
 			<h1>Album: <?php echo $album['Album']['name']; ?></h1>
 			<time class="date-created" datetime="<?php echo date(DATE_ATOM, strtotime($album['Album']['created'])); ?>">

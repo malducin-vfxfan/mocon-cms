@@ -14,7 +14,7 @@
 		<h1>Past Events</h1>
 
 		<?php foreach ($events as $event): ?>
-		<article class="contents" id="event-contents">
+		<article class="event-contents">
 			<?php echo $this->FormatImage->idImage('events', $event['Event']['id'], array('class' => 'framed image-right')); ?>
 			<header>
 				<h2><?php echo $event['Event']['name']; ?></h2>

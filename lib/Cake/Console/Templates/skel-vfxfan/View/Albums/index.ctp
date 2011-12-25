@@ -14,7 +14,7 @@
 		<h1>Albums</h1>
 
 		<?php foreach ($albums as $album): ?>
-		<article class="contents" id="album-contents">
+		<article class="album-contents">
 			<?php echo $this->FormatImage->idImage('albums', $album['Album']['id'], array('class' => 'framed image-right')); ?>
 			<header>
 				<h2><?php echo $album['Album']['name']; ?></h2>

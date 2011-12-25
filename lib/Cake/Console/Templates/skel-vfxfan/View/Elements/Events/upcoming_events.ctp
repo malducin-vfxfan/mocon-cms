@@ -15,7 +15,7 @@ $events = $this->requestAction(array('controller' => 'events', 'action' => 'upco
 ?>
 <h2>Upcoming Events</h2>
 <?php foreach ($events as $event): ?>
-<article class="contents" id="event-contents">
+<article class="event-contents">
 	<?php echo $this->FormatImage->idImage('events', $event['Event']['id'], array('class' => 'framed image-right')); ?>
 	<header>
 		<h3><?php echo $event['Event']['name']; ?></h3>
