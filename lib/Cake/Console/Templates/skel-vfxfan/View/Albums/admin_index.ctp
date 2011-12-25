@@ -35,7 +35,7 @@
 				<td>
 					<?php echo $this->Html->link('View', array('action' => 'admin_view', $album['Album']['id']), array('class' => 'btn')); ?>
 					<?php echo $this->Html->link('Edit', array('action' => 'admin_edit', $album['Album']['id']), array('class' => 'btn')); ?>
-					<?php echo $this->Form->postLink('Delete', array('action' => 'admin_delete', $album['Album']['id']), array('class' => 'btn'), sprintf('Are you sure you want to delete # %s?', $album['Album']['id'])); ?>
+					<?php echo $this->Form->postLink('Delete', array('action' => 'admin_delete', $album['Album']['id']), array('class' => 'btn danger'), sprintf('Are you sure you want to delete # %s?', $album['Album']['id'])); ?>
 				</td>
 			</tr>
 			<?php endforeach; ?>
