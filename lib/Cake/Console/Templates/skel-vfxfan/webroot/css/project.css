@@ -1507,6 +1507,6 @@ figcaption, .image-caption {
 .contents-summary {
     font-style: italic;
 }
-#post-contents, #event-contents, #album-contents {
+.post-contents, .event-contents, .album-contents {
     min-height: 110px;
 }
