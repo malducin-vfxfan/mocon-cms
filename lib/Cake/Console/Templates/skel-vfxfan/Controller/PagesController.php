@@ -220,7 +220,7 @@ class PagesController extends AppController {
  * @param string $filename
  * @return void
  */
-	public function admin_delete_file($id = null, $filename = null) {
+	public function admin_deleteFile($id = null, $filename = null) {
 		$this->layout = 'default_admin';
 		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();
