@@ -127,6 +127,21 @@ class Post extends AppModel {
 	);
 
 /**
+ * constructor method
+ *
+ * Create virtual fields.
+ *
+ * @param mixed $id The id to start the model on
+ * @param string $table The table to use for this model
+ * @param string $ds The connection name this model is connected to
+ * @return void
+ */
+	public function __construct($id = false, $table = null, $ds = null) {
+		parent::__construct($id, $table, $ds);
+		$this->virtualFields['year'] = sprintf('YEAR(%s.created)', $this->alias);
+	}
+
+/**
  * beforeValidate method
  *
  * If id doesn't exist (when adding a new record), create a slug from
@@ -153,6 +168,13 @@ class Post extends AppModel {
  * @return void
  */
 	public function afterSave($created) {
+		// check to see if a year folder exists and if not, create one
+		if ($created) {
+			$post = $this->read(null, $this->id);
+			if (!is_file(IMAGES.'posts'.DS.$post['Post']['year'])) {
+				mkdir(IMAGES.'posts'.DS.$post['Post']['year']);
+			}
+		}
 		Cache::delete('latest_posts');
 	}
 
@@ -165,7 +187,8 @@ class Post extends AppModel {
  * @return boolean
  */
 	public function beforeDelete($cascade) {
-		$directory = IMAGES.'posts';
+		$post = $this->read(null, $this->id);
+		$directory = IMAGES.'posts'.DS.$post['Post']['year'];
 		$filebasename = sprintf("%010d", $this->id);
 
 		$images = glob($directory.DS.$filebasename.'.*');

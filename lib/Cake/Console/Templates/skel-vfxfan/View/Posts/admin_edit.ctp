@@ -39,7 +39,7 @@ if (Configure::read('TinyMCE.active')) {
 			</fieldset>
 			<fieldset>
 				<legend>Current Image</legend>
-				<?php echo $this->FormatImage->idImage('posts', $this->Form->value('id')); ?>
+				<?php echo $this->FormatImage->idImage('posts/'.$this->Form->value('year'), $this->Form->value('id'), array(), 'posts'); ?>
 			</fieldset>
 		<?php echo $this->Form->end('Submit');?>
 	</section>

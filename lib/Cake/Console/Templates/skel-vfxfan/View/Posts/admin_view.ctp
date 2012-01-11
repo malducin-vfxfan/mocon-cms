@@ -66,7 +66,7 @@
 			</dd>
 			<dt>Image</dt>
 			<dd>
-				<?php echo $this->FormatImage->idImage('posts', $post['Post']['id']); ?>
+				<?php echo $this->FormatImage->idImage('posts/'.$post['Post']['year'], $post['Post']['id'], array(), 'posts'); ?>
 				&nbsp;
 			</dd>
 		</dl>

@@ -15,7 +15,7 @@
 
 		<?php foreach ($posts as $post): ?>
 		<article class="post-contents">
-			<?php echo $this->FormatImage->idImage('posts', $post['Post']['id'], array('class' => 'framed image-right')); ?>
+			<?php echo $this->FormatImage->idImage('posts/'.$post['Post']['year'], $post['Post']['id'], array('class' => 'framed image-right'), 'posts'); ?>
 			<header>
 				<h2><?php echo $post['Post']['title']; ?></h2>
 				<time class="date-created" datetime="<?php echo date(DATE_ATOM, strtotime($post['Post']['created'])); ?>">
