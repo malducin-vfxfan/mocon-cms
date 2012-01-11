@@ -76,15 +76,16 @@ class FormatImageHelper extends AppHelper {
  * Return an image from a given location from the id field. If not found
  * return a default (PNG) image.
  *
- * @param $location string
- * @param $id string
- * @param $options array
+ * @param string $location
+ * @param string $id
+ * @param arrayn $options
+ * @param string $default_location Location of default image, usually an enclosing folder (for example for posts)
  * @return mixed
  */
-	public function idImage($location = null, $id = null, $options = array()) {
+	public function idImage($location = null, $id = null, $options = array(), $location_default = null) {
 		$default = array(
 			'alt' => 'Image',
-			'class' => 'framed'
+			'class' => 'framed',
 		);
 
 		$options = array_merge($default, $options);
@@ -105,12 +106,20 @@ class FormatImageHelper extends AppHelper {
 				break;
 			}
 		}
-
 		if ($image_name) {
 			$img_link = $this->Html->image($location.'/'.$image_name, $options);
 		}
 		else {
-			$img_link = $this->Html->image($location.'/'.'default.png', $options);
+			// if default image is in the same location
+			if (!$location_default) {
+				$img_link = $this->Html->image($location.'/'.'default.png', $options);
+			}
+			// use the specified location of the default image
+			// usually for images that are in subfolders like posts and events where the
+			// default is in the enclosing folder
+			else {
+				$img_link = $this->Html->image($default_location.'/'.'default.png', $options);
+			}
 		}
 
 		return $this->output($img_link);
