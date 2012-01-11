@@ -118,7 +118,7 @@ class FormatImageHelper extends AppHelper {
 			// usually for images that are in subfolders like posts and events where the
 			// default is in the enclosing folder
 			else {
-				$img_link = $this->Html->image($default_location.'/'.'default.png', $options);
+				$img_link = $this->Html->image($location_default.'/'.'default.png', $options);
 			}
 		}
 
