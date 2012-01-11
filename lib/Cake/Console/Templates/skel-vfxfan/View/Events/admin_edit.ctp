@@ -37,6 +37,10 @@ else $max_year = date('Y') + $year_range;
 					echo $this->Form->input('File.image', array('div' => 'clearfix', 'type' => 'file'));
 				?>
 			</fieldset>
+			<fieldset>
+				<legend>Current Image</legend>
+				<?php echo $this->FormatImage->idImage('events/'.$this->Form->value('year'), $this->Form->value('id'), array(), 'events'); ?>
+			</fieldset>
 		<?php echo $this->Form->end('Submit');?>
 	</section>
 </div>

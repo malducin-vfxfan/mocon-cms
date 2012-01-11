@@ -11,11 +11,11 @@
 ?>
 <div class="row">
 	<section class="page-content" id="events">
-		<h1>Events</h1>
+		<h1>Upcoming Events</h1>
 
 		<?php foreach ($events as $event): ?>
 		<article class="event-contents">
-			<?php echo $this->FormatImage->idImage('events', $event['Event']['id'], array('class' => 'framed image-right')); ?>
+			<?php echo $this->FormatImage->idImage('events/'.$event['Event']['year'], $event['Event']['id'], array('class' => 'framed image-right'), 'events'); ?>
 			<header>
 				<h2><?php echo $event['Event']['name']; ?></h2>
 				<time class="date-start" datetime="<?php echo $event['Event']['date_start']; ?>">

@@ -125,6 +125,21 @@ class Event extends AppModel {
 	);
 
 /**
+ * constructor method
+ *
+ * Create virtual fields.
+ *
+ * @param mixed $id The id to start the model on
+ * @param string $table The table to use for this model
+ * @param string $ds The connection name this model is connected to
+ * @return void
+ */
+	public function __construct($id = false, $table = null, $ds = null) {
+		parent::__construct($id, $table, $ds);
+		$this->virtualFields['year'] = sprintf('YEAR(%s.created)', $this->alias);
+	}
+
+/**
  * beforeValidate method
  *
  * @return boolean
@@ -137,13 +152,32 @@ class Event extends AppModel {
 	}
 
 /**
+ * afterSave method
+ *
+ * Delete the latest posts cache everytime a new post is added.
+ *
+ * @param boolean $created
+ * @return void
+ */
+	public function afterSave($created) {
+		// check to see if a year folder exists and if not, create one
+		if ($created) {
+			$event = $this->read(null, $this->id);
+			if (!is_file(IMAGES.'events'.DS.$event['Event']['year'])) {
+				mkdir(IMAGES.'events'.DS.$event['Event']['year']);
+			}
+		}
+	}
+
+/**
  * beforeDelete method
  *
  * @param boolean $cascade
  * @return boolean
  */
 	public function beforeDelete($cascade) {
-		$directory = IMAGES.'events';
+		$event = $this->read(null, $this->id);
+		$directory = IMAGES.'events'.DS.$event['Event']['year'];
 		$filebasename = sprintf("%010d", $this->id);
 
 		$images = glob($directory.DS.$filebasename.'.*');

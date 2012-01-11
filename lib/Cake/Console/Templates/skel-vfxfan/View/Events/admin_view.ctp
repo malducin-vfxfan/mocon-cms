@@ -69,7 +69,7 @@
 			</dd>
 			<dt>Image</dt>
 			<dd>
-				<?php echo $this->FormatImage->idImage('events', $event['Event']['id']); ?>
+				<?php echo $this->FormatImage->idImage('events/'.$event['Event']['year'], $event['Event']['id'], array(), 'events'); ?>
 				&nbsp;
 			</dd>
 		</dl>

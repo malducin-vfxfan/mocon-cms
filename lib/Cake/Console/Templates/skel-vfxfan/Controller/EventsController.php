@@ -49,8 +49,8 @@ class EventsController extends AppController {
  */
 	public function index() {
 		$this->Event->recursive = 0;
-		$this->set('title_for_layout', 'Events');
-		$this->set('events', $this->paginate());
+		$this->set('title_for_layout', 'Upcoming Events');
+		$this->set('events', $this->paginate('Event', array('Event.date_end >= CURDATE()')));
 	}
 
 /**
@@ -115,7 +115,8 @@ class EventsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Event->create();
 			if ($this->Event->save($this->request->data)) {
-				$this->Upload->uploadImageThumb('img'.DS.'events', $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->request->data['File']['image']['name']));
+				$event = $this->Event->read(null, $this->Event->id);
+				$this->Upload->uploadImageThumb('img'.DS.'events'.DS.$event['Event']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->request->data['File']['image']['name']));
 				$this->Session->setFlash('The Event has been saved.', 'default', array('class' => 'message success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
@@ -139,7 +140,8 @@ class EventsController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Event->save($this->request->data)) {
-				$this->Upload->uploadImageThumb('img'.DS.'events', $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->request->data['File']['image']['name']));
+				$event = $this->Event->read(null, $this->Event->id);
+				$this->Upload->uploadImageThumb('img'.DS.'events'.DS.$event['Event']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->request->data['File']['image']['name']));
 				$this->Session->setFlash('The Event has been saved.', 'default', array('class' => 'message success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
