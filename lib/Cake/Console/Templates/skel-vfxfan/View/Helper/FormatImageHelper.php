@@ -79,7 +79,7 @@ class FormatImageHelper extends AppHelper {
  * @param string $location
  * @param string $id
  * @param arrayn $options
- * @param string $default_location Location of default image, usually an enclosing folder (for example for posts)
+ * @param string $location_default Location of default image, usually an enclosing folder (for example for posts)
  * @return mixed
  */
 	public function idImage($location = null, $id = null, $options = array(), $location_default = null) {
