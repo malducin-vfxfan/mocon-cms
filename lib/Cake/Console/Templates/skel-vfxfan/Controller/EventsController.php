@@ -49,8 +49,9 @@ class EventsController extends AppController {
  */
 	public function index() {
 		$this->Event->recursive = 0;
+		$this->paginate = array('conditions' => array('Event.date_end >= CURDATE()'));
 		$this->set('title_for_layout', 'Upcoming Events');
-		$this->set('events', $this->paginate('Event', array('Event.date_end >= CURDATE()')));
+		$this->set('events', $this->paginate());
 	}
 
 /**
@@ -59,9 +60,10 @@ class EventsController extends AppController {
  * @return void
  */
 	public function archive() {
+		$this->paginate = array('conditions' => array('Event.date_end < CURDATE()'), 'order' => array('Event.date_start DESC'));
 		$this->Event->recursive = 0;
 		$this->set('title_for_layout', 'Past Events');
-		$this->set('events', $this->paginate('Event', array('Event.date_end < CURDATE()')));
+		$this->set('events', $this->paginate());
 	}
 
 /**
@@ -83,6 +85,7 @@ class EventsController extends AppController {
  */
 	public function admin_index() {
 		$this->layout = 'default_admin';
+		$this->paginate = array('order' => array('Event.date_start DESC'));
 		$this->Event->recursive = 0;
 		$this->set('title_for_layout', 'Events');
 		$this->set('events', $this->paginate());

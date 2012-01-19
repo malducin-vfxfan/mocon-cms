@@ -29,7 +29,7 @@ class Event extends AppModel {
  * @var array
  */
  	public $order = array(
- 		'Event.date_start' => 'DESC',
+ 		'Event.date_start' => 'ASC',
  		'Event.name' => 'ASC'
  	);
 /**
