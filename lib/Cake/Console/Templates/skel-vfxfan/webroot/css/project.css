@@ -257,14 +257,6 @@ p small {
     color: #BFBFBF;
     font-size: 11px;
 }
-h1, h2, h3, h4, h5, h6 {
-    color: #404040;
-    font-family: 'Ubuntu',Helvetica,Arial,sans-serif;
-    font-weight: bold;
-}
-h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
-    color: #BFBFBF;
-}
 h1 {
     font-size: 30px;
     line-height: 36px;
@@ -406,6 +398,14 @@ pre {
     padding: 8.5px;
     white-space: pre-wrap;
     word-wrap: break-word;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: #404040;
+    font-family: 'Ubuntu',Helvetica,Arial,sans-serif;
+    font-weight: bold;
+}
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
+    color: #BFBFBF;
 }
 form {
     margin-bottom: 18px;
@@ -1244,19 +1244,6 @@ footer {
     margin-top: 17px;
     padding-top: 17px;
 }
-.page-header {
-    background-color: #E6E6E6;
-    border-bottom: 1px solid #DDDDDD;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-    margin: -20px -20px 20px;
-    padding: 20px 20px 10px;
-}
-.page-header h1 {
-    margin-bottom: 8px;
-}
-.page-header h1 small {
-    color: #000000;
-}
 .btn.danger, .alert-message.danger, .btn.danger:hover, .alert-message.danger:hover, .btn.error, .alert-message.error, .btn.error:hover, .alert-message.error:hover, .btn.success, .alert-message.success, .btn.success:hover, .alert-message.success:hover, .btn.info, .alert-message.info, .btn.info:hover, .alert-message.info:hover {
     color: #FFFFFF;
 }
@@ -1305,7 +1292,6 @@ footer {
     display: inline-block;
     font-size: 13px;
     line-height: normal;
-    margin: 2px;
     padding: 5px 14px 6px;
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
 }
@@ -1404,9 +1390,21 @@ button.btn::-moz-focus-inner, input.btn[type="submit"]::-moz-focus-inner {
 .label.notice {
     background-color: #62CFFC;
 }
-.article-header {
+.page-header {
+    background: none repeat scroll 0 0 #E6E6E6;
     border-bottom: 1px solid #DDDDDD;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    margin: -20px -20px 20px;
+    padding: 20px 20px 10px;
+}
+.page-header h1 {
+    margin-bottom: 8px;
+}
+.page-header h1 small {
+    color: #000000;
+}
+.btn {
+    margin: 2px;
 }
 .container > footer p {
     text-align: center;
@@ -1454,7 +1452,6 @@ button.btn::-moz-focus-inner, input.btn[type="submit"]::-moz-focus-inner {
     border-color: #C6EDF9;
 }
 div.paging {
-    background: none repeat scroll 0 0 #FFFFFF;
     clear: both;
     color: #CCCCCC;
     margin-top: 1em;
