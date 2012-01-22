@@ -38,7 +38,6 @@ function menuIterator($array, $htmlInstance) {
 $menuItems = $this->requestAction('menus/menu');
 ?>
 	<ul class="nav">
-		<li class="active"><?php echo $this->Html->link('Home', '/'); ?></li>
 		<?php
 			menuIterator($menuItems, $this->Html);
 		?>
