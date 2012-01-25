@@ -19,7 +19,7 @@ $this->set('channelData', array(
 	'language' => 'en-us',
 	'copyright' => 'Copyright 2011-'.date('Y').', '.FULL_BASE_URL,
 	'generator' => 'VFXfan.com CMS',
-	'image' => array('url' => '/img/rss_travelhq.png', 'width' => 100, 'height' => 100),
+	'image' => array('url' => '/img/rss_site.png', 'width' => 100, 'height' => 100),
 	'atom:link' => array('attrib' => array('href' => $this->Html->url(array('controller' => 'posts', 'action' => 'index.rss')), 'rel' => 'self', 'type' => 'application/rss+xml')),
 	'pubDate' => $last_pub_date,
 	'lastBuildDate' => $last_pub_date
