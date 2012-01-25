@@ -23,11 +23,17 @@ App::uses('CakeEmail', 'Network/Email');
 class ContactFormsController extends AppController {
 
 /**
+ * Models
+ *
+ * @var array
+ */
+	public $uses = array('ContactForm', 'ContactFormEmail');
+/**
  * Components
  *
  * @var array
  */
-	var $components = array('Recaptcha.Recaptcha' => array('actions' => array('index')));
+	public $components = array('Recaptcha.Recaptcha' => array('actions' => array('index')));
 
 /**
  * index method
@@ -113,18 +119,19 @@ class ContactFormsController extends AppController {
  */
 	private function _sendContactEmail($id) {
 		$email = new CakeEmail();
-		$contact_form = $this->ContactForm->read(null, $id);
+		$contactForm = $this->ContactForm->read(null, $id);
+		$currentRecipients = $this->ContactFormEmail->find('active', array('fields' => array('ContactFormEmail.email')));
 
 		$email->from(array('webmaster@example.com' => 'Site Webmaster'));
-		$email->to('webmaster@example.com');
+		$email->to($currentRecipients);
 		$email->sender('webmaster@example.com', 'VFXfan CMS emailer');
 		$email->subject('New Contact Message from Site');
 		$email->emailFormat('both');
 		$email->template('contact_form', 'default');
 		$email->viewVars(array(
-			'name' => $contact_form['ContactForm']['name'],
-			'email' => $contact_form['ContactForm']['email'],
-			'message' => $contact_form['ContactForm']['message']
+			'name' => $contactForm['ContactForm']['name'],
+			'email' => $contactForm['ContactForm']['email'],
+			'message' => $contactForm['ContactForm']['message']
 		));
 		$result = $email->send();
     }
