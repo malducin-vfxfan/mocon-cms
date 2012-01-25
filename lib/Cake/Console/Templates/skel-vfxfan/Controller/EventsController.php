@@ -24,7 +24,7 @@ class EventsController extends AppController {
  *
  * @var array
  */
-	var $helpers = array('FormatImage');
+	public $helpers = array('FormatImage');
 /**
  * Components
  *

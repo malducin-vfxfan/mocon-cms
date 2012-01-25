@@ -25,7 +25,7 @@ class AlbumsController extends AppController {
  *
  * @var array
  */
-	var $helpers = array('FormatImage');
+	public $helpers = array('FormatImage');
 /**
  * Components
  *

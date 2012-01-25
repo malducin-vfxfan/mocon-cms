@@ -23,13 +23,13 @@ class PostsController extends AppController {
  *
  * @var array
  */
-	var $components = array('Brita', 'RequestHandler', 'Upload');
+	public $components = array('Brita', 'RequestHandler', 'Upload');
 /**
  * Helpers
  *
  * @var array
  */
-	var $helpers = array('FormatImage', 'Rss');
+	public $helpers = array('FormatImage', 'Rss');
 
 /**
  * beforeFilter method
