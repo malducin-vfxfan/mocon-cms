@@ -71,6 +71,7 @@
 						<?php echo $this->Html->link('Misc.', '#', array('class' => 'dropdown-toggle')); ?>
 						<ul class="dropdown-menu">
 							<li><?php echo $this->Html->link('Contact Form', array('controller' => 'contact_forms', 'action' => 'admin_index')); ?></li>
+							<li><?php echo $this->Html->link('Contact Form Emails', array('controller' => 'contact_form_emails', 'action' => 'admin_index')); ?></li>
 						</ul>
 					</li>
 					<li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'admin_logout')); ?></li>
