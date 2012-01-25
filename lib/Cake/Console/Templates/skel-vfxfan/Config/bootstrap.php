@@ -30,7 +30,7 @@ Cache::config('veryshort', array(
 	'duration'=> '+5 minutes',
 	'probability'=> 100,
 	'path' => CACHE,
-	'prefix' => 'travelhq_',
+	'prefix' => '',
 	'lock' => false,
 	'serialize' => true)
 );
@@ -40,7 +40,7 @@ Cache::config('short', array(
 	'duration'=> '+1 hours',
 	'probability'=> 100,
 	'path' => CACHE,
-	'prefix' => 'travelhq_',
+	'prefix' => '',
 	'lock' => false,
 	'serialize' => true)
 );
@@ -50,7 +50,7 @@ Cache::config('medium', array(
 	'duration'=> '+1 day',
 	'probability'=> 100,
 	'path' => CACHE,
-	'prefix' => 'travelhq_',
+	'prefix' => '',
 	'lock' => false,
 	'serialize' => true)
 );
@@ -60,7 +60,7 @@ Cache::config('long', array(
 	'duration'=> '+1 week',
 	'probability'=> 100,
 	'path' => CACHE,
-	'prefix' => 'travelhq_',
+	'prefix' => '',
 	'lock' => false,
 	'serialize' => true)
 );
