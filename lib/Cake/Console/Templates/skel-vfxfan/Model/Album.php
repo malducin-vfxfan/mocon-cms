@@ -2,7 +2,7 @@
 /**
  * Album model.
  *
- * Manage Album data. Albuma have a thumbnail and their image folder
+ * Manage Album data. Albums have a thumbnail and their image folder
  * contains a thumbnails folder. It assumes the actual image and
  * thumbnail have the same name, the only thing that distinguishes
  * them is their location.
