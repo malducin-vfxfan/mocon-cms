@@ -28,7 +28,7 @@ $subpackagename = $packagename.'.views';
 		<ul class="action-buttons-list">
 <?php
 	echo "\t\t\t<li><?php echo \$this->Html->link('Edit " . $singularHumanName ."', array('action' => 'admin_edit', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'btn')); ?> </li>\n";
-	echo "\t\t\t<li><?php echo \$this->Form->postLink('Delete " . $singularHumanName . "', array('action' => 'admin_delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'btn danger'), sprintf('Are you sure you want to delete # %s?', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?> </li>\n";
+	echo "\t\t\t<li><?php echo \$this->Form->postLink('Delete " . $singularHumanName . "', array('action' => 'admin_delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?> </li>\n";
 	echo "\t\t\t<li><?php echo \$this->Html->link('List " . $pluralHumanName . "', array('action' => 'admin_index'), array('class' => 'btn')); ?> </li>\n";
 	echo "\t\t\t<li><?php echo \$this->Html->link('New " . $singularHumanName . "', array('action' => 'admin_add'), array('class' => 'btn')); ?> </li>\n";
 
@@ -113,35 +113,39 @@ foreach ($relations as $alias => $details):
 	<aside class="admin-related">
 		<h3><?php echo "Related " . $otherPluralHumanName; ?></h3>
 		<?php echo "<?php if (!empty(\${$otherPluralVar})): ?>\n";?>
-		<table class="bordered-table zebra-striped">
-			<tr>
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
 <?php
 	foreach ($details['fields'] as $field) {
-		echo "\t\t\t\t<th><?php echo '" . Inflector::humanize($field) . "'; ?></th>\n";
+		echo "\t\t\t\t\t<th><?php echo '" . Inflector::humanize($field) . "'; ?></th>\n";
 	}
 ?>
-				<th>Actions</th>
-			</tr>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
 <?php
-	echo "\t\t\t<?php\n";
-	echo "\t\t\t\t\$i = 0;\n";
-	echo "\t\t\t\tforeach (\${$otherPluralVar} as \${$otherSingularVar}):\n";
-	echo "\t\t\t?>\n";
-	echo "\t\t\t<tr>\n";
+	echo "\t\t\t\t<?php\n";
+	echo "\t\t\t\t\t\$i = 0;\n";
+	echo "\t\t\t\t\tforeach (\${$otherPluralVar} as \${$otherSingularVar}):\n";
+	echo "\t\t\t\t?>\n";
+	echo "\t\t\t\t<tr>\n";
 
 	foreach ($details['fields'] as $field) {
-		echo "\t\t\t\t<td><?php echo \${$otherSingularVar}['{$alias}']['{$field}'];?></td>\n";
+		echo "\t\t\t\t\t<td><?php echo \${$otherSingularVar}['{$alias}']['{$field}'];?></td>\n";
 	}
 
-	echo "\t\t\t\t<td>\n";
-	echo "\t\t\t\t\t<?php echo \$this->Html->link('View', array('controller' => '{$details['controller']}', 'action' => 'admin_view', \${$otherSingularVar}['{$alias}']['{$details['primaryKey']}']), array('class' => 'btn')); ?>\n";
-	echo "\t\t\t\t\t<?php echo \$this->Html->link('Edit', array('controller' => '{$details['controller']}', 'action' => 'admin_edit', \${$otherSingularVar}['{$alias}']['{$details['primaryKey']}']), array('class' => 'btn')); ?>\n";
-	echo "\t\t\t\t\t<?php echo \$this->Form->postLink('Delete', array('controller' => '{$details['controller']}', 'action' => 'admin_delete', \${$otherSingularVar}['{$alias}']['{$details['primaryKey']}']), array('class' => 'btn danger'), sprintf('Are you sure you want to delete # %s?', \${$otherSingularVar}['{$alias}']['{$details['primaryKey']}'])); ?>\n";
-	echo "\t\t\t\t</td>\n";
-	echo "\t\t\t</tr>\n";
+	echo "\t\t\t\t\t<td>\n";
+	echo "\t\t\t\t\t\t<?php echo \$this->Html->link('View', array('controller' => '{$details['controller']}', 'action' => 'admin_view', \${$otherSingularVar}['{$alias}']['{$details['primaryKey']}']), array('class' => 'btn')); ?>\n";
+	echo "\t\t\t\t\t\t<?php echo \$this->Html->link('Edit', array('controller' => '{$details['controller']}', 'action' => 'admin_edit', \${$otherSingularVar}['{$alias}']['{$details['primaryKey']}']), array('class' => 'btn')); ?>\n";
+	echo "\t\t\t\t\t\t<?php echo \$this->Form->postLink('Delete', array('controller' => '{$details['controller']}', 'action' => 'admin_delete', \${$otherSingularVar}['{$alias}']['{$details['primaryKey']}']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', \${$otherSingularVar}['{$alias}']['{$details['primaryKey']}'])); ?>\n";
+	echo "\t\t\t\t\t</td>\n";
+	echo "\t\t\t\t</tr>\n";
 
-	echo "\t\t\t<?php endforeach; ?>\n";
+	echo "\t\t\t\t<?php endforeach; ?>\n";
 ?>
+			<tbody>
 		</table>
 
 		<p>
@@ -158,9 +162,9 @@ foreach ($relations as $alias => $details):
 <?php
 	echo "\t\t<?php\n";
 	echo "\t\t\techo \$this->Paginator->first('first');\n";
-	echo "\t\t\techo \$this->Paginator->prev('« previous', array(), null, array('class' => 'prev disabled'));\n";
+	echo "\t\t\techo \$this->Paginator->prev('« previous', array(), null, array('class' => 'disabled'));\n";
 	echo "\t\t\techo \$this->Paginator->numbers(array('separator' => ''));\n";
-	echo "\t\t\techo \$this->Paginator->next('next »', array(), null, array('class' => 'next disabled'));\n";
+	echo "\t\t\techo \$this->Paginator->next('next »', array(), null, array('class' => 'disabled'));\n";
 	echo "\t\t\techo \$this->Paginator->last('last');\n";
 	echo "\t\t?>\n";
 ?>

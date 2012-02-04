@@ -31,40 +31,44 @@ $subpackagename = $packagename.'.views';
 	</section>
 	<section class="admin-main-content">
 		<h2><?php echo $pluralHumanName; ?></h2>
-		<table class="bordered-table zebra-striped">
-			<tr>
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
 <?php foreach ($fields as $field): ?>
-				<th><?php echo "<?php echo \$this->Paginator->sort('{$field}');?>";?></th>
+					<th><?php echo "<?php echo \$this->Paginator->sort('{$field}');?>";?></th>
 <?php endforeach;?>
-				<th>Actions</th>
-			</tr>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
 <?php
-	echo "\t\t\t<?php foreach (\${$pluralVar} as \${$singularVar}): ?>\n";
-	echo "\t\t\t<tr>\n";
+	echo "\t\t\t\t<?php foreach (\${$pluralVar} as \${$singularVar}): ?>\n";
+	echo "\t\t\t\t<tr>\n";
 	foreach ($fields as $field) {
 		$isKey = false;
 		if (!empty($associations['belongsTo'])) {
 			foreach ($associations['belongsTo'] as $alias => $details) {
 				if ($field === $details['foreignKey']) {
 					$isKey = true;
-					echo "\t\t\t\t<td>\n\t\t\t\t\t<?php echo \$this->Html->link(\${$singularVar}['{$alias}']['{$details['displayField']}'], array('controller' => '{$details['controller']}', 'action' => 'admin_view', \${$singularVar}['{$alias}']['{$details['primaryKey']}'])); ?>\n\t\t\t\t</td>\n";
+					echo "\t\t\t\t\t<td>\n\t\t\t\t\t\t<?php echo \$this->Html->link(\${$singularVar}['{$alias}']['{$details['displayField']}'], array('controller' => '{$details['controller']}', 'action' => 'admin_view', \${$singularVar}['{$alias}']['{$details['primaryKey']}'])); ?>\n\t\t\t\t\t</td>\n";
 					break;
 				}
 			}
 		}
 		if ($isKey !== true) {
-			echo "\t\t\t\t<td><?php echo \${$singularVar}['{$modelClass}']['{$field}']; ?>&nbsp;</td>\n";
+			echo "\t\t\t\t\t<td><?php echo \${$singularVar}['{$modelClass}']['{$field}']; ?>&nbsp;</td>\n";
 		}
 	}
-	echo "\t\t\t\t<td>\n";
-	echo "\t\t\t\t\t<?php echo \$this->Html->link('View', array('action' => 'admin_view', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'btn')); ?>\n";
- 	echo "\t\t\t\t\t<?php echo \$this->Html->link('Edit', array('action' => 'admin_edit', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'btn')); ?>\n";
- 	echo "\t\t\t\t\t<?php echo \$this->Form->postLink('Delete', array('action' => 'admin_delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'btn danger'), sprintf('Are you sure you want to delete # %s?', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?>\n";
-	echo "\t\t\t\t</td>\n";
-	echo "\t\t\t</tr>\n";
+	echo "\t\t\t\t\t<td>\n";
+	echo "\t\t\t\t\t\t<?php echo \$this->Html->link('View', array('action' => 'admin_view', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'btn')); ?>\n";
+ 	echo "\t\t\t\t\t\t<?php echo \$this->Html->link('Edit', array('action' => 'admin_edit', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'btn')); ?>\n";
+ 	echo "\t\t\t\t\t\t<?php echo \$this->Form->postLink('Delete', array('action' => 'admin_delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?>\n";
+	echo "\t\t\t\t\t</td>\n";
+	echo "\t\t\t\t</tr>\n";
 
-	echo "\t\t\t<?php endforeach; ?>\n";
+	echo "\t\t\t\t<?php endforeach; ?>\n";
 ?>
+			</tbody>
 		</table>
 		<p>
 <?php echo "\t\t<?php
@@ -79,9 +83,9 @@ $subpackagename = $packagename.'.views';
 <?php
 	echo "\t\t<?php\n";
 	echo "\t\t\techo \$this->Paginator->first('first');\n";
-	echo "\t\t\techo \$this->Paginator->prev('« previous', array(), null, array('class' => 'prev disabled'));\n";
+	echo "\t\t\techo \$this->Paginator->prev('« previous', array(), null, array('class' => 'disabled'));\n";
 	echo "\t\t\techo \$this->Paginator->numbers(array('separator' => ''));\n";
-	echo "\t\t\techo \$this->Paginator->next('next »', array(), null, array('class' => 'next disabled'));\n";
+	echo "\t\t\techo \$this->Paginator->next('next »', array(), null, array('class' => 'disabled'));\n";
 	echo "\t\t\techo \$this->Paginator->last('last');\n";
 	echo "\t\t?>\n";
 ?>

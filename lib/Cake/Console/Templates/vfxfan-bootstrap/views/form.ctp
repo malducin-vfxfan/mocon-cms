@@ -27,7 +27,7 @@ $subpackagename = $packagename.'.views';
 		<h3>Actions</h3>
 		<ul class="action-buttons-list">
 <?php if (strpos($action, 'add') === false): ?>
-			<li><?php echo "<?php echo \$this->Form->postLink('Delete', array('action' => 'admin_delete', \$this->Form->value('{$modelClass}.{$primaryKey}')), array('class' => 'btn danger'), sprintf('Are you sure you want to delete # %s?', \$this->Form->value('{$modelClass}.{$primaryKey}'))); ?>";?></li>
+			<li><?php echo "<?php echo \$this->Form->postLink('Delete', array('action' => 'admin_delete', \$this->Form->value('{$modelClass}.{$primaryKey}')), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', \$this->Form->value('{$modelClass}.{$primaryKey}'))); ?>";?></li>
 <?php endif;?>
 			<li><?php echo "<?php echo \$this->Html->link('List " . $pluralHumanName . "', array('action' => 'admin_index'), array('class' => 'btn'));?>";?></li>
 <?php
@@ -46,7 +46,7 @@ $subpackagename = $packagename.'.views';
 	</section>
 	<section class="admin-content">
 		<h2><?php printf("%s a %s", Inflector::humanize($action), $singularHumanName); ?></h2>
-		<?php echo "<?php echo \$this->Form->create('{$modelClass}', array('class' => 'form-stacked'));?>\n";?>
+		<?php echo "<?php echo \$this->Form->create('{$modelClass}');?>\n";?>
 			<fieldset>
 				<legend><?php printf("%s %s", Inflector::humanize($action), $singularHumanName); ?></legend>
 <?php
@@ -55,12 +55,12 @@ $subpackagename = $packagename.'.views';
 			if (strpos($action, 'add') !== false && $field == $primaryKey) {
 				continue;
 			} elseif (!in_array($field, array('created', 'modified', 'updated'))) {
-				echo "\t\t\t\t\techo \$this->Form->input('{$field}', array('div' => 'clearfix'));\n";
+				echo "\t\t\t\t\techo \$this->Form->input('{$field}');\n";
 			}
 		}
 		if (!empty($associations['hasAndBelongsToMany'])) {
 			foreach ($associations['hasAndBelongsToMany'] as $assocName => $assocData) {
-				echo "\t\t\t\t\techo \$this->Form->input('{$assocName}', array('div' => 'clearfix'));\n";
+				echo "\t\t\t\t\techo \$this->Form->input('{$assocName}');\n";
 			}
 		}
 		echo "\t\t\t\t?>\n";
