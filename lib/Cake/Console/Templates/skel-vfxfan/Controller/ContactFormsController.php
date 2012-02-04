@@ -48,10 +48,10 @@ class ContactFormsController extends AppController {
 			$this->ContactForm->create();
 			if ($this->ContactForm->save($this->request->data)) {
 				$this->_sendContactEmail($this->ContactForm->id);
-				$this->Session->setFlash('The Contact Form message has been sent.', 'default', array('class' => 'message success'));
+				$this->Session->setFlash('The Contact Form message has been sent.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('controller' => 'pages', 'action' => 'index'));
 			} else {
-				$this->Session->setFlash('The Contact Form message could not be sent. Please, try again.', 'default', array('class' => 'message failure'));
+				$this->Session->setFlash('The Contact Form message could not be sent. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		}
 		$this->set('title_for_layout', 'Contact Us');
@@ -102,10 +102,10 @@ class ContactFormsController extends AppController {
 			throw new NotFoundException('Invalid Contact Form message.');
 		}
 		if ($this->ContactForm->delete()) {
-			$this->Session->setFlash('Contact Form message deleted.', 'default', array('class' => 'message success'));
+			$this->Session->setFlash('Contact Form message deleted.', 'default', array('class' => 'alert alert-success'));
 			$this->redirect(array('action'=>'admin_index'));
 		}
-		$this->Session->setFlash('Contact Form message was not deleted.', 'default', array('class' => 'message failure'));
+		$this->Session->setFlash('Contact Form message was not deleted.', 'default', array('class' => 'alert alert-error'));
 		$this->redirect(array('action' => 'admin_index'));
 	}
 

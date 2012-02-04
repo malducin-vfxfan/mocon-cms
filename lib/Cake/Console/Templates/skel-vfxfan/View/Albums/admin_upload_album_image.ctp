@@ -18,11 +18,11 @@
 	</section>
 	<section class="admin-content">
 		<h2><?php echo 'Admin Add Album Image'; ?></h2>
-		<?php echo $this->Form->create('Album', array('class' => 'form-stacked', 'type' => 'file'));?>
+		<?php echo $this->Form->create('Album', array('type' => 'file'));?>
 			<fieldset>
 				<legend><?php echo 'Admin Add Album'; ?></legend>
 				<?php
-					echo $this->Form->input('File.image', array('div' => 'clearfix', 'type' => 'file'));
+					echo $this->Form->input('File.image', array('type' => 'file'));
 				?>
 			</fieldset>
 		<?php echo $this->Form->end('Submit');?>

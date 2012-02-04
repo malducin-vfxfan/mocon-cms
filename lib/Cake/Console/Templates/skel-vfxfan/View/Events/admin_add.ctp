@@ -25,17 +25,17 @@ else $max_year = date('Y') + $year_range;
 	</section>
 	<section class="admin-content">
 		<h2>Admin Add am Event</h2>
-		<?php echo $this->Form->create('Event', array('class' => 'form-stacked', 'type' => 'file'));?>
+		<?php echo $this->Form->create('Event', array('type' => 'file'));?>
 			<fieldset>
 				<legend>Admin Add Event</legend>
 				<?php
-					echo $this->Form->input('name', array('div' => 'clearfix'));
-					echo $this->Form->input('date_start', array('div' => 'clearfix', 'minYear' => $min_year, 'maxYear' => $max_year));
-					echo $this->Form->input('date_end', array('div' => 'clearfix', 'minYear' => $min_year, 'maxYear' => $max_year));
-					echo $this->Form->input('location', array('div' => 'clearfix'));
-					echo $this->Form->input('description', array('div' => 'clearfix'));
-					echo $this->Form->input('webpage', array('div' => 'clearfix', 'type' => 'url'));
-					echo $this->Form->input('File.image', array('div' => 'clearfix', 'type' => 'file'));
+					echo $this->Form->input('name');
+					echo $this->Form->input('date_start', array('minYear' => $min_year, 'maxYear' => $max_year));
+					echo $this->Form->input('date_end', array('minYear' => $min_year, 'maxYear' => $max_year));
+					echo $this->Form->input('location');
+					echo $this->Form->input('description');
+					echo $this->Form->input('webpage', array('type' => 'url'));
+					echo $this->Form->input('File.image', array('type' => 'file'));
 				?>
 			</fieldset>
 		<?php echo $this->Form->end('Submit');?>

@@ -126,11 +126,11 @@ class AppController extends Controller {
  */
 	public function blackhole($type) {
 		if ($type == 'csrf') {
-			$this->Session->setFlash('The Form has expired, please try again.', 'default', array('class' => 'message failure'));
+			$this->Session->setFlash('The Form has expired, please try again.', 'default', array('class' => 'alert alert-error'));
 			$this->redirect(array('action' => $this->request->action));
 		}
 		elseif ($type == 'auth') {
-			$this->Session->setFlash('There was a problem with the action (probably validation), please try again.', 'default', array('class' => 'message failure'));
+			$this->Session->setFlash('There was a problem with the action (probably validation), please try again.', 'default', array('class' => 'alert alert-error'));
 			$this->redirect(array('action' => $this->request->action));
 		}
 		else {

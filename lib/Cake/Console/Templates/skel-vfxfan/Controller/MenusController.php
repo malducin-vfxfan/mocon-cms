@@ -84,10 +84,10 @@ class MenusController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Menu->create();
 			if ($this->Menu->save($this->request->data)) {
-				$this->Session->setFlash('The Menu has been saved.', 'default', array('class' => 'message success'));
+				$this->Session->setFlash('The Menu has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Menu could not be saved. Please, try again.', 'default', array('class' => 'message failure'));
+				$this->Session->setFlash('The Menu could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		}
 		$menuParents = $this->Menu->find('list', array('fields' => array('Menu.id', 'Menu.name'), 'order' => 'Menu.id'));
@@ -107,14 +107,14 @@ class MenusController extends AppController {
 		$this->layout = 'default_admin';
 		$this->Menu->id = $id;
 		if (!$this->Menu->exists()) {
-			throw new NotFoundException('Invalid Menu.', 'default', array('class' => 'message failure'));
+			throw new NotFoundException('Invalid Menu.', 'default', array('class' => 'alert alert-error'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Menu->save($this->request->data)) {
-				$this->Session->setFlash('The menu has been saved.', 'default', array('class' => 'message success'));
+				$this->Session->setFlash('The menu has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Menu could not be saved. Please, try again.', 'default', array('class' => 'message failure'));
+				$this->Session->setFlash('The Menu could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		} else {
 			$this->request->data = $this->Menu->read(null, $id);
@@ -139,13 +139,13 @@ class MenusController extends AppController {
 		}
 		$this->Menu->id = $id;
 		if (!$this->Menu->exists()) {
-			throw new NotFoundException('Invalid Menu.', 'default', array('class' => 'message failure'));
+			throw new NotFoundException('Invalid Menu.', 'default', array('class' => 'alert alert-error'));
 		}
 		if ($this->Menu->delete()) {
-			$this->Session->setFlash('Menu deleted.', 'default', array('class' => 'message success'));
+			$this->Session->setFlash('Menu deleted.', 'default', array('class' => 'alert alert-success'));
 			$this->redirect(array('action'=>'admin_index'));
 		}
-		$this->Session->setFlash('Menu was not deleted.', 'default', array('class' => 'message failure'));
+		$this->Session->setFlash('Menu was not deleted.', 'default', array('class' => 'alert alert-error'));
 		$this->redirect(array('action' => 'admin_index'));
 	}
 }

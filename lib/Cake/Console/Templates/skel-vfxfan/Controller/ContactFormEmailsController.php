@@ -57,10 +57,10 @@ class ContactFormEmailsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->ContactFormEmail->create();
 			if ($this->ContactFormEmail->save($this->request->data)) {
-				$this->Session->setFlash('The Contact Form Email has been saved.', 'default', array('class' => 'message success'));
+				$this->Session->setFlash('The Contact Form Email has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Contact Form Email could not be saved. Please, try again.', 'default', array('class' => 'message failure'));
+				$this->Session->setFlash('The Contact Form Email could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		}
 		$this->set('title_for_layout', 'Add Contact Form Email');
@@ -80,10 +80,10 @@ class ContactFormEmailsController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->ContactFormEmail->save($this->request->data)) {
-				$this->Session->setFlash('The Contact Form Email has been saved.', 'default', array('class' => 'message success'));
+				$this->Session->setFlash('The Contact Form Email has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Contact Form Email could not be saved. Please, try again.', 'default', array('class' => 'message failure'));
+				$this->Session->setFlash('The Contact Form Email could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		} else {
 			$this->request->data = $this->ContactFormEmail->read(null, $id);
@@ -107,10 +107,10 @@ class ContactFormEmailsController extends AppController {
 			throw new NotFoundException('Invalid Contact Form Email.');
 		}
 		if ($this->ContactFormEmail->delete()) {
-			$this->Session->setFlash('Contact Form Email deleted.', 'default', array('class' => 'message success'));
+			$this->Session->setFlash('Contact Form Email deleted.', 'default', array('class' => 'alert alert-success'));
 			$this->redirect(array('action'=>'admin_index'));
 		}
-		$this->Session->setFlash('Contact Form Email was not deleted.', 'default', array('class' => 'message failure'));
+		$this->Session->setFlash('Contact Form Email was not deleted.', 'default', array('class' => 'alert alert-error'));
 		$this->redirect(array('action' => 'admin_index'));
 	}
 }

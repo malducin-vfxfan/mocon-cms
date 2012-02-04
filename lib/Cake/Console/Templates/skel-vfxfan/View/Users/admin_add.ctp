@@ -22,13 +22,13 @@
 	</section>
 	<section class="admin-content">
 		<h2>Add a User</h2>
-		<?php echo $this->Form->create('User', array('class' => 'form-stacked'));?>
+		<?php echo $this->Form->create('User');?>
 			<fieldset>
 				<legend>Admin Add User</legend>
 				<?php
-					echo $this->Form->input('username', array('div' => 'clearfix'));
-					echo $this->Form->input('password', array('div' => 'clearfix'));
-					echo $this->Form->input('group_id', array('div' => 'clearfix'));
+					echo $this->Form->input('username');
+					echo $this->Form->input('password');
+					echo $this->Form->input('group_id');
 				?>
 			</fieldset>
 		<?php echo $this->Form->end('Submit');?>

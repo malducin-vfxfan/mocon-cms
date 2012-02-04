@@ -80,10 +80,10 @@ class PageSectionsController extends AppController {
 			$this->PageSection->create();
 			$this->request->data['PageSection']['content'] = $this->brita->purify($this->request->data['PageSection']['content']);
 			if ($this->PageSection->save($this->request->data)) {
-				$this->Session->setFlash('The Page Section has been saved.', 'default', array('class' => 'message success'));
+				$this->Session->setFlash('The Page Section has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_view', $this->PageSection->id));
 			} else {
-				$this->Session->setFlash('The Page Section could not be saved. Please, try again.', 'default', array('class' => 'message failure'));
+				$this->Session->setFlash('The Page Section could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		}
 		$pages = $this->PageSection->Page->find('list');
@@ -107,10 +107,10 @@ class PageSectionsController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$this->request->data['PageSection']['content'] = $this->brita->purify($this->request->data['PageSection']['content']);
 			if ($this->PageSection->save($this->request->data)) {
-				$this->Session->setFlash('The Page Section has been saved.', 'default', array('class' => 'message success'));
+				$this->Session->setFlash('The Page Section has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_view', $this->PageSection->id));
 			} else {
-				$this->Session->setFlash('The Page Section could not be saved. Please, try again.', 'default', array('class' => 'message failure'));
+				$this->Session->setFlash('The Page Section could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		} else {
 			$this->request->data = $this->PageSection->read(null, $id);
@@ -136,10 +136,10 @@ class PageSectionsController extends AppController {
 			throw new NotFoundException('Invalid Page Section.');
 		}
 		if ($this->PageSection->delete()) {
-			$this->Session->setFlash('Page Section deleted.', 'default', array('class' => 'message success'));
+			$this->Session->setFlash('Page Section deleted.', 'default', array('class' => 'alert alert-success'));
 			$this->redirect(array('action'=>'admin_index'));
 		}
-		$this->Session->setFlash('Page Section was not deleted.', 'default', array('class' => 'message failure'));
+		$this->Session->setFlash('Page Section was not deleted.', 'default', array('class' => 'alert alert-error'));
 		$this->redirect(array('action' => 'admin_index'));
 	}
 

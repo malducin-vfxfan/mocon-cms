@@ -38,8 +38,8 @@
 	?>
 </head>
 <body>
-	<nav class="topbar">
-		<div class="fill">
+	<nav class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
 			<div class="container">
 				<?php echo $this->Html->link('Site', '/', array('class' => 'brand')); ?>
 			</div>
@@ -47,7 +47,7 @@
 	</nav> <!-- /topbar -->
 
 	<div class="container">
-		<div class="content">
+		<div class="body-content">
 			<header class="page-header">
 				<hgroup>
 					<h1>Site</h1>

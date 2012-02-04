@@ -20,31 +20,35 @@
 <div class="row">
 	<section class="admin-main-content">
 		<h2>Page Sections</h2>
-		<table  class="bordered-table zebra-striped">
-			<tr>
-				<th><?php echo $this->Paginator->sort('id');?></th>
-				<th><?php echo $this->Paginator->sort('title');?></th>
-				<th><?php echo $this->Paginator->sort('page_id');?></th>
-				<th><?php echo $this->Paginator->sort('created');?></th>
-				<th><?php echo $this->Paginator->sort('modified');?></th>
-				<th>Actions</th>
-			</tr>
-			<?php foreach ($pageSections as $pageSection): ?>
-			<tr>
-				<td><?php echo $pageSection['PageSection']['id']; ?>&nbsp;</td>
-				<td><?php echo $pageSection['PageSection']['title']; ?>&nbsp;</td>
-				<td>
-					<?php echo $this->Html->link($pageSection['Page']['title'], array('controller' => 'pages', 'action' => 'admin_view', $pageSection['Page']['id'])); ?>
-				</td>
-				<td><?php echo $pageSection['PageSection']['created']; ?>&nbsp;</td>
-				<td><?php echo $pageSection['PageSection']['modified']; ?>&nbsp;</td>
-				<td>
-					<?php echo $this->Html->link('View', array('action' => 'admin_view', $pageSection['PageSection']['id']), array('class' => 'btn')); ?>
-					<?php echo $this->Html->link('Edit', array('action' => 'admin_edit', $pageSection['PageSection']['id']), array('class' => 'btn')); ?>
-					<?php echo $this->Form->postLink('Delete', array('action' => 'admin_delete', $pageSection['PageSection']['id']), array('class' => 'btn danger'), sprintf('Are you sure you want to delete # %s?', $pageSection['PageSection']['id'])); ?>
-				</td>
-			</tr>
-			<?php endforeach; ?>
+		<table  class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th><?php echo $this->Paginator->sort('id');?></th>
+					<th><?php echo $this->Paginator->sort('title');?></th>
+					<th><?php echo $this->Paginator->sort('page_id');?></th>
+					<th><?php echo $this->Paginator->sort('created');?></th>
+					<th><?php echo $this->Paginator->sort('modified');?></th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ($pageSections as $pageSection): ?>
+				<tr>
+					<td><?php echo $pageSection['PageSection']['id']; ?>&nbsp;</td>
+					<td><?php echo $pageSection['PageSection']['title']; ?>&nbsp;</td>
+					<td>
+						<?php echo $this->Html->link($pageSection['Page']['title'], array('controller' => 'pages', 'action' => 'admin_view', $pageSection['Page']['id'])); ?>
+					</td>
+					<td><?php echo $pageSection['PageSection']['created']; ?>&nbsp;</td>
+					<td><?php echo $pageSection['PageSection']['modified']; ?>&nbsp;</td>
+					<td>
+						<?php echo $this->Html->link('View', array('action' => 'admin_view', $pageSection['PageSection']['id']), array('class' => 'btn')); ?>
+						<?php echo $this->Html->link('Edit', array('action' => 'admin_edit', $pageSection['PageSection']['id']), array('class' => 'btn')); ?>
+						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_delete', $pageSection['PageSection']['id']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $pageSection['PageSection']['id'])); ?>
+					</td>
+				</tr>
+				<?php endforeach; ?>
+			</tbody>
 		</table>
 		<p>
 		<?php
@@ -57,9 +61,9 @@
 		<div class="paging">
 		<?php
 			echo $this->Paginator->first('first');
-			echo $this->Paginator->prev('« previous', array(), null, array('class' => 'prev disabled'));
+			echo $this->Paginator->prev('« previous', array(), null, array('class' => 'disabled'));
 			echo $this->Paginator->numbers(array('separator' => ''));
-			echo $this->Paginator->next('next »', array(), null, array('class' => 'next disabled'));
+			echo $this->Paginator->next('next »', array(), null, array('class' => 'disabled'));
 			echo $this->Paginator->last('last');
 		?>
 		</div>

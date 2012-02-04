@@ -20,31 +20,35 @@
 <div class="row">
 	<section class="admin-main-content">
 		<h2>Users</h2>
-		<table class="bordered-table zebra-striped">
-			<tr>
-				<th><?php echo $this->Paginator->sort('id');?></th>
-				<th><?php echo $this->Paginator->sort('username');?></th>
-				<th><?php echo $this->Paginator->sort('created');?></th>
-				<th><?php echo $this->Paginator->sort('modified');?></th>
-				<th><?php echo $this->Paginator->sort('group_id');?></th>
-				<th>Actions</th>
-			</tr>
-			<?php foreach ($users as $user): ?>
-			<tr>
-				<td><?php echo $user['User']['id']; ?>&nbsp;</td>
-				<td><?php echo $user['User']['username']; ?>&nbsp;</td>
-				<td><?php echo $user['User']['created']; ?>&nbsp;</td>
-				<td><?php echo $user['User']['modified']; ?>&nbsp;</td>
-				<td>
-					<?php echo $this->Html->link($user['Group']['name'], array('controller' => 'groups', 'action' => 'admin_view', $user['Group']['id'])); ?>
-				</td>
-				<td>
-					<?php echo $this->Html->link('View', array('action' => 'admin_view', $user['User']['id']), array('class' => 'btn')); ?>
-					<?php echo $this->Html->link('Edit', array('action' => 'admin_edit', $user['User']['id']), array('class' => 'btn')); ?>
-					<?php echo $this->Form->postLink('Delete', array('action' => 'admin_delete', $user['User']['id']), array('class' => 'btn danger'), sprintf('Are you sure you want to delete # %s?', $user['User']['id'])); ?>
-				</td>
-			</tr>
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th><?php echo $this->Paginator->sort('id');?></th>
+					<th><?php echo $this->Paginator->sort('username');?></th>
+					<th><?php echo $this->Paginator->sort('created');?></th>
+					<th><?php echo $this->Paginator->sort('modified');?></th>
+					<th><?php echo $this->Paginator->sort('group_id');?></th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ($users as $user): ?>
+				<tr>
+					<td><?php echo $user['User']['id']; ?>&nbsp;</td>
+					<td><?php echo $user['User']['username']; ?>&nbsp;</td>
+					<td><?php echo $user['User']['created']; ?>&nbsp;</td>
+					<td><?php echo $user['User']['modified']; ?>&nbsp;</td>
+					<td>
+						<?php echo $this->Html->link($user['Group']['name'], array('controller' => 'groups', 'action' => 'admin_view', $user['Group']['id'])); ?>
+					</td>
+					<td>
+						<?php echo $this->Html->link('View', array('action' => 'admin_view', $user['User']['id']), array('class' => 'btn')); ?>
+						<?php echo $this->Html->link('Edit', array('action' => 'admin_edit', $user['User']['id']), array('class' => 'btn')); ?>
+						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_delete', $user['User']['id']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $user['User']['id'])); ?>
+					</td>
+				</tr>
 			<?php endforeach; ?>
+			</tbody>
 		</table>
 		<p>
 		<?php
@@ -57,9 +61,9 @@
 		<div class="paging">
 		<?php
 			echo $this->Paginator->first('first');
-			echo $this->Paginator->prev('« previous', array(), null, array('class' => 'prev disabled'));
+			echo $this->Paginator->prev('« previous', array(), null, array('class' => 'disabled'));
 			echo $this->Paginator->numbers(array('separator' => ''));
-			echo $this->Paginator->next('next »', array(), null, array('class' => 'next disabled'));
+			echo $this->Paginator->next('next »', array(), null, array('class' => 'disabled'));
 			echo $this->Paginator->last('last');
 		?>
 		</div>

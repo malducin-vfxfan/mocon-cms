@@ -85,7 +85,7 @@ class FormatImageHelper extends AppHelper {
 	public function idImage($location = null, $id = null, $options = array(), $location_default = null) {
 		$default = array(
 			'alt' => 'Image',
-			'class' => 'framed',
+			'class' => 'thumbnail',
 		);
 
 		$options = array_merge($default, $options);

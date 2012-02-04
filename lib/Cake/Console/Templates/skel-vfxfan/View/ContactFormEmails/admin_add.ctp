@@ -18,13 +18,13 @@
 	</section>
 	<section class="admin-content">
 		<h2>Admin Add a Contact Form Email</h2>
-		<?php echo $this->Form->create('ContactFormEmail', array('class' => 'form-stacked'));?>
+		<?php echo $this->Form->create('ContactFormEmail');?>
 			<fieldset>
 				<legend>Admin Add Contact Form Email</legend>
 				<?php
-					echo $this->Form->input('email', array('div' => 'clearfix'));
-					echo $this->Form->input('name', array('div' => 'clearfix'));
-					echo $this->Form->input('active', array('div' => 'clearfix'));
+					echo $this->Form->input('email');
+					echo $this->Form->input('name');
+					echo $this->Form->input('active');
 				?>
 			</fieldset>
 		<?php echo $this->Form->end('Submit');?>

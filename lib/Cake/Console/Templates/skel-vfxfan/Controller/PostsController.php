@@ -132,10 +132,10 @@ class PostsController extends AppController {
 			if ($this->Post->save($this->request->data)) {
 				$post = $this->Post->read(null, $this->Post->id);
 				$this->Upload->uploadImageThumb('img'.DS.'posts'.DS.$post['Post']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Post->id, $this->request->data['File']['image']['name']));
-				$this->Session->setFlash('The Post has been saved.', 'default', array('class' => 'message success'));
+				$this->Session->setFlash('The Post has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Post could not be saved. Please, try again.', 'default', array('class' => 'message failure'));
+				$this->Session->setFlash('The Post could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		}
 		$users = $this->Post->User->find('list');
@@ -159,10 +159,10 @@ class PostsController extends AppController {
 			if ($this->Post->save($this->request->data)) {
 				$post = $this->Post->read(null, $this->Post->id);
 				$this->Upload->uploadImageThumb('img'.DS.'posts'.DS.$post['Post']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Post->id, $this->request->data['File']['image']['name']));
-				$this->Session->setFlash('The Post has been saved.', 'default', array('class' => 'message success'));
+				$this->Session->setFlash('The Post has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Post could not be saved. Please, try again.', 'default', array('class' => 'message failure'));
+				$this->Session->setFlash('The Post could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		} else {
 			$this->request->data = $this->Post->read(null, $id);
@@ -188,10 +188,10 @@ class PostsController extends AppController {
 			throw new NotFoundException('Invalid Post.');
 		}
 		if ($this->Post->delete()) {
-			$this->Session->setFlash('Post deleted.', 'default', array('class' => 'message success'));
+			$this->Session->setFlash('Post deleted.', 'default', array('class' => 'alert alert-success'));
 			$this->redirect(array('action'=>'admin_index'));
 		}
-		$this->Session->setFlash('Post was not deleted.', 'default', array('class' => 'message failure'));
+		$this->Session->setFlash('Post was not deleted.', 'default', array('class' => 'alert alert-error'));
 		$this->redirect(array('action' => 'admin_index'));
 	}
 }

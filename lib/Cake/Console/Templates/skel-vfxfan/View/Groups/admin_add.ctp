@@ -20,11 +20,11 @@
 	</section>
 	<section class="admin-content">
 		<h2>Add a Group</h2>
-		<?php echo $this->Form->create('Group', array('class' => 'form-stacked'));?>
+		<?php echo $this->Form->create('Group');?>
 			<fieldset>
 				<legend>Admin Add Group</legend>
 				<?php
-					echo $this->Form->input('name', array('div' => 'clearfix'));
+					echo $this->Form->input('name');
 				?>
 			</fieldset>
 		<?php echo $this->Form->end('Submit');?>

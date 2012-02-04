@@ -25,15 +25,15 @@ if (Configure::read('TinyMCE.active')) {
 	</section>
 	<section class="admin-content">
 		<h2>Add a Page</h2>
-		<?php echo $this->Form->create('Page', array('class' => 'form-stacked'));?>
+		<?php echo $this->Form->create('Page');?>
 			<fieldset>
 				<legend>Admin Add Page</legend>
 				<?php
-					echo $this->Form->input('Page.title', array('div' => 'clearfix', 'label'=>'Page Title'));
-					echo $this->Form->input('Page.main', array('div' => 'clearfix'));
-					echo $this->Form->input('PageSection.0.title', array('div' => 'clearfix', 'label'=>'Section Title', 'class' => 'page_section_title'));
-					echo $this->Form->input('PageSection.0.section', array('div' => 'clearfix', 'class' => 'page_section_section'));
-					echo $this->Form->input('PageSection.0.content', array('div' => 'clearfix', 'class' => 'page_section_content span7'));
+					echo $this->Form->input('Page.title', array('label'=>'Page Title'));
+					echo $this->Form->input('Page.main');
+					echo $this->Form->input('PageSection.0.title', array('label'=>'Section Title', 'class' => 'page_section_title'));
+					echo $this->Form->input('PageSection.0.section', array('class' => 'page_section_section'));
+					echo $this->Form->input('PageSection.0.content', array('class' => 'page_section_content span7'));
 				?>
 			</fieldset>
 			<fieldset id="extraPageSections">

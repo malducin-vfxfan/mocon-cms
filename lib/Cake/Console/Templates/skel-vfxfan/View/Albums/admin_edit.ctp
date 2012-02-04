@@ -13,21 +13,21 @@
 	<section class="admin-actions">
 		<h3>Actions</h3>
 		<ul class="action-buttons-list">
-			<li><?php echo $this->Form->postLink('Delete', array('action' => 'admin_delete', $this->Form->value('Album.id')), array('class' => 'btn danger'), sprintf('Are you sure you want to delete # %s?', $this->Form->value('Album.id'))); ?></li>
+			<li><?php echo $this->Form->postLink('Delete', array('action' => 'admin_delete', $this->Form->value('Album.id')), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $this->Form->value('Album.id'))); ?></li>
 			<li><?php echo $this->Html->link('List Albums', array('action' => 'admin_index'), array('class' => 'btn'));?></li>
 		</ul>
 	</section>
 	<section class="admin-content">
 		<h2>Admin Edit a Album</h2>
-		<?php echo $this->Form->create('Album', array('class' => 'form-stacked', 'type' => 'file'));?>
+		<?php echo $this->Form->create('Album', array('type' => 'file'));?>
 			<fieldset>
 				<legend>Admin Edit Album</legend>
 				<?php
-					echo $this->Form->input('id', array('div' => 'clearfix'));
-					echo $this->Form->input('name', array('div' => 'clearfix'));
-					echo $this->Form->input('description', array('div' => 'clearfix'));
-					echo $this->Form->input('slug', array('div' => 'clearfix'));
-					echo $this->Form->input('File.image', array('div' => 'clearfix', 'type' => 'file'));
+					echo $this->Form->input('id');
+					echo $this->Form->input('name');
+					echo $this->Form->input('description');
+					echo $this->Form->input('slug');
+					echo $this->Form->input('File.image', array('type' => 'file'));
 				?>
 			</fieldset>
 		<?php echo $this->Form->end('Submit');?>

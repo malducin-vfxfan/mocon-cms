@@ -150,10 +150,10 @@ class PagesController extends AppController {
 			unset($this->Page->PageSection->validate['page_id']);
 			// save associated data non-atomically since we're nor using transactions
 			if ($this->Page->saveAssociated($this->request->data, array('atomic' => false))) {
-				$this->Session->setFlash('The Page has been saved.', 'default', array('class' => 'message success'));
+				$this->Session->setFlash('The Page has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Page could not be saved. Please, try again.', 'default', array('class' => 'message failure'));
+				$this->Session->setFlash('The Page could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		}
 		$this->set('title_for_layout', 'Add Page');
@@ -176,10 +176,10 @@ class PagesController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Page->save($this->request->data)) {
 				$this->Upload->uploadImageThumb('img'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->data['File']['image']);
-				$this->Session->setFlash('The Page has been saved.', 'default', array('class' => 'message success'));
+				$this->Session->setFlash('The Page has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Page could not be saved. Please, try again.', 'default', array('class' => 'message failure'));
+				$this->Session->setFlash('The Page could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		} else {
 			$this->request->data = $this->Page->read(null, $id);
@@ -204,10 +204,10 @@ class PagesController extends AppController {
 			throw new NotFoundException('Invalid Page.');
 		}
 		if ($this->Page->delete()) {
-			$this->Session->setFlash('Page deleted.', 'default', array('class' => 'message success'));
+			$this->Session->setFlash('Page deleted.', 'default', array('class' => 'alert alert-success'));
 			$this->redirect(array('action'=>'admin_index'));
 		}
-		$this->Session->setFlash('Page was not deleted.', 'default', array('class' => 'message failure'));
+		$this->Session->setFlash('Page was not deleted.', 'default', array('class' => 'alert alert-error'));
 		$this->redirect(array('action' => 'admin_index'));
 	}
 
@@ -233,10 +233,10 @@ class PagesController extends AppController {
 			throw new NotFoundException('Invalid Image.');
 		}
 		if ($this->Page->deleteFile($id, $filename)) {
-			$this->Session->setFlash('File deleted.', 'default', array('class' => 'message success'));
+			$this->Session->setFlash('File deleted.', 'default', array('class' => 'alert alert-success'));
 			$this->redirect(array('action'=>'admin_view', $id));
 		}
-		$this->Session->setFlash('File was not deleted.', 'default', array('class' => 'message failure'));
+		$this->Session->setFlash('File was not deleted.', 'default', array('class' => 'alert alert-error'));
 		$this->redirect(array('action' => 'admin_view', $id));
 	}
 

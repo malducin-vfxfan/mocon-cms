@@ -23,7 +23,7 @@
 function menuIterator($array, $htmlInstance) {
 	foreach ($array as $item) {
 		if (!empty($item['children'])) {
-			echo "<li class=\"dropdown\">" . $htmlInstance->link($item['Menu']['name'], $item['Menu']['link'], array('class' => 'dropdown-toggle'))."\n";
+			echo "<li class=\"dropdown\">" . $htmlInstance->link($item['Menu']['name'].$htmlInstance->tag('span', '', array('class' => 'caret')), $item['Menu']['link'], array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'escape' => false))."\n";
 			echo "<ul class=\"dropdown-menu\">\n";
 			menuIterator($item['children'], $htmlInstance);
 			echo "</ul>\n";

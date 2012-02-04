@@ -41,8 +41,8 @@
 	?>
 </head>
 <body>
-	<nav class="topbar" data-dropdown="dropdown">
-		<div class="fill">
+	<nav class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
 			<div class="container">
 				<?php echo $this->Html->link('Site', '/', array('class' => 'brand')); ?>
 				<?php echo $this->element('Menus/bootstrap'); ?>
@@ -52,7 +52,7 @@
 	</nav> <!-- /topbar -->
 
 	<div class="container">
-		<div class="content">
+		<div class="body-content">
 			<header class="page-header">
 				<hgroup>
 					<h1>Site</h1>
@@ -73,7 +73,7 @@
 					<?php echo $this->element('sql_dump'); ?>
 				</div>
 			</div>
-		</div>
+		</div> <!-- /body-content -->
 		<footer>
 			<p>© 2011-<?php echo date('Y'); ?>, Manuel Alducin, <?php echo $this->Html->link('VFXfan.com', 'http://vfxfan.com'); ?></p>
 		</footer>

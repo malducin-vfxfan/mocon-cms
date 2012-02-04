@@ -42,7 +42,7 @@ class UsersController extends AppController {
 				return $this->redirect(array('controller' => 'posts', 'action' => 'admin_index'));
 			}
 			else {
-				$this->Session->setFlash('Username or password is incorrect.', 'default', array('class' => 'message failure'), 'auth');
+				$this->Session->setFlash('Username or password is incorrect.', 'default', array('class' => 'alert alert-error'), 'auth');
 			}
 		}
 		$this->set('title_for_layout', 'Login');
@@ -103,10 +103,10 @@ class UsersController extends AppController {
 		if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash('The User has been saved.', 'default', array('class' => 'message success'));
+				$this->Session->setFlash('The User has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The User could not be saved. Please, try again.', 'default', array('class' => 'message failure'));
+				$this->Session->setFlash('The User could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		}
 		$groups = $this->User->Group->find('list');
@@ -135,20 +135,20 @@ class UsersController extends AppController {
 			if (!$this->request->data('User.passwd')) {
 				unset($this->request->data['User']['passwd']);
 				if ($this->User->save($this->request->data, array('fieldList' => array('username', 'group_id')))) {
-					$this->Session->setFlash('The User has been saved.', 'default', array('class' => 'message success'));
+					$this->Session->setFlash('The User has been saved.', 'default', array('class' => 'alert alert-success'));
 					$this->redirect(array('action' => 'admin_index'));
 				} else {
-					$this->Session->setFlash('The User could not be saved. Please, try again.', 'default', array('class' => 'message failure'));
+					$this->Session->setFlash('The User could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 				}
 			}
 			else {
 				$this->request->data('User.password', $this->request->data('User.passwd'));
 				unset($this->request->data['User']['passwd']);
 				if ($this->User->save($this->request->data)) {
-					$this->Session->setFlash('The User has been saved.', 'default', array('class' => 'message success'));
+					$this->Session->setFlash('The User has been saved.', 'default', array('class' => 'alert alert-success'));
 					$this->redirect(array('action' => 'admin_index'));
 				} else {
-					$this->Session->setFlash('The User could not be saved. Please, try again.', 'default', array('class' => 'message failure'));
+					$this->Session->setFlash('The User could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 				}
 			}
 		} else {
@@ -175,10 +175,10 @@ class UsersController extends AppController {
 			throw new NotFoundException('Invalid User.');
 		}
 		if ($this->User->delete()) {
-			$this->Session->setFlash('User deleted.', 'default', array('class' => 'message success'));
+			$this->Session->setFlash('User deleted.', 'default', array('class' => 'alert alert-success'));
 			$this->redirect(array('action'=>'admin_index'));
 		}
-		$this->Session->setFlash('User was not deleted.', 'default', array('class' => 'message failure'));
+		$this->Session->setFlash('User was not deleted.', 'default', array('class' => 'alert alert-error'));
 		$this->redirect(array('action' => 'admin_index'));
 	}
 

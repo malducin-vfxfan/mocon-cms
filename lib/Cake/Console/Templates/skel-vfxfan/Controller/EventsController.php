@@ -120,10 +120,10 @@ class EventsController extends AppController {
 			if ($this->Event->save($this->request->data)) {
 				$event = $this->Event->read(null, $this->Event->id);
 				$this->Upload->uploadImageThumb('img'.DS.'events'.DS.$event['Event']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->request->data['File']['image']['name']));
-				$this->Session->setFlash('The Event has been saved.', 'default', array('class' => 'message success'));
+				$this->Session->setFlash('The Event has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Event could not be saved. Please, try again.', 'default', array('class' => 'message failure'));
+				$this->Session->setFlash('The Event could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		}
 		$this->set('title_for_layout', 'Add Event');
@@ -145,10 +145,10 @@ class EventsController extends AppController {
 			if ($this->Event->save($this->request->data)) {
 				$event = $this->Event->read(null, $this->Event->id);
 				$this->Upload->uploadImageThumb('img'.DS.'events'.DS.$event['Event']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->request->data['File']['image']['name']));
-				$this->Session->setFlash('The Event has been saved.', 'default', array('class' => 'message success'));
+				$this->Session->setFlash('The Event has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Event could not be saved. Please, try again.', 'default', array('class' => 'message failure'));
+				$this->Session->setFlash('The Event could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		} else {
 			$this->request->data = $this->Event->read(null, $id);
@@ -172,10 +172,10 @@ class EventsController extends AppController {
 			throw new NotFoundException('Invalid Event.');
 		}
 		if ($this->Event->delete()) {
-			$this->Session->setFlash('Event deleted.', 'default', array('class' => 'message success'));
+			$this->Session->setFlash('Event deleted.', 'default', array('class' => 'alert alert-success'));
 			$this->redirect(array('action'=>'admin_index'));
 		}
-		$this->Session->setFlash('Event was not deleted.', 'default', array('class' => 'message failure'));
+		$this->Session->setFlash('Event was not deleted.', 'default', array('class' => 'alert alert-error'));
 		$this->redirect(array('action' => 'admin_index'));
 	}
 }

@@ -20,27 +20,31 @@
 <div class="row">
 	<section class="admin-main-content">
 		<h2>Groups</h2>
-		<table class="bordered-table zebra-striped">
-			<tr>
-				<th><?php echo $this->Paginator->sort('id');?></th>
-				<th><?php echo $this->Paginator->sort('name');?></th>
-				<th><?php echo $this->Paginator->sort('created');?></th>
-				<th><?php echo $this->Paginator->sort('modified');?></th>
-				<th>Actions</th>
-			</tr>
-			<?php foreach ($groups as $group): ?>
-			<tr>
-				<td><?php echo $group['Group']['id']; ?>&nbsp;</td>
-				<td><?php echo $group['Group']['name']; ?>&nbsp;</td>
-				<td><?php echo $group['Group']['created']; ?>&nbsp;</td>
-				<td><?php echo $group['Group']['modified']; ?>&nbsp;</td>
-				<td>
-					<?php echo $this->Html->link('View', array('action' => 'admin_view', $group['Group']['id']), array('class' => 'btn')); ?>
-					<?php echo $this->Html->link('Edit', array('action' => 'admin_edit', $group['Group']['id']), array('class' => 'btn')); ?>
-					<?php echo $this->Form->postLink('Delete', array('action' => 'admin_delete', $group['Group']['id']), array('class' => 'btn danger'), sprintf('Are you sure you want to delete # %s?', $group['Group']['id'])); ?>
-				</td>
-			</tr>
-			<?php endforeach; ?>
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th><?php echo $this->Paginator->sort('id');?></th>
+					<th><?php echo $this->Paginator->sort('name');?></th>
+					<th><?php echo $this->Paginator->sort('created');?></th>
+					<th><?php echo $this->Paginator->sort('modified');?></th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ($groups as $group): ?>
+				<tr>
+					<td><?php echo $group['Group']['id']; ?>&nbsp;</td>
+					<td><?php echo $group['Group']['name']; ?>&nbsp;</td>
+					<td><?php echo $group['Group']['created']; ?>&nbsp;</td>
+					<td><?php echo $group['Group']['modified']; ?>&nbsp;</td>
+					<td>
+						<?php echo $this->Html->link('View', array('action' => 'admin_view', $group['Group']['id']), array('class' => 'btn')); ?>
+						<?php echo $this->Html->link('Edit', array('action' => 'admin_edit', $group['Group']['id']), array('class' => 'btn')); ?>
+						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_delete', $group['Group']['id']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $group['Group']['id'])); ?>
+					</td>
+				</tr>
+				<?php endforeach; ?>
+			</tbody>
 		</table>
 		<p>
 		<?php
@@ -53,9 +57,9 @@
 		<div class="paging">
 		<?php
 			echo $this->Paginator->first('first');
-			echo $this->Paginator->prev('« previous', array(), null, array('class' => 'prev disabled'));
+			echo $this->Paginator->prev('« previous', array(), null, array('class' => 'disabled'));
 			echo $this->Paginator->numbers(array('separator' => ''));
-			echo $this->Paginator->next('next »', array(), null, array('class' => 'next disabled'));
+			echo $this->Paginator->next('next »', array(), null, array('class' => 'disabled'));
 			echo $this->Paginator->last('last');
 		?>
 		</div>

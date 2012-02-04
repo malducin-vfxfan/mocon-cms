@@ -23,14 +23,14 @@ if (Configure::read('TinyMCE.active')) {
 	</section>
 	<section class="admin-content">
 		<h2>Add a Page Section</h2>
-		<?php echo $this->Form->create('PageSection', array('class' => 'form-stacked'));?>
+		<?php echo $this->Form->create('PageSection');?>
 			<fieldset>
 				<legend>Admin Add Page Section</legend>
 				<?php
-					echo $this->Form->input('title', array('div' => 'clearfix'));
-					echo $this->Form->input('content', array('div' => 'clearfix', 'class' => 'span7'));
-					echo $this->Form->input('page_id', array('div' => 'clearfix', 'value' => $selected));
-					echo $this->Form->input('section', array('div' => 'clearfix', 'default' => 0, 'type' => 'number', 'min' => 0));
+					echo $this->Form->input('title');
+					echo $this->Form->input('content', array('class' => 'span7'));
+					echo $this->Form->input('page_id', array('value' => $selected));
+					echo $this->Form->input('section', array('default' => 0, 'type' => 'number', 'min' => 0));
 				?>
 			</fieldset>
 		<?php echo $this->Form->end('Submit');?>

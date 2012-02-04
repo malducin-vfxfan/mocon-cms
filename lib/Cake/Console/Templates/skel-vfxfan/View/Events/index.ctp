@@ -15,7 +15,7 @@
 
 		<?php foreach ($events as $event): ?>
 		<article class="event-contents">
-			<?php echo $this->FormatImage->idImage('events/'.$event['Event']['year'], $event['Event']['id'], array('class' => 'framed image-right'), 'events'); ?>
+			<?php echo $this->FormatImage->idImage('events/'.$event['Event']['year'], $event['Event']['id'], array('class' => 'thumbnail image-right'), 'events'); ?>
 			<header>
 				<h2><?php echo $event['Event']['name']; ?></h2>
 				<time class="date-start" datetime="<?php echo $event['Event']['date_start']; ?>">
@@ -47,9 +47,9 @@
 			<div class="paging">
 			<?php
 				echo $this->Paginator->first('first');
-				echo $this->Paginator->prev('« previous', array(), null, array('class' => 'prev disabled'));
+				echo $this->Paginator->prev('« previous', array(), null, array('class' => 'disabled'));
 				echo $this->Paginator->numbers(array('separator' => ''));
-				echo $this->Paginator->next('next »', array(), null, array('class' => 'next disabled'));
+				echo $this->Paginator->next('next »', array(), null, array('class' => 'disabled'));
 				echo $this->Paginator->last('last');
 			?>
 			</div>

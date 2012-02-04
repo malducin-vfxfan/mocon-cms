@@ -23,14 +23,14 @@ if (Configure::read('TinyMCE.active')) {
 	</section>
 	<section class="admin-content">
 		<h2>Add a Post</h2>
-		<?php echo $this->Form->create('Post', array('class' => 'form-stacked', 'type' => 'file'));?>
+		<?php echo $this->Form->create('Post', array('type' => 'file'));?>
 			<fieldset>
 				<legend>Admin Add Post</legend>
 				<?php
-					echo $this->Form->input('title', array('div' => 'clearfix'));
-					echo $this->Form->input('summary', array('div' => 'clearfix'));
-					echo $this->Form->input('content', array('div' => 'clearfix', 'class' => 'span7'));
-					echo $this->Form->input('File.image', array('div' => 'clearfix', 'type' => 'file'));
+					echo $this->Form->input('title');
+					echo $this->Form->input('summary');
+					echo $this->Form->input('content', array('class' => 'span7'));
+					echo $this->Form->input('File.image', array('type' => 'file'));
 				?>
 			</fieldset>
 		<?php echo $this->Form->end('Submit');?>

@@ -11,12 +11,12 @@
 ?>
 <div class="row">
 	<section class="login">
-		<?php echo $this->Form->create('User', array('class' => 'form-stacked'));?>
+		<?php echo $this->Form->create('User');?>
 			<fieldset>
 				<legend>Admin Login</legend>
 				<?php
-					echo $this->Form->input('username', array('div' => 'clearfix'));
-					echo $this->Form->input('password', array('div' => 'clearfix'));
+					echo $this->Form->input('username');
+					echo $this->Form->input('password');
 				?>
 			</fieldset>
 		<?php echo $this->Form->end('Submit');?>

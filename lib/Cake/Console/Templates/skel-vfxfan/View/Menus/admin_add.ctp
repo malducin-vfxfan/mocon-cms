@@ -18,14 +18,14 @@
 	</section>
 	<section class="admin-content">
 		<h2>Add a Menu Item</h2>
-		<?php echo $this->Form->create('Menu', array('class' => 'form-stacked'));?>
+		<?php echo $this->Form->create('Menu');?>
 			<fieldset>
 				<legend>Admin Add Menu Item</legend>
 				<?php
-					echo $this->Form->input('name', array('div' => 'clearfix'));
-					echo $this->Form->input('link', array('div' => 'clearfix', 'default' => '#'));
-					echo $this->Form->input('parent_id', array('div' => 'clearfix'));
-					echo $this->Form->input('priority', array('div' => 'clearfix', 'type' => 'number', 'min' => 0, 'default' => 0));
+					echo $this->Form->input('name');
+					echo $this->Form->input('link', array('default' => '#'));
+					echo $this->Form->input('parent_id');
+					echo $this->Form->input('priority', array('type' => 'number', 'min' => 0, 'default' => 0));
 				?>
 			</fieldset>
 		<?php echo $this->Form->end('Submit');?>

@@ -15,7 +15,7 @@
 
 		<?php foreach ($albums as $album): ?>
 		<article class="album-contents">
-			<?php echo $this->FormatImage->idImage('albums', $album['Album']['id'], array('class' => 'framed image-right')); ?>
+			<?php echo $this->FormatImage->idImage('albums', $album['Album']['id'], array('class' => 'thumbnail image-right')); ?>
 			<header>
 				<h2><?php echo $album['Album']['name']; ?></h2>
 				<time class="date-created" datetime="<?php echo date(DATE_ATOM, strtotime($album['Album']['created'])); ?>">
@@ -39,9 +39,9 @@
 			<div class="paging">
 			<?php
 				echo $this->Paginator->first('first');
-				echo $this->Paginator->prev('« previous', array(), null, array('class' => 'prev disabled'));
+				echo $this->Paginator->prev('« previous', array(), null, array('class' => 'disabled'));
 				echo $this->Paginator->numbers(array('separator' => ''));
-				echo $this->Paginator->next('next »', array(), null, array('class' => 'next disabled'));
+				echo $this->Paginator->next('next »', array(), null, array('class' => 'disabled'));
 				echo $this->Paginator->last('last');
 			?>
 			</div>

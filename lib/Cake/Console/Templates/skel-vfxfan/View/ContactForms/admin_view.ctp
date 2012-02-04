@@ -13,7 +13,7 @@
 	<section class="admin-actions">
 		<h3>Actions</h3>
 		<ul class="action-buttons-list">
-			<li><?php echo $this->Form->postLink('Delete Contact Form Messages', array('action' => 'admin_delete', $contactForm['ContactForm']['id']), array('class' => 'btn danger'), sprintf('Are you sure you want to delete # %s?', $contactForm['ContactForm']['id'])); ?> </li>
+			<li><?php echo $this->Form->postLink('Delete Contact Form Messages', array('action' => 'admin_delete', $contactForm['ContactForm']['id']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $contactForm['ContactForm']['id'])); ?> </li>
 			<li><?php echo $this->Html->link('List Contact Forms Messages', array('action' => 'admin_index'), array('class' => 'btn')); ?> </li>
 		</ul>
 	</section>

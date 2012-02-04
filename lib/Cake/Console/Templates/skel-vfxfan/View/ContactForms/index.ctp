@@ -12,13 +12,13 @@
 <div class="row">
 	<section class="page-content" id="contact-us">
 		<h1>Contact Us</h1>
-		<?php echo $this->Form->create('ContactForm', array('class' => 'form-stacked'));?>
+		<?php echo $this->Form->create('ContactForm');?>
 			<fieldset>
 				<legend>Contact Form</legend>
 				<?php
-					echo $this->Form->input('name', array('div' => 'clearfix'));
-					echo $this->Form->input('email', array('div' => 'clearfix', 'type' => 'email'));
-					echo $this->Form->input('message', array('div' => 'clearfix', 'class' => 'span7'));
+					echo $this->Form->input('name');
+					echo $this->Form->input('email', array('type' => 'email'));
+					echo $this->Form->input('message', array('class' => 'span7'));
 					echo $this->Recaptcha->display(array('recaptchaOptions' => array('theme' => 'white')));
 				?>
 			</fieldset>

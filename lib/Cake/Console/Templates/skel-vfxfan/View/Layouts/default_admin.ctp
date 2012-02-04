@@ -39,20 +39,20 @@
 	?>
 </head>
 <body>
-	<nav class="topbar" data-dropdown="dropdown">
-		<div class="fill">
+	<nav class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
 			<div class="container">
 				<?php echo $this->Html->link('Site', '/', array('class' => 'brand')); ?>
 				<ul class="nav">
 					<li class="dropdown">
-						<?php echo $this->Html->link('Basic Admin', '#', array('class' => 'dropdown-toggle')); ?>
+						<?php echo $this->Html->link('Basic Admin'.$this->Html->tag('span', '', array('class' => 'caret')), '#', array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'escape' => false)); ?>
 						<ul class="dropdown-menu">
 							<li><?php echo $this->Html->link('Groups', array('controller' => 'groups', 'action' => 'admin_index')); ?></li>
 							<li><?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'admin_index')); ?></li>
 						</ul>
 					</li>
 					<li class="dropdown">
-						<?php echo $this->Html->link('Basic Content', '#', array('class' => 'dropdown-toggle')); ?>
+						<?php echo $this->Html->link('Basic Content'.$this->Html->tag('span', '', array('class' => 'caret')), '#', array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'escape' => false)); ?>
 						<ul class="dropdown-menu">
 							<li><?php echo $this->Html->link('Menu Items', array('controller' => 'menus', 'action' => 'admin_index')); ?></li>
 							<li><?php echo $this->Html->link('Pages', array('controller' => 'pages', 'action' => 'admin_index')); ?></li>
@@ -62,13 +62,13 @@
 						</ul>
 					</li>
 					<li class="dropdown">
-						<?php echo $this->Html->link('Other Content', '#', array('class' => 'dropdown-toggle')); ?>
+						<?php echo $this->Html->link('Other Content'.$this->Html->tag('span', '', array('class' => 'caret')), '#', array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'escape' => false)); ?>
 						<ul class="dropdown-menu">
 							<li><?php echo $this->Html->link('Albums', array('controller' => 'albums', 'action' => 'admin_index')); ?></li>
 						</ul>
 					</li>
 					<li class="dropdown">
-						<?php echo $this->Html->link('Misc.', '#', array('class' => 'dropdown-toggle')); ?>
+						<?php echo $this->Html->link('Misc.'.$this->Html->tag('span', '', array('class' => 'caret')), '#', array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'escape' => false)); ?>
 						<ul class="dropdown-menu">
 							<li><?php echo $this->Html->link('Contact Form', array('controller' => 'contact_forms', 'action' => 'admin_index')); ?></li>
 							<li><?php echo $this->Html->link('Contact Form Emails', array('controller' => 'contact_form_emails', 'action' => 'admin_index')); ?></li>
@@ -81,7 +81,7 @@
 	</nav> <!-- /topbar -->
 
 	<div class="container">
-		<div class="content">
+		<div class="body-content">
 			<header class="page-header">
 				<hgroup>
 					<h1>Site</h1>

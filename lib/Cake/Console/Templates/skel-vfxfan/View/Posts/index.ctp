@@ -15,7 +15,7 @@
 
 		<?php foreach ($posts as $post): ?>
 		<article class="post-contents">
-			<?php echo $this->FormatImage->idImage('posts/'.$post['Post']['year'], $post['Post']['id'], array('class' => 'framed image-right'), 'posts'); ?>
+			<?php echo $this->FormatImage->idImage('posts/'.$post['Post']['year'], $post['Post']['id'], array('class' => 'thumbnail image-right'), 'posts'); ?>
 			<header>
 				<h2><?php echo $post['Post']['title']; ?></h2>
 				<time class="date-created" datetime="<?php echo date(DATE_ATOM, strtotime($post['Post']['created'])); ?>">
@@ -47,9 +47,9 @@
 			<div class="paging">
 			<?php
 				echo $this->Paginator->first('first');
-				echo $this->Paginator->prev('« previous', array(), null, array('class' => 'prev disabled'));
+				echo $this->Paginator->prev('« previous', array(), null, array('class' => 'disabled'));
 				echo $this->Paginator->numbers(array('separator' => ''));
-				echo $this->Paginator->next('next »', array(), null, array('class' => 'next disabled'));
+				echo $this->Paginator->next('next »', array(), null, array('class' => 'disabled'));
 				echo $this->Paginator->last('last');
 			?>
 			</div>

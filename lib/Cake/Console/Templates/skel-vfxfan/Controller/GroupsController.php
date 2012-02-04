@@ -61,10 +61,10 @@ class GroupsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Group->create();
 			if ($this->Group->save($this->request->data)) {
-				$this->Session->setFlash('The Group has been saved.', 'default', array('class' => 'message success'));
+				$this->Session->setFlash('The Group has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Group could not be saved. Please, try again.', 'default', array('class' => 'message failure'));
+				$this->Session->setFlash('The Group could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		}
 		$this->set('title_for_layout', 'Add Group');
@@ -84,10 +84,10 @@ class GroupsController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Group->save($this->request->data)) {
-				$this->Session->setFlash('The Group has been saved.', 'default', array('class' => 'message success'));
+				$this->Session->setFlash('The Group has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Group could not be saved. Please, try again.', 'default', array('class' => 'message failure'));
+				$this->Session->setFlash('The Group could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		} else {
 			$this->request->data = $this->Group->read(null, $id);
@@ -111,10 +111,10 @@ class GroupsController extends AppController {
 			throw new NotFoundException('Invalid Group.');
 		}
 		if ($this->Group->delete()) {
-			$this->Session->setFlash('Group deleted.', 'default', array('class' => 'message success'));
+			$this->Session->setFlash('Group deleted.', 'default', array('class' => 'alert alert-success'));
 			$this->redirect(array('action'=>'admin_index'));
 		}
-		$this->Session->setFlash('Group was not deleted.', 'default', array('class' => 'message failure'));
+		$this->Session->setFlash('Group was not deleted.', 'default', array('class' => 'alert alert-error'));
 		$this->redirect(array('action' => 'admin_index'));
 	}
 }

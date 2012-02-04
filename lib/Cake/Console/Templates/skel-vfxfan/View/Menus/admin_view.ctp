@@ -14,7 +14,7 @@
 		<h3>Actions</h3>
 		<ul class="action-buttons-list">
 			<li><?php echo $this->Html->link('Edit Menu', array('action' => 'admin_edit', $menu['Menu']['id']), array('class' => 'btn')); ?> </li>
-			<li><?php echo $this->Form->postLink('Delete Menu', array('action' => 'admin_delete', $menu['Menu']['id']), array('class' => 'btn danger'), sprintf('Are you sure you want to delete # %s?', $menu['Menu']['id'])); ?> </li>
+			<li><?php echo $this->Form->postLink('Delete Menu', array('action' => 'admin_delete', $menu['Menu']['id']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $menu['Menu']['id'])); ?> </li>
 			<li><?php echo $this->Html->link('List Menus', array('action' => 'admin_index'), array('class' => 'btn')); ?> </li>
 			<li><?php echo $this->Html->link('New Menu', array('action' => 'admin_add'), array('class' => 'btn')); ?> </li>
 		</ul>
