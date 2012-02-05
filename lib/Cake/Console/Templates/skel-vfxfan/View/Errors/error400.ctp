@@ -12,13 +12,13 @@
 <div class="row">
 	<div class="span12">
 		<h2><?php echo $name; ?></h2>
-		<p class="error">
+		<p class="alert alert-error">
 			<strong>Error:</strong>
 			<?php
 				echo sprintf('The requested address <strong>%s</strong> was not found on this server.', $url);
 			?>
 		</p>
-		<p class="notice">
+		<p class="alert">
 			The location you're looking for has been lost somehwere in the world,
 			or the form you were using may have expired.
 			Check the address, reload the form or report the error.

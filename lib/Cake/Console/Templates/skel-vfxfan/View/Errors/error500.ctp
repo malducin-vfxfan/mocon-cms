@@ -12,11 +12,11 @@
 <div class="row">
 	<div class="span12">
 		<h2><?php echo $name; ?></h2>
-		<p class="error">
+		<p class="alert alert-error">
 			<strong>Error: </strong>
 			An Internal Error Has Occurred.
 		</p>
-		<p class="notice">
+		<p class="alert">
 			There has been a serious error. We'll try to take you to the main page in a moment.
 		</p>
 
