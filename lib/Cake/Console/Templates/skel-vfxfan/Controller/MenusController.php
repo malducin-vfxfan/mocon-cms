@@ -107,7 +107,7 @@ class MenusController extends AppController {
 		$this->layout = 'default_admin';
 		$this->Menu->id = $id;
 		if (!$this->Menu->exists()) {
-			throw new NotFoundException('Invalid Menu.', 'default', array('class' => 'alert alert-error'));
+			throw new NotFoundException('Invalid Menu.');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Menu->save($this->request->data)) {
@@ -139,7 +139,7 @@ class MenusController extends AppController {
 		}
 		$this->Menu->id = $id;
 		if (!$this->Menu->exists()) {
-			throw new NotFoundException('Invalid Menu.', 'default', array('class' => 'alert alert-error'));
+			throw new NotFoundException('Invalid Menu.');
 		}
 		if ($this->Menu->delete()) {
 			$this->Session->setFlash('Menu deleted.', 'default', array('class' => 'alert alert-success'));
