@@ -103,7 +103,6 @@ if (empty($associations['hasAndBelongsToMany'])) {
 	$associations['hasAndBelongsToMany'] = array();
 }
 $relations = array_merge($associations['hasMany'], $associations['hasAndBelongsToMany']);
-$i = 0;
 foreach ($relations as $alias => $details):
 	$otherSingularVar = Inflector::variable($alias);
 	$otherPluralHumanName = Inflector::humanize($details['controller']);
@@ -127,7 +126,6 @@ foreach ($relations as $alias => $details):
 			<tbody>
 <?php
 	echo "\t\t\t\t<?php\n";
-	echo "\t\t\t\t\t\$i = 0;\n";
 	echo "\t\t\t\t\tforeach (\${$otherPluralVar} as \${$otherSingularVar}):\n";
 	echo "\t\t\t\t?>\n";
 	echo "\t\t\t\t<tr>\n";
