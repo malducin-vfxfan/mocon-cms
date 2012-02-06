@@ -147,9 +147,7 @@ class PostsController extends AppController {
 				$this->Session->setFlash('The Post could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		}
-		$users = $this->Post->User->find('list');
 		$this->set('title_for_layout', 'Add Post');
-		$this->set(compact('users'));
 	}
 
 /**
@@ -176,9 +174,7 @@ class PostsController extends AppController {
 		} else {
 			$this->request->data = $this->Post->read(null, $id);
 		}
-		$users = $this->Post->User->find('list');
 		$this->set('title_for_layout', 'Edit Post');
-		$this->set(compact('users'));
 	}
 
 /**
