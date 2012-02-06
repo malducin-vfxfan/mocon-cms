@@ -78,7 +78,6 @@ class PagesController extends AppController {
 		$this->Page->recursive = 1;
 		$this->set('title_for_layout', 'Home');
 		$this->set('mainpage', $this->Page->find('first', array('conditions' => array('Page.main' => 1))));
-		$this->set('posts', $this->Post->getLatest());
 	}
 
 /**
