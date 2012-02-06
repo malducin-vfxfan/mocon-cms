@@ -207,7 +207,6 @@ class Event extends AppModel {
 			$this->recursive = 0;
 			$query['conditions']['Event.date_end >='] = date('Y-m-d');
 			$query['limit'] = Configure::read('Events.upcoming_num');
-debug($query);
 			return $query;
 		}
 		if ($state == 'after') {
