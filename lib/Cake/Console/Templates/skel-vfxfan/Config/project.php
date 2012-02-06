@@ -20,6 +20,9 @@ $config = array(
 			'year_range' => 5,
 		),
 	),
+	'Posts' => array(
+		'latest_num' => 5,
+	),
 	'AddThis' => array(
 		'pubid' => '',
 		'title' => '',
