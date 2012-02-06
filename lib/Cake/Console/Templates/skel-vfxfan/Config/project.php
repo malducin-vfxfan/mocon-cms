@@ -23,6 +23,9 @@ $config = array(
 	'Posts' => array(
 		'latest_num' => 5,
 	),
+	'Events' => array(
+		'upcoming_num' => 5,
+	),
 	'AddThis' => array(
 		'pubid' => '',
 		'title' => '',

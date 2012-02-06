@@ -33,6 +33,12 @@ class Event extends AppModel {
  		'Event.name' => 'ASC'
  	);
 /**
+ * Custom find methods
+ *
+ * @var array
+ */
+ 	public $findMethods = array('upcoming' =>  true);
+/**
  * Validation rules
  *
  * @var array
@@ -190,6 +196,28 @@ class Event extends AppModel {
 	}
 
 /**
+ * _findUpcoming method
+ *
+ * Find the upcoming events.
+ *
+ * @return array
+ */
+	protected function _findUpcoming($state, $query, $results = array()) {
+		if ($state == 'before') {
+			$this->recursive = 0;
+			$query['conditions']['Event.date_end >='] = date('Y-m-d');
+			$query['limit'] = Configure::read('Events.upcoming_num');
+debug($query);
+			return $query;
+		}
+		if ($state == 'after') {
+			// if we get results, cache them
+			Cache::write('upcoming_events', $results);
+		}
+		return $results;
+	}
+
+/**
  * _cleanData method
  *
  * Cleans data array from forms.
@@ -205,24 +233,6 @@ class Event extends AppModel {
 		$data['Event']['description'] = MySanitize::cleanSafe($data['Event']['location']);
 		$data['Event']['webpage'] = MySanitize::cleanSafe($data['Event']['webpage'], array('quotes' => ENT_QUOTES));
 		return $data;
-	}
-
-/**
- * getLatest method
- *
- * Return the most recent upcoming events and caches content.
- *
- * @param int $num_posts Number of recent posts to display and cache.
- * @return array
- */
-	public function getUpcoming($num_events = 5) {
-		$latest_events = Cache::read('latest_events');
-		if (!$latest_events) {
-			$this->recursive = 0;
-			$latest_events = $this->find('all', array('conditions' => array('Event.date_end >= CURDATE()'), 'limit' => $num_events));
-			Cache::write('latest_events', $latest_events);
-		}
-		return $latest_events;
 	}
 
 }

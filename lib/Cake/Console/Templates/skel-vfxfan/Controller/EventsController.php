@@ -69,12 +69,17 @@ class EventsController extends AppController {
 /**
  * upcomingEvents method
  *
- * return a list of upcomin events.
+ * return a list of upcoming events.
  *
  * @return void
  */
-	public function upcomingEvents($num_events = 5) {
-		$events = $this->Event->getUpcoming($num_events);
+	public function upcomingEvents() {
+		// get cached results
+		$events = Cache::read('upcoming_events');
+		if ($events === false) {
+			// if cache expired or non-existent, get upcoming
+			$events = $this->Event->find('upcoming');
+		}
 		return $events;
 	}
 
