@@ -31,6 +31,12 @@ class Post extends AppModel {
  */
  	public $order = array('Post.created' => 'DESC');
 /**
+ * Custom find methods
+ *
+ * @var array
+ */
+ 	public $findMethods = array('latest' =>  true);
+/**
  * Validation rules
  *
  * @var array
@@ -201,6 +207,27 @@ class Post extends AppModel {
 	}
 
 /**
+ * _findLatest method
+ *
+ * Find the latest posts.
+ *
+ * @return array
+ */
+	protected function _findLatest($state, $query, $results = array()) {
+
+		if ($state == 'before') {
+			$this->recursive = 0;
+			$query['limit'] = Configure::read('Posts.latest_num');
+			return $query;
+		}
+		if ($state == 'after') {
+			// if we get results, cache them
+			Cache::write('latest_posts', $results);
+		}
+		return $results;
+	}
+
+/**
  * _cleanData method
  *
  * Cleans data array from forms.
@@ -215,23 +242,4 @@ class Post extends AppModel {
 		$data['Post']['user_id'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Post']['user_id'], array('quotes' => ENT_NOQUOTES)), array(' ', '-', '_'));
 		return $data;
 	}
-
-/**
- * getLatest method
- *
- * Return the most recent posts and caches the content.
- *
- * @param int $num_posts Number of recent posts to display and cache.
- * @return array
- */
-	public function getLatest($num_posts = 5) {
-		$latest_posts = Cache::read('latest_posts');
-		if (!$latest_posts) {
-			$this->recursive = 0;
-			$latest_posts = $this->find('all', array('limit' => $num_posts));
-			Cache::write('latest_posts', $latest_posts);
-		}
-		return $latest_posts;
-	}
-
 }

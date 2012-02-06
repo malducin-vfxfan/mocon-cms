@@ -49,7 +49,12 @@ class PostsController extends AppController {
 	public function index() {
 		$this->Post->recursive = 0;
 		if ($this->RequestHandler->isRss()) {
-			$posts = $this->Post->getLatest(5);
+			// get cached results
+			$posts = Cache::read('latest_posts');
+			if ($posts === false) {
+				// if cache expired or non-existent, get latest
+				$posts = $this->Post->find('latest');
+			}
 			$this->set(compact('posts'));
 		}
 		else {
@@ -77,15 +82,19 @@ class PostsController extends AppController {
 	}
 
 /**
- * latest_posts method
+ * latestPosts method
  *
  * Return a list of the latest posts.
  *
- * @param int $num_posts
  * @return array
  */
-	public function latestPosts($num_posts = 5) {
-		$posts = $this->Post->getLatest($num_posts);
+	public function latestPosts() {
+		// get cached results
+		$posts = Cache::read('latest_posts');
+		if ($posts === false) {
+			// if cache expired or non-existent, get latest
+			$posts = $this->Post->find('latest');
+		}
 		return $posts;
     }
 
