@@ -31,7 +31,7 @@ $posts = $this->requestAction(array('controller' => 'posts', 'action' => 'latest
 					}
 				?>
 			</div>
-			<p class="contents-summary"><?php echo $post['Post']['summary']; ?></p>
+			<p><?php echo $post['Post']['summary']; ?></p>
 			<p><?php echo $this->Html->link('Read more »', array('controller' => 'posts', 'action' => 'view', $post['Post']['slug'])); ?></p>
 		</article>
 		<hr />
