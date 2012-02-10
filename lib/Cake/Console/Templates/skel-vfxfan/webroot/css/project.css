@@ -479,6 +479,7 @@ label input, label textarea, label select {
 }
 input[type="image"], input[type="checkbox"], input[type="radio"] {
     border: 0 none;
+    border-radius: 0 0 0 0;
     cursor: pointer;
     height: auto;
     line-height: normal;
@@ -1722,12 +1723,12 @@ button.btn.small, input.btn.small[type="submit"] {
 .nav-list > li + .nav-header {
     margin-top: 9px;
 }
-.nav-list .active > a {
+.nav-list .active > a, .nav-list .active > a:hover {
     background-color: #0088CC;
     color: #FFFFFF;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
-.nav-list .icon {
+.nav-list [class^="icon-"] {
     margin-right: 2px;
 }
 .nav-tabs, .nav-pills {
