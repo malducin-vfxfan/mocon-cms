@@ -33,3 +33,39 @@
 		<?php echo $this->Form->end('Submit');?>
 	</section>
 </div>
+<div class="row">
+	<aside class="admin-related">
+		<h3>Pages</h3>
+		<?php if (!empty($pages)): ?>
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Title</th>
+					<th>Slug</th>
+					<th>Created</th>
+					<th>Modified</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ($pages as $page): ?>
+				<tr>
+					<td><?php echo $page['Page']['id'];?></td>
+					<td><?php echo $page['Page']['title'];?></td>
+					<td><?php echo $page['Page']['slug'];?></td>
+					<td><?php echo $page['Page']['created'];?></td>
+					<td><?php echo $page['Page']['modified'];?></td>
+					<td>
+						<?php echo $this->Html->link('Add Slug to Link', '#', array('class' => 'btn btn-info menu-page-slug', 'id' => $page['Page']['slug'])); ?>
+						<?php echo $this->Html->link('View', array('controller' => 'pages', 'action' => 'admin_view', $page['Page']['id']), array('class' => 'btn')); ?>
+						<?php echo $this->Html->link('Edit', array('controller' => 'pages', 'action' => 'admin_edit', $page['Page']['id']), array('class' => 'btn')); ?>
+						<?php echo $this->Form->postLink('Delete', array('controller' => 'pages', 'action' => 'admin_delete', $page['Page']['id']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $page['Page']['id'])); ?>
+					</td>
+				</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+		<?php endif; ?>
+	</aside>
+</div>
