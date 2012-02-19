@@ -49,6 +49,7 @@
 						<ul class="dropdown-menu">
 							<li><?php echo $this->Html->link('Groups', array('controller' => 'groups', 'action' => 'admin_index')); ?></li>
 							<li><?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'admin_index')); ?></li>
+							<li><?php echo $this->Html->link('System Info', array('controller' => 'system_infos', 'action' => 'admin_index')); ?></li>
 						</ul>
 					</li>
 					<li class="dropdown">
