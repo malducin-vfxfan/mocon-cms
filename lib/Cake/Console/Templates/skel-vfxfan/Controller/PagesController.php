@@ -95,6 +95,9 @@ class PagesController extends AppController {
 		if (!$page) {
 			throw new NotFoundException('Invalid Page.');
 		}
+		if (!$page['Page']['published']) {
+			throw new NotFoundException('Invalid Page.');
+		}
 		$this->set('title_for_layout', $page['Page']['title']);
 		$this->set(compact('page'));
 		$this->Page->PageSection->recursive = -1;
@@ -183,7 +186,9 @@ class PagesController extends AppController {
 		} else {
 			$this->request->data = $this->Page->read(null, $id);
 		}
+		$pageSections = $this->Page->PageSection->find('all', array('conditions' => array('Page.id' => $id)));
 		$this->set('title_for_layout', 'Edit Page');
+		$this->set(compact('pageSections'));
 		$this->set('images', $this->Page->listFiles($id));
 	}
 

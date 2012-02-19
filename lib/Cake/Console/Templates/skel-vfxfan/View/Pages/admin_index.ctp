@@ -26,6 +26,7 @@
 					<th><?php echo $this->Paginator->sort('id');?></th>
 					<th><?php echo $this->Paginator->sort('title');?></th>
 					<th><?php echo $this->Paginator->sort('slug');?></th>
+					<th><?php echo $this->Paginator->sort('published');?></th>
 					<th><?php echo $this->Paginator->sort('created');?></th>
 					<th><?php echo $this->Paginator->sort('modified');?></th>
 					<th>Actions</th>
@@ -37,6 +38,7 @@
 					<td><?php echo $page['Page']['id']; ?>&nbsp;</td>
 					<td><?php echo $page['Page']['title']; ?>&nbsp;</td>
 					<td><?php echo $page['Page']['slug']; ?>&nbsp;</td>
+					<td><?php echo $page['Page']['published']; ?>&nbsp;</td>
 					<td><?php echo $page['Page']['created']; ?>&nbsp;</td>
 					<td><?php echo $page['Page']['modified']; ?>&nbsp;</td>
 					<td>

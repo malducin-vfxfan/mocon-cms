@@ -39,6 +39,11 @@
 				<?php echo $page['Page']['slug']; ?>
 				&nbsp;
 			</dd>
+			<dt>Published</dt>
+			<dd>
+				<?php echo $page['Page']['published']; ?>
+				&nbsp;
+			</dd>
 			<dt>Main</dt>
 			<dd>
 				<?php echo $page['Page']['main']; ?>

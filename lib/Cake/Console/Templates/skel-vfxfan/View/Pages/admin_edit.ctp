@@ -28,12 +28,52 @@
 					echo $this->Form->input('id');
 					echo $this->Form->input('title');
 					echo $this->Form->input('slug');
+					echo $this->Form->input('published');
 					echo $this->Form->input('main');
 					echo $this->Form->input('File.image', array('type' => 'file'));
 				?>
 			</fieldset>
 		<?php echo $this->Form->end('Submit');?>
-		<h3>Images</h3>
+	</section>
+</div>
+<div class="row">
+	<aside class="admin-related">
+		<h3>Related Page Sections</h3>
+		<?php if (!empty($pageSections)): ?>
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Title</th>
+					<th>Section</th>
+					<th>Created</th>
+					<th>Modified</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ($pageSections as $pageSection): ?>
+				<tr>
+					<td><?php echo $pageSection['PageSection']['id'];?></td>
+					<td><?php echo $pageSection['PageSection']['title'];?></td>
+					<td><?php echo $pageSection['PageSection']['section'];?></td>
+					<td><?php echo $pageSection['PageSection']['created'];?></td>
+					<td><?php echo $pageSection['PageSection']['modified'];?></td>
+					<td>
+						<?php echo $this->Html->link('View', array('controller' => 'page_sections', 'action' => 'admin_view', $pageSection['PageSection']['id']), array('class' => 'btn')); ?>
+						<?php echo $this->Html->link('Edit', array('controller' => 'page_sections', 'action' => 'admin_edit', $pageSection['PageSection']['id']), array('class' => 'btn')); ?>
+						<?php echo $this->Form->postLink('Delete', array('controller' => 'page_sections', 'action' => 'admin_delete', $pageSection['PageSection']['id']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $pageSection['PageSection']['id'])); ?>
+					</td>
+				</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+		<?php endif; ?>
+	</aside>
+</div>
+<div class="row">
+	<aside class="admin-related">
+		<h3>Page Images</h3>
 		<table class="table table-striped table-bordered">
 			<thead>
 				<tr>
@@ -42,13 +82,16 @@
 				</tr>
 			</thead>
 			<tbody>
-			<?php foreach ($images as $image): ?>
+				<?php foreach ($images as $image): ?>
 				<tr>
 					<td><?php echo $this->Html->link($image, '/img/pages/'.sprintf("%010d", $this->Form->value('Page.id')).'/'.$image, array('target' => '_blank')); ?></td>
-					<td><?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->Form->value('Page.id'), $image), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this image?'); ?></td>
+					<td>
+						<?php echo $this->Html->link('View', '/img/pages/'.sprintf("%010d", $this->Form->value('Page.id')).'/'.$image, array('class' => 'btn', 'target' => '_blank')); ?>
+						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->Form->value('Page.id'), $image), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this image?'); ?>
+					</td>
 				</tr>
-			<?php endforeach; ?>
+				<?php endforeach; ?>
 			</tbody>
 		</table>
-	</section>
+	</aside>
 </div>

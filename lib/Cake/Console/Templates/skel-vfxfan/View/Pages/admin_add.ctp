@@ -8,7 +8,6 @@
  * @package       pages
  * @subpackage    pages.views
  */
-$this->Html->script(array('forms_pages'), array('inline' => false));
 if (Configure::read('TinyMCE.active')) {
 	echo $this->element('TinyMCE/config_basic', array('external_image_list_url' => $this->Html->url(array('controller' => 'page_sections', 'action' => 'admin_tinymceImageList', $this->Form->value('Page.id')))));
 }
@@ -30,6 +29,7 @@ if (Configure::read('TinyMCE.active')) {
 				<legend>Admin Add Page</legend>
 				<?php
 					echo $this->Form->input('Page.title', array('label'=>'Page Title'));
+					echo $this->Form->input('Page.published');
 					echo $this->Form->input('Page.main');
 					echo $this->Form->input('PageSection.0.title', array('label'=>'Section Title', 'class' => 'page_section_title'));
 					echo $this->Form->input('PageSection.0.section', array('class' => 'page_section_section'));

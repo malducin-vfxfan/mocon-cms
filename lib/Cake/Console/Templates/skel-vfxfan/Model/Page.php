@@ -79,6 +79,26 @@ class Page extends AppModel {
 				'last' => true // Stop validation after this rule
 			),
 		),
+		'published' => array(
+			'notempty' => array(
+				'rule' => array('notEmpty'),
+				'message' => 'This field cannot be left blank.',
+				'required' => true,
+				'last' => true // Stop validation after this rule
+			),
+			'numeric' => array(
+				'rule' => array('numeric'),
+				'message' => 'This field is numeric.',
+				'required' => true,
+				'last' => true // Stop validation after this rule
+			),
+			'boolean' => array(
+				'rule' => array('boolean'),
+				'message' => 'This field is boolean.',
+				'required' => true,
+				'last' => true // Stop validation after this rule
+			),
+		),
 		'main' => array(
 			'notempty' => array(
 				'rule' => array('notEmpty'),
@@ -181,6 +201,7 @@ class Page extends AppModel {
 	private function _cleanData($data) {
 		$data['Page']['title'] = MySanitize::cleanSafe($data['Page']['title']);
 		$data['Page']['slug'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Page']['slug'], array('quotes' => ENT_NOQUOTES)), array('-', '_'));
+		$data['Page']['published'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Page']['published'], array('quotes' => ENT_NOQUOTES)));
 		$data['Page']['main'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Page']['main'], array('quotes' => ENT_NOQUOTES)));
 		return $data;
 	}
