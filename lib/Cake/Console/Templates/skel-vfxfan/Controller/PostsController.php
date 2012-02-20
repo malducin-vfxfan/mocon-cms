@@ -32,16 +32,6 @@ class PostsController extends AppController {
 	public $helpers = array('FormatImage', 'Rss');
 
 /**
- * beforeFilter method
- *
- * @return void
- */
-	public function beforeFilter() {
-		parent::beforeFilter();
-		$this->Auth->allow('latestPosts');
-	}
-
-/**
  * index method
  *
  * @return void
@@ -80,23 +70,6 @@ class PostsController extends AppController {
 		$this->set(compact('post'));
 		$this->set('title_for_layout', 'Post: '.$post['Post']['title']);
 	}
-
-/**
- * latestPosts method
- *
- * Return a list of the latest posts.
- *
- * @return array
- */
-	public function latestPosts() {
-		// get cached results
-		$posts = Cache::read('latest_posts');
-		if ($posts === false) {
-			// if cache expired or non-existent, get latest
-			$posts = $this->Post->find('latest');
-		}
-		return $posts;
-    }
 
 /**
  * admin_index method

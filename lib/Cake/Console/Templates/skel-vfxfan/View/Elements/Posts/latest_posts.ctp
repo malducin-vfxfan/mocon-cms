@@ -11,7 +11,6 @@
  * @package       posts
  * @subpackage    posts.views.elements
  */
-$posts = $this->requestAction(array('controller' => 'posts', 'action' => 'latestPosts'));
 ?>
 <h2>Latest News</h2>
 <?php foreach ($posts as $post): ?>

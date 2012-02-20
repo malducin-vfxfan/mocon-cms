@@ -11,7 +11,6 @@
  * @package       events
  * @subpackage    events.views.elements
  */
-$events = $this->requestAction(array('controller' => 'events', 'action' => 'upcomingEvents'));
 ?>
 <h2>Upcoming Events</h2>
 <?php foreach ($events as $event): ?>

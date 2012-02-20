@@ -39,7 +39,7 @@ class EventsController extends AppController {
  */
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('archive', 'upcomingEvents');
+		$this->Auth->allow('archive');
 	}
 
 /**
@@ -64,23 +64,6 @@ class EventsController extends AppController {
 		$this->Event->recursive = 0;
 		$this->set('title_for_layout', 'Past Events');
 		$this->set('events', $this->paginate());
-	}
-
-/**
- * upcomingEvents method
- *
- * return a list of upcoming events.
- *
- * @return void
- */
-	public function upcomingEvents() {
-		// get cached results
-		$events = Cache::read('upcoming_events');
-		if ($events === false) {
-			// if cache expired or non-existent, get upcoming
-			$events = $this->Event->find('upcoming');
-		}
-		return $events;
 	}
 
 /**

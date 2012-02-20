@@ -27,7 +27,7 @@ class PagesController extends AppController {
  *
  * @var array
  */
-	public $uses = array('Page', 'Post');
+	public $uses = array('Page', 'Post', 'Event');
 /**
  * Helpers
  *
@@ -76,7 +76,24 @@ class PagesController extends AppController {
  */
 	public function index() {
 		$this->Page->recursive = 1;
+
+		// get cached latest posts, if expired find the latest
+		$posts = Cache::read('latest_posts');
+		if ($posts === false) {
+			// if cache expired or non-existent, get latest
+			$posts = $this->Post->find('latest');
+		}
+
+		// get cached upcoming events, if expired find the upcoming
+		$events = Cache::read('upcoming_events');
+		if ($events === false) {
+			// if cache expired or non-existent, get upcoming
+			$events = $this->Event->find('upcoming');
+		}
+
+
 		$this->set('title_for_layout', 'Home');
+		$this->set(compact('posts', 'events'));
 		$this->set('mainpage', $this->Page->find('first', array('conditions' => array('Page.main' => 1))));
 	}
 
