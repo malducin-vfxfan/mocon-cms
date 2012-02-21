@@ -49,11 +49,11 @@ class MenusController extends AppController {
 		$this->Menu->recursive = -1;
 
 		// get menu items from cache, if expired get elements and cache
-		$menuItems = Cache::read('menu');
+		$menuItems = Cache::read('menu', 'medium');
 		if ($menuItems === false) {
 			// if cache expired or non-existent, get latest
 			$menuItems = $this->Menu->find('threaded', array('conditions' => array('priority >' => 0)));
-			Cache::write('menu', $menuItems);
+			Cache::write('menu', $menuItems, 'medium');
 		}
 
 		return $menuItems;
