@@ -47,8 +47,16 @@ class MenusController extends AppController {
  */
  	public function menu() {
 		$this->Menu->recursive = -1;
-		$menu_items = $this->Menu->find('threaded', array('conditions' => array('priority >' => 0)));
-		return $menu_items;
+
+		// get menu items from cache, if expired get elements and cache
+		$menuItems = Cache::read('menu');
+		if ($menuItems === false) {
+			// if cache expired or non-existent, get latest
+			$menuItems = $this->Menu->find('threaded', array('conditions' => array('priority >' => 0)));
+			Cache::write('menu', $menuItems);
+		}
+
+		return $menuItems;
  	}
 
 /**

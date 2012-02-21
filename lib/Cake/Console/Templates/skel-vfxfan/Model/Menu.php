@@ -115,6 +115,18 @@ class Menu extends AppModel {
 	}
 
 /**
+ * afterSave method
+ *
+ * Delete the latest menu cache everytime a new menu element is saved.
+ *
+ * @param boolean $created
+ * @return void
+ */
+	public function afterSave($created) {
+		Cache::delete('menu');
+	}
+
+/**
  * _cleanData method
  *
  * Cleans data array from forms.
