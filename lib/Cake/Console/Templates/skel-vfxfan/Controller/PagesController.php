@@ -91,7 +91,6 @@ class PagesController extends AppController {
 			$events = $this->Event->find('upcoming');
 		}
 
-
 		$this->set('title_for_layout', 'Home');
 		$this->set(compact('posts', 'events'));
 		$this->set('mainpage', $this->Page->find('first', array('conditions' => array('Page.main' => 1))));
