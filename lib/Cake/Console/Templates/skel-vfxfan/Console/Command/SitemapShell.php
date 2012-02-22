@@ -28,6 +28,7 @@ class SitemapShell extends AppShell {
  */
 	public function main() {
 		$this->Post->recursive = -1;
+		$this->Event->recursive = -1;
 		$this->Page->recursive = -1;
 		$this->Album->recursive = -1;
 
@@ -60,8 +61,10 @@ class SitemapShell extends AppShell {
 			$sitemap .= "\t</url>\n";
 		}
 
+		$latest_result = $this->Event->find('first', array('order' => 'Event.modified DESC'));
 		$sitemap .= "\t<url>\n";
 		$sitemap .= "\t\t<loc>".FULL_BASE_URL.'/events'."</loc>\n";
+		$sitemap .= "\t\t<lastmod>".date('Y-m-d', strtotime($latest_result['Event']['modified']))."</lastmod>\n";
 		$sitemap .= "\t\t<changefreq>weekly</changefreq>\n";
 		$sitemap .= "\t\t<priority>0.7</priority>\n";
 		$sitemap .= "\t</url>\n";
@@ -71,6 +74,16 @@ class SitemapShell extends AppShell {
 		$sitemap .= "\t\t<changefreq>weekly</changefreq>\n";
 		$sitemap .= "\t\t<priority>0.7</priority>\n";
 		$sitemap .= "\t</url>\n";
+
+		$results = $this->Event->find('all');
+		foreach ($results as $event) {
+			$sitemap .= "\t<url>\n";
+			$sitemap .= "\t\t<loc>".FULL_BASE_URL.'/events/view/'.$event['Event']['slug']."</loc>\n";
+			$sitemap .= "\t\t<lastmod>".date('Y-m-d', strtotime($event['Event']['modified']))."</lastmod>\n";
+			$sitemap .= "\t\t<changefreq>yearly</changefreq>\n";
+			$sitemap .= "\t\t<priority>0.7</priority>\n";
+			$sitemap .= "\t</url>\n";
+		}
 
 		$results = $this->Page->find('all', array('order' => 'Page.slug ASC'));
 		foreach ($results as $page) {
