@@ -128,6 +128,26 @@ class Event extends AppModel {
 				'last' => true, // Stop validation after this rule
 			),
 		),
+		'slug' => array(
+			'notempty' => array(
+				'rule' => array('notEmpty'),
+				'message' => 'This field cannot be left blank.',
+				'required' => true,
+				'last' => true, // Stop validation after this rule
+			),
+			'maxlength' => array(
+				'rule' => array('maxLength', 140),
+				'message' => 'Names must be no larger than 140 characters long.',
+				'required' => true,
+				'last' => true, // Stop validation after this rule
+			),
+			'isunique' => array(
+				'rule' => array('isUnique'),
+				'message' => 'This name has already been taken.',
+				'required' => true,
+				'last' => true // Stop validation after this rule
+			),
+		),
 	);
 
 /**
@@ -152,6 +172,9 @@ class Event extends AppModel {
  */
 	public function beforeValidate() {
 		if (!empty($this->data)) {
+			if (!$this->id) {
+				$this->data['Event']['slug'] = strtolower(Inflector::slug($this->data['Event']['name'].'-'.$this->data['Event']['date_start'], '-'));
+			}
 			$this->data = $this->_cleanData($this->data);
 		}
 		return true;
@@ -231,6 +254,7 @@ class Event extends AppModel {
 		$data['Event']['location'] = MySanitize::cleanSafe($data['Event']['location']);
 		$data['Event']['description'] = MySanitize::cleanSafe($data['Event']['location']);
 		$data['Event']['webpage'] = MySanitize::cleanSafe($data['Event']['webpage'], array('quotes' => ENT_QUOTES));
+		$data['Event']['slug'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Event']['slug'], array('quotes' => ENT_NOQUOTES)), array(' ', '-', '_'));
 		return $data;
 	}
 

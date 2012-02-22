@@ -55,6 +55,24 @@ class EventsController extends AppController {
 	}
 
 /**
+ * view method
+ *
+ * @param string $id
+ * @return void
+ */
+	public function view($slug = null) {
+		if (!$slug) {
+			throw new NotFoundException('Invalid Event.');
+		}
+		$event = $this->Event->findBySlug($slug);
+		if (!$event) {
+			throw new NotFoundException('Invalid Event.');
+		}
+		$this->set(compact('event'));
+		$this->set('title_for_layout', 'Event: '.$event['Event']['name']);
+	}
+
+/**
  * archive method
  *
  * @return void

@@ -57,6 +57,11 @@
 				<?php echo $event['Event']['webpage']; ?>
 				&nbsp;
 			</dd>
+			<dt>Slug</dt>
+			<dd>
+				<?php echo $event['Event']['slug']; ?>
+				&nbsp;
+			</dd>
 			<dt>Created</dt>
 			<dd>
 				<?php echo $event['Event']['created']; ?>

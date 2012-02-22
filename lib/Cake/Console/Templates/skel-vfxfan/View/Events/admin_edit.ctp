@@ -34,6 +34,7 @@ else $max_year = date('Y') + $year_range;
 					echo $this->Form->input('location');
 					echo $this->Form->input('description');
 					echo $this->Form->input('webpage', array('type' => 'url'));
+					echo $this->Form->input('slug');
 					echo $this->Form->input('File.image', array('type' => 'file'));
 				?>
 			</fieldset>
