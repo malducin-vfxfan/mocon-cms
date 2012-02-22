@@ -105,7 +105,7 @@
 			</div>
 		</div>
 		<footer>
-			<p>© 2011-<?php echo date('Y'); ?>, Manuel Alducin, <?php echo $this->Html->link('VFXfan.com', 'http://vfxfan.com'); ?></p>
+			<p>© 2011-<?php echo date('Y'); ?>, system by <?php echo $this->Html->link('Manuel Alducin (malducin) - VFXfan.com', 'http://vfxfan.com'); ?></p>
 		</footer>
 	</div> <!-- /container -->
 </body>
