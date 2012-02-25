@@ -244,7 +244,7 @@ class Page extends AppModel {
 	public function deleteFile($id = null, $filename = null) {
 		if (!id or !$filename) return false;
 
-		return unlink(IMAGES.'pages'.DS.sprintf("%010d", $this->id).DS.$filename);
+		return unlink(IMAGES.'pages'.DS.sprintf("%010d", $id).DS.$filename);
 	}
 
 }
