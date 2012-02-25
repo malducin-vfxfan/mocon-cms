@@ -21,11 +21,11 @@
 </div>
 <div>&nbsp;</div>
 <div class="row">
-	<section class="latest-posts">
+	<section id="latest-posts">
 		<?php echo $this->element('Posts/latest_posts', $posts); ?>
 		<?php echo $this->Html->link('Previous posts »', array('controller' => 'posts', 'action' => 'index')); ?>
 	</section>
-	<section class="upcoming-events">
+	<section id="upcoming-events">
 		<?php echo $this->element('Events/upcoming_events', $events); ?>
 		<?php echo $this->Html->link('More events »', array('controller' => 'events', 'action' => 'index')); ?>
 	</section>
