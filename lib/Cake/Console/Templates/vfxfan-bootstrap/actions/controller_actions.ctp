@@ -33,7 +33,7 @@
 			throw new NotFoundException('Invalid <?php echo strtolower($singularHumanName); ?>.');
 		}
 		// $this-><?php echo $currentModelName; ?>->unbindModel(array('hasMany' => array('')));
-		$<?php echo $singularName; ?> = $this-><?php echo $currentModelName; ?>->read(null, $id);
+		$<?php echo $singularName; ?> = $this-><?php echo $currentModelName; ?>->find('first', array('conditions' => array('<?php echo $currentModelName; ?>.id' => $id)));
 		$this->set(compact('<?php echo $singularName; ?>'));
 		$this->set('title_for_layout', '<?php echo ucfirst($singularName); ?>: ');
 		// if model has a hasMany relationship don't forget to add pagination here and in the view
