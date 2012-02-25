@@ -95,7 +95,7 @@ class PostsController extends AppController {
 		if (!$this->Post->exists()) {
 			throw new NotFoundException('Invalid Post.');
 		}
-		$post = $this->Post->read(null, $id);
+		$post = $this->Post->find('first', array('conditions' => array('Post.id' => $id)));
 		$this->set(compact('post'));
 		$this->set('title_for_layout', 'Post: '.$post['Post']['title']);
 	}
@@ -112,7 +112,7 @@ class PostsController extends AppController {
 			$this->request->data['Post']['user_id'] = $this->Auth->user('id');
 			$this->request->data['Post']['content'] = $this->brita->purify($this->request->data['Post']['content']);
 			if ($this->Post->save($this->request->data)) {
-				$post = $this->Post->read(null, $this->Post->id);
+				$post = $this->Post->find('first', array('conditions' => array('Post.id' => $this->Post->id)));
 				$this->Upload->uploadImageThumb('img'.DS.'posts'.DS.$post['Post']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Post->id, $this->request->data['File']['image']['name']));
 				$this->Session->setFlash('The Post has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));
@@ -137,7 +137,7 @@ class PostsController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Post->save($this->request->data)) {
-				$post = $this->Post->read(null, $this->Post->id);
+				$post = $this->Post->find('first', array('conditions' => array('Post.id' => $this->Post->id)));
 				$this->Upload->uploadImageThumb('img'.DS.'posts'.DS.$post['Post']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Post->id, $this->request->data['File']['image']['name']));
 				$this->Session->setFlash('The Post has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));

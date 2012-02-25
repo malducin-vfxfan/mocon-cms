@@ -144,7 +144,7 @@ class PagesController extends AppController {
 		if (!$this->Page->exists()) {
 			throw new NotFoundException('Invalid Page.');
 		}
-		$page = $this->Page->read(null, $id);
+		$page = $this->Page->find('first', array('conditions' => array('Page.id' => $id)));
 		$this->set(compact('page'));
 		$this->set('title_for_layout', 'Page: '.$page['Page']['title']);
 		$this->set('images', $this->Page->listFiles($page['Page']['id']));

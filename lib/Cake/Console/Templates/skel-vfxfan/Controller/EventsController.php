@@ -109,7 +109,7 @@ class EventsController extends AppController {
 		if (!$this->Event->exists()) {
 			throw new NotFoundException('Invalid Event.');
 		}
-		$event = $this->Event->read(null, $id);
+		$event = $this->Event->find('first', array('conditions' => array('Event.id' => $id)));
 		$this->set(compact('event'));
 		$this->set('title_for_layout', 'Event: ');
 	}
@@ -124,7 +124,7 @@ class EventsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Event->create();
 			if ($this->Event->save($this->request->data)) {
-				$event = $this->Event->read(null, $this->Event->id);
+				$event = $this->Event->find('first', array('conditions' => array('Event.id' => $this->Event->id)));
 				$this->Upload->uploadImageThumb('img'.DS.'events'.DS.$event['Event']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->request->data['File']['image']['name']));
 				$this->Session->setFlash('The Event has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));
@@ -149,7 +149,7 @@ class EventsController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Event->save($this->request->data)) {
-				$event = $this->Event->read(null, $this->Event->id);
+				$event = $this->Event->find('first', array('conditions' => array('Event.id' => $this->Event->id)));
 				$this->Upload->uploadImageThumb('img'.DS.'events'.DS.$event['Event']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->request->data['File']['image']['name']));
 				$this->Session->setFlash('The Event has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));

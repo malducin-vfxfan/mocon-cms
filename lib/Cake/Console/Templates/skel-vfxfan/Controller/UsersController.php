@@ -37,7 +37,7 @@ class UsersController extends AppController {
 		$this->layout = 'default_login';
 		if ($this->request->is('post')) {
 			if ($this->Auth->login()) {
-				$user_data = $this->User->read(null, $this->Auth->user('id'));
+				$user_data = $this->User->find('first', array('conditions' => array('User.id' => $this->Auth->user('id'))));
 				$this->Session->write('Auth.User.groupName', $user_data['Group']['name']);
 				return $this->redirect(array('controller' => 'posts', 'action' => 'admin_index'));
 			}
@@ -86,7 +86,7 @@ class UsersController extends AppController {
 			throw new NotFoundException('Invalid User.');
 		}
 		$this->User->unbindModel(array('hasMany' => array('Post')));
-		$user = $this->User->read(null, $id);
+		$user = $this->User->find('first', array('conditions' => array('User.id' => $id)));
 		$this->set(compact('user'));
 		$this->set('title_for_layout', 'User: '.$user['User']['username']);
 		$this->User->Post->recursive = -1;

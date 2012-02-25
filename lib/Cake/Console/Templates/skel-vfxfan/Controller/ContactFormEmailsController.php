@@ -42,7 +42,7 @@ class ContactFormEmailsController extends AppController {
 		if (!$this->ContactFormEmail->exists()) {
 			throw new NotFoundException('Invalid Contact Form Email.');
 		}
-		$contactFormEmail = $this->ContactFormEmail->read(null, $id);
+		$contactFormEmail = $this->ContactFormEmail->find('first', array('conditions' => array('ContactFormEmail.id' => $id)));
 		$this->set(compact('contactFormEmail'));
 		$this->set('title_for_layout', 'Contact Form Email: '.$contactFormEmail['ContactFormEmail']['email']);
 	}

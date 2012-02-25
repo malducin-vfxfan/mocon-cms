@@ -81,7 +81,7 @@ class ContactFormsController extends AppController {
 		if (!$this->ContactForm->exists()) {
 			throw new NotFoundException('Invalid Contact Form message.');
 		}
-		$contactForm = $this->ContactForm->read(null, $id);
+		$contactForm = $this->ContactForm->find('first', array('conditions' => array('ContactForm.id' => $id)));
 		$this->set(compact('contactForm'));
 		$this->set('title_for_layout', 'Contact Form message');
 	}
@@ -119,7 +119,7 @@ class ContactFormsController extends AppController {
  */
 	private function _sendContactEmail($id) {
 		$email = new CakeEmail();
-		$contactForm = $this->ContactForm->read(null, $id);
+		$contactForm = $this->ContactForm->find('first', array('conditions' => array('ContactForm' => $id)));
 		$currentRecipients = $this->ContactFormEmail->find('active', array('fields' => array('ContactFormEmail.email')));
 
 		$email->from(array('webmaster@example.com' => 'Site Webmaster'));
