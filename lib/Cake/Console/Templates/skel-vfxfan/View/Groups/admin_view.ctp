@@ -69,9 +69,9 @@
 				<td><?php echo $user['User']['created']; ?>&nbsp;</td>
 				<td><?php echo $user['User']['modified']; ?>&nbsp;</td>
 				<td>
-					<?php echo $this->Html->link('View', array('action' => 'admin_view', $user['User']['id']), array('class' => 'btn')); ?>
-					<?php echo $this->Html->link('Edit', array('action' => 'admin_edit', $user['User']['id']), array('class' => 'btn')); ?>
-					<?php echo $this->Form->postLink('Delete', array('action' => 'admin_delete', $user['User']['id']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $user['User']['id'])); ?>
+					<?php echo $this->Html->link('View', array('controller' => 'users', 'action' => 'admin_view', $user['User']['id']), array('class' => 'btn')); ?>
+					<?php echo $this->Html->link('Edit', array('controller' => 'users', 'action' => 'admin_edit', $user['User']['id']), array('class' => 'btn')); ?>
+					<?php echo $this->Form->postLink('Delete', array('controller' => 'users', 'action' => 'admin_delete', $user['User']['id']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $user['User']['id'])); ?>
 				</td>
 			</tr>
 			<?php endforeach; ?>
