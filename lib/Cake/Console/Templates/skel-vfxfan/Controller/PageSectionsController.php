@@ -80,8 +80,9 @@ class PageSectionsController extends AppController {
 			$this->PageSection->create();
 			$this->request->data['PageSection']['content'] = $this->brita->purify($this->request->data['PageSection']['content']);
 			if ($this->PageSection->save($this->request->data)) {
+				$pageSection = $this->PageSection->find('first', array('conditions' => array('PageSection.id' => $this->PageSection->id)));
 				$this->Session->setFlash('The Page Section has been saved.', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action' => 'admin_view', $this->PageSection->id));
+				$this->redirect(array('controller' => 'pages', 'action' => 'admin_view', $pageSection['PageSection']['page_id']));
 			} else {
 				$this->Session->setFlash('The Page Section could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
@@ -107,8 +108,9 @@ class PageSectionsController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$this->request->data['PageSection']['content'] = $this->brita->purify($this->request->data['PageSection']['content']);
 			if ($this->PageSection->save($this->request->data)) {
+				$pageSection = $this->PageSection->find('first', array('conditions' => array('PageSection.id' => $this->PageSection->id)));
 				$this->Session->setFlash('The Page Section has been saved.', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action' => 'admin_view', $this->PageSection->id));
+				$this->redirect(array('controller' => 'pages', 'action' => 'admin_view', $pageSection['PageSection']['page_id']));
 			} else {
 				$this->Session->setFlash('The Page Section could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
