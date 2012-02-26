@@ -62,7 +62,7 @@ class PageSectionsController extends AppController {
 		if (!$this->PageSection->exists()) {
 			throw new NotFoundException('Invalid Page Section.');
 		}
-		$pageSection = $this->PageSection->find('first', array('conditions' => array('PageSection' => $id)));
+		$pageSection = $this->PageSection->find('first', array('conditions' => array('PageSection.id' => $id)));
 		$this->set(compact('pageSection'));
 		$this->set('title_for_layout', 'Page Section: '.$pageSection['PageSection']['title']);
 		$this->set('images', $this->PageSection->listFiles($pageSection['PageSection']['page_id']));

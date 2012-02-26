@@ -119,7 +119,7 @@ class ContactFormsController extends AppController {
  */
 	private function _sendContactEmail($id) {
 		$email = new CakeEmail();
-		$contactForm = $this->ContactForm->find('first', array('conditions' => array('ContactForm' => $id)));
+		$contactForm = $this->ContactForm->find('first', array('conditions' => array('ContactForm.id' => $id)));
 		$currentRecipients = $this->ContactFormEmail->find('active', array('fields' => array('ContactFormEmail.email')));
 
 		$email->from(array('webmaster@example.com' => 'Site Webmaster'));
