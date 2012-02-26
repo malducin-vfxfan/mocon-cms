@@ -192,7 +192,8 @@ class PagesController extends AppController {
 			throw new NotFoundException('Invalid Page.');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Page->save($this->request->data)) {
+			// save associated data non-atomically since we're nor using transactions
+			if ($this->Page->saveAssociated($this->request->data, array('atomic' => false))) {
 				$this->Upload->uploadImageThumb('img'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->data['File']['image']);
 				$this->Session->setFlash('The Page has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));

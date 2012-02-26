@@ -33,6 +33,19 @@
 					echo $this->Form->input('File.image', array('type' => 'file'));
 				?>
 			</fieldset>
+			<fieldset>
+				<legend>Page Sections</legend>
+				<?php
+					foreach ($this->data['PageSection'] as $key => $value) {
+						echo $this->Form->hidden('PageSection.'.$key.'.id');
+						echo $this->Form->input('PageSection.'.$key.'.title');
+						echo $this->Form->input('PageSection.'.$key.'.content', array('class' => 'span7'));
+						echo $this->Form->input('PageSection.'.$key.'.section');
+						echo $this->Form->hidden('PageSection.'.$key.'.page_id');
+						echo "<hr />\n";
+					}
+				?>
+			</fieldset>
 		<?php echo $this->Form->end('Submit');?>
 	</section>
 </div>

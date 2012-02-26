@@ -68,6 +68,19 @@
 	</section>
 </div>
 <div class="row">
+	<div class="admin-main-content">
+		<h1>Content</h1>
+	</div>
+</div>
+<?php foreach ($page['PageSection'] as $pageSection): ?>
+<div class="row">
+	<section class="admin-main-content">
+		<h2><?php echo $pageSection['title']; ?></h2>
+		<?php echo $pageSection['content']; ?>
+	</section>
+</div>
+<?php endforeach; ?>
+<div class="row">
 	<aside class="admin-related">
 		<h3>Related Page Sections</h3>
 		<?php if (!empty($page['PageSection'])): ?>
