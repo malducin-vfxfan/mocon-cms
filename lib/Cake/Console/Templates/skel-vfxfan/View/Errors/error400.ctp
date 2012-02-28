@@ -11,7 +11,7 @@
 ?>
 <div class="row">
 	<div class="span12">
-		<h2><?php echo $name; ?></h2>
+		<h1><?php echo $name; ?></h1>
 		<p class="alert alert-error">
 			<strong>Error:</strong>
 			<?php
