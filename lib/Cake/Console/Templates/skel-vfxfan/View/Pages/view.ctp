@@ -21,16 +21,20 @@
 			<h2><?php echo $pageSection['PageSection']['title'];?></h2>
 			<?php echo $pageSection['PageSection']['content'];?>
 
-			<footer id="page-section-modified">
-				<p><small>
-					Section last modified:
-					<time class="date-modified" datetime="<?php echo date(DATE_ATOM, strtotime($pageSection['PageSection']['modified'])); ?>">
-						<?php echo strftime("%B %d, %Y %H:%M:%S", strtotime($pageSection['PageSection']['modified'])); ?>
-					</time>
-				</small></p>
-			</footer>
 		</div>
 		<?php endforeach; ?>
+	</article>
+</div>
+<div class="row">
+	<div class="page-content">
+		<footer id="page-section-modified">
+			<p><small>
+				Section last modified:
+				<time class="date-modified" datetime="<?php echo date(DATE_ATOM, strtotime($pageSection['PageSection']['modified'])); ?>">
+					<?php echo strftime("%B %d, %Y %H:%M:%S", strtotime($pageSection['PageSection']['modified'])); ?>
+				</time>
+			</small></p>
+		</footer>
 		<nav class="paginator">
 			<p>
 			<?php
@@ -51,5 +55,5 @@
 			</div>
 		<?php endif; ?>
 		</nav>
-	</article>
+	</div>
 </div>
