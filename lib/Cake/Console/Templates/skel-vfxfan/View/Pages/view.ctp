@@ -16,13 +16,12 @@
 		</header>
 
 		<div class="contents">
-		<?php if (!empty($pageSections)):?>
 		<?php foreach ($pageSections as $pageSection): ?>
 			<h2><?php echo $pageSection['PageSection']['title'];?></h2>
 			<?php echo $pageSection['PageSection']['content'];?>
 
-		</div>
 		<?php endforeach; ?>
+		</div>
 	</article>
 </div>
 <div class="row">
@@ -53,7 +52,6 @@
 				echo $this->Paginator->last('last');
 			?>
 			</div>
-		<?php endif; ?>
 		</nav>
 	</div>
 </div>
