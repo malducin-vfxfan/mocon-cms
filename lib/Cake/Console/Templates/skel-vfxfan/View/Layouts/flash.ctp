@@ -1,18 +1,12 @@
 <?php
 /**
- * Short description.
- *
- * Long description.
+ * Layout for flash() messages.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009, 2011, ILMfan (http://ilmfan.com)
  * @link          http://ilmfan.com ILMfan
- * @package       $packagename$
- * @subpackage    $subpackagename$
- * @version       $Id$
- * @modifiedby    malducin
- * @lastmodified  $Date$
- * @revision      $Revision$
+ * @package       layouts
+ * @subpackage    layouts.flash
  */
 ?>
 <!doctype html>
