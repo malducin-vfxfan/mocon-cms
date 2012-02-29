@@ -27,12 +27,16 @@
 		<?php if ($event['Event']['webpage']): ?>
 			<p>Web: <?php echo $this->Html->link($event['Event']['webpage'], $event['Event']['webpage'], array('target' => '_blank')); ?></p>
 		<?php endif; ?>
-		<footer id="event-modified">
-			<p><small>Event last modified:
+	</article>
+</div>
+<div class="row">
+	<div class="page-content">
+		<p id="post-modified">
+			<small>Event last modified:
 				<time class="date-modified" datetime="<?php echo date(DATE_ATOM, strtotime($event['Event']['modified'])); ?>">
 					<?php echo strftime("%B %d, %Y %H:%M:%S", strtotime($event['Event']['modified'])); ?>
 				</time>
-			</small></p>
-		</footer>
-	</article>
+			</small>
+		</p>
+	</div>
 </div>

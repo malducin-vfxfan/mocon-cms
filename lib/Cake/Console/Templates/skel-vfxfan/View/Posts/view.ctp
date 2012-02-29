@@ -32,12 +32,16 @@
 		<div class="contents">
 			<?php echo $post['Post']['content']; ?>
 		</div>
-		<footer id="post-modified">
-			<p><small>Post last modified:
+	</article>
+</div>
+<div class="row">
+	<div class="page-content">
+		<p id="post-modified">
+			<small>Post last modified:
 				<time class="date-modified" datetime="<?php echo date(DATE_ATOM, strtotime($post['Post']['modified'])); ?>">
 					<?php echo strftime("%B %d, %Y %H:%M:%S", strtotime($post['Post']['modified'])); ?>
 				</time>
-			</small></p>
-		</footer>
-	</article>
+			</small>
+		</p>
+	</div>
 </div>
