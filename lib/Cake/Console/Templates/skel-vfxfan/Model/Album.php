@@ -95,6 +95,21 @@ class Album extends AppModel {
 	);
 
 /**
+ * constructor method
+ *
+ * Create virtual fields.
+ *
+ * @param mixed $id The id to start the model on
+ * @param string $table The table to use for this model
+ * @param string $ds The connection name this model is connected to
+ * @return void
+ */
+	public function __construct($id = false, $table = null, $ds = null) {
+		parent::__construct($id, $table, $ds);
+		$this->virtualFields['year'] = sprintf('YEAR(%s.created)', $this->alias);
+	}
+
+/**
  * beforeValidate method
  *
  * If id doesn't exist (when adding a new record), create a slug from
@@ -122,8 +137,12 @@ class Album extends AppModel {
  */
 	public function afterSave($created) {
 		if ($created) {
-			mkdir(IMAGES.'albums'.DS.sprintf("%010d", $this->id));
-			mkdir(IMAGES.'albums'.DS.sprintf("%010d", $this->id).DS.'thumbnails');
+			$album = $this->find('first', array('conditions' => array('id' => $this->id)));
+			if (!is_file(IMAGES.'albums'.DS.$album['Album']['year'])) {
+				mkdir(IMAGES.'albums'.DS.$album['Album']['year']);
+			}
+			mkdir(IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id));
+			mkdir(IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id).DS.'thumbnails');
 		}
 	}
 
@@ -132,36 +151,37 @@ class Album extends AppModel {
  *
  * Delete all images inside the thumbnails folder and the image album
  * folder and reove the folders. Then remove the folder thumbnail.
- * It returns tue hen the operation completes, even if there's a
+ * It returns true hen the operation completes, even if there's a
  * problem removing something.
  *
  * @param boolean $cascade
  * @return boolean
  */
 	public function beforeDelete($cascade) {
-		$directory = IMAGES.'albums'.DS.sprintf("%010d", $this->id).DS.'thumbnails';
+		$album = $this->find('first', array('conditions' => array('id' => $this->id)));
+		$directory = IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id).DS.'thumbnails';
 		$files = new DirectoryIterator($directory);
 
 		foreach ($files as $filename) {
 			if ($filename->isFile()) {
-				unlink(IMAGES.'albums'.DS.sprintf("%010d", $this->id).DS.'thumbnails'.DS.$filename->getBasename());
+				unlink(IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id).DS.'thumbnails'.DS.$filename->getBasename());
 			}
 		}
 
 		rmdir($directory);
 
-		$directory = IMAGES.'albums'.DS.sprintf("%010d", $this->id);
+		$directory = IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id);
 		$files = new DirectoryIterator($directory);
 
 		foreach ($files as $filename) {
 			if ($filename->isFile()) {
-				unlink(IMAGES.'albums'.DS.sprintf("%010d", $this->id).DS.$filename->getBasename());
+				unlink(IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id).DS.$filename->getBasename());
 			}
 		}
 
 		rmdir($directory);
 
-		$directory = IMAGES.'albums';
+		$directory = IMAGES.'albums'.DS.$album['Album']['year'];
 		$filebasename = sprintf("%010d", $this->id);
 
 		$images = glob($directory.DS.$filebasename.'.*');
@@ -199,8 +219,9 @@ class Album extends AppModel {
 	public function getAlbumThumbnails($id = null) {
 		if (!$id) return;
 
+		$album = $this->find('first', array('conditions' => array('id' => $id)));
 		$images = array();
-		$directory = IMAGES.'albums'.DS.sprintf("%010d", $id).DS.'thumbnails';
+		$directory = IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $id).DS.'thumbnails';
 		$files = new DirectoryIterator($directory);
 
 		foreach ($files as $filename) {
@@ -228,8 +249,10 @@ class Album extends AppModel {
 	public function deleteFile($id = null, $filename = null) {
 		if (!$id || !$filename) return false;
 
-		$del_thumb = unlink(IMAGES.'albums'.DS.sprintf("%010d", $this->id).DS.'thumbnails'.DS.$filename);
-		$del_image = unlink(IMAGES.'albums'.DS.sprintf("%010d", $this->id).DS.$filename);
+		$album = $this->find('first', array('conditions' => array('id' => $id)));
+
+		$del_thumb = unlink(IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id).DS.'thumbnails'.DS.$filename);
+		$del_image = unlink(IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id).DS.$filename);
 
 		return ($del_thumb && $del_image);
 	}

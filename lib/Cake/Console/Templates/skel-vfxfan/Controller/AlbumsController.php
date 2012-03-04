@@ -104,7 +104,8 @@ class AlbumsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Album->create();
 			if ($this->Album->save($this->request->data)) {
-				$this->Upload->uploadImageThumb('img'.DS.'albums', $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Album->id, $this->request->data['File']['image']['name']));
+				$album = $this->Album->find('first', array('conditions' => array('Album.id' => $this->Album->id)));
+				$this->Upload->uploadImageThumb('img'.DS.'albums'.DS.$album['Album']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Album->id, $this->request->data['File']['image']['name']));
 				$this->Session->setFlash('The Album has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
@@ -128,7 +129,8 @@ class AlbumsController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Album->save($this->request->data)) {
-				$this->Upload->uploadImageThumb('img'.DS.'albums', $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Album->id, $this->request->data['File']['image']['name']));
+				$album = $this->Album->find('first', array('conditions' => array('Album.id' => $this->Album->id)));
+				$this->Upload->uploadImageThumb('img'.DS.'albums'.DS.$album['Album']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Album->id, $this->request->data['File']['image']['name']));
 				$this->Session->setFlash('The Album has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
@@ -178,7 +180,8 @@ class AlbumsController extends AppController {
 			throw new NotFoundException('Invalid Album.');
 		}
 		if ($this->request->is('post')) {
-			$result = $this->Upload->uploadImageThumb('img'.DS.'albums'.DS.sprintf("%010d", $id), $this->request->data['File']['image'], $this->request->data['File']['image']['name'], array('create_thumb' => true));
+			$album = $this->Album->find('first', array('conditions' => array('Album.id' => $id)));
+			$result = $this->Upload->uploadImageThumb('img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $id), $this->request->data['File']['image'], $this->request->data['File']['image']['name'], array('create_thumb' => true));
 			if ($result) {
 				$this->Session->setFlash('The Album image has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_view', $id));

@@ -57,7 +57,7 @@ echo $this->Html->script(array('/slimbox2/js/slimbox2'), array('inline' => false
 			</dd>
 			<dt>Image</dt>
 			<dd>
-				<?php echo $this->FormatImage->idImage('albums', $album['Album']['id']); ?>
+				<?php echo $this->FormatImage->idImage('albums/'.$album['Album']['year'], $album['Album']['id'], array('class' => 'thumbnail'), 'albums'); ?>
 				&nbsp;
 			</dd>
 		</dl>
@@ -68,7 +68,7 @@ echo $this->Html->script(array('/slimbox2/js/slimbox2'), array('inline' => false
 <?php
 	$i = 0;
 	$last = count($images) - 1;
-	$images_path = 'albums/'.sprintf("%010d", $album['Album']['id']).'/';
+	$images_path = 'albums/'.$album['Album']['year'].'/'.sprintf("%010d", $album['Album']['id']).'/';
 	foreach ($images as $image):
 ?>
 <?php
