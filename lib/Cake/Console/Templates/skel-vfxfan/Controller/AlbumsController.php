@@ -58,7 +58,7 @@ class AlbumsController extends AppController {
 		if (!$album) {
 			throw new NotFoundException('Invalid Album.');
 		}
-		$images = $this->Album->getAlbumThumbnails($album['Album']['id']);
+		$images = $this->Album->getAlbumThumbnails($album['Album']['id'], $album['Album']['year']);
 		$this->set(compact('album', 'images'));
 		$this->set('title_for_layout', 'Album: '.$album['Album']['name']);
 	}
@@ -88,10 +88,9 @@ class AlbumsController extends AppController {
 			throw new NotFoundException('Invalid Album.');
 		}
 		$album = $this->Album->find('first', array('conditions' => array('Album.id' => $id)));
-		$images = $this->Album->getAlbumThumbnails($album['Album']['id']);
+		$images = $this->Album->getAlbumThumbnails($album['Album']['id'], $album['Album']['year']);
 		$this->set(compact('album', 'images'));
 		$this->set('title_for_layout', 'Album: '.$album['Album']['name']);
-
 	}
 
 /**

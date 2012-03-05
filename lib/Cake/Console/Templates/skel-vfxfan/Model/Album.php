@@ -216,12 +216,11 @@ class Album extends AppModel {
  * @param string $id
  * @return array
  */
-	public function getAlbumThumbnails($id = null) {
-		if (!$id) return;
+	public function getAlbumThumbnails($id = null, $year = null) {
+		if (!$id || !$year) return array();
 
-		$album = $this->find('first', array('conditions' => array('id' => $id)));
 		$images = array();
-		$directory = IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $id).DS.'thumbnails';
+		$directory = IMAGES.'albums'.DS.$year.DS.sprintf("%010d", $id).DS.'thumbnails';
 		$files = new DirectoryIterator($directory);
 
 		foreach ($files as $filename) {
