@@ -24,6 +24,7 @@ ini_set('display_errors', 1);
 	if (!defined('DS')) {
 		define('DS', DIRECTORY_SEPARATOR);
 	}
+
 /**
  * These defines should only be edited if you have cake installed in
  * a directory layout other than the way it is distributed.
@@ -37,6 +38,7 @@ ini_set('display_errors', 1);
 	if (!defined('ROOT')) {
 		define('ROOT', dirname(dirname(dirname(__FILE__))));
 	}
+
 /**
  * The actual directory name for the "app".
  *
@@ -53,7 +55,7 @@ ini_set('display_errors', 1);
  *
  * Leaving this constant undefined will result in it being defined in Cake/bootstrap.php
  */
-	//define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . 'lib');
+	//define('CAKE_CORE_INCLUDE_PATH', __CAKE_PATH__);
 
 /**
  * Editing below this line should not be necessary.

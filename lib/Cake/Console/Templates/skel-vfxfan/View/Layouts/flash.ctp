@@ -16,7 +16,7 @@
 	<title><?php echo $page_title; ?></title>
 
 	<?php if (Configure::read() == 0): ?>
-		<meta http-equiv="Refresh" content="<?php echo $pause?>;url=<?php echo $url?>"/>
+		<meta http-equiv="Refresh" content="<?php echo $pause; ?>;url=<?php echo $url; ?>"/>
 	<?php endif; ?>
 
 	<style><!--
@@ -27,6 +27,6 @@
 </head>
 
 <body>
-	<p><a href="<?php echo $url?>"><?php echo $message?></a></p>
+	<p><a href="<?php echo $url; ?>"><?php echo $message; ?></a></p>
 </body>
 </html>

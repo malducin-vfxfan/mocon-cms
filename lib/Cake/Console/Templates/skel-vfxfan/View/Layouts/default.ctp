@@ -29,14 +29,16 @@
 		echo $this->Html->meta(array('name' => 'description', 'content' => Configure::read('Meta.description')));
 		echo $this->Html->meta('Latest News', '/posts/index.rss', array('type' => 'rss'));
 		echo $this->Html->meta('icon');
+		echo $this->fetch('meta');
 
 		echo $this->Html->css('project');
+		echo $this->fetch('css');
 
 		if (Configure::read('Jquery.version')) {
 			echo $this->Html->script(Configure::read('Jquery.version'));
 		}
 		echo $this->Html->script(array('bootstrap-dropdown', 'nav'));
-		echo $scripts_for_layout;
+		echo $this->fetch('script');
 		echo $this->element('GoogleAnalytics/page_tracker');
 	?>
 </head>
@@ -66,7 +68,7 @@
 				</div>
 			</div>
 
-			<?php echo $content_for_layout; ?>
+			<?php echo $this->fetch('content'); ?>
 
 	        <div class="row">
 				<div class="span12">
