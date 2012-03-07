@@ -149,7 +149,7 @@ if (!empty($associations['hasAndBelongsToMany'])):
 		$out .= "\t\t\t'joinTable' => '{$relation['joinTable']}',\n";
 		$out .= "\t\t\t'foreignKey' => '{$relation['foreignKey']}',\n";
 		$out .= "\t\t\t'associationForeignKey' => '{$relation['associationForeignKey']}',\n";
-		$out .= "\t\t\t'unique' => true,\n";
+		$out .= "\t\t\t'unique' => keepExisting,\n";
 		$out .= "\t\t\t'order' => '',\n";
 		$out .= "\t\t)";
 		if ($i + 1 < $habtmCount) {
