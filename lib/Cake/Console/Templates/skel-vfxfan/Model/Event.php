@@ -254,7 +254,7 @@ class Event extends AppModel {
 		$data['Event']['location'] = MySanitize::cleanSafe($data['Event']['location']);
 		$data['Event']['description'] = MySanitize::cleanSafe($data['Event']['location']);
 		$data['Event']['webpage'] = MySanitize::cleanSafe($data['Event']['webpage'], array('quotes' => ENT_QUOTES));
-		$data['Event']['slug'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Event']['slug'], array('quotes' => ENT_NOQUOTES)), array(' ', '-', '_'));
+		$data['Event']['slug'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Event']['slug'], array('quotes' => ENT_NOQUOTES)), array('-', '_'));
 		return $data;
 	}
 
