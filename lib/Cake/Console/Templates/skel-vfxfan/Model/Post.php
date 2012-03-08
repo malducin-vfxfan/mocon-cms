@@ -239,7 +239,7 @@ class Post extends AppModel {
 		$data['Post']['title'] = MySanitize::cleanSafe($data['Post']['title']);
 		$data['Post']['summary'] = MySanitize::cleanSafe($data['Post']['summary']);
 		$data['Post']['slug'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Post']['slug'], array('quotes' => ENT_NOQUOTES)), array(' ', '-', '_'));
-		$data['Post']['user_id'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Post']['user_id'], array('quotes' => ENT_NOQUOTES)), array(' ', '-', '_'));
+		$data['Post']['user_id'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Post']['user_id'], array('quotes' => ENT_NOQUOTES)));
 		return $data;
 	}
 }
