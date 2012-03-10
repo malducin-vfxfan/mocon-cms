@@ -43,7 +43,7 @@ class BritaComponent extends Component {
 		// the next few lines allow the config settings to be cached
 		$config = HTMLPurifier_Config::createDefault();
 		$config->set('HTML.DefinitionID', 'made by malducin');
-		$config->set('HTML.DefinitionRev', 1);
+		$config->set('HTML.DefinitionRev', 2);
 		// levels describe how aggressive the Tidy module should be when cleaning up html, four levels: none, light, medium, heavy
 		$config->set('HTML.TidyLevel', 'heavy');
 		// check the top of your html file for the next two
@@ -59,6 +59,10 @@ class BritaComponent extends Component {
 			$def->addAttribute('a', 'target', 'Enum#_blank,_self,_target,_top');
 			// adding rel attibute to anchor tag
 			$def->addAttribute('a', 'rel', 'CDATA');
+
+			// Add HTML5 elements
+			$def->addElement('figure', 'Flow', 'Flow', 'Common', array());
+			$def->addElement('figcaption', 'Flow', 'Flow', 'Common', array());
 		}
 
 		// BritaComponent instance of controller is replaced by a htmlpurifier instance
