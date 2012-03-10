@@ -32,7 +32,7 @@ if (Configure::read('TinyMCE.active')) {
 					echo $this->Form->input('Page.published');
 					echo $this->Form->input('Page.main');
 					echo $this->Form->input('PageSection.0.title', array('label'=>'Section Title', 'class' => 'page_section_title'));
-					echo $this->Form->input('PageSection.0.section', array('class' => 'page_section_section'));
+					echo $this->Form->input('PageSection.0.section', array('class' => 'page_section_section', 'default' => 0, 'type' => 'number', 'min' => 0));
 					echo $this->Form->input('PageSection.0.content', array('class' => 'page_section_content span7'));
 				?>
 			</fieldset>

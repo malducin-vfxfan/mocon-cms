@@ -40,7 +40,7 @@
 						echo $this->Form->hidden('PageSection.'.$key.'.id');
 						echo $this->Form->input('PageSection.'.$key.'.title');
 						echo $this->Form->input('PageSection.'.$key.'.content', array('class' => 'span7'));
-						echo $this->Form->input('PageSection.'.$key.'.section');
+						echo $this->Form->input('PageSection.'.$key.'.section', array('type' => 'number', 'min' => 0));
 						echo $this->Form->hidden('PageSection.'.$key.'.page_id');
 						echo "<hr />\n";
 					}
