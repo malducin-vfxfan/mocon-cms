@@ -136,6 +136,7 @@ class PostsController extends AppController {
 			throw new NotFoundException('Invalid Post.');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
+			$this->request->data['Post']['content'] = $this->brita->purify($this->request->data['Post']['content']);
 			if ($this->Post->save($this->request->data)) {
 				$post = $this->Post->find('first', array('conditions' => array('Post.id' => $this->Post->id)));
 				$this->Upload->uploadImageThumb('img'.DS.'posts'.DS.$post['Post']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Post->id, $this->request->data['File']['image']['name']));
