@@ -197,7 +197,7 @@ class PagesController extends AppController {
 					$this->Session->setFlash('The Page has been saved.', 'default', array('class' => 'alert alert-success'));
 				}
 				else {
-					$this->Session->setFlash('The Page has been saved, but there was a problem savin one or more sections.', 'default', array('class' => 'alert alert-info'));
+					$this->Session->setFlash('The Page has been saved, but there was a problem saving one or more sections.', 'default', array('class' => 'alert alert-info'));
 				}
 				$this->redirect(array('action' => 'admin_index'));
 			}
@@ -246,7 +246,7 @@ class PagesController extends AppController {
 					$this->Session->setFlash('The Page has been saved.', 'default', array('class' => 'alert alert-success'));
 				}
 				else {
-					$this->Session->setFlash('The Page has been saved, but there was a problem savin one or more sections.', 'default', array('class' => 'alert alert-info'));
+					$this->Session->setFlash('The Page has been saved, but there was a problem saving one or more sections.', 'default', array('class' => 'alert alert-info'));
 				}
 				$this->redirect(array('action' => 'admin_index'));
 			}
