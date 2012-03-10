@@ -15,6 +15,9 @@ App::uses('AppController', 'Controller');
  * Posts Controller
  *
  * @property Post $Post
+ * @property BritaComponent $Brita
+ * @property RequestHandler $RequestHandler
+ * @property UploadComponent $Upload
  */
 class PostsController extends AppController {
 

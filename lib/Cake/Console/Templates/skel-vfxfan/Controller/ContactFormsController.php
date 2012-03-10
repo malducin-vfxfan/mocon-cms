@@ -19,6 +19,7 @@ App::uses('CakeEmail', 'Network/Email');
  * ContactForms Controller
  *
  * @property ContactForm $ContactForm
+ * @property Recaptcha $Recaptcha
  */
 class ContactFormsController extends AppController {
 
