@@ -17,8 +17,8 @@ App::uses('AppController', 'Controller');
  * Pages Controller
  *
  * @property Page $Page
+ * @property BritaComponent $Brita
  * @property UploadComponent $Upload
- * @property RequestHandlerComponent $RequestHandler
  */
 class PagesController extends AppController {
 
@@ -39,7 +39,7 @@ class PagesController extends AppController {
  *
  * @var array
  */
-	public $components = array('Upload');
+	public $components = array('Brita', 'Upload');
 /**
  * Pagination
  *
@@ -53,6 +53,10 @@ class PagesController extends AppController {
  * Disable other page section fields from validation during creation
  * of new page. The for loop limit should match the maximum number of
  * possible page sections (established on the page forms script).
+ *
+ * This is done because other extra page sections are not part of the
+ * original form, so they would normally be blackholed through
+ * CakePHP's security.
  *
  * @return void
  */
@@ -164,13 +168,40 @@ class PagesController extends AppController {
 		$this->layout = 'default_admin';
 		if ($this->request->is('post')) {
 			$this->Page->create();
+
+			// purify page sections
+			$page_sections_num = count($this->request->data['PageSection']);
+			for ($i = 0; $i < $page_sections_num; $i++) {
+				$this->request->data['PageSection'][$i]['content'] = $this->brita->purify($this->request->data['PageSection'][$i]['content']);
+			}
+
 			// do not validate page_id of the page sections
 			unset($this->Page->PageSection->validate['page_id']);
-			// save associated data non-atomically since we're nor using transactions
-			if ($this->Page->saveAssociated($this->request->data, array('atomic' => false))) {
-				$this->Session->setFlash('The Page has been saved.', 'default', array('class' => 'alert alert-success'));
+
+			// save associated data non-atomically since we're not using transactions
+			// also validate set to true so to validate each record before saving,
+			// instead of trying to validate all records before any are saved, this
+			// way the page is saved first and the page_id can be set for the extra
+			// page sections
+			$result = $this->Page->saveAssociated($this->request->data, array('atomic' => false, 'validate' => true));
+			if ($result['Page']) {
+				// check page sections
+				$page_sections_ok = true;
+				foreach ($result['PageSection'] as $result_page_section) {
+					if (!$result_page_section) {
+						$page_sections_ok = false;
+						break;
+					}
+				}
+				if ($page_sections_ok) {
+					$this->Session->setFlash('The Page has been saved.', 'default', array('class' => 'alert alert-success'));
+				}
+				else {
+					$this->Session->setFlash('The Page has been saved, but there was a problem savin one or more sections.', 'default', array('class' => 'alert alert-info'));
+				}
 				$this->redirect(array('action' => 'admin_index'));
-			} else {
+			}
+			else {
 				$this->Session->setFlash('The Page could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		}
@@ -192,15 +223,38 @@ class PagesController extends AppController {
 			throw new NotFoundException('Invalid Page.');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
-			// save associated data non-atomically since we're nor using transactions
-			if ($this->Page->saveAssociated($this->request->data, array('atomic' => false))) {
+			// purify page sections
+			$page_sections_num = count($this->request->data['PageSection']);
+			for ($i = 0; $i < $page_sections_num; $i++) {
+				$this->request->data['PageSection'][$i]['content'] = $this->brita->purify($this->request->data['PageSection'][$i]['content']);
+			}
+
+			// save associated data non-atomically since we're not using transactions
+			$result = $this->Page->saveAssociated($this->request->data, array('atomic' => false));
+			if ($result['Page']) {
 				$this->Upload->uploadImageThumb('img'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->data['File']['image']);
-				$this->Session->setFlash('The Page has been saved.', 'default', array('class' => 'alert alert-success'));
+
+				// check page sections
+				$page_sections_ok = true;
+				foreach ($result['PageSection'] as $result_page_section) {
+					if (!$result_page_section) {
+						$page_sections_ok = false;
+						break;
+					}
+				}
+				if ($page_sections_ok) {
+					$this->Session->setFlash('The Page has been saved.', 'default', array('class' => 'alert alert-success'));
+				}
+				else {
+					$this->Session->setFlash('The Page has been saved, but there was a problem savin one or more sections.', 'default', array('class' => 'alert alert-info'));
+				}
 				$this->redirect(array('action' => 'admin_index'));
-			} else {
+			}
+			else {
 				$this->Session->setFlash('The Page could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
-		} else {
+		}
+		else {
 			$this->request->data = $this->Page->read(null, $id);
 		}
 		$pageSections = $this->Page->PageSection->find('all', array('conditions' => array('Page.id' => $id)));
