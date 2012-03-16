@@ -37,7 +37,7 @@
 		if (Configure::read('Jquery.version')) {
 			echo $this->Html->script(Configure::read('Jquery.version'));
 		}
-		echo $this->Html->script(array('bootstrap-dropdown', 'nav'));
+		echo $this->Html->script(array('bootstrap-dropdown', 'project'));
 		echo $this->fetch('script');
 		echo $this->element('GoogleAnalytics/page_tracker');
 	?>

@@ -35,7 +35,7 @@
 		if (Configure::read('Jquery.version')) {
 			echo $this->Html->script(Configure::read('Jquery.version'));
 		}
-		echo $this->Html->script(array('bootstrap-dropdown', 'nav', 'admin'));
+		echo $this->Html->script(array('bootstrap-dropdown', 'admin'));
 		echo $this->fetch('script');
 	?>
 </head>
