@@ -40,7 +40,7 @@
 					<td>
 						<?php echo $this->Html->link('View', array('action' => 'admin_view', $event['Event']['id']), array('class' => 'btn')); ?>
 						<?php echo $this->Html->link('Edit', array('action' => 'admin_edit', $event['Event']['id']), array('class' => 'btn')); ?>
-						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_delete', $event['Event']['id']), array('class' => 'btn'), sprintf('Are you sure you want to delete # %s?', $event['Event']['id'])); ?>
+						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_delete', $event['Event']['id']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $event['Event']['id'])); ?>
 					</td>
 				</tr>
 				<?php endforeach; ?>
