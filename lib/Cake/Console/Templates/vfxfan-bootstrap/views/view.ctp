@@ -159,11 +159,9 @@ foreach ($relations as $alias => $details):
 		<div class="paging">
 <?php
 	echo "\t\t<?php\n";
-	echo "\t\t\techo \$this->Paginator->first('first');\n";
-	echo "\t\t\techo \$this->Paginator->prev('« previous', array(), null, array('class' => 'disabled'));\n";
-	echo "\t\t\techo \$this->Paginator->numbers(array('separator' => ''));\n";
-	echo "\t\t\techo \$this->Paginator->next('next »', array(), null, array('class' => 'disabled'));\n";
-	echo "\t\t\techo \$this->Paginator->last('last');\n";
+	echo "\t\t\techo \$this->Paginator->prev('« previous', array(), null, array('class' => 'prev disabled'));\n";
+	echo "\t\t\techo \$this->Paginator->numbers(array('separator' => '', 'first' => 'first', 'last' => 'last'));\n";
+	echo "\t\t\techo \$this->Paginator->next('next »', array(), null, array('class' => 'next disabled'));\n";
 	echo "\t\t?>\n";
 ?>
 		</div>
