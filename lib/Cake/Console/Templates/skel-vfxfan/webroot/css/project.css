@@ -1071,7 +1071,7 @@ table .span24 {
     width: 1884px;
 }
 [class^="icon-"], [class*=" icon-"] {
-    background-image: url("file:///C:/work/projects/bootstrap-twitter-2.0/less-2.0-cake-2.0/../img/glyphicons-halflings.png");
+    background-image: url("../img/glyphicons-halflings.png");
     background-position: 14px 14px;
     background-repeat: no-repeat;
     display: inline-block;
@@ -1083,7 +1083,7 @@ table .span24 {
 [class^="icon-"]:last-child, [class*=" icon-"]:last-child {
 }
 .icon-white {
-    background-image: url("file:///C:/work/projects/bootstrap-twitter-2.0/less-2.0-cake-2.0/../img/glyphicons-halflings-white.png");
+    background-image: url("../img/glyphicons-halflings-white.png");
 }
 .icon-glass {
     background-position: 0 0;
