@@ -176,7 +176,7 @@ class Post extends AppModel {
 	public function afterSave($created) {
 		// check to see if a year folder exists and if not, create one
 		if ($created) {
-			$post = $this->find('first', array('conditions' => array('id' => $this->id)));
+			$post = $this->find('first', array('conditions' => array('id' => $this->id), 'recursive' => -1));
 			if (!is_file(IMAGES.'posts'.DS.$post['Post']['year'])) {
 				mkdir(IMAGES.'posts'.DS.$post['Post']['year']);
 			}
