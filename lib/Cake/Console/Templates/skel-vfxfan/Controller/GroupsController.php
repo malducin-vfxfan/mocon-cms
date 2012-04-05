@@ -43,7 +43,6 @@ class GroupsController extends AppController {
 		if (!$this->Group->exists()) {
 			throw new NotFoundException('Invalid Group.');
 		}
-		$this->Group->unbindModel(array('hasMany' => array('User')));
 		$group = $this->Group->find('first', array('conditions' => array('Group.id' => $id)));
 		$this->set(compact('group'));
 		$this->set('title_for_layout', 'Group: '.$group['Group']['name']);
