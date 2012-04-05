@@ -176,7 +176,7 @@ class Post extends AppModel {
 	public function afterSave($created) {
 		// check to see if a year folder exists and if not, create one
 		if ($created) {
-			$post = $this->find('first', array('conditions' => array('id' => $this->id), 'recursive' => -1));
+			$post = $this->find('first', array('conditions' => array('Post.id' => $this->id), 'recursive' => -1));
 			if (!is_file(IMAGES.'posts'.DS.$post['Post']['year'])) {
 				mkdir(IMAGES.'posts'.DS.$post['Post']['year']);
 			}
@@ -193,7 +193,7 @@ class Post extends AppModel {
  * @return boolean
  */
 	public function beforeDelete($cascade) {
-		$post = $this->find('first', array('conditions' => array('id' => $this->id)));
+		$post = $this->find('first', array('conditions' => array('Post.id' => $this->id), 'recursive' => -1));
 		$directory = IMAGES.'posts'.DS.$post['Post']['year'];
 		$filebasename = sprintf("%010d", $this->id);
 
