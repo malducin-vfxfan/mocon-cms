@@ -137,7 +137,7 @@ class Album extends AppModel {
  */
 	public function afterSave($created) {
 		if ($created) {
-			$album = $this->find('first', array('conditions' => array('id' => $this->id)));
+			$album = $this->find('first', array('conditions' => array('Album.id' => $this->id)));
 			if (!is_file(IMAGES.'albums'.DS.$album['Album']['year'])) {
 				mkdir(IMAGES.'albums'.DS.$album['Album']['year']);
 			}
@@ -158,7 +158,7 @@ class Album extends AppModel {
  * @return boolean
  */
 	public function beforeDelete($cascade) {
-		$album = $this->find('first', array('conditions' => array('id' => $this->id)));
+		$album = $this->find('first', array('conditions' => array('Album.id' => $this->id)));
 		$directory = IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id).DS.'thumbnails';
 		$files = new DirectoryIterator($directory);
 
@@ -248,7 +248,7 @@ class Album extends AppModel {
 	public function deleteFile($id = null, $filename = null) {
 		if (!$id || !$filename) return false;
 
-		$album = $this->find('first', array('conditions' => array('id' => $id)));
+		$album = $this->find('first', array('conditions' => array('Album.id' => $id)));
 
 		$del_thumb = unlink(IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id).DS.'thumbnails'.DS.$filename);
 		$del_image = unlink(IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id).DS.$filename);
