@@ -131,7 +131,6 @@ class Page extends AppModel {
 			'className' => 'PageSection',
 			'foreignKey' => 'page_id',
 			'dependent' => true,
-			'order' => 'PageSection.section ASC, PageSection.title ASC',
 		)
 	);
 

@@ -113,7 +113,6 @@ class User extends AppModel {
 			'className' => 'Post',
 			'foreignKey' => 'user_id',
 			'dependent' => false,
-			'order' => 'Post.created DESC'
 		)
 	);
 

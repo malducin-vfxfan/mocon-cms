@@ -73,7 +73,6 @@ class Group extends AppModel {
 			'className' => 'User',
 			'foreignKey' => 'group_id',
 			'dependent' => true,
-			'order' => 'User.username ASC',
 		)
 	);
 
