@@ -10,7 +10,7 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @subpackage    albums
+ * @package       albums
  * @subpackage    albums.views
  */
 echo $this->Html->css('/slimbox2/css/slimbox2', null, array('inline' => false));
