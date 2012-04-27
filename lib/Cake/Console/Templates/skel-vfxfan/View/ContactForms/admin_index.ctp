@@ -5,7 +5,7 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @subpackage    contact_forms
+ * @package       contact_forms
  * @subpackage    contact_forms.views
  */
 ?>
