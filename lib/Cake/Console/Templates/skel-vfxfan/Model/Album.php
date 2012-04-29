@@ -159,23 +159,22 @@ class Album extends AppModel {
  */
 	public function beforeDelete($cascade) {
 		$album = $this->find('first', array('conditions' => array('Album.id' => $this->id)));
-		$directory = IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id).DS.'thumbnails';
-		$files = new DirectoryIterator($directory);
+		$directory = IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id);
+		$files = new DirectoryIterator($directory.DS.'thumbnails');
 
 		foreach ($files as $filename) {
 			if ($filename->isFile()) {
-				unlink(IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id).DS.'thumbnails'.DS.$filename->getBasename());
+				unlink($directory.DS.'thumbnails'.DS.$filename->getBasename());
 			}
 		}
 
-		rmdir($directory);
+		rmdir($directory.DS.'thumbnails');
 
-		$directory = IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id);
 		$files = new DirectoryIterator($directory);
 
 		foreach ($files as $filename) {
 			if ($filename->isFile()) {
-				unlink(IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id).DS.$filename->getBasename());
+				unlink($directory.DS.$filename->getBasename());
 			}
 		}
 
