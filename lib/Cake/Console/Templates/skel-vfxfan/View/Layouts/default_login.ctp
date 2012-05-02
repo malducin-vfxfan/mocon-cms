@@ -26,7 +26,7 @@
 		echo $this->Html->meta(array('name' => 'author', 'content' => Configure::read('Meta.author')));
 		echo $this->Html->meta(array('name' => 'generator', 'content' => Configure::read('Meta.generator')));
 		echo $this->Html->meta(array('name' => 'description', 'content' => Configure::read('Meta.description')));
-		echo $this->Html->meta('favicon.ico', FULL_BASE_URL.'/'.WEBROOT_DIR.'/favicon.ico', array('type' => 'icon'));
+		echo $this->Html->meta('icon');
 		echo $this->fetch('meta');
 
 		echo $this->Html->css('project');

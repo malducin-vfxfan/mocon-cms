@@ -27,7 +27,7 @@
 		echo $this->Html->meta(array('name' => 'generator', 'content' => 'VFXfan CMS'));
 		echo $this->Html->meta(array('name' => 'description', 'content' => Configure::read('Meta.description')));
 		echo $this->Html->meta('Latest News', '/posts/index.rss', array('type' => 'rss'));
-		echo $this->Html->meta('favicon.ico', FULL_BASE_URL.'/'.WEBROOT_DIR.'/favicon.ico', array('type' => 'icon'));
+		echo $this->Html->meta('icon');
 		if (Configure::read('Google.SiteVerification.key')) {
 			echo $this->Html->meta(array('name' => 'google-site-verification', 'content' => Configure::read('Google.SiteVerification.key')));
 		}
@@ -53,7 +53,7 @@
 			<div class="container">
 				<?php echo $this->Html->link('Site', '/', array('class' => 'brand')); ?>
 				<?php echo $this->element('Menus/bootstrap'); ?>
-				<?php echo $this->element('GoogleSearch/simple_search'); ?>
+				<?php echo $this->element('Google/Search/simple_search'); ?>
 			</div>
 		</div>
 	</nav> <!-- /topbar -->
