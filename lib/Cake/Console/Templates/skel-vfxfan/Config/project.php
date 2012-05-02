@@ -10,7 +10,8 @@
  */
 $config = array(
 	'Meta' => array(
-		'keywords' => 'keywords',
+		'author' => 'Manuel Alducin',
+		'generator' => 'VFXfan CMS',
 		'description' => 'description'
 	),
 	'Admin' => array(
@@ -33,17 +34,22 @@ $config = array(
 		'posts' => true,
 	),
 	'Jquery' => array(
-		'version' => '',
+		'version' => 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',
 	),
 	'JqueryUi' => array(
-		'version' => '',
+		'version' => 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js',
 		'theme' => '',
 	),
-	'GoogleAnalytics' => array(
-		'trackerCode' => '',
-	),
-	'GoogleMaps' => array(
-		'key' => '',
+	'Google' => array(
+		'Analytics' => array(
+			'trackerCode' => '',
+		),
+		'Maps' => array(
+			'key' => '',
+		),
+		'SiteVerification' => array(
+			'key' => ''
+		),
 	),
 	'TinyMCE' => array(
 		'active' => false,
