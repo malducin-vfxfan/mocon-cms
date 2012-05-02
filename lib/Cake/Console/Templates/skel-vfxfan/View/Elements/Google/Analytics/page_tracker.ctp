@@ -10,7 +10,7 @@
  * @package       google
  * @subpackage    google.analytics.views.elements
  */
-$ga_code = Configure::read('GoogleAnalytics.trackerCode');
+$ga_code = Configure::read('Google.Analytics.trackerCode');
 if ($ga_code):
 ?>
 <script type="text/javascript">
