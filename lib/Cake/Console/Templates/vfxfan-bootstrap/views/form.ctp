@@ -18,7 +18,7 @@ $subpackagename = $packagename.'.views';
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @subpackage    <?php echo $packagename."\n"; ?>
+ * @package       <?php echo $packagename."\n"; ?>
  * @subpackage    <?php echo $subpackagename."\n"; ?>
  */
 <?php echo "?>\n"; ?>
