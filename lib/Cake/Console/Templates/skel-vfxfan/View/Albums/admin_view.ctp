@@ -63,8 +63,6 @@ echo $this->Html->script(array('/slimbox2/js/slimbox2'), array('inline' => false
 		</dl>
 	</section>
 </div>
-<section>
-	<h3>Album Images</h3>
 <?php
 	$i = 0;
 	$last = count($images) - 1;
@@ -95,4 +93,3 @@ echo $this->Html->script(array('/slimbox2/js/slimbox2'), array('inline' => false
 	$i++;
 	endforeach;
 ?>
-</section>
