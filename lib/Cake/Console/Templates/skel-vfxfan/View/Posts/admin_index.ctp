@@ -68,7 +68,6 @@
 	</section>
 </div>
 <aside class="row">
-	<div class="span12"><h2>Related Actions</h2></div>
 	<section class="admin-related-actions">
 		<h3>Users Actions</h3>
 		<ul class="action-buttons-list">

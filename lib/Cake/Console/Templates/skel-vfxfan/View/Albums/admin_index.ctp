@@ -16,6 +16,8 @@
 			<li><?php echo $this->Html->link('New Album', array('action' => 'admin_add'), array('class' => 'btn')); ?></li>
 		</ul>
 	</section>
+</div>
+<div class="row">
 	<section class="admin-main-content">
 		<h2>Albums</h2>
 		<table class="table table-striped table-bordered">

@@ -16,6 +16,8 @@
 			<li><?php echo $this->Html->link('New Event', array('action' => 'add'), array('class' => 'btn')); ?></li>
 		</ul>
 	</section>
+</div>
+<div class="row">
 	<section class="admin-main-content">
 		<h2>Events</h2>
 		<table class="table table-striped table-bordered">
