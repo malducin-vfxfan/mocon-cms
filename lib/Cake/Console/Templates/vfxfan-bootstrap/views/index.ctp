@@ -29,6 +29,8 @@ $subpackagename = $packagename.'.views';
 			<li><?php echo "<?php echo \$this->Html->link('New " . $singularHumanName . "', array('action' => 'admin_add'), array('class' => 'btn')); ?>";?></li>
 		</ul>
 	</section>
+</div>
+<div class="row">
 	<section class="admin-main-content">
 		<h2><?php echo $pluralHumanName; ?></h2>
 		<table class="table table-striped table-bordered">
@@ -91,7 +93,6 @@ $subpackagename = $packagename.'.views';
 	</section>
 </div>
 <aside class="row">
-	<div class="span12"><h2>Related Actions</h2></div>
 	<section class="admin-related-actions">
 		<h3>Actions</h3>
 		<ul class="action-buttons-list">
