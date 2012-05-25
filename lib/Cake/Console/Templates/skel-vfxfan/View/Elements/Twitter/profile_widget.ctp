@@ -17,7 +17,7 @@ new TWTR.Widget({
   version: 2,
   type: 'profile',
   rpp: <?php echo Configure::read('Twitter.widget_num_tweets'); ?>,
-  interval: 30000,
+  interval: <?php echo Configure::read('Twitter.widget_interval'); ?>,
   width: <?php echo Configure::read('Twitter.widget_width'); ?>,
   height: <?php echo Configure::read('Twitter.widget_height'); ?>,
   theme: {
@@ -32,9 +32,9 @@ new TWTR.Widget({
     }
   },
   features: {
-    scrollbar: false,
+    scrollbar: <?php echo Configure::read('Twitter.widget_scrollbar'); ?>,
     loop: false,
-    live: false,
+    live: <?php echo Configure::read('Twitter.widget_live'); ?>,
     behavior: 'all'
   }
 }).render().setUser('<?php echo $twitter_profile; ?>').start();
