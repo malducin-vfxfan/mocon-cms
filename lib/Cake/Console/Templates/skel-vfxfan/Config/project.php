@@ -8,6 +8,9 @@
  * @package       app
  * @subpackage    app.config
  */
+if (!defined('FULL_BASE_URL')) {
+	define('FULL_BASE_URL', 'http://');
+}
 $config = array(
 	'Meta' => array(
 		'author' => 'Manuel Alducin',
