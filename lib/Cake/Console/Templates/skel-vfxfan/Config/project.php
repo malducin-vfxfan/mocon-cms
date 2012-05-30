@@ -8,8 +8,10 @@
  * @package       app
  * @subpackage    app.config
  */
-if (!defined('FULL_BASE_URL')) {
-	define('FULL_BASE_URL', 'http://');
+// for use in shells and other places where FULL_BASE_URL might not be set,
+// but we do not want to override
+if (!defined('WEBSITE_BASE_URL')) {
+	define('WEBSITE_BASE_URL', 'http://');
 }
 $config = array(
 	'Meta' => array(
