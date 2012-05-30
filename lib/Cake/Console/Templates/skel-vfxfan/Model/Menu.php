@@ -52,8 +52,8 @@ class Menu extends AppModel {
 				'last' => true, // Stop validation after this rule
 			),
 			'maxlength' => array(
-				'rule' => array('maxLength', 64),
-				'message' => 'Names must be no larger than 64 characters long.',
+				'rule' => array('maxLength', 128),
+				'message' => 'Names must be no larger than 128 characters long.',
 				'required' => false,
 				'last' => true, // Stop validation after this rule
 			),
@@ -66,8 +66,8 @@ class Menu extends AppModel {
 				'last' => true, // Stop validation after this rule
 			),
 			'maxlength' => array(
-				'rule' => array('maxLength', 64),
-				'message' => 'Links must be no larger than 64 characters long.',
+				'rule' => array('maxLength', 255),
+				'message' => 'Links must be no larger than 255 characters long.',
 				'required' => false,
 				'last' => true, // Stop validation after this rule
 			),
