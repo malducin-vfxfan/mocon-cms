@@ -53,7 +53,7 @@
 			<div class="container">
 				<?php echo $this->Html->link('Site', '/', array('class' => 'brand')); ?>
 				<?php echo $this->element('Menus/bootstrap'); ?>
-				<?php echo $this->element('Google/Search/simple_search'); ?>
+				<?php echo $this->element('Google/Search/search'); ?>
 			</div>
 		</div>
 	</nav> <!-- /topbar -->

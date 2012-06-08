@@ -55,6 +55,11 @@ $config = array(
 		'SiteVerification' => array(
 			'key' => ''
 		),
+		'Search' => array(
+			'action' => 'http://google.com/search',
+			'sitesearch' => 'example.com',
+			'key' => ''
+		),
 	),
 	'TinyMCE' => array(
 		'active' => false,
