@@ -205,7 +205,7 @@ class UploadComponent extends Component {
 			$typeOK = $this->_checkTypes($data['type'], array('file_types' => 'files'));
 
 			if ($typeOK) {
-				switch ($formdata['error']) {
+				switch ($data['error']) {
 					case UPLOAD_ERR_OK:
 						// file uploaded correctly
 						if ($file_name) {
