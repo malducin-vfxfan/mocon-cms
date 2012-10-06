@@ -66,6 +66,7 @@ class PageSectionsController extends AppController {
 		$this->set(compact('pageSection'));
 		$this->set('title_for_layout', 'Page Section: '.$pageSection['PageSection']['title']);
 		$this->set('images', $this->PageSection->listFiles($pageSection['PageSection']['page_id']));
+		$this->set('documents', $this->PageSection->listFiles($pageSection['PageSection']['page_id'], FILES));
 	}
 
 /**

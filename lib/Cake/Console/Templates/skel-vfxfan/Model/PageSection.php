@@ -138,23 +138,24 @@ class PageSection extends AppModel {
  * uploaded.
  *
  * @param string $id
+ * @param string $location
  * @return array
  */
-	public function listFiles($id = null) {
-		if (!$id) return;
+	public function listFiles($id = null, $location = IMAGES) {
+		if (!$id || !$location) return;
 
-		$images = array();
-		$directory = IMAGES.'pages'.DS.sprintf("%010d", $id);
-		$files = new DirectoryIterator($directory);
+		$files = array();
+		$directory = $location.'pages'.DS.sprintf("%010d", $id);
+		$filesList = new DirectoryIterator($directory);
 
-		foreach ($files as $filename) {
+		foreach ($filesList as $filename) {
 			if ($filename->isFile()) {
-				$images[] = $filename->getBasename();
+				$files[] = $filename->getBasename();
 			}
 		}
 
-		sort($images);
-		return $images;
+		sort($files);
+		return $files;
 	}
 
 }
