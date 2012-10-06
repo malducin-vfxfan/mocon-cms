@@ -152,6 +152,7 @@ class PagesController extends AppController {
 		$this->set(compact('page'));
 		$this->set('title_for_layout', 'Page: '.$page['Page']['title']);
 		$this->set('images', $this->Page->listFiles($page['Page']['id']));
+		$this->set('documents', $this->Page->listFiles($page['Page']['id'], FILES));
 	}
 
 /**
@@ -233,6 +234,7 @@ class PagesController extends AppController {
 			$result = $this->Page->saveAssociated($this->request->data, array('atomic' => false));
 			if ($result['Page']) {
 				$this->Upload->uploadImageThumb('img'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->data['File']['image']);
+				$this->Upload->uploadFile('files'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->data['File']['document']);
 
 				// check page sections
 				$page_sections_ok = true;
@@ -261,6 +263,7 @@ class PagesController extends AppController {
 		$this->set('title_for_layout', 'Edit Page');
 		$this->set(compact('pageSections'));
 		$this->set('images', $this->Page->listFiles($id));
+		$this->set('documents', $this->Page->listFiles($id, FILES));
 	}
 
 /**
@@ -293,9 +296,10 @@ class PagesController extends AppController {
  *
  * @param string $id
  * @param string $filename
+ * @param string $location
  * @return void
  */
-	public function admin_deleteFile($id = null, $filename = null) {
+	public function admin_deleteFile($id = null, $filename = null, $location = 'images') {
 		$this->layout = 'default_admin';
 		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();
@@ -305,11 +309,19 @@ class PagesController extends AppController {
 			throw new NotFoundException('Invalid Page.');
 		}
 		if (!$filename) {
-			throw new NotFoundException('Invalid Image.');
+			throw new NotFoundException('Invalid File.');
 		}
-		if ($this->Page->deleteFile($id, $filename)) {
-			$this->Session->setFlash('File deleted.', 'default', array('class' => 'alert alert-success'));
-			$this->redirect(array('action'=>'admin_view', $id));
+		if ($location == 'images') {
+			if ($this->Page->deleteFile($id, $filename)) {
+				$this->Session->setFlash('File deleted.', 'default', array('class' => 'alert alert-success'));
+				$this->redirect(array('action'=>'admin_view', $id));
+			}
+		}
+		if ($location == 'files') {
+			if ($this->Page->deleteFile($id, $filename, FILES)) {
+				$this->Session->setFlash('File deleted.', 'default', array('class' => 'alert alert-success'));
+				$this->redirect(array('action'=>'admin_view', $id));
+			}
 		}
 		$this->Session->setFlash('File was not deleted.', 'default', array('class' => 'alert alert-error'));
 		$this->redirect(array('action' => 'admin_view', $id));

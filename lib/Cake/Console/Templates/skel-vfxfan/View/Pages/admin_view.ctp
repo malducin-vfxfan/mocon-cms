@@ -146,3 +146,27 @@
 		</table>
 	</aside>
 </div>
+<div class="row">
+	<aside class="admin-related">
+		<h3>Page Documents</h3>
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>Filename</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ($documents as $document): ?>
+				<tr>
+					<td><?php echo $this->Html->link($document, '/files/pages/'.sprintf("%010d", $page['Page']['id']).'/'.$document, array('target' => '_blank')); ?></td>
+					<td>
+						<?php echo $this->Html->link('View', '/files/pages/'.sprintf("%010d", $page['Page']['id']).'/'.$document, array('class' => 'btn', 'target' => '_blank')); ?>
+						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $page['Page']['id'], $document, 'files'), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this document?'); ?>
+					</td>
+				</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+	</aside>
+</div>
