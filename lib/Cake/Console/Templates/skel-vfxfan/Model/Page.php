@@ -163,6 +163,7 @@ class Page extends AppModel {
 	public function afterSave($created) {
 		if ($created) {
 			mkdir(IMAGES.'pages'.DS.sprintf("%010d", $this->id));
+			mkdir(FILES.'pages'.DS.sprintf("%010d", $this->id));
 		}
 	}
 
@@ -181,6 +182,17 @@ class Page extends AppModel {
 		foreach ($files as $filename) {
 			if ($filename->isFile()) {
 				unlink(IMAGES.'pages'.DS.sprintf("%010d", $this->id).DS.$filename->getBasename());
+			}
+		}
+
+		rmdir($directory);
+
+		$directory = FILES.'pages'.DS.sprintf("%010d", $this->id);
+		$files = new DirectoryIterator($directory);
+
+		foreach ($files as $filename) {
+			if ($filename->isFile()) {
+				unlink(FILES.'pages'.DS.sprintf("%010d", $this->id).DS.$filename->getBasename());
 			}
 		}
 
@@ -211,23 +223,24 @@ class Page extends AppModel {
  * List all file name in the page image folder given its id.
  *
  * @param string $id
+ * @param string $location
  * @return array
  */
-	public function listFiles($id = null) {
-		if (!$id) return;
+	public function listFiles($id = null, $location = IMAGES) {
+		if (!$id || !$filesFolder) return;
 
-		$images = array();
-		$directory = IMAGES.'pages'.DS.sprintf("%010d", $id);
-		$files = new DirectoryIterator($directory);
+		$files = array();
+		$directory = $location.'pages'.DS.sprintf("%010d", $id);
+		$filesList = new DirectoryIterator($directory);
 
-		foreach ($files as $filename) {
+		foreach ($filesList as $filename) {
 			if ($filename->isFile()) {
-				$images[] = $filename->getBasename();
+				$files[] = $filename->getBasename();
 			}
 		}
 
-		sort($images);
-		return $images;
+		sort($files);
+		return $files;
 	}
 
 /**
@@ -238,12 +251,13 @@ class Page extends AppModel {
  *
  * @param string $id
  * @param string $filename
+ * @param string $location
  * @return boolean
  */
-	public function deleteFile($id = null, $filename = null) {
-		if (!id or !$filename) return false;
+	public function deleteFile($id = null, $filename = null, $location = IMAGES) {
+		if (!id || !$filename || !$location) return false;
 
-		return unlink(IMAGES.'pages'.DS.sprintf("%010d", $id).DS.$filename);
+		return unlink($location.'pages'.DS.sprintf("%010d", $id).DS.$filename);
 	}
 
 }
