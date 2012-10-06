@@ -227,7 +227,7 @@ class Page extends AppModel {
  * @return array
  */
 	public function listFiles($id = null, $location = IMAGES) {
-		if (!$id || !$filesFolder) return;
+		if (!$id || !$location) return;
 
 		$files = array();
 		$directory = $location.'pages'.DS.sprintf("%010d", $id);
