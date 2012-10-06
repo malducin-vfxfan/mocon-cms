@@ -8,6 +8,7 @@
  * @package       app
  * @subpackage    app.config
  */
+define('FILES', WWW_ROOT.'files'.DS);
 // for use in shells and other places where FULL_BASE_URL might not be set,
 // but we do not want to override
 if (!defined('WEBSITE_BASE_URL')) {
