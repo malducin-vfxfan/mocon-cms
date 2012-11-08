@@ -255,7 +255,7 @@ class Page extends AppModel {
  * @return boolean
  */
 	public function deleteFile($id = null, $filename = null, $location = IMAGES) {
-		if (!id || !$filename || !$location) return false;
+		if (!$id || !$filename || !$location) return false;
 
 		return unlink($location.'pages'.DS.sprintf("%010d", $id).DS.$filename);
 	}
