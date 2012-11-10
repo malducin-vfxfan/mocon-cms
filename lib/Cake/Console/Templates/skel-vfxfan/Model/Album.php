@@ -110,6 +110,17 @@ class Album extends AppModel {
 	}
 
 /**
+ * hasMany associations
+ *
+ * @var array
+ */
+	public $hasMany = array(
+		'AlbumImage' => array(
+			'className' => 'AlbumImage',
+		)
+	);
+
+/**
  * beforeValidate method
  *
  * If id doesn't exist (when adding a new record), create a slug from

@@ -58,8 +58,14 @@ class AlbumsController extends AppController {
 		if (!$album) {
 			throw new NotFoundException('Invalid Album.');
 		}
-		$images = $this->Album->getAlbumThumbnails($album['Album']['id'], $album['Album']['year']);
-		$this->set(compact('album', 'images'));
+
+		$this->paginate = array(
+			'conditions' => array('directory' => 'albums'.DS.$album['Album']['year'].DS.sprintf('%010d', $album['Album']['id'])),
+			'limit' => 60,
+		);
+
+		$this->set(compact('album'));
+		$this->set('albumImages', $this->paginate('AlbumImage'));
 		$this->set('title_for_layout', 'Album: '.$album['Album']['name']);
 	}
 

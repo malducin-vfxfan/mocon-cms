@@ -29,9 +29,10 @@ echo $this->Html->script(array('/slimbox2/js/slimbox2'), array('inline' => false
 </div>
 <?php
 	$i = 0;
-	$last = count($images) - 1;
+	$last = count($albumImages['AlbumImage']) - 1;
 	$images_path = 'albums/'.$album['Album']['year'].'/'.sprintf("%010d", $album['Album']['id']).'/';
-	foreach ($images as $image):
+
+	foreach ($albumImages['AlbumImage'] as $image):
 ?>
 <?php
 		if ($i%6 == 0):
@@ -55,3 +56,25 @@ echo $this->Html->script(array('/slimbox2/js/slimbox2'), array('inline' => false
 	$i++;
 	endforeach;
 ?>
+
+<div class="row">
+	<div class="page-content">
+		<nav class="paginator">
+			<p>
+			<?php
+				echo $this->Paginator->counter(array(
+					'format' => 'Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}'
+				));
+			?>
+			</p>
+
+			<div class="paging">
+			<?php
+				echo $this->Paginator->prev('« previous', array(), null, array('class' => 'prev disabled'));
+				echo $this->Paginator->numbers(array('separator' => '', 'first' => 'first', 'last' => 'last'));
+				echo $this->Paginator->next('next »', array(), null, array('class' => 'next disabled'));
+			?>
+			</div>
+		</nav>
+	</div>
+</div>
