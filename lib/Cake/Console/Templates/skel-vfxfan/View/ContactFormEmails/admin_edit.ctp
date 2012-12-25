@@ -8,17 +8,17 @@
  * @package       contact_form_emails
  * @subpackage    contact_form_emails.views
  */
+$this->extend('/Common/admin_add_edit');
+
+$this->assign('formTitle', 'Edit a Contact Form Email');
+
+$this->start('actions');
 ?>
-<div class="row">
-	<section class="admin-actions">
-		<h3>Actions</h3>
-		<ul class="action-buttons-list">
 			<li><?php echo $this->Form->postLink('Delete', array('action' => 'admin_delete', $this->Form->value('ContactFormEmail.id')), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $this->Form->value('ContactFormEmail.id'))); ?></li>
 			<li><?php echo $this->Html->link('List Contact Form Email', array('action' => 'admin_index'), array('class' => 'btn'));?></li>
-		</ul>
-	</section>
-	<section class="admin-content">
-		<h2>Admin Edit a Contact Form Email</h2>
+<?php
+$this->end();
+?>
 		<?php echo $this->Form->create('ContactFormEmail');?>
 			<fieldset>
 				<legend>Admin Edit Contact Form Email</legend>
@@ -30,5 +30,3 @@
 				?>
 			</fieldset>
 		<?php echo $this->Form->end('Submit');?>
-	</section>
-</div>

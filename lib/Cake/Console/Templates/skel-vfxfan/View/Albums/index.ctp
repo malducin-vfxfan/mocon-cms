@@ -8,11 +8,11 @@
  * @package       albums
  * @subpackage    albums.views
  */
-?>
-<div class="row">
-	<section class="page-content" id="albums">
-		<h1>Albums</h1>
+$this->extend('/Common/index');
 
+$this->assign('title', 'Albums');
+$this->assign('contentId', 'albums');
+?>
 		<?php foreach ($albums as $album): ?>
 		<article class="album-contents">
 			<?php echo $this->FormatImage->idImage('albums/'.$album['Album']['year'], $album['Album']['id'], array('class' => 'thumbnail image-right'), 'albums'); ?>
@@ -27,22 +27,3 @@
 		</article>
 		<hr />
 		<?php endforeach; ?>
-		<nav class="paginator">
-			<p>
-			<?php
-				echo $this->Paginator->counter(array(
-					'format' => 'Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}'
-				));
-			?>
-			</p>
-
-			<div class="paging">
-			<?php
-				echo $this->Paginator->prev('« previous', array(), null, array('class' => 'prev disabled'));
-				echo $this->Paginator->numbers(array('separator' => '', 'first' => 'first', 'last' => 'last'));
-				echo $this->Paginator->next('next »', array(), null, array('class' => 'next disabled'));
-			?>
-			</div>
-		</nav>
-	</section>
-</div>

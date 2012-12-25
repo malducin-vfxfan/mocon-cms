@@ -15,16 +15,17 @@ else $min_year = date('Y') - $year_range;
 
 if (Configure::read('Admin.date_select.max_year')) $max_year = Configure::read('Admin.date_select.max_year');
 else $max_year = date('Y') + $year_range;
+
+$this->extend('/Common/admin_add_edit');
+
+$this->assign('formTitle', 'Add an Event');
+
+$this->start('actions');
 ?>
-<div class="row">
-	<section class="admin-actions">
-		<h3>Actions</h3>
-		<ul class="action-buttons-list">
 			<li><?php echo $this->Html->link('List Events', array('action' => 'admin_index'), array('class' => 'btn'));?></li>
-		</ul>
-	</section>
-	<section class="admin-content">
-		<h2>Admin Add am Event</h2>
+<?php
+$this->end();
+?>
 		<?php echo $this->Form->create('Event', array('type' => 'file'));?>
 			<fieldset>
 				<legend>Admin Add Event</legend>
@@ -39,5 +40,3 @@ else $max_year = date('Y') + $year_range;
 				?>
 			</fieldset>
 		<?php echo $this->Form->end('Submit');?>
-	</section>
-</div>

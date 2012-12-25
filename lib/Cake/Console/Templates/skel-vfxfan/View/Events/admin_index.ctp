@@ -8,30 +8,28 @@
  * @package       events
  * @subpackage    events.views
  */
+$this->extend('/Common/admin_index');
+
+$this->assign('formTitle', 'Events');
+
+$this->start('actions');
 ?>
-<div class="row">
-	<section class="admin-main-content">
-		<h3>Actions</h3>
-		<ul class="action-buttons-list">
 			<li><?php echo $this->Html->link('New Event', array('action' => 'add'), array('class' => 'btn')); ?></li>
-		</ul>
-	</section>
-</div>
-<div class="row">
-	<section class="admin-main-content">
-		<h2>Events</h2>
-		<table class="table table-striped table-bordered">
-			<thead>
-				<tr>
+<?php
+$this->end();
+
+$this->start('tableHeaders');
+?>
 					<th><?php echo $this->Paginator->sort('id');?></th>
 					<th><?php echo $this->Paginator->sort('name');?></th>
 					<th><?php echo $this->Paginator->sort('date_start');?></th>
 					<th><?php echo $this->Paginator->sort('created');?></th>
 					<th><?php echo $this->Paginator->sort('modified');?></th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
+<?php
+$this->end();
+
+$this->start('tableRows');
+?>
 				<?php foreach ($events as $event): ?>
 				<tr>
 					<td><?php echo $event['Event']['id']; ?>&nbsp;</td>
@@ -46,22 +44,6 @@
 					</td>
 				</tr>
 				<?php endforeach; ?>
-			</tbody>
-		</table>
-		<p>
-		<?php
-			echo $this->Paginator->counter(array(
-				'format' => 'Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}'
-			));
-		?>
-		</p>
-
-		<div class="paging">
-		<?php
-			echo $this->Paginator->prev('« previous', array(), null, array('class' => 'prev disabled'));
-			echo $this->Paginator->numbers(array('separator' => '', 'first' => 'first', 'last' => 'last'));
-			echo $this->Paginator->next('next »', array(), null, array('class' => 'next disabled'));
-		?>
-		</div>
-	</section>
-</div>
+<?php
+$this->end();
+?>

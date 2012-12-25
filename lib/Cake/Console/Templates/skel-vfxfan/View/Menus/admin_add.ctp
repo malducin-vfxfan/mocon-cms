@@ -8,16 +8,16 @@
  * @package       menus
  * @subpackage    menus.views
  */
+$this->extend('/Common/admin_add_edit');
+
+$this->assign('formTitle', 'Add a Menu Item');
+
+$this->start('actions');
 ?>
-<div class="row">
-	<section class="admin-actions">
-		<h3>Actions</h3>
-		<ul class="action-buttons-list">
 			<li><?php echo $this->Html->link('List Menus', array('action' => 'admin_index'), array('class' => 'btn'));?></li>
-		</ul>
-	</section>
-	<section class="admin-content">
-		<h2>Add a Menu Item</h2>
+<?php
+$this->end();
+?>
 		<?php echo $this->Form->create('Menu');?>
 			<fieldset>
 				<legend>Admin Add Menu Item</legend>
@@ -29,13 +29,12 @@
 				?>
 			</fieldset>
 		<?php echo $this->Form->end('Submit');?>
-	</section>
-</div>
-<div class="row">
-	<aside class="admin-related">
+<?php
+$this->start('relatedContent1');
+?>
 		<h3>Pages</h3>
 		<?php if (!empty($pages)): ?>
-		<table class="table table-striped table-bordered">
+		<table class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
 					<th>Id</th>
@@ -65,5 +64,6 @@
 			</tbody>
 		</table>
 		<?php endif; ?>
-	</aside>
-</div>
+<?php
+$this->end();
+?>

@@ -8,11 +8,11 @@
  * @package       events
  * @subpackage    events.views
  */
-?>
-<div class="row">
-	<section class="page-content" id="events">
-		<h1>Past Events</h1>
+$this->extend('/Common/index');
 
+$this->assign('title', 'Past Events');
+$this->assign('contentId', 'events');
+?>
 		<?php foreach ($events as $event): ?>
 		<article class="event-contents">
 			<?php echo $this->FormatImage->idImage('events/'.$event['Event']['year'], $event['Event']['id'], array('class' => 'thumbnail image-right'), 'events'); ?>
@@ -34,22 +34,3 @@
 		</article>
 		<hr />
 		<?php endforeach; ?>
-		<nav class="paginator">
-			<p>
-			<?php
-				echo $this->Paginator->counter(array(
-					'format' => 'Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}'
-				));
-			?>
-			</p>
-
-			<div class="paging">
-			<?php
-				echo $this->Paginator->prev('« previous', array(), null, array('class' => 'prev disabled'));
-				echo $this->Paginator->numbers(array('separator' => '', 'first' => 'first', 'last' => 'last'));
-				echo $this->Paginator->next('next »', array(), null, array('class' => 'next disabled'));
-			?>
-			</div>
-		</nav>
-	</section>
-</div>

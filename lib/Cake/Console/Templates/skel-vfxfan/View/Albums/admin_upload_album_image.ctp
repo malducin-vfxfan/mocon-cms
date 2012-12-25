@@ -8,16 +8,16 @@
  * @package       albums
  * @subpackage    albums.views
  */
+$this->extend('/Common/admin_add_edit');
+
+$this->assign('formTitle', 'Add Album Image');
+
+$this->start('actions');
 ?>
-<div class="row">
-	<section class="admin-actions">
-		<h3>Actions</h3>
-		<ul class="action-buttons-list">
 			<li><?php echo $this->Html->link('List Albums', array('action' => 'admin_index'), array('class' => 'btn'));?></li>
-		</ul>
-	</section>
-	<section class="admin-content">
-		<h2><?php echo 'Admin Add Album Image'; ?></h2>
+<?php
+$this->end();
+?>
 		<?php echo $this->Form->create('Album', array('type' => 'file'));?>
 			<fieldset>
 				<legend><?php echo 'Admin Add Album'; ?></legend>
@@ -26,5 +26,3 @@
 				?>
 			</fieldset>
 		<?php echo $this->Form->end('Submit');?>
-	</section>
-</div>

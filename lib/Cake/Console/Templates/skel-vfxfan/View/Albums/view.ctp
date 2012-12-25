@@ -15,23 +15,19 @@
  */
 echo $this->Html->css('/slimbox2/css/slimbox2', null, array('inline' => false));
 echo $this->Html->script(array('/slimbox2/js/slimbox2'), array('inline' => false));
+
+$this->extend('/Common/view');
+
+$this->assign('title', 'Album: '.$album['Album']['name']);
+$this->assign('contentCreated', $album['Album']['created']);
 ?>
-<div class="row">
-	<article class="page-content">
-		<header>
-			<h1>Album: <?php echo $album['Album']['name']; ?></h1>
-			<time class="date-created" datetime="<?php echo date(DATE_ATOM, strtotime($album['Album']['created'])); ?>">
-				<?php echo strftime("%B %d, %Y %H:%M:%S", strtotime($album['Album']['created'])); ?>
-			</time>
-		</header>
 		<p><?php echo $album['Album']['description']; ?></p>
-	</article>
-</div>
 <?php
+$this->start('extraContent');
+
 	$i = 0;
 	$last = count($albumImages['AlbumImage']) - 1;
 	$images_path = 'albums/'.$album['Album']['year'].'/'.sprintf("%010d", $album['Album']['id']).'/';
-
 	foreach ($albumImages['AlbumImage'] as $image):
 ?>
 <?php
@@ -55,26 +51,5 @@ echo $this->Html->script(array('/slimbox2/js/slimbox2'), array('inline' => false
 <?php
 	$i++;
 	endforeach;
+$this->end();
 ?>
-
-<div class="row">
-	<div class="page-content">
-		<nav class="paginator">
-			<p>
-			<?php
-				echo $this->Paginator->counter(array(
-					'format' => 'Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}'
-				));
-			?>
-			</p>
-
-			<div class="paging">
-			<?php
-				echo $this->Paginator->prev('« previous', array(), null, array('class' => 'prev disabled'));
-				echo $this->Paginator->numbers(array('separator' => '', 'first' => 'first', 'last' => 'last'));
-				echo $this->Paginator->next('next »', array(), null, array('class' => 'next disabled'));
-			?>
-			</div>
-		</nav>
-	</div>
-</div>

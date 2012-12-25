@@ -8,18 +8,18 @@
  * @package       groups
  * @subpackage    groups.views
  */
+$this->extend('/Common/admin_add_edit');
+
+$this->assign('formTitle', 'Add a Group');
+
+$this->start('actions');
 ?>
-<div class="row">
-	<section class="admin-actions">
-		<h3>Actions</h3>
-		<ul class="action-buttons-list">
 			<li><?php echo $this->Html->link('List Groups', array('action' => 'admin_index'), array('class' => 'btn'));?></li>
 			<li><?php echo $this->Html->link('List Users', array('controller' => 'users', 'action' => 'admin_index'), array('class' => 'btn')); ?> </li>
 			<li><?php echo $this->Html->link('New User', array('controller' => 'users', 'action' => 'admin_add'), array('class' => 'btn')); ?> </li>
-		</ul>
-	</section>
-	<section class="admin-content">
-		<h2>Add a Group</h2>
+<?php
+$this->end();
+?>
 		<?php echo $this->Form->create('Group');?>
 			<fieldset>
 				<legend>Admin Add Group</legend>
@@ -28,5 +28,3 @@
 				?>
 			</fieldset>
 		<?php echo $this->Form->end('Submit');?>
-	</section>
-</div>

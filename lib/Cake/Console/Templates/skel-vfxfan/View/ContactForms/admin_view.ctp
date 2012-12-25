@@ -8,18 +8,17 @@
  * @package       contact_forms
  * @subpackage    contact_forms.views
  */
+$this->extend('/Common/admin_view');
+
+$this->assign('formTitle', 'Contact Form Messages');
+
+$this->start('actions');
 ?>
-<div class="row">
-	<section class="admin-actions">
-		<h3>Actions</h3>
-		<ul class="action-buttons-list">
 			<li><?php echo $this->Form->postLink('Delete Contact Form Messages', array('action' => 'admin_delete', $contactForm['ContactForm']['id']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $contactForm['ContactForm']['id'])); ?> </li>
 			<li><?php echo $this->Html->link('List Contact Forms Messages', array('action' => 'admin_index'), array('class' => 'btn')); ?> </li>
-		</ul>
-	</section>
-	<section class="admin-content">
-		<h2><?php  echo 'Contact Form';?></h2>
-		<dl>
+<?php
+$this->end();
+?>
 			<dt>Id</dt>
 			<dd>
 				<?php echo $contactForm['ContactForm']['id']; ?>
@@ -50,6 +49,3 @@
 				<?php echo $contactForm['ContactForm']['modified']; ?>
 				&nbsp;
 			</dd>
-		</dl>
-	</section>
-</div>

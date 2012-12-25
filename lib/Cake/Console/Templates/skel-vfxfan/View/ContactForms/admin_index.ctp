@@ -8,22 +8,22 @@
  * @package       contact_forms
  * @subpackage    contact_forms.views
  */
+$this->extend('/Common/admin_index');
+
+$this->assign('formTitle', 'Contact Form Messages');
+
+$this->start('tableHeaders');
 ?>
-<div class="row">
-	<section class="admin-main-content">
-		<h2>Contact Forms</h2>
-		<table class="table table-striped table-bordered">
-			<thead>
-				<tr>
 					<th><?php echo $this->Paginator->sort('id');?></th>
 					<th><?php echo $this->Paginator->sort('name');?></th>
 					<th><?php echo $this->Paginator->sort('email');?></th>
 					<th><?php echo $this->Paginator->sort('created');?></th>
 					<th><?php echo $this->Paginator->sort('modified');?></th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
+<?php
+$this->end();
+
+$this->start('tableRows');
+?>
 				<?php foreach ($contactForms as $contactForm): ?>
 				<tr>
 					<td><?php echo $contactForm['ContactForm']['id']; ?>&nbsp;</td>
@@ -37,22 +37,6 @@
 					</td>
 				</tr>
 				<?php endforeach; ?>
-			</tbody>
-		</table>
-		<p>
-		<?php
-			echo $this->Paginator->counter(array(
-				'format' => 'Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}'
-			));
-		?>
-		</p>
-
-		<div class="paging">
-		<?php
-			echo $this->Paginator->prev('« previous', array(), null, array('class' => 'prev disabled'));
-			echo $this->Paginator->numbers(array('separator' => '', 'first' => 'first', 'last' => 'last'));
-			echo $this->Paginator->next('next »', array(), null, array('class' => 'next disabled'));
-		?>
-		</div>
-	</section>
-</div>
+<?php
+$this->end();
+?>

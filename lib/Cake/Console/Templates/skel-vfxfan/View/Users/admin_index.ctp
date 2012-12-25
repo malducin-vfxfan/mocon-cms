@@ -8,30 +8,28 @@
  * @package       users
  * @subpackage    users.views
  */
+$this->extend('/Common/admin_index');
+
+$this->assign('formTitle', 'Users');
+
+$this->start('actions');
 ?>
-<div class="row">
-	<section class="admin-main-content">
-		<h3>Actions</h3>
-		<ul class="action-buttons-list">
 			<li><?php echo $this->Html->link('New User', array('action' => 'admin_add'), array('class' => 'btn')); ?></li>
-		</ul>
-	</section>
-</div>
-<div class="row">
-	<section class="admin-main-content">
-		<h2>Users</h2>
-		<table class="table table-striped table-bordered">
-			<thead>
-				<tr>
+<?php
+$this->end();
+
+$this->start('tableHeaders');
+?>
 					<th><?php echo $this->Paginator->sort('id');?></th>
 					<th><?php echo $this->Paginator->sort('username');?></th>
 					<th><?php echo $this->Paginator->sort('created');?></th>
 					<th><?php echo $this->Paginator->sort('modified');?></th>
 					<th><?php echo $this->Paginator->sort('group_id');?></th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
+<?php
+$this->end();
+
+$this->start('tableRows');
+?>
 				<?php foreach ($users as $user): ?>
 				<tr>
 					<td><?php echo $user['User']['id']; ?>&nbsp;</td>
@@ -48,38 +46,20 @@
 					</td>
 				</tr>
 			<?php endforeach; ?>
-			</tbody>
-		</table>
-		<p>
-		<?php
-			echo $this->Paginator->counter(array(
-				'format' => 'Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}'
-			));
-		?>
-		</p>
+<?php
+$this->end();
 
-		<div class="paging">
-		<?php
-			echo $this->Paginator->prev('« previous', array(), null, array('class' => 'prev disabled'));
-			echo $this->Paginator->numbers(array('separator' => '', 'first' => 'first', 'last' => 'last'));
-			echo $this->Paginator->next('next »', array(), null, array('class' => 'next disabled'));
-		?>
-		</div>
-	</section>
-</div>
-<aside class="row">
-	<section class="admin-related-actions">
-		<h3>Groups Actions</h3>
-		<ul class="action-buttons-list">
+$this->start('relatedActions1');
+?>
 			<li><?php echo $this->Html->link('List Groups', array('controller' => 'groups', 'action' => 'admin_index'), array('class' => 'btn')); ?> </li>
 			<li><?php echo $this->Html->link('New Group', array('controller' => 'groups', 'action' => 'admin_add'), array('class' => 'btn')); ?> </li>
-		</ul>
-	</section>
-	<section class="admin-related-actions">
-		<h3>Posts Actions</h3>
-		<ul class="action-buttons-list">
+<?php
+$this->end();
+
+$this->start('relatedActions2');
+?>
 			<li><?php echo $this->Html->link('List Posts', array('controller' => 'posts', 'action' => 'admin_index'), array('class' => 'btn')); ?> </li>
 			<li><?php echo $this->Html->link('New Post', array('controller' => 'posts', 'action' => 'admin_add'), array('class' => 'btn')); ?> </li>
-		</ul>
-	</section>
-</aside>
+<?php
+$this->end();
+?>

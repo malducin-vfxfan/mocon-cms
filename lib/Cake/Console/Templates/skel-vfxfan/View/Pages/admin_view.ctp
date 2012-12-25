@@ -8,22 +8,21 @@
  * @package       pages
  * @subpackage    pages.views
  */
+$this->extend('/Common/admin_view');
+
+$this->assign('formTitle', 'Page');
+
+$this->start('actions');
 ?>
-<div class="row">
-	<section class="admin-actions">
-		<h3>Actions</h3>
-		<ul class="action-buttons-list">
 			<li><?php echo $this->Html->link('Edit Page', array('action' => 'admin_edit', $page['Page']['id']), array('class' => 'btn')); ?> </li>
 			<li><?php echo $this->Form->postLink('Delete Page', array('action' => 'admin_delete', $page['Page']['id']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $page['Page']['id'])); ?> </li>
 			<li><?php echo $this->Html->link('List Pages', array('action' => 'admin_index'), array('class' => 'btn')); ?> </li>
 			<li><?php echo $this->Html->link('New Page', array('action' => 'admin_add'), array('class' => 'btn')); ?> </li>
 			<li><?php echo $this->Html->link('List Page Sections', array('controller' => 'page_sections', 'action' => 'admin_index'), array('class' => 'btn')); ?> </li>
 			<li><?php echo $this->Html->link('New Page Section', array('controller' => 'page_sections', 'action' => 'admin_add', $page['Page']['id']), array('class' => 'btn')); ?> </li>
-		</ul>
-	</section>
-	<section class="admin-content">
-	<h2>Page</h2>
-		<dl>
+<?php
+$this->end();
+?>
 			<dt>Id</dt>
 			<dd>
 				<?php echo $page['Page']['id']; ?>
@@ -64,24 +63,24 @@
 				/img/pages/<?php echo sprintf("%010d", $page['Page']['id']); ?>
 				&nbsp;
 			</dd>
-		</dl>
-	</section>
-</div>
-<div class="row">
-	<div class="admin-main-content">
-		<h1>Content</h1>
-	</div>
-</div>
-<?php foreach ($page['PageSection'] as $pageSection): ?>
+
+<?php
+$this->start('contentHtml');
+foreach ($page['PageSection'] as $pageSection):
+?>
 <div class="row">
 	<section class="admin-main-content">
 		<h2><?php echo $pageSection['title']; ?></h2>
 		<?php echo $pageSection['content']; ?>
+		<hr class="separator-content-sections" />
 	</section>
 </div>
-<?php endforeach; ?>
-<div class="row">
-	<aside class="admin-related">
+<?php
+endforeach;
+$this->end();
+
+$this->start('relatedContent1');
+?>
 		<h3>Related Page Sections</h3>
 		<?php if (!empty($page['PageSection'])): ?>
 		<table class="table table-striped table-bordered">
@@ -120,10 +119,12 @@
 				<li><?php echo $this->Html->link('New Page Section', array('controller' => 'page_sections', 'action' => 'admin_add', $page['Page']['id']), array('class' => 'btn'));?> </li>
 			</ul>
 		</section>
-	</aside>
-</div>
-<div class="row">
-	<aside class="admin-related">
+<?php
+$this->end();
+?>
+<?php
+$this->start('relatedContent2');
+?>
 		<h3>Page Images</h3>
 		<table class="table table-striped table-bordered">
 			<thead>
@@ -144,10 +145,10 @@
 				<?php endforeach; ?>
 			</tbody>
 		</table>
-	</aside>
-</div>
-<div class="row">
-	<aside class="admin-related">
+<?php
+$this->end();
+$this->start('relatedContent3');
+?>
 		<h3>Page Documents</h3>
 		<table class="table table-striped table-bordered">
 			<thead>
@@ -168,5 +169,6 @@
 				<?php endforeach; ?>
 			</tbody>
 		</table>
-	</aside>
-</div>
+<?php
+$this->end();
+?>

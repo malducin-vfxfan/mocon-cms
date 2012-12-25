@@ -8,11 +8,12 @@
  * @package       users
  * @subpackage    users.views
  */
+$this->extend('/Common/admin_view');
+
+$this->assign('formTitle', 'User');
+
+$this->start('actions');
 ?>
-<div class="row">
-<section class="admin-actions">
-	<h3>Actions</h3>
-	<ul class="action-buttons-list">
 		<li><?php echo $this->Html->link('Edit User', array('action' => 'admin_edit', $user['User']['id']), array('class' => 'btn')); ?> </li>
 		<li><?php echo $this->Form->postLink('Delete User', array('action' => 'admin_delete', $user['User']['id']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $user['User']['id'])); ?> </li>
 		<li><?php echo $this->Html->link('List Users', array('action' => 'admin_index'), array('class' => 'btn')); ?> </li>
@@ -21,11 +22,9 @@
 		<li><?php echo $this->Html->link('New Group', array('controller' => 'groups', 'action' => 'admin_add'), array('class' => 'btn')); ?> </li>
 		<li><?php echo $this->Html->link('List Posts', array('controller' => 'posts', 'action' => 'admin_index'), array('class' => 'btn')); ?> </li>
 		<li><?php echo $this->Html->link('New Post', array('controller' => 'posts', 'action' => 'admin_add'), array('class' => 'btn')); ?> </li>
-	</ul>
-</section>
-<section class="admin-content">
-<h2>User</h2>
-	<dl>
+<?php
+$this->end();
+?>
 		<dt>Id</dt>
 		<dd>
 			<?php echo $user['User']['id']; ?>
@@ -56,11 +55,9 @@
 			<?php echo $this->Html->link($user['Group']['name'], array('controller' => 'groups', 'action' => 'admin_view', $user['Group']['id'])); ?>
 			&nbsp;
 		</dd>
-	</dl>
-</section>
-</div>
-<div class="row">
-	<aside class="admin-related">
+<?php
+$this->start('relatedContent1');
+?>
 		<h3>Related Posts</h3>
 		<?php if (!empty($posts)): ?>
 		<table class="table table-striped table-bordered">
@@ -112,5 +109,6 @@
 				<li><?php echo $this->Html->link('New Post', array('controller' => 'posts', 'action' => 'admin_add'), array('class' => 'btn'));?> </li>
 			</ul>
 		</section>
-	</aside>
-</div>
+<?php
+$this->end();
+?>

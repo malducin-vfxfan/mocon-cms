@@ -8,11 +8,11 @@
  * @package       posts
  * @subpackage    posts.views
  */
-?>
-<div class="row">
-	<section class="page-content" id="posts">
-		<h1>Posts</h1>
+$this->extend('/Common/index');
 
+$this->assign('title', 'Posts');
+$this->assign('contentId', 'posts');
+?>
 		<?php foreach ($posts as $post): ?>
 		<article class="post-contents">
 			<?php echo $this->FormatImage->idImage('posts/'.$post['Post']['year'], $post['Post']['id'], array('class' => 'thumbnail image-right'), 'posts'); ?>
@@ -35,22 +35,3 @@
 		</article>
 		<hr />
 		<?php endforeach; ?>
-		<nav class="paginator">
-			<p>
-			<?php
-				echo $this->Paginator->counter(array(
-					'format' => 'Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}'
-				));
-			?>
-			</p>
-
-			<div class="paging">
-			<?php
-				echo $this->Paginator->prev('« previous', array(), null, array('class' => 'prev disabled'));
-				echo $this->Paginator->numbers(array('separator' => '', 'first' => 'first', 'last' => 'last'));
-				echo $this->Paginator->next('next »', array(), null, array('class' => 'next disabled'));
-			?>
-			</div>
-		</nav>
-	</section>
-</div>

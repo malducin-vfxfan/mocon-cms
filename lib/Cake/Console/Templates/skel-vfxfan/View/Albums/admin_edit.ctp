@@ -8,17 +8,17 @@
  * @package       albums
  * @subpackage    albums.views
  */
+$this->extend('/Common/admin_add_edit');
+
+$this->assign('formTitle', 'Edit an Album');
+
+$this->start('actions');
 ?>
-<div class="row">
-	<section class="admin-actions">
-		<h3>Actions</h3>
-		<ul class="action-buttons-list">
 			<li><?php echo $this->Form->postLink('Delete', array('action' => 'admin_delete', $this->Form->value('Album.id')), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $this->Form->value('Album.id'))); ?></li>
 			<li><?php echo $this->Html->link('List Albums', array('action' => 'admin_index'), array('class' => 'btn'));?></li>
-		</ul>
-	</section>
-	<section class="admin-content">
-		<h2>Admin Edit a Album</h2>
+<?php
+$this->end();
+?>
 		<?php echo $this->Form->create('Album', array('type' => 'file'));?>
 			<fieldset>
 				<legend>Admin Edit Album</legend>
@@ -31,5 +31,3 @@
 				?>
 			</fieldset>
 		<?php echo $this->Form->end('Submit');?>
-	</section>
-</div>
