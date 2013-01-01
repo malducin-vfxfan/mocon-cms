@@ -73,7 +73,7 @@ $this->end();
 $this->start('relatedContent1');
 ?>
 		<h3>Page Images</h3>
-		<table class="table table-striped table-bordered">
+		<table class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
 					<th>Filename</th>

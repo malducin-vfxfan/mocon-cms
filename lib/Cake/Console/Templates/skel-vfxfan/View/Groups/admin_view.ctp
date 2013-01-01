@@ -48,7 +48,7 @@ $this->start('relatedContent1');
 ?>
 		<h3>Related Users</h3>
 		<?php if (!empty($users)): ?>
-		<table class="table table-striped table-bordered">
+		<table class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
 					<th><?php echo $this->Paginator->sort('id');?></th>

@@ -83,7 +83,7 @@ $this->start('relatedContent1');
 ?>
 		<h3>Related Page Sections</h3>
 		<?php if (!empty($page['PageSection'])): ?>
-		<table class="table table-striped table-bordered">
+		<table class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
 					<th>Id</th>
@@ -125,7 +125,7 @@ $this->end();
 $this->start('relatedContent2');
 ?>
 		<h3>Page Images</h3>
-		<table class="table table-striped table-bordered">
+		<table class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
 					<th>Filename</th>
@@ -150,7 +150,7 @@ $this->end();
 $this->start('relatedContent3');
 ?>
 		<h3>Page Documents</h3>
-		<table class="table table-striped table-bordered">
+		<table class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
 					<th>Filename</th>

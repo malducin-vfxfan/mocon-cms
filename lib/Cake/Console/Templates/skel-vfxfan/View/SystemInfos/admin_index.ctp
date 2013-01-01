@@ -13,7 +13,7 @@
 	<section class="admin-main-content">
 		<h2>System Info</h2>
 		<h3>Basic Configuration</h3>
-		<table class="table table-striped table-bordered">
+		<table class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
 					<th>Setting</th>
@@ -68,7 +68,7 @@
 			</tbody>
 		</table>
 		<h3>Controllers</h3>
-		<table class="table table-striped table-bordered">
+		<table class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
 					<th>Controller Name</th>

@@ -60,7 +60,7 @@ $this->start('relatedContent1');
 ?>
 		<h3>Related Posts</h3>
 		<?php if (!empty($posts)): ?>
-		<table class="table table-striped table-bordered">
+		<table class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
 					<th>Id</th>
