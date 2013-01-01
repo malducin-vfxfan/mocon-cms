@@ -34,6 +34,9 @@
 				<?php echo strftime("%B %d, %Y", strtotime($this->fetch('contentEndDate'))); ?>
 			</time>
 			<?php endif; ?>
+			<?php if ($this->fetch('contentAuthor')): ?>
+			<p>by <span class="author"><?php echo $this->fetch('contentAuthor'); ?></span></p>
+			<?php endif; ?>
 		</header>
 
 		<div class="contents">

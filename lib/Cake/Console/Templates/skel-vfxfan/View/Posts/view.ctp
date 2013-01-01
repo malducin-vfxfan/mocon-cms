@@ -12,6 +12,7 @@ $this->extend('/Common/view');
 
 $this->assign('title', $post['Post']['title']);
 $this->assign('contentCreated', $post['Post']['created']);
+$this->assign('contentAuthor', $post['User']['username']);
 $this->assign('sectionModified', $post['Post']['modified']);
 $this->assign('contentThumbnail', $this->FormatImage->idImage('posts/'.$post['Post']['year'], $post['Post']['id'], array('class' => 'thumbnail image-right'), 'posts'));
 ?>

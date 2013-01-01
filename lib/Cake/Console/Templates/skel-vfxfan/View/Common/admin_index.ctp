@@ -48,6 +48,13 @@
 		</div>
 	</section>
 </div>
+<?php if ($this->fetch('relatedContent')): ?>
+<aside class="row">
+	<div class="admin-related">
+		<?php echo $this->fetch('relatedContent'); ?>
+	</div>
+</aside>
+<?php endif; ?>
 <aside class="row">
 <?php if ($this->fetch('relatedActions1')): ?>
 	<section class="admin-related-actions">

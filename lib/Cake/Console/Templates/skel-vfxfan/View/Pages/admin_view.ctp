@@ -121,8 +121,7 @@ $this->start('relatedContent1');
 		</section>
 <?php
 $this->end();
-?>
-<?php
+
 $this->start('relatedContent2');
 ?>
 		<h3>Page Images</h3>
@@ -147,6 +146,7 @@ $this->start('relatedContent2');
 		</table>
 <?php
 $this->end();
+
 $this->start('relatedContent3');
 ?>
 		<h3>Page Documents</h3>
