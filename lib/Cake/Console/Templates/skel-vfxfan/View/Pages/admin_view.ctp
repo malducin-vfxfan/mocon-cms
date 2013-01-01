@@ -63,7 +63,6 @@ $this->end();
 				/img/pages/<?php echo sprintf("%010d", $page['Page']['id']); ?>
 				&nbsp;
 			</dd>
-
 <?php
 $this->start('contentHtml');
 foreach ($page['PageSection'] as $pageSection):

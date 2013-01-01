@@ -31,6 +31,7 @@ $this->end();
 					echo $this->Form->input('published');
 					echo $this->Form->input('main');
 					echo $this->Form->input('File.image', array('type' => 'file'));
+					echo $this->Form->input('File.document', array('type' => 'file'));
 				?>
 			</fieldset>
 			<fieldset>
@@ -101,6 +102,31 @@ $this->start('relatedContent2');
 					<td>
 						<?php echo $this->Html->link('View', '/img/pages/'.sprintf("%010d", $this->Form->value('Page.id')).'/'.$image, array('class' => 'btn', 'target' => '_blank')); ?>
 						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->Form->value('Page.id'), $image), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this image?'); ?>
+					</td>
+				</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+<?php
+$this->end();
+
+$this->start('relatedContent3');
+?>
+		<h3>Page Documents</h3>
+		<table class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Filename</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ($documents as $document): ?>
+				<tr>
+					<td><?php echo $this->Html->link($document, '/files/pages/'.sprintf("%010d", $this->Form->value('Page.id')).'/'.$document, array('target' => '_blank')); ?></td>
+					<td>
+						<?php echo $this->Html->link('View', '/files/pages/'.sprintf("%010d", $this->Form->value('Page.id')).'/'.$document, array('class' => 'btn', 'target' => '_blank')); ?>
+						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->Form->value('Page.id'), $document, 'files'), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this image?'); ?>
 					</td>
 				</tr>
 				<?php endforeach; ?>

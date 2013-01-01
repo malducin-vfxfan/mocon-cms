@@ -37,4 +37,7 @@ $this->end();
 					echo $this->Form->input('PageSection.0.content', array('class' => 'page-section-content span7'));
 				?>
 			</fieldset>
+			<fieldset id="extraPageSections">
+				<legend>Extra Page Sections</legend>
+			</fieldset>
 		<?php echo $this->Form->end('Submit');?>

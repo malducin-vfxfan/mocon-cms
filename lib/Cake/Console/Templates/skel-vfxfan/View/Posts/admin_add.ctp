@@ -8,6 +8,10 @@
  * @package       posts
  * @subpackage    posts.views
  */
+if (Configure::read('TinyMCE.active')) {
+	echo $this->element('TinyMCE/config_basic');
+}
+
 $this->extend('/Common/admin_add_edit');
 
 $this->assign('formTitle', 'Add a Post');
@@ -24,7 +28,6 @@ $this->end();
 			<fieldset>
 				<legend>Admin Add Post</legend>
 				<?php
-					// form elements goe into the content block inside a fieldset
 					echo $this->Form->input('title');
 					echo $this->Form->input('summary');
 					echo $this->Form->input('content', array('class' => 'span7'));
