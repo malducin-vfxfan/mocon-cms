@@ -252,7 +252,7 @@ class Event extends AppModel {
 		$data['Event']['date_start'] = Sanitize::paranoid(MySanitize::cleanSafe($data['Event']['date_start'], array('quotes' => ENT_NOQUOTES)), array('-', ':', ' '));
 		$data['Event']['date_end'] = Sanitize::paranoid(MySanitize::cleanSafe($data['Event']['date_end'], array('quotes' => ENT_NOQUOTES)), array('-', ':', ' '));
 		$data['Event']['location'] = MySanitize::cleanSafe($data['Event']['location']);
-		$data['Event']['description'] = MySanitize::cleanSafe($data['Event']['location']);
+		$data['Event']['description'] = MySanitize::cleanSafe($data['Event']['description']);
 		$data['Event']['webpage'] = MySanitize::cleanSafe($data['Event']['webpage'], array('quotes' => ENT_QUOTES));
 		$data['Event']['slug'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Event']['slug'], array('quotes' => ENT_NOQUOTES)), array('-', '_'));
 		return $data;
