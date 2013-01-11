@@ -40,11 +40,11 @@ $config = array(
 		'posts' => true,
 	),
 	'Jquery' => array(
-		'version' => 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',
+		'version' => 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js',
 	),
 	'JqueryUi' => array(
-		'version' => 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js',
-		'theme' => '',
+		'version' => 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js',
+		'theme' => 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/base/jquery-ui.css',
 	),
 	'Google' => array(
 		'Analytics' => array(
