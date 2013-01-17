@@ -84,6 +84,25 @@ class AppController extends Controller {
 					$this->Security->requirePost(array('admin_edit'));
 			}
 		}
+
+		// check to see if we are on a mobile device
+		if (!$this->Session->check('Config.theme')) {
+			if ($this->request->is('mobile')) {
+				$this->Session->write('Config.theme', 'mobile');
+			}
+			else {
+				$this->Session->write('Config.theme', 'default');
+			}
+		}
+
+		// use the Mobile theme if configured
+		if ($this->Session->read('Config.theme') == 'mobile') {
+			$this->theme = 'Mobile';
+		}
+		else {
+			$this->theme = null;
+		}
+		$this->response->vary('User-Agent');
 	}
 
 /**

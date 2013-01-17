@@ -38,7 +38,7 @@
 		echo $this->fetch('script');
 	?>
 </head>
-<body>
+<body style="background: #fff;">
 	<nav class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
@@ -49,12 +49,14 @@
 
 	<div class="container">
 		<div class="body-content">
-			<header class="page-header">
-				<hgroup>
-					<h1>Site</h1>
-					<h2>Admin Login</h2>
-				</hgroup>
-			</header>
+			<div class="row">
+				<header class="span12">
+					<hgroup>
+						<h1>Site</h1>
+						<h2>Admin Login</h2>
+					</hgroup>
+				</header>
+			</div>
 			<div class="row">
 		        <div class="login" id="flash-messages">
 					<?php echo $this->Session->flash('auth'); ?>
@@ -64,14 +66,25 @@
 
 			<?php echo $this->fetch('content'); ?>
 
-	        <div class="row">
+			<div class="row">
 				<div class="span12">
 					<?php echo $this->element('sql_dump'); ?>
 				</div>
 			</div>
 		</div>
+		<!-- /body-content -->
 		<footer>
-			<p>© 2011-<?php echo date('Y'); ?>, system by <?php echo $this->Html->link('Manuel Alducin (malducin) - VFXfan.com', 'http://vfxfan.com'); ?></p>
+			<p>
+				© 2013-<?php echo date('Y'); ?>, system by <?php echo $this->Html->link('Manuel Alducin (malducin) - VFXfan.com', 'http://vfxfan.com'); ?></p>
+				<?php
+					if ($this->Session->read('Config.theme') == 'default') {
+						echo $this->Html->link('Switch to Mobile Site', array('controller' => 'change_themes', 'action' => 'change'), array('class' => 'btn btn-info'));
+					}
+					else {
+						echo $this->Html->link('Switch to Default Site', array('controller' => 'change_themes', 'action' => 'change'), array('class' => 'btn btn-info'));
+					}
+				?>
+			</p>
 		</footer>
 	</div> <!-- /container -->
 </body>

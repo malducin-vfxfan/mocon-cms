@@ -22,6 +22,7 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0" />
 	<?php
 		echo $this->Html->meta(array('name' => 'author', 'content' => 'Manuel Alducin'));
 		echo $this->Html->meta(array('name' => 'generator', 'content' => 'VFXfan CMS'));
@@ -33,7 +34,7 @@
 		}
 		echo $this->fetch('meta');
 
-		echo $this->Html->css('project');
+		echo $this->Html->css('project-responsive');
 		if (Configure::read('JqueryUi.theme')) {
 			echo $this->Html->css(Configure::read('JqueryUi.theme'));
 		}
@@ -50,13 +51,20 @@
 		echo $this->element('Google/Analytics/page_tracker');
 	?>
 </head>
-<body>
+<body style="background: #eee;">
 	<nav class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
 				<?php echo $this->Html->link('Site', '/', array('class' => 'brand')); ?>
-				<?php echo $this->element('Menus/bootstrap'); ?>
-				<?php echo $this->element('Google/Search/search'); ?>
+				<div class="nav-collapse collapse">
+					<?php echo $this->element('Menus/bootstrap'); ?>
+					<?php echo $this->element('Google/Search/search'); ?>
+				</div>
 			</div>
 		</div>
 	</nav> <!-- /topbar -->
@@ -64,13 +72,14 @@
 	<div class="container">
 		<div class="body-content">
 			<div class="row">
-				<header class="page-content" id="banner-site">
-					<hgroup id="banner-site-text">
+				<header class="page-content">
+					<hgroup>
 						<h1>Site</h1>
 						<h2>tagline</h2>
 					</hgroup>
 				</header>
 			</div>
+			<hr />
 			<div class="row">
 				<div class="page-content" id="flash-messages">
 					<?php echo $this->Session->flash('auth'); ?>
@@ -80,12 +89,6 @@
 
 			<?php echo $this->fetch('content'); ?>
 
-			<div class="row">
-				<div class="span12">
-					<div>&nbsp;</div>
-					<p class="top-page"><span class="icon-circle-arrow-up"></span><?php echo $this->Html->link('Back to top', '#top-header', array('class' => 'label label-info')); ?></p>
-				</div>
-			</div>
 			<div class="row">
 				<div class="span12">
 					<?php echo $this->element('sql_dump'); ?>
