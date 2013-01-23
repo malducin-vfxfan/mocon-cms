@@ -39,7 +39,7 @@ class UsersController extends AppController {
 			if ($this->Auth->login()) {
 				$user_data = $this->User->find('first', array('conditions' => array('User.id' => $this->Auth->user('id'))));
 				$this->Session->write('Auth.User.groupName', $user_data['Group']['name']);
-				return $this->redirect(array('controller' => 'posts', 'action' => 'admin_index'));
+				$this->redirect($this->Auth->redirect());
 			}
 			else {
 				$this->Session->setFlash('Username or password is incorrect.', 'default', array('class' => 'alert alert-error'), 'auth');
@@ -56,8 +56,7 @@ class UsersController extends AppController {
 	public function admin_logout() {
 		$this->layout = 'default_login';
 		$this->Session->destroy();
-		$this->Auth->logout();
-		$this->redirect(array('controller' => 'users', 'action' => 'admin_login'));
+		$this->redirect($this->Auth->logout());
 	}
 
 /**

@@ -59,9 +59,10 @@ class AppController extends Controller {
 		// always allow index and view access
 		$this->Auth->allow('index', 'view');
 
-		// disable authentication redirect, controll it in the login and logout methods
-		$this->Session->write('Auth.redirect', null);
-		$this->Auth->autoRedirect = false;
+		// set the login and logout actions
+		$this->Auth->loginAction = array('controller' => 'users', 'action' => 'admin_login');
+		$this->Auth->loginRedirect = array('controller' => 'posts', 'action' => 'admin_index');
+		$this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'admin_login');
 
 		// use controller based authorization
 //		$this->Auth->authorize = 'controller';
