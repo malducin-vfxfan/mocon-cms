@@ -67,7 +67,7 @@ class MySanitize extends Sanitize {
 			$string = trim($string);
 		}
 
-		return htmlspecialchars(Sanitize::stripWhitespace(trim($string)), $options['quotes'], $options['charset']);
+		return htmlspecialchars($string, $options['quotes'], $options['charset']);
 	}
 
 /**
@@ -93,10 +93,8 @@ class MySanitize extends Sanitize {
 			return $data;
 		}
 
-		if (is_string($options)) {
+		if (!is_array($options)) {
 			$options = array('connection' => $options);
-		} elseif (!is_array($options)) {
-			$options = array();
 		}
 
 		$options = array_merge(array(
@@ -118,29 +116,29 @@ class MySanitize extends Sanitize {
 				$data[$key] = MySanitize::cleanSafe($val, $options);
 			}
 			return $data;
-		} else {
-			if ($options['odd_spaces']) {
-				$data = str_replace(chr(0xCA), '', $data);
-			}
-			if ($options['encode']) {
-				$data = MySanitize::cleanHtml($data, array('remove' => $options['remove_html'], 'quotes' => $options['quotes'], 'only_single_quotes' => $options['only_single_quotes']));
-			}
-			if ($options['dollar']) {
-				$data = str_replace("\\\$", "$", $data);
-			}
-			if ($options['carriage']) {
-				$data = str_replace("\r", "", $data);
-			}
-			if ($options['unicode']) {
-				$data = preg_replace("/&amp;#([0-9]+);/s", "&#\\1;", $data);
-			}
-			if ($options['escape']) {
-				$data = Sanitize::escape($data, $options['connection']);
-			}
-			if ($options['backslash']) {
-				$data = preg_replace("/\\\(?!&amp;#|\?#)/", "\\", $data);
-			}
-			return $data;
 		}
+
+		if ($options['odd_spaces']) {
+			$data = str_replace(chr(0xCA), '', $data);
+		}
+		if ($options['encode']) {
+			$data = MySanitize::cleanHtml($data, array('remove' => $options['remove_html'], 'quotes' => $options['quotes'], 'only_single_quotes' => $options['only_single_quotes']));
+		}
+		if ($options['dollar']) {
+			$data = str_replace("\\\$", "$", $data);
+		}
+		if ($options['carriage']) {
+			$data = str_replace("\r", "", $data);
+		}
+		if ($options['unicode']) {
+			$data = preg_replace("/&amp;#([0-9]+);/s", "&#\\1;", $data);
+		}
+		if ($options['escape']) {
+			$data = Sanitize::escape($data, $options['connection']);
+		}
+		if ($options['backslash']) {
+			$data = preg_replace("/\\\(?!&amp;#|\?#)/", "\\", $data);
+		}
+		return $data;
 	}
 }
