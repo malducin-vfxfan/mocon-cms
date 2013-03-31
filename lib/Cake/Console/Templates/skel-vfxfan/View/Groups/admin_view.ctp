@@ -82,12 +82,14 @@ $this->start('relatedContent1');
 		?>
 		</p>
 
-		<div class="paging">
-		<?php
-			echo $this->Paginator->prev('« previous', array(), null, array('class' => 'prev disabled'));
-			echo $this->Paginator->numbers(array('separator' => '', 'first' => 'first', 'last' => 'last'));
-			echo $this->Paginator->next('next »', array(), null, array('class' => 'next disabled'));
-		?>
+		<div class="pagination">
+			<ul>
+			<?php
+				echo $this->Paginator->prev('« previous', array('tag' => 'li', 'disabledTag' => 'span'), null, array());
+				echo $this->Paginator->numbers(array('separator' => '', 'first' => 'first', 'last' => 'last', 'tag' => 'li', 'currentTag' => 'span', 'currentClass' => 'active'));
+				echo $this->Paginator->next('next »', array('tag' => 'li', 'disabledTag' => 'span'), null, array());
+			?>
+			</ul>
 		</div>
 		<?php endif; ?>
 
