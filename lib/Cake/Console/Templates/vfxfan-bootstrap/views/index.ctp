@@ -8,8 +8,7 @@
  * @package       templates
  * @subpackage    templates.vfxfan-bootstrap.views.index
  */
-$packagename = strtolower(Inflector::slug($pluralHumanName));
-$subpackagename = $packagename.'.views';
+$packagename = strtolower(Inflector::slug($pluralHumanName)).'.views';
 ?>
 <?php echo "<?php\n"; ?>
 /**
@@ -19,7 +18,6 @@ $subpackagename = $packagename.'.views';
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
  * @subpackage    <?php echo $packagename."\n"; ?>
- * @subpackage    <?php echo $subpackagename."\n"; ?>
  */
 <?php echo "?>\n"; ?>
 <div class="row">
@@ -81,14 +79,16 @@ $subpackagename = $packagename.'.views';
 ?>
 		</p>
 
-		<div class="paging">
+		<div class="pagination">
+			<ul>
 <?php
-	echo "\t\t<?php\n";
-	echo "\t\t\techo \$this->Paginator->prev('« previous', array(), null, array('class' => 'prev disabled'));\n";
-	echo "\t\t\techo \$this->Paginator->numbers(array('separator' => '', 'first' => 'first', 'last' => 'last'));\n";
-	echo "\t\t\techo \$this->Paginator->next('next »', array(), null, array('class' => 'next disabled'));\n";
-	echo "\t\t?>\n";
+	echo "\t\t\t<?php\n";
+	echo "\t\t\t\techo \$this->Paginator->prev('« previous', array('tag' => 'li', 'disabledTag' => 'span'), null, array());\n";
+	echo "\t\t\t\techo \$this->Paginator->numbers(array('separator' => '', 'first' => 'first', 'last' => 'last', 'tag' => 'li', 'currentTag' => 'span', 'currentClass' => 'active'));\n";
+	echo "\t\t\t\techo \$this->Paginator->next('next »', array('tag' => 'li', 'disabledTag' => 'span'), null, array());\n";
+	echo "\t\t\t?>\n";
 ?>
+			</ul>
 		</div>
 	</section>
 </div>

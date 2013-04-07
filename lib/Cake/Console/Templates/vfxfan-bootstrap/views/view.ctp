@@ -8,8 +8,7 @@
  * @package       templates
  * @subpackage    templates.vfxfan-bootstrap.views.view
  */
-$packagename = strtolower(Inflector::slug($pluralHumanName));
-$subpackagename = $packagename.'.views';
+$packagename = strtolower(Inflector::slug($pluralHumanName)).'.views';
 ?>
 <?php echo "<?php\n"; ?>
 /**
@@ -19,7 +18,6 @@ $subpackagename = $packagename.'.views';
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
  * @subpackage    <?php echo $packagename."\n"; ?>
- * @subpackage    <?php echo $subpackagename."\n"; ?>
  */
 <?php echo "?>\n"; ?>
 <div class="row">
@@ -37,7 +35,7 @@ $subpackagename = $packagename.'.views';
 		foreach ($data as $alias => $details) {
 			if ($details['controller'] != $this->name && !in_array($details['controller'], $done)) {
 				echo "\t\t\t<li><?php echo \$this->Html->link('List " . Inflector::humanize($details['controller']) . "', array('controller' => '{$details['controller']}', 'action' => 'admin_index'), array('class' => 'btn')); ?> </li>\n";
-				echo "\t\t\t<li><?php echo \$this->Html->link('New " .  Inflector::humanize(Inflector::underscore($alias)) . "', array('controller' => '{$details['controller']}', 'action' => 'admin_add'), array('class' => 'btn')); ?> </li>\n";
+				echo "\t\t\t<li><?php echo \$this->Html->link('New " . Inflector::humanize(Inflector::underscore($alias)) . "', array('controller' => '{$details['controller']}', 'action' => 'admin_add'), array('class' => 'btn')); ?> </li>\n";
 				$done[] = $details['controller'];
 			}
 		}

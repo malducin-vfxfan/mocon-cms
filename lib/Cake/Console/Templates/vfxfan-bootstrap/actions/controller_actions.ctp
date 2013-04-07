@@ -28,12 +28,12 @@
  * @return void
  */
 	public function <?php echo $admin ?>view($id = null) {
-		$this-><?php echo $currentModelName; ?>->id = $id;
-		if (!$this-><?php echo $currentModelName; ?>->exists()) {
+		if (!$this-><?php echo $currentModelName; ?>->exists($id)) {
 			throw new NotFoundException('Invalid <?php echo strtolower($singularHumanName); ?>.');
 		}
 		// $this-><?php echo $currentModelName; ?>->unbindModel(array('hasMany' => array('')));
-		$<?php echo $singularName; ?> = $this-><?php echo $currentModelName; ?>->find('first', array('conditions' => array('<?php echo $currentModelName; ?>.id' => $id)));
+		$options = array('conditions' => array('<?php echo $currentModelName; ?>.id' => $id));
+		$<?php echo $singularName; ?> = $this-><?php echo $currentModelName; ?>->find('first', $options);
 		$this->set(compact('<?php echo $singularName; ?>'));
 		$this->set('title_for_layout', '<?php echo ucfirst($singularName); ?>: ');
 		// if model has a hasMany relationship don't forget to add pagination here and in the view
@@ -91,8 +91,7 @@
  * @return void
  */
 	public function <?php echo $admin; ?>edit($id = null) {
-		$this-><?php echo $currentModelName; ?>->id = $id;
-		if (!$this-><?php echo $currentModelName; ?>->exists()) {
+		if (!$this-><?php echo $currentModelName; ?>->exists($id)) {
 			throw new NotFoundException('Invalid <?php echo strtolower($singularHumanName); ?>.');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
@@ -109,7 +108,9 @@
 <?php endif; ?>
 			}
 		} else {
-			$this->request->data = $this-><?php echo $currentModelName; ?>->read(null, $id);
+			$options = array('conditions' => array('<?php echo $currentModelName; ?>.id' => $id));
+			$this->request->data = $this-><?php echo $currentModelName; ?>->find('first', $options);
+
 		}
 <?php
 		foreach (array('belongsTo', 'hasAndBelongsToMany') as $assoc):
@@ -132,17 +133,17 @@
 /**
  * <?php echo $admin ?>delete method
  *
+ * @throws NotFoundException
+ * @throws MethodNotAllowedException
  * @param string $id
  * @return void
  */
 	public function <?php echo $admin; ?>delete($id = null) {
-		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
-		}
 		$this-><?php echo $currentModelName; ?>->id = $id;
 		if (!$this-><?php echo $currentModelName; ?>->exists()) {
 			throw new NotFoundException('Invalid <?php echo strtolower($singularHumanName); ?>.');
 		}
+		$this->request->onlyAllow('post', 'delete');
 		if ($this-><?php echo $currentModelName; ?>->delete()) {
 <?php if ($wannaUseSession): ?>
 			$this->Session->setFlash('<?php echo ucfirst(strtolower($singularHumanName)); ?> deleted.', 'default', array('class' => 'alert alert-success'));

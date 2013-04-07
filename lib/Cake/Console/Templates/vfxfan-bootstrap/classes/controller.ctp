@@ -3,14 +3,13 @@
  * Controller template.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
  * @package       templates
  * @subpackage    templates.vfxfan-bootstrap.controller
  */
 
-$packagename = strtolower(Inflector::underscore($controllerName));
-$subpackagename = $packagename.'.controller';
+$packagename = strtolower(Inflector::underscore($controllerName)).'.controller';
 echo "<?php\n";
 $docString = <<<DOCSTRING
 /**
@@ -19,10 +18,9 @@ $docString = <<<DOCSTRING
  * $controllerName actions.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
  * @package       $packagename
- * @subpackage    $subpackagename
  */
 DOCSTRING;
 echo $docString."\n";

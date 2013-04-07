@@ -8,8 +8,7 @@
  * @package       templates
  * @subpackage    templates.vfxfan-bootstrap.views.form
  */
-$packagename = strtolower(Inflector::slug($pluralHumanName));
-$subpackagename = $packagename.'.views';
+$packagename = strtolower(Inflector::slug($pluralHumanName)).'.views';
 ?>
 <?php echo "<?php\n"; ?>
 /**
@@ -19,7 +18,6 @@ $subpackagename = $packagename.'.views';
  * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
  * @package       <?php echo $packagename."\n"; ?>
- * @subpackage    <?php echo $subpackagename."\n"; ?>
  */
 <?php echo "?>\n"; ?>
 <div class="row">

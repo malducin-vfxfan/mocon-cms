@@ -3,14 +3,13 @@
  * Model template.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
  * @package       templates
  * @subpackage    templates.vfxfan-bootstrap.model
  */
 
-$packagename = strtolower(Inflector::pluralize(Inflector::underscore($name)));
-$subpackagename = $packagename.'.model';
+$packagename = strtolower(Inflector::pluralize(Inflector::underscore($name))).'.model';
 echo "<?php\n";
 $docString = <<<DOCSTRING
 /**
@@ -19,10 +18,9 @@ $docString = <<<DOCSTRING
  * Manage $name data.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
  * @package       $packagename
- * @subpackage    $subpackagename
  */
 DOCSTRING;
 echo $docString."\n";
@@ -43,7 +41,7 @@ foreach (array('hasOne', 'belongsTo', 'hasMany', 'hasAndBelongsToMany') as $asso
 ?>
  */
 class <?php echo $name ?> extends <?php echo $plugin; ?>AppModel {
-<?php if ($useDbConfig != 'default'): ?>
+<?php if ($useDbConfig !== 'default'): ?>
 /**
  * Use database config
  *
