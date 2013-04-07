@@ -105,11 +105,11 @@ class EventsController extends AppController {
  */
 	public function admin_view($id = null) {
 		$this->layout = 'default_admin';
-		$this->Event->id = $id;
-		if (!$this->Event->exists()) {
+		if (!$this->Event->exists($id)) {
 			throw new NotFoundException('Invalid Event.');
 		}
-		$event = $this->Event->find('first', array('conditions' => array('Event.id' => $id)));
+		$options = array('conditions' => array('Event.id' => $id));
+		$event = $this->Event->find('first', $options);
 		$this->set(compact('event'));
 		$this->set('title_for_layout', 'Event: ');
 	}
@@ -125,7 +125,9 @@ class EventsController extends AppController {
 			$this->Event->create();
 			if ($this->Event->save($this->request->data)) {
 				$event = $this->Event->find('first', array('conditions' => array('Event.id' => $this->Event->id)));
-				$this->Upload->uploadImageThumb('img'.DS.'events'.DS.$event['Event']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->request->data['File']['image']['name']));
+				if ($event) {
+					$this->Upload->uploadImageThumb('img'.DS.'events'.DS.$event['Event']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->request->data['File']['image']['name']));
+				}
 				$this->Session->setFlash('The Event has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
@@ -143,21 +145,23 @@ class EventsController extends AppController {
  */
 	public function admin_edit($id = null) {
 		$this->layout = 'default_admin';
-		$this->Event->id = $id;
-		if (!$this->Event->exists()) {
+		if (!$this->Event->exists($id)) {
 			throw new NotFoundException('Invalid Event.');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Event->save($this->request->data)) {
 				$event = $this->Event->find('first', array('conditions' => array('Event.id' => $this->Event->id)));
-				$this->Upload->uploadImageThumb('img'.DS.'events'.DS.$event['Event']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->request->data['File']['image']['name']));
+				if ($event) {
+					$this->Upload->uploadImageThumb('img'.DS.'events'.DS.$event['Event']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->request->data['File']['image']['name']));
+				}
 				$this->Session->setFlash('The Event has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
 				$this->Session->setFlash('The Event could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		} else {
-			$this->request->data = $this->Event->read(null, $id);
+			$options = array('conditions' => array('Event.id' => $id));
+			$this->request->data = $this->Event->find('first', $options);
 		}
 		$this->set('title_for_layout', 'Edit Event');
 	}
@@ -165,18 +169,18 @@ class EventsController extends AppController {
 /**
  * admin_delete method
  *
+ * @throws NotFoundException
+ * @throws MethodNotAllowedException
  * @param string $id
  * @return void
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
-		}
 		$this->Event->id = $id;
 		if (!$this->Event->exists()) {
 			throw new NotFoundException('Invalid Event.');
 		}
+		$this->request->onlyAllow('post', 'delete');
 		if ($this->Event->delete()) {
 			$this->Session->setFlash('Event deleted.', 'default', array('class' => 'alert alert-success'));
 			$this->redirect(array('action'=>'admin_index'));

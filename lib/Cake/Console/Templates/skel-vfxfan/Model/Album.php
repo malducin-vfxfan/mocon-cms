@@ -149,11 +149,13 @@ class Album extends AppModel {
 	public function afterSave($created) {
 		if ($created) {
 			$album = $this->find('first', array('conditions' => array('Album.id' => $this->id)));
-			if (!is_file(IMAGES.'albums'.DS.$album['Album']['year'])) {
-				mkdir(IMAGES.'albums'.DS.$album['Album']['year']);
+			if ($album) {
+				if (!is_file(IMAGES.'albums'.DS.$album['Album']['year'])) {
+					mkdir(IMAGES.'albums'.DS.$album['Album']['year']);
+				}
+				mkdir(IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id));
+				mkdir(IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id).DS.'thumbnails');
 			}
-			mkdir(IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id));
-			mkdir(IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id).DS.'thumbnails');
 		}
 	}
 
@@ -170,22 +172,24 @@ class Album extends AppModel {
  */
 	public function beforeDelete($cascade) {
 		$album = $this->find('first', array('conditions' => array('Album.id' => $this->id)));
-		$directory = IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id);
-		$files = new DirectoryIterator($directory.DS.'thumbnails');
+		if ($album) {
+			$directory = IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id);
+			$files = new DirectoryIterator($directory.DS.'thumbnails');
 
-		foreach ($files as $filename) {
-			if ($filename->isFile()) {
-				unlink($directory.DS.'thumbnails'.DS.$filename->getBasename());
+			foreach ($files as $filename) {
+				if ($filename->isFile()) {
+					unlink($directory.DS.'thumbnails'.DS.$filename->getBasename());
+				}
 			}
-		}
 
-		rmdir($directory.DS.'thumbnails');
+			rmdir($directory.DS.'thumbnails');
 
-		$files = new DirectoryIterator($directory);
+			$files = new DirectoryIterator($directory);
 
-		foreach ($files as $filename) {
-			if ($filename->isFile()) {
-				unlink($directory.DS.$filename->getBasename());
+			foreach ($files as $filename) {
+				if ($filename->isFile()) {
+					unlink($directory.DS.$filename->getBasename());
+				}
 			}
 		}
 

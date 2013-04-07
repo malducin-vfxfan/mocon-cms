@@ -79,11 +79,11 @@ class MenusController extends AppController {
  */
 	public function admin_view($id = null) {
 		$this->layout = 'default_admin';
-		$this->Menu->id = $id;
-		if (!$this->Menu->exists()) {
+		if (!$this->Menu->exists($id)) {
 			throw new NotFoundException('Invalid Menu.');
 		}
-		$menu = $this->Menu->find('first', array('conditions' => array('Menu.id' => $id)));
+		$options = array('conditions' => array('Menu.id' => $id));
+		$menu = $this->Menu->find('first', $options);
 		$this->set(compact('menu'));
 		$this->set('title_for_layout', 'Menu Item: '.$menu['Menu']['name']);
 	}
@@ -120,8 +120,7 @@ class MenusController extends AppController {
  */
 	public function admin_edit($id = null) {
 		$this->layout = 'default_admin';
-		$this->Menu->id = $id;
-		if (!$this->Menu->exists()) {
+		if (!$this->Menu->exists($id)) {
 			throw new NotFoundException('Invalid Menu.');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
@@ -132,7 +131,8 @@ class MenusController extends AppController {
 				$this->Session->setFlash('The Menu could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		} else {
-			$this->request->data = $this->Menu->read(null, $id);
+			$options = array('conditions' => array('Menu.id' => $id));
+			$this->request->data = $this->Menu->find('first', $options);
 		}
 		$menuParents = $this->Menu->find('list', array('fields' => array('Menu.id', 'Menu.name'), 'order' => 'Menu.id'));
 		$menuRoot = array(0 => 'Root');
@@ -145,18 +145,18 @@ class MenusController extends AppController {
 /**
  * admin_delete method
  *
+ * @throws NotFoundException
+ * @throws MethodNotAllowedException
  * @param string $id
  * @return void
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
-		}
 		$this->Menu->id = $id;
 		if (!$this->Menu->exists()) {
 			throw new NotFoundException('Invalid Menu.');
 		}
+		$this->request->onlyAllow('post', 'delete');
 		if ($this->Menu->delete()) {
 			$this->Session->setFlash('Menu deleted.', 'default', array('class' => 'alert alert-success'));
 			$this->redirect(array('action'=>'admin_index'));

@@ -78,11 +78,11 @@ class ContactFormsController extends AppController {
  */
 	public function admin_view($id = null) {
 		$this->layout = 'default_admin';
-		$this->ContactForm->id = $id;
-		if (!$this->ContactForm->exists()) {
+		if (!$this->ContactForm->exists($id)) {
 			throw new NotFoundException('Invalid Contact Form message.');
 		}
-		$contactForm = $this->ContactForm->find('first', array('conditions' => array('ContactForm.id' => $id)));
+		$options = array('conditions' => array('ContactForm.id' => $id));
+		$contactForm = $this->ContactForm->find('first', $options);
 		$this->set(compact('contactForm'));
 		$this->set('title_for_layout', 'Contact Form message');
 	}
@@ -90,18 +90,18 @@ class ContactFormsController extends AppController {
 /**
  * admin_delete method
  *
+ * @throws NotFoundException
+ * @throws MethodNotAllowedException
  * @param string $id
  * @return void
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
-		}
 		$this->ContactForm->id = $id;
 		if (!$this->ContactForm->exists()) {
 			throw new NotFoundException('Invalid Contact Form message.');
 		}
+		$this->request->onlyAllow('post', 'delete');
 		if ($this->ContactForm->delete()) {
 			$this->Session->setFlash('Contact Form message deleted.', 'default', array('class' => 'alert alert-success'));
 			$this->redirect(array('action'=>'admin_index'));
@@ -118,23 +118,28 @@ class ContactFormsController extends AppController {
  * @param string $id
  * @return void
  */
-	private function _sendContactEmail($id) {
+	private function _sendContactEmail($id = null) {
+		if (!$this->ContactForm->exists($id)) {
+			throw new NotFoundException('Invalid Contact Form.');
+		}
 		$email = new CakeEmail();
 		$contactForm = $this->ContactForm->find('first', array('conditions' => array('ContactForm.id' => $id)));
-		$currentRecipients = $this->ContactFormEmail->find('active', array('fields' => array('ContactFormEmail.email')));
+		if ($contactForm) {
+			$currentRecipients = $this->ContactFormEmail->find('active', array('fields' => array('ContactFormEmail.email')));
 
-		$email->from(array('webmaster@example.com' => 'Site Webmaster'));
-		$email->to($currentRecipients);
-		$email->sender('webmaster@example.com', 'VFXfan CMS emailer');
-		$email->subject('New Contact Message from Site');
-		$email->emailFormat('both');
-		$email->template('contact_form', 'default');
-		$email->viewVars(array(
-			'name' => $contactForm['ContactForm']['name'],
-			'email' => $contactForm['ContactForm']['email'],
-			'message' => $contactForm['ContactForm']['message']
-		));
-		$result = $email->send();
+			$email->from(array('webmaster@example.com' => 'Site Webmaster'));
+			$email->to($currentRecipients);
+			$email->sender('webmaster@example.com', 'VFXfan CMS emailer');
+			$email->subject('New Contact Message from Site');
+			$email->emailFormat('both');
+			$email->template('contact_form', 'default');
+			$email->viewVars(array(
+				'name' => $contactForm['ContactForm']['name'],
+				'email' => $contactForm['ContactForm']['email'],
+				'message' => $contactForm['ContactForm']['message']
+			));
+			$result = $email->send();
+		}
     }
 
 }

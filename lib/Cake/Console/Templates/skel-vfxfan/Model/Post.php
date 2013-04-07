@@ -177,8 +177,10 @@ class Post extends AppModel {
 		// check to see if a year folder exists and if not, create one
 		if ($created) {
 			$post = $this->find('first', array('conditions' => array('Post.id' => $this->id), 'recursive' => -1));
-			if (!is_file(IMAGES.'posts'.DS.$post['Post']['year'])) {
-				mkdir(IMAGES.'posts'.DS.$post['Post']['year']);
+			if ($post) {
+				if (!is_file(IMAGES.'posts'.DS.$post['Post']['year'])) {
+					mkdir(IMAGES.'posts'.DS.$post['Post']['year']);
+				}
 			}
 		}
 		Cache::delete('latest_posts');
@@ -194,13 +196,15 @@ class Post extends AppModel {
  */
 	public function beforeDelete($cascade) {
 		$post = $this->find('first', array('conditions' => array('Post.id' => $this->id), 'recursive' => -1));
-		$directory = IMAGES.'posts'.DS.$post['Post']['year'];
-		$filebasename = sprintf("%010d", $this->id);
+		if ($post) {
+			$directory = IMAGES.'posts'.DS.$post['Post']['year'];
+			$filebasename = sprintf("%010d", $this->id);
 
-		$images = glob($directory.DS.$filebasename.'.*');
+			$images = glob($directory.DS.$filebasename.'.*');
 
-		foreach ($images as $image) {
-			unlink($image);
+			foreach ($images as $image) {
+				unlink($image);
+			}
 		}
 
 		return true;

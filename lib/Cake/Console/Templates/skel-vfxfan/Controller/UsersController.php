@@ -80,11 +80,11 @@ class UsersController extends AppController {
 	public function admin_view($id = null) {
 		$this->layout = 'default_admin';
 		$this->User->recursive = 0;
-		$this->User->id = $id;
-		if (!$this->User->exists()) {
+		if (!$this->User->exists($id)) {
 			throw new NotFoundException('Invalid User.');
 		}
-		$user = $this->User->find('first', array('conditions' => array('User.id' => $id)));
+		$options = array('conditions' => array('User.id' => $id));
+		$user = $this->User->find('first', $options);
 		$this->set(compact('user'));
 		$this->set('title_for_layout', 'User: '.$user['User']['username']);
 		$this->User->Post->recursive = -1;
@@ -125,8 +125,7 @@ class UsersController extends AppController {
  */
 	public function admin_edit($id = null) {
 		$this->layout = 'default_admin';
-		$this->User->id = $id;
-		if (!$this->User->exists()) {
+		if (!$this->User->exists($id)) {
 			throw new NotFoundException('Invalid User.');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
@@ -150,7 +149,8 @@ class UsersController extends AppController {
 				}
 			}
 		} else {
-			$this->request->data = $this->User->read(null, $id);
+			$options = array('conditions' => array('User.id' => $id));
+			$this->request->data = $this->User->find('first', $options);
 		}
 		$groups = $this->User->Group->find('list');
 		$this->set(compact('groups'));
@@ -160,18 +160,18 @@ class UsersController extends AppController {
 /**
  * admin_delete method
  *
+ * @throws NotFoundException
+ * @throws MethodNotAllowedException
  * @param string $id
  * @return void
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
-		}
 		$this->User->id = $id;
 		if (!$this->User->exists()) {
 			throw new NotFoundException('Invalid User.');
 		}
+		$this->request->onlyAllow('post', 'delete');
 		if ($this->User->delete()) {
 			$this->Session->setFlash('User deleted.', 'default', array('class' => 'alert alert-success'));
 			$this->redirect(array('action'=>'admin_index'));

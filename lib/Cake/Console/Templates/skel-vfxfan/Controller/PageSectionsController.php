@@ -58,11 +58,11 @@ class PageSectionsController extends AppController {
  */
 	public function admin_view($id = null) {
 		$this->layout = 'default_admin';
-		$this->PageSection->id = $id;
-		if (!$this->PageSection->exists()) {
+		if (!$this->PageSection->exists($id)) {
 			throw new NotFoundException('Invalid Page Section.');
 		}
-		$pageSection = $this->PageSection->find('first', array('conditions' => array('PageSection.id' => $id)));
+		$options = array('conditions' => array('PageSection.id' => $id));
+		$pageSection = $this->PageSection->find('first', $options);
 		$this->set(compact('pageSection'));
 		$this->set('title_for_layout', 'Page Section: '.$pageSection['PageSection']['title']);
 		$this->set('images', $this->PageSection->listFiles($pageSection['PageSection']['page_id']));
@@ -102,8 +102,7 @@ class PageSectionsController extends AppController {
  */
 	public function admin_edit($id = null) {
 		$this->layout = 'default_admin';
-		$this->PageSection->id = $id;
-		if (!$this->PageSection->exists()) {
+		if (!$this->PageSection->exists($id)) {
 			throw new NotFoundException('Invalid Page Section.');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
@@ -116,7 +115,8 @@ class PageSectionsController extends AppController {
 				$this->Session->setFlash('The Page Section could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		} else {
-			$this->request->data = $this->PageSection->read(null, $id);
+			$options = array('conditions' => array('PageSection.id' => $id));
+			$this->request->data = $this->PageSection->find('first', $options);
 		}
 		$pages = $this->PageSection->Page->find('list');
 		$this->set('title_for_layout', 'Edit Page Section');
@@ -126,18 +126,18 @@ class PageSectionsController extends AppController {
 /**
  * admin_delete method
  *
+ * @throws NotFoundException
+ * @throws MethodNotAllowedException
  * @param string $id
  * @return void
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
-		}
 		$this->PageSection->id = $id;
 		if (!$this->PageSection->exists()) {
 			throw new NotFoundException('Invalid Page Section.');
 		}
+		$this->request->onlyAllow('post', 'delete');
 		if ($this->PageSection->delete()) {
 			$this->Session->setFlash('Page Section deleted.', 'default', array('class' => 'alert alert-success'));
 			$this->redirect(array('action'=>'admin_index'));

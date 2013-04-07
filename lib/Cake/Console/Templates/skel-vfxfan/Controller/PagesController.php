@@ -144,11 +144,11 @@ class PagesController extends AppController {
  */
 	public function admin_view($id = null) {
 		$this->layout = 'default_admin';
-		$this->Page->id = $id;
-		if (!$this->Page->exists()) {
+		if (!$this->Page->exists($id)) {
 			throw new NotFoundException('Invalid Page.');
 		}
-		$page = $this->Page->find('first', array('conditions' => array('Page.id' => $id)));
+		$options = array('conditions' => array('Page.id' => $id));
+		$page = $this->Page->find('first', $options);
 		$this->set(compact('page'));
 		$this->set('title_for_layout', 'Page: '.$page['Page']['title']);
 		$this->set('images', $this->Page->listFiles($page['Page']['id']));
@@ -219,8 +219,7 @@ class PagesController extends AppController {
  */
 	public function admin_edit($id = null) {
 		$this->layout = 'default_admin';
-		$this->Page->id = $id;
-		if (!$this->Page->exists()) {
+		if (!$this->Page->exists($id)) {
 			throw new NotFoundException('Invalid Page.');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
@@ -257,7 +256,8 @@ class PagesController extends AppController {
 			}
 		}
 		else {
-			$this->request->data = $this->Page->read(null, $id);
+			$options = array('conditions' => array('Page.id' => $id));
+			$this->request->data = $this->Page->find('first', $options);
 		}
 		$pageSections = $this->Page->PageSection->find('all', array('conditions' => array('Page.id' => $id)));
 		$this->set('title_for_layout', 'Edit Page');
@@ -269,18 +269,18 @@ class PagesController extends AppController {
 /**
  * admin_delete method
  *
+ * @throws NotFoundException
+ * @throws MethodNotAllowedException
  * @param string $id
  * @return void
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
-		}
 		$this->Page->id = $id;
 		if (!$this->Page->exists()) {
 			throw new NotFoundException('Invalid Page.');
 		}
+		$this->request->onlyAllow('post', 'delete');
 		if ($this->Page->delete()) {
 			$this->Session->setFlash('Page deleted.', 'default', array('class' => 'alert alert-success'));
 			$this->redirect(array('action'=>'admin_index'));
@@ -301,13 +301,10 @@ class PagesController extends AppController {
  */
 	public function admin_deleteFile($id = null, $filename = null, $location = 'images') {
 		$this->layout = 'default_admin';
-		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
-		}
-		$this->Page->id = $id;
-		if (!$this->Page->exists()) {
+		if (!$this->Page->exists($id)) {
 			throw new NotFoundException('Invalid Page.');
 		}
+		$this->request->onlyAllow('post', 'delete');
 		if (!$filename) {
 			throw new NotFoundException('Invalid File.');
 		}

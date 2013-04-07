@@ -38,11 +38,11 @@ class ContactFormEmailsController extends AppController {
  */
 	public function admin_view($id = null) {
 		$this->layout = 'default_admin';
-		$this->ContactFormEmail->id = $id;
-		if (!$this->ContactFormEmail->exists()) {
+		if (!$this->ContactFormEmail->exists($id)) {
 			throw new NotFoundException('Invalid Contact Form Email.');
 		}
-		$contactFormEmail = $this->ContactFormEmail->find('first', array('conditions' => array('ContactFormEmail.id' => $id)));
+		$options = array('conditions' => array('ContactFormEmail.id' => $id));
+		$contactFormEmail = $this->ContactFormEmail->find('first', $options);
 		$this->set(compact('contactFormEmail'));
 		$this->set('title_for_layout', 'Contact Form Email: '.$contactFormEmail['ContactFormEmail']['email']);
 	}
@@ -74,8 +74,7 @@ class ContactFormEmailsController extends AppController {
  */
 	public function admin_edit($id = null) {
 		$this->layout = 'default_admin';
-		$this->ContactFormEmail->id = $id;
-		if (!$this->ContactFormEmail->exists()) {
+		if (!$this->ContactFormEmail->exists($id)) {
 			throw new NotFoundException('Invalid Contact Form Email.');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
@@ -86,7 +85,8 @@ class ContactFormEmailsController extends AppController {
 				$this->Session->setFlash('The Contact Form Email could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		} else {
-			$this->request->data = $this->ContactFormEmail->read(null, $id);
+			$options = array('conditions' => array('ContactFormEmail.id' => $id));
+			$this->request->data = $this->ContactFormEmail->find('first', $options);
 		}
 		$this->set('title_for_layout', 'Edit Contact Form Email');
 	}
@@ -94,18 +94,18 @@ class ContactFormEmailsController extends AppController {
 /**
  * admin_delete method
  *
+ * @throws NotFoundException
+ * @throws MethodNotAllowedException
  * @param string $id
  * @return void
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
-		}
 		$this->ContactFormEmail->id = $id;
 		if (!$this->ContactFormEmail->exists()) {
 			throw new NotFoundException('Invalid Contact Form Email.');
 		}
+		$this->request->onlyAllow('post', 'delete');
 		if ($this->ContactFormEmail->delete()) {
 			$this->Session->setFlash('Contact Form Email deleted.', 'default', array('class' => 'alert alert-success'));
 			$this->redirect(array('action'=>'admin_index'));

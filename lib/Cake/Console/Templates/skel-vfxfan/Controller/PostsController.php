@@ -94,11 +94,11 @@ class PostsController extends AppController {
  */
 	public function admin_view($id = null) {
 		$this->layout = 'default_admin';
-		$this->Post->id = $id;
-		if (!$this->Post->exists()) {
+		if (!$this->Post->exists($id)) {
 			throw new NotFoundException('Invalid Post.');
 		}
-		$post = $this->Post->find('first', array('conditions' => array('Post.id' => $id)));
+		$options = array('conditions' => array('Post.id' => $id));
+		$post = $this->Post->find('first', $options);
 		$this->set(compact('post'));
 		$this->set('title_for_layout', 'Post: '.$post['Post']['title']);
 	}
@@ -116,7 +116,9 @@ class PostsController extends AppController {
 			$this->request->data['Post']['content'] = $this->brita->purify($this->request->data['Post']['content']);
 			if ($this->Post->save($this->request->data)) {
 				$post = $this->Post->find('first', array('conditions' => array('Post.id' => $this->Post->id)));
-				$this->Upload->uploadImageThumb('img'.DS.'posts'.DS.$post['Post']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Post->id, $this->request->data['File']['image']['name']));
+				if ($post) {
+					$this->Upload->uploadImageThumb('img'.DS.'posts'.DS.$post['Post']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Post->id, $this->request->data['File']['image']['name']));
+				}
 				$this->Session->setFlash('The Post has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
@@ -134,22 +136,24 @@ class PostsController extends AppController {
  */
 	public function admin_edit($id = null) {
 		$this->layout = 'default_admin';
-		$this->Post->id = $id;
-		if (!$this->Post->exists()) {
+		if (!$this->Post->exists($id)) {
 			throw new NotFoundException('Invalid Post.');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$this->request->data['Post']['content'] = $this->brita->purify($this->request->data['Post']['content']);
 			if ($this->Post->save($this->request->data)) {
 				$post = $this->Post->find('first', array('conditions' => array('Post.id' => $this->Post->id)));
-				$this->Upload->uploadImageThumb('img'.DS.'posts'.DS.$post['Post']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Post->id, $this->request->data['File']['image']['name']));
+				if ($post) {
+					$this->Upload->uploadImageThumb('img'.DS.'posts'.DS.$post['Post']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Post->id, $this->request->data['File']['image']['name']));
+				}
 				$this->Session->setFlash('The Post has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
 				$this->Session->setFlash('The Post could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		} else {
-			$this->request->data = $this->Post->read(null, $id);
+			$options = array('conditions' => array('Post.id' => $id));
+			$this->request->data = $this->Post->find('first', $options);
 		}
 		$this->set('title_for_layout', 'Edit Post');
 	}
@@ -157,18 +161,18 @@ class PostsController extends AppController {
 /**
  * admin_delete method
  *
+ * @throws NotFoundException
+ * @throws MethodNotAllowedException
  * @param string $id
  * @return void
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
-		}
 		$this->Post->id = $id;
 		if (!$this->Post->exists()) {
 			throw new NotFoundException('Invalid Post.');
 		}
+		$this->request->onlyAllow('post', 'delete');
 		if ($this->Post->delete()) {
 			$this->Session->setFlash('Post deleted.', 'default', array('class' => 'alert alert-success'));
 			$this->redirect(array('action'=>'admin_index'));

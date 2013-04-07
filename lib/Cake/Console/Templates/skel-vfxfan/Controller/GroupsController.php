@@ -39,11 +39,11 @@ class GroupsController extends AppController {
 	public function admin_view($id = null) {
 		$this->layout = 'default_admin';
 		$this->Group->recursive = -1;
-		$this->Group->id = $id;
-		if (!$this->Group->exists()) {
+		if (!$this->Group->exists($id)) {
 			throw new NotFoundException('Invalid Group.');
 		}
-		$group = $this->Group->find('first', array('conditions' => array('Group.id' => $id)));
+		$options = array('conditions' => array('Group.id' => $id));
+		$group = $this->Group->find('first', $options);
 		$this->set(compact('group'));
 		$this->set('title_for_layout', 'Group: '.$group['Group']['name']);
 		$this->Group->User->recursive = -1;
@@ -77,8 +77,7 @@ class GroupsController extends AppController {
  */
 	public function admin_edit($id = null) {
 		$this->layout = 'default_admin';
-		$this->Group->id = $id;
-		if (!$this->Group->exists()) {
+		if (!$this->Group->exists($id)) {
 			throw new NotFoundException('Invalid Group.');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
@@ -89,7 +88,8 @@ class GroupsController extends AppController {
 				$this->Session->setFlash('The Group could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
 			}
 		} else {
-			$this->request->data = $this->Group->read(null, $id);
+			$options = $options = array('conditions' => array('Group.id' => $id));
+			$this->request->data = $this->Group->find('first', $options);
 		}
 		$this->set('title_for_layout', 'Edit Group');
 	}
@@ -97,18 +97,18 @@ class GroupsController extends AppController {
 /**
  * admin_delete method
  *
+ * @throws NotFoundException
+ * @throws MethodNotAllowedException
  * @param string $id
  * @return void
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
-		}
 		$this->Group->id = $id;
 		if (!$this->Group->exists()) {
 			throw new NotFoundException('Invalid Group.');
 		}
+		$this->request->onlyAllow('post', 'delete');
 		if ($this->Group->delete()) {
 			$this->Session->setFlash('Group deleted.', 'default', array('class' => 'alert alert-success'));
 			$this->redirect(array('action'=>'admin_index'));

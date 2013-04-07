@@ -192,8 +192,10 @@ class Event extends AppModel {
 		// check to see if a year folder exists and if not, create one
 		if ($created) {
 			$event = $this->find('first', array('conditions' => array('Event.id' => $this->id)));
-			if (!is_file(IMAGES.'events'.DS.$event['Event']['year'])) {
-				mkdir(IMAGES.'events'.DS.$event['Event']['year']);
+			if ($event) {
+				if (!is_file(IMAGES.'events'.DS.$event['Event']['year'])) {
+					mkdir(IMAGES.'events'.DS.$event['Event']['year']);
+				}
 			}
 		}
 	}
@@ -206,15 +208,16 @@ class Event extends AppModel {
  */
 	public function beforeDelete($cascade) {
 		$event = $this->find('first', array('conditions' => array('Event.id' => $this->id)));
-		$directory = IMAGES.'events'.DS.$event['Event']['year'];
-		$filebasename = sprintf("%010d", $this->id);
+		if ($event) {
+			$directory = IMAGES.'events'.DS.$event['Event']['year'];
+			$filebasename = sprintf("%010d", $this->id);
 
-		$images = glob($directory.DS.$filebasename.'.*');
+			$images = glob($directory.DS.$filebasename.'.*');
 
-		foreach ($images as $image) {
-			unlink($image);
+			foreach ($images as $image) {
+				unlink($image);
+			}
 		}
-
 		return true;
 	}
 
