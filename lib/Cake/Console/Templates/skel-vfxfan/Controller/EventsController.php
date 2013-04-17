@@ -124,7 +124,8 @@ class EventsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Event->create();
 			if ($this->Event->save($this->request->data)) {
-				$event = $this->Event->find('first', array('conditions' => array('Event.id' => $this->Event->id)));
+				$options = array('conditions' => array('Event.id' => $this->Event->id));
+				$event = $this->Event->find('first', $options);
 				if ($event) {
 					$this->Upload->uploadImageThumb('img'.DS.'events'.DS.$event['Event']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->request->data['File']['image']['name']));
 				}
@@ -150,7 +151,8 @@ class EventsController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Event->save($this->request->data)) {
-				$event = $this->Event->find('first', array('conditions' => array('Event.id' => $this->Event->id)));
+				$options = array('conditions' => array('Event.id' => $this->Event->id));
+				$event = $this->Event->find('first', $options);
 				if ($event) {
 					$this->Upload->uploadImageThumb('img'.DS.'events'.DS.$event['Event']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->request->data['File']['image']['name']));
 				}
@@ -176,8 +178,7 @@ class EventsController extends AppController {
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		$this->Event->id = $id;
-		if (!$this->Event->exists()) {
+		if (!$this->Event->exists($id)) {
 			throw new NotFoundException('Invalid Event.');
 		}
 		$this->request->onlyAllow('post', 'delete');

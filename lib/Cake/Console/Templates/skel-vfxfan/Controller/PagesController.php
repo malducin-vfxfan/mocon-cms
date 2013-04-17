@@ -97,7 +97,8 @@ class PagesController extends AppController {
 
 		$this->set('title_for_layout', 'Home');
 		$this->set(compact('posts', 'events'));
-		$this->set('mainpage', $this->Page->find('first', array('conditions' => array('Page.main' => 1))));
+		$options = array('conditions' => array('Page.main' => 1));
+		$this->set('mainpage', $this->Page->find('first', $options));
 	}
 
 /**
@@ -259,7 +260,8 @@ class PagesController extends AppController {
 			$options = array('conditions' => array('Page.id' => $id));
 			$this->request->data = $this->Page->find('first', $options);
 		}
-		$pageSections = $this->Page->PageSection->find('all', array('conditions' => array('Page.id' => $id)));
+		$options = array('conditions' => array('Page.id' => $id));
+		$pageSections = $this->Page->PageSection->find('all', $options);
 		$this->set('title_for_layout', 'Edit Page');
 		$this->set(compact('pageSections'));
 		$this->set('images', $this->Page->listFiles($id));
@@ -276,8 +278,7 @@ class PagesController extends AppController {
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		$this->Page->id = $id;
-		if (!$this->Page->exists()) {
+		if (!$this->Page->exists($id)) {
 			throw new NotFoundException('Invalid Page.');
 		}
 		$this->request->onlyAllow('post', 'delete');
@@ -294,6 +295,8 @@ class PagesController extends AppController {
  *
  * Delete one image file of a page.
  *
+ * @throws NotFoundException
+ * @throws MethodNotAllowedException
  * @param string $id
  * @param string $filename
  * @param string $location
@@ -304,10 +307,10 @@ class PagesController extends AppController {
 		if (!$this->Page->exists($id)) {
 			throw new NotFoundException('Invalid Page.');
 		}
-		$this->request->onlyAllow('post', 'delete');
 		if (!$filename) {
 			throw new NotFoundException('Invalid File.');
 		}
+		$this->request->onlyAllow('post', 'delete');
 		if ($location == 'images') {
 			if ($this->Page->deleteFile($id, $filename)) {
 				$this->Session->setFlash('File deleted.', 'default', array('class' => 'alert alert-success'));

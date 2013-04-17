@@ -101,8 +101,7 @@ class ContactFormEmailsController extends AppController {
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		$this->ContactFormEmail->id = $id;
-		if (!$this->ContactFormEmail->exists()) {
+		if (!$this->ContactFormEmail->exists($id)) {
 			throw new NotFoundException('Invalid Contact Form Email.');
 		}
 		$this->request->onlyAllow('post', 'delete');

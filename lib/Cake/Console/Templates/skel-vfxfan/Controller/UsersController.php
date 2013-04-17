@@ -37,7 +37,8 @@ class UsersController extends AppController {
 		$this->layout = 'default_login';
 		if ($this->request->is('post')) {
 			if ($this->Auth->login()) {
-				$user_data = $this->User->find('first', array('conditions' => array('User.id' => $this->Auth->user('id'))));
+				$options = array('conditions' => array('User.id' => $this->Auth->user('id')));
+				$user_data = $this->User->find('first', $options);
 				$this->Session->write('Auth.User.groupName', $user_data['Group']['name']);
 				$this->redirect($this->Auth->redirect());
 			}
@@ -167,8 +168,7 @@ class UsersController extends AppController {
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		$this->User->id = $id;
-		if (!$this->User->exists()) {
+		if (!$this->User->exists($id)) {
 			throw new NotFoundException('Invalid User.');
 		}
 		$this->request->onlyAllow('post', 'delete');

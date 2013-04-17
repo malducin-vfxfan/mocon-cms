@@ -97,8 +97,7 @@ class ContactFormsController extends AppController {
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		$this->ContactForm->id = $id;
-		if (!$this->ContactForm->exists()) {
+		if (!$this->ContactForm->exists($id)) {
 			throw new NotFoundException('Invalid Contact Form message.');
 		}
 		$this->request->onlyAllow('post', 'delete');
@@ -123,7 +122,8 @@ class ContactFormsController extends AppController {
 			throw new NotFoundException('Invalid Contact Form.');
 		}
 		$email = new CakeEmail();
-		$contactForm = $this->ContactForm->find('first', array('conditions' => array('ContactForm.id' => $id)));
+		$options = array('conditions' => array('ContactForm.id' => $id));
+		$contactForm = $this->ContactForm->find('first', $options);
 		if ($contactForm) {
 			$currentRecipients = $this->ContactFormEmail->find('active', array('fields' => array('ContactFormEmail.email')));
 

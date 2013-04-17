@@ -109,7 +109,8 @@ class AlbumsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Album->create();
 			if ($this->Album->save($this->request->data)) {
-				$album = $this->Album->find('first', array('conditions' => array('Album.id' => $this->Album->id)));
+				$options = array('conditions' => array('Album.id' => $this->Album->id));
+				$album = $this->Album->find('first', $options);
 				if ($album) {
 					$this->Upload->uploadImageThumb('img'.DS.'albums'.DS.$album['Album']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Album->id, $this->request->data['File']['image']['name']));
 				}
@@ -135,7 +136,8 @@ class AlbumsController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Album->save($this->request->data)) {
-				$album = $this->Album->find('first', array('conditions' => array('Album.id' => $this->Album->id)));
+				$options = array('conditions' => array('Album.id' => $this->Album->id));
+				$album = $this->Album->find('first', $options);
 				if ($album) {
 					$this->Upload->uploadImageThumb('img'.DS.'albums'.DS.$album['Album']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Album->id, $this->request->data['File']['image']['name']));
 				}
@@ -161,8 +163,7 @@ class AlbumsController extends AppController {
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		$this->Album->id = $id;
-		if (!$this->Album->exists()) {
+		if (!$this->Album->exists($id)) {
 			throw new NotFoundException('Invalid Album.');
 		}
 		$this->request->onlyAllow('post', 'delete');
@@ -179,6 +180,8 @@ class AlbumsController extends AppController {
  *
  * Upload one album image and create its thumbnail.
  *
+ * @throws NotFoundException
+ * @throws MethodNotAllowedException
  * @param string $id
  * @return void
  */
@@ -188,7 +191,8 @@ class AlbumsController extends AppController {
 			throw new NotFoundException('Invalid Album.');
 		}
 		$this->request->onlyAllow('post');
-		$album = $this->Album->find('first', array('conditions' => array('Album.id' => $id)));
+		$options = array('conditions' => array('Album.id' => $id));
+		$album = $this->Album->find('first', $options);
 		if ($album) {
 			$result = $this->Upload->uploadImageThumb('img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $id), $this->request->data['File']['image'], $this->request->data['File']['image']['name'], array('create_thumb' => true));
 			if ($result) {
@@ -206,18 +210,23 @@ class AlbumsController extends AppController {
  *
  * Delete one album image and its thumbnail.
  *
+ * @throws NotFoundException
+ * @throws MethodNotAllowedException
  * @param string $id
  * @return void
  */
 	public function admin_deleteAlbumImage($id = null, $image = null) {
 		$this->layout = 'default_admin';
+
 		if (!$id or !$image) {
 			$this->Session->setFlash('Invalid Album or image.', 'default', array('class' => 'alert alert-error'));
 			$this->redirect(array('action' => 'admin_index'));
 		}
+
 		if (!$this->Album->exists($id)) {
 			throw new NotFoundException('Invalid Album.');
 		}
+
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Album->deleteFile($id, $image)) {
 			$this->Session->setFlash('Album image deleted.', 'default', array('class' => 'alert alert-success'));

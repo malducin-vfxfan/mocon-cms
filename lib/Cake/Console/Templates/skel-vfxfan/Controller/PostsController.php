@@ -115,7 +115,8 @@ class PostsController extends AppController {
 			$this->request->data['Post']['user_id'] = $this->Auth->user('id');
 			$this->request->data['Post']['content'] = $this->brita->purify($this->request->data['Post']['content']);
 			if ($this->Post->save($this->request->data)) {
-				$post = $this->Post->find('first', array('conditions' => array('Post.id' => $this->Post->id)));
+				$options = array('conditions' => array('Post.id' => $this->Post->id));
+				$post = $this->Post->find('first', $options);
 				if ($post) {
 					$this->Upload->uploadImageThumb('img'.DS.'posts'.DS.$post['Post']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Post->id, $this->request->data['File']['image']['name']));
 				}
@@ -142,7 +143,8 @@ class PostsController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$this->request->data['Post']['content'] = $this->brita->purify($this->request->data['Post']['content']);
 			if ($this->Post->save($this->request->data)) {
-				$post = $this->Post->find('first', array('conditions' => array('Post.id' => $this->Post->id)));
+				$options = array('conditions' => array('Post.id' => $this->Post->id));
+				$post = $this->Post->find('first', $options);
 				if ($post) {
 					$this->Upload->uploadImageThumb('img'.DS.'posts'.DS.$post['Post']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Post->id, $this->request->data['File']['image']['name']));
 				}
@@ -168,8 +170,7 @@ class PostsController extends AppController {
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		$this->Post->id = $id;
-		if (!$this->Post->exists()) {
+		if (!$this->Post->exists($id)) {
 			throw new NotFoundException('Invalid Post.');
 		}
 		$this->request->onlyAllow('post', 'delete');

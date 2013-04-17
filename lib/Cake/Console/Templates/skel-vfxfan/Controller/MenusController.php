@@ -152,8 +152,7 @@ class MenusController extends AppController {
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		$this->Menu->id = $id;
-		if (!$this->Menu->exists()) {
+		if (!$this->Menu->exists($id)) {
 			throw new NotFoundException('Invalid Menu.');
 		}
 		$this->request->onlyAllow('post', 'delete');

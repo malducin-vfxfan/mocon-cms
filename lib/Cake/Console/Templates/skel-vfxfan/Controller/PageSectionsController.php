@@ -81,7 +81,8 @@ class PageSectionsController extends AppController {
 			$this->PageSection->create();
 			$this->request->data['PageSection']['content'] = $this->brita->purify($this->request->data['PageSection']['content']);
 			if ($this->PageSection->save($this->request->data)) {
-				$pageSection = $this->PageSection->find('first', array('conditions' => array('PageSection.id' => $this->PageSection->id)));
+				$options = array('conditions' => array('PageSection.id' => $this->PageSection->id));
+				$pageSection = $this->PageSection->find('first', $options);
 				$this->Session->setFlash('The Page Section has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('controller' => 'pages', 'action' => 'admin_view', $pageSection['PageSection']['page_id']));
 			} else {
@@ -108,7 +109,8 @@ class PageSectionsController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$this->request->data['PageSection']['content'] = $this->brita->purify($this->request->data['PageSection']['content']);
 			if ($this->PageSection->save($this->request->data)) {
-				$pageSection = $this->PageSection->find('first', array('conditions' => array('PageSection.id' => $this->PageSection->id)));
+				$options = array('conditions' => array('PageSection.id' => $this->PageSection->id));
+				$pageSection = $this->PageSection->find('first', $options);
 				$this->Session->setFlash('The Page Section has been saved.', 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('controller' => 'pages', 'action' => 'admin_view', $pageSection['PageSection']['page_id']));
 			} else {
@@ -133,8 +135,7 @@ class PageSectionsController extends AppController {
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		$this->PageSection->id = $id;
-		if (!$this->PageSection->exists()) {
+		if (!$this->PageSection->exists($id)) {
 			throw new NotFoundException('Invalid Page Section.');
 		}
 		$this->request->onlyAllow('post', 'delete');
