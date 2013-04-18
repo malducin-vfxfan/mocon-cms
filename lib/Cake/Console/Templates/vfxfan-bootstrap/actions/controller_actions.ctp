@@ -139,8 +139,7 @@
  * @return void
  */
 	public function <?php echo $admin; ?>delete($id = null) {
-		$this-><?php echo $currentModelName; ?>->id = $id;
-		if (!$this-><?php echo $currentModelName; ?>->exists()) {
+		if (!$this-><?php echo $currentModelName; ?>->exists($id)) {
 			throw new NotFoundException('Invalid <?php echo strtolower($singularHumanName); ?>.');
 		}
 		$this->request->onlyAllow('post', 'delete');
