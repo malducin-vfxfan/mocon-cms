@@ -142,7 +142,7 @@ class Page extends AppModel {
  *
  * @return boolean
  */
-	public function beforeValidate() {
+	public function beforeValidate($options = array()) {
 		if (!empty($this->data)) {
 			if (!$this->id) {
 				$this->data['Page']['slug'] = strtolower(Inflector::slug($this->data['Page']['title'], '-'));
@@ -175,7 +175,7 @@ class Page extends AppModel {
  * @param boolean $cascade
  * @return boolean
  */
-	public function beforeDelete($cascade) {
+	public function beforeDelete($cascade = true) {
 		$directory = IMAGES.'pages'.DS.sprintf("%010d", $this->id);
 		$files = new DirectoryIterator($directory);
 

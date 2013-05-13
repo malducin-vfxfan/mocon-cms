@@ -128,7 +128,7 @@ class Album extends AppModel {
  *
  * @return boolean
  */
-	public function beforeValidate() {
+	public function beforeValidate($options = array()) {
 		if (!empty($this->data)) {
 			$this->data = $this->_cleanData($this->data);
 			if (!$this->id) {
@@ -171,7 +171,7 @@ class Album extends AppModel {
  * @param boolean $cascade
  * @return boolean
  */
-	public function beforeDelete($cascade) {
+	public function beforeDelete($cascade = true) {
 		$options = array('conditions' => array('Album.id' => $this->id));
 		$album = $this->find('first', $options);
 		if ($album) {

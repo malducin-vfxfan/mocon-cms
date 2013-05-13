@@ -170,7 +170,7 @@ class Event extends AppModel {
  *
  * @return boolean
  */
-	public function beforeValidate() {
+	public function beforeValidate($options = array()) {
 		if (!empty($this->data)) {
 			if (!$this->id) {
 				$this->data['Event']['slug'] = strtolower(Inflector::slug($this->data['Event']['name'].'-'.$this->data['Event']['date_start'], '-'));
@@ -207,7 +207,7 @@ class Event extends AppModel {
  * @param boolean $cascade
  * @return boolean
  */
-	public function beforeDelete($cascade) {
+	public function beforeDelete($cascade = true) {
 		$options = array('conditions' => array('Event.id' => $this->id));
 		$event = $this->find('first', $options);
 		if ($event) {

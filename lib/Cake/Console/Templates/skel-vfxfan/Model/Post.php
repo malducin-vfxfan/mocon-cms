@@ -155,7 +155,7 @@ class Post extends AppModel {
  *
  * @return boolean
  */
-	public function beforeValidate() {
+	public function beforeValidate($options = array()) {
 		if (!empty($this->data)) {
 			if (!$this->id) {
 				$this->data['Post']['slug'] = strtolower(Inflector::slug($this->data['Post']['title'], '-'));
@@ -195,7 +195,7 @@ class Post extends AppModel {
  * @param boolean $cascade
  * @return boolean
  */
-	public function beforeDelete($cascade) {
+	public function beforeDelete($cascade = true) {
 		$options = array('conditions' => array('Post.id' => $this->id), 'recursive' => -1);
 		$post = $this->find('first', $options);
 		if ($post) {

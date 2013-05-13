@@ -38,7 +38,7 @@ class BritaComponent extends Component {
  * @param reference $controller
  * @return void
  */
-	public function startup($controller) {
+	public function startup(Controller $controller) {
 
 		// the next few lines allow the config settings to be cached
 		$config = HTMLPurifier_Config::createDefault();

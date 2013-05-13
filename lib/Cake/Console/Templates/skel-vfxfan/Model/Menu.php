@@ -107,7 +107,7 @@ class Menu extends AppModel {
  *
  * @return boolean
  */
-	public function beforeValidate() {
+	public function beforeValidate($options = array()) {
 		if (!empty($this->data)) {
 			$this->data = $this->_cleanData($this->data);
 		}
