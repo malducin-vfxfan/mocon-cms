@@ -37,7 +37,7 @@ class AppController extends Controller {
  *
  * @var array
  */
-	public $components = array('Auth', 'Security', 'Session');
+	public $components = array('Acl', 'Auth', 'Security', 'Session');
 
 /**
  * Helpers
@@ -65,8 +65,33 @@ class AppController extends Controller {
 		$this->Auth->loginRedirect = array('controller' => 'posts', 'action' => 'admin_index');
 		$this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'admin_login');
 
+/**
+* VFXfan CMS system authorization
+*
+* The base system only uses authentication, meaning a logged in user is by
+* default an administrator and acn do anything. For better user control to
+* additonal methods have been implemented, but disabled by default: ACL
+* authorization and controller based authorizaed. Just uncomment one below.
+*
+* In controller based authentication, an isAuthorized method is used to check
+* users permissions. One is implemented here in the App Controller which
+* mimcs the default behavior: Administrators acn do anything. Controller
+* based authorization is useful if only a few groups are needed and only
+* a few groups require special authorization.
+*
+* ACL allows more fine-grained permissions. To use uncomment the lines below
+* and also the actsAs variables in the User and Group models. Allow
+* access to the system, update the ACOs, which allows Aministrators access
+* to the whole system. Then only allow the index and view views. Create
+* the AROs and ACOs tables first, schema can be found at:
+*
+* app/Config/Schema/db_acl.sql
+*/
+		// use ACL based authorization
+//		$this->Auth->authorize = array('Actions' => array('actionPath' => 'controllers'),);
+
 		// use controller based authorization
-//		$this->Auth->authorize = 'controller';
+//		$this->Auth->authorize = 'Controller';
 
 		// set security options
 		$this->Security->csrfExpires = '+10 minutes';
@@ -122,7 +147,7 @@ class AppController extends Controller {
 	public function isAuthorized() {
 		// id action starts with admin_, check if the user belongs to the Admin group
 		if (strpos($this->request->action, 'admin_') !== false) {
-			if ($this->Auth->user('groupName') == 'Admin') {
+			if ($this->Auth->user('groupName') == 'Administrators') {
 				return true;
 			}
 			else {

@@ -31,6 +31,13 @@ class Group extends AppModel {
  */
  	public $order = array('Group.name' => 'ASC');
 /**
+ * Act as a Requester for ACL. Requires an implementation of
+ * parentNode().
+ *
+ * @var array
+ */
+//	public $actsAs = array('Acl' => array('type' => 'requester'));
+/**
  * Validation rules
  *
  * @var array
@@ -86,6 +93,20 @@ class Group extends AppModel {
 			$this->data = $this->_cleanData($this->data);
 		}
 		return true;
+	}
+
+/**
+ * parentNode method
+ *
+ * Used by the AclBehavior to determine parent->child relationships.
+ * A model’s parentNode() method must return null or return a parent
+ * Model reference.
+ *
+ * @return array
+ */
+	public function parentNode() {
+		// since groups dont have parents
+		return null;
 	}
 
 /**

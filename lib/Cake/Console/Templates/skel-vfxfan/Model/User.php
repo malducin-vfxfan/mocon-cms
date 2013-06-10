@@ -32,6 +32,13 @@ class User extends AppModel {
  */
  	public $order = array('User.username' => 'ASC');
 /**
+ * Act as a Requester for ACL. Requires an implementation of
+ * parentNode().
+ *
+ * @var array
+ */
+//	public $actsAs = array('Acl' => array('type' => 'requester'));
+/**
  * Validation rules
  *
  * @var array
@@ -139,6 +146,33 @@ class User extends AppModel {
 	public function beforeSave($options = array()) {
 		$this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
 		return true;
+	}
+
+/**
+ * parentNode method
+ *
+ * Used by the AclBehavior to determine parent->child relationships.
+ * A model’s parentNode() method must return null or return a parent
+ * Model reference.
+ *
+ * @return array
+ */
+	public function parentNode() {
+		if (!$this->id && empty($this->data)) {
+			return null;
+		}
+		if (isset($this->data['User']['group_id'])) {
+			$groupId = $this->data['User']['group_id'];
+		}
+		else {
+			$groupId = $this->field('group_id');
+		}
+		if (!$groupId) {
+			return null;
+		}
+		else {
+			return array('Group' => array('id' => $groupId));
+		}
 	}
 
 /**
