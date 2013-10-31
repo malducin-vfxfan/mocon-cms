@@ -189,13 +189,8 @@
  */
 	Configure::write('Session', array(
 		'defaults' => 'php',
-		'timeout' => 36
+		'timeout' => 60
 	));
-
-/**
- * The level of CakePHP security.
- */
-	Configure::write('Security.level', 'medium');
 
 /**
  * A random string used in security hashing methods.
@@ -261,7 +256,8 @@
  * 		'path' => CACHE, //[optional] use system tmp directory - remember to use absolute path
  * 		'prefix' => 'cake_', //[optional]  prefix every cache file with this string
  * 		'lock' => false, //[optional]  use file locking
- * 		'serialize' => true, [optional]
+ * 		'serialize' => true, //[optional]
+ * 		'mask' => 0664, //[optional]
  *	));
  *
  * APC (http://pecl.php.net/package/APC)

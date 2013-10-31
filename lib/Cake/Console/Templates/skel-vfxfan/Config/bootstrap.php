@@ -29,41 +29,25 @@
 Cache::config('veryshort', array(
 	'engine' => 'File',
 	'duration'=> '+5 minutes',
-	'probability'=> 100,
-	'path' => CACHE,
-	'prefix' => '',
-	'lock' => false,
-	'serialize' => true)
+	'prefix' => '')
 );
 // short
 Cache::config('short', array(
 	'engine' => 'File',
 	'duration'=> '+1 hours',
-	'probability'=> 100,
-	'path' => CACHE,
-	'prefix' => '',
-	'lock' => false,
-	'serialize' => true)
+	'prefix' => '')
 );
 // medium
 Cache::config('medium', array(
 	'engine' => 'File',
 	'duration'=> '+1 day',
-	'probability'=> 100,
-	'path' => CACHE,
-	'prefix' => '',
-	'lock' => false,
-	'serialize' => true)
+	'prefix' => '')
 );
 // long
 Cache::config('long', array(
 	'engine' => 'File',
 	'duration'=> '+1 week',
-	'probability'=> 100,
-	'path' => CACHE,
-	'prefix' => '',
-	'lock' => false,
-	'serialize' => true)
+	'prefix' => '')
 );
 // Setup a 'default' cache configuration for use in the application.
 Cache::config('default', Cache::settings('short'));

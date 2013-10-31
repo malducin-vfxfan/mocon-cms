@@ -15,7 +15,7 @@
 	<meta charset="utf-8">
 	<title><?php echo $page_title; ?></title>
 
-	<?php if (Configure::read() == 0): ?>
+	<?php if (Configure::read('debug') == 0): ?>
 		<meta http-equiv="Refresh" content="<?php echo $pause; ?>;url=<?php echo $url; ?>"/>
 	<?php endif; ?>
 
