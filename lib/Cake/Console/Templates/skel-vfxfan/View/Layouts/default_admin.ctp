@@ -3,10 +3,9 @@
  * Default admin layout.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       app
- * @subpackage    app.views.layouts.default.admin
+ * @package       vfxfan-base.View.Layouts
  */
 ?>
 <!doctype html>
@@ -29,7 +28,7 @@
 		echo $this->Html->meta('icon');
 		echo $this->fetch('meta');
 
-		echo $this->Html->css('project');
+		echo $this->Html->css('project.min');
 		if (Configure::read('JqueryUi.theme')) {
 			echo $this->Html->css(Configure::read('JqueryUi.theme'));
 		}
@@ -41,93 +40,91 @@
 		if (Configure::read('JqueryUi.version')) {
 			echo $this->Html->script(Configure::read('JqueryUi.version'));
 		}
-		echo $this->Html->script(array('bootstrap-dropdown', 'admin'));
+		echo $this->Html->script(array('bootstrap.min', 'admin'));
 		echo $this->fetch('script');
 	?>
 </head>
-<body style="background: #fff;">
-	<nav class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<?php echo $this->Html->link('Site', '/', array('class' => 'brand')); ?>
-				<ul class="nav">
-					<li class="dropdown">
-						<?php echo $this->Html->link('Basic Admin'.$this->Html->tag('span', '', array('class' => 'caret')), '#', array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'escape' => false)); ?>
-						<ul class="dropdown-menu">
-							<li><?php echo $this->Html->link('Groups', array('controller' => 'groups', 'action' => 'admin_index')); ?></li>
-							<li><?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'admin_index')); ?></li>
-							<li><?php echo $this->Html->link('System Info', array('controller' => 'system_infos', 'action' => 'admin_index')); ?></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<?php echo $this->Html->link('Basic Content'.$this->Html->tag('span', '', array('class' => 'caret')), '#', array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'escape' => false)); ?>
-						<ul class="dropdown-menu">
-							<li><?php echo $this->Html->link('Menu Items', array('controller' => 'menus', 'action' => 'admin_index')); ?></li>
-							<li><?php echo $this->Html->link('Pages', array('controller' => 'pages', 'action' => 'admin_index')); ?></li>
-							<li><?php echo $this->Html->link('Page Sections', array('controller' => 'page_sections', 'action' => 'admin_index')); ?></li>
-							<li><?php echo $this->Html->link('Posts', array('controller' => 'posts', 'action' => 'admin_index')); ?></li>
-							<li><?php echo $this->Html->link('Events', array('controller' => 'events', 'action' => 'admin_index')); ?></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<?php echo $this->Html->link('Other Content'.$this->Html->tag('span', '', array('class' => 'caret')), '#', array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'escape' => false)); ?>
-						<ul class="dropdown-menu">
-							<li><?php echo $this->Html->link('Albums', array('controller' => 'albums', 'action' => 'admin_index')); ?></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<?php echo $this->Html->link('Misc.'.$this->Html->tag('span', '', array('class' => 'caret')), '#', array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'escape' => false)); ?>
-						<ul class="dropdown-menu">
-							<li><?php echo $this->Html->link('Contact Form', array('controller' => 'contact_forms', 'action' => 'admin_index')); ?></li>
-							<li><?php echo $this->Html->link('Contact Form Emails', array('controller' => 'contact_form_emails', 'action' => 'admin_index')); ?></li>
-						</ul>
-					</li>
-					<li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'admin_logout')); ?></li>
-				</ul>
-			</div>
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navigation">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<?php echo $this->Html->link('Site', '/', array('class' => 'navbar-brand')); ?>
 		</div>
-	</nav> <!-- /topbar -->
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="main-navigation">
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+					<?php echo $this->Html->link('Basic Admin'.$this->Html->tag('span', '', array('class' => 'caret')), '#', array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'escapeTitle' => false)); ?>
+					<ul class="dropdown-menu">
+						<li><?php echo $this->Html->link('Groups', array('controller' => 'groups', 'action' => 'admin_index')); ?></li>
+						<li><?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'admin_index')); ?></li>
+						<li><?php echo $this->Html->link('ACL Permissions', array('controller' => 'acl_permissions', 'action' => 'admin_index')); ?></li>
+						<li><?php echo $this->Html->link('System Info', array('controller' => 'system_infos', 'action' => 'admin_index')); ?></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<?php echo $this->Html->link('Basic Content'.$this->Html->tag('span', '', array('class' => 'caret')), '#', array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'escapeTitle' => false)); ?>
+					<ul class="dropdown-menu">
+						<li><?php echo $this->Html->link('Menu Items', array('controller' => 'menus', 'action' => 'admin_index')); ?></li>
+						<li><?php echo $this->Html->link('Pages', array('controller' => 'pages', 'action' => 'admin_index')); ?></li>
+						<li><?php echo $this->Html->link('Page Sections', array('controller' => 'page_sections', 'action' => 'admin_index')); ?></li>
+						<li><?php echo $this->Html->link('Posts', array('controller' => 'posts', 'action' => 'admin_index')); ?></li>
+						<li><?php echo $this->Html->link('Events', array('controller' => 'events', 'action' => 'admin_index')); ?></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<?php echo $this->Html->link('Other Content'.$this->Html->tag('span', '', array('class' => 'caret')), '#', array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'escapeTitle' => false)); ?>
+					<ul class="dropdown-menu">
+						<li><?php echo $this->Html->link('Albums', array('controller' => 'albums', 'action' => 'admin_index')); ?></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<?php echo $this->Html->link('Misc.'.$this->Html->tag('span', '', array('class' => 'caret')), '#', array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'escapeTitle' => false)); ?>
+					<ul class="dropdown-menu">
+						<li><?php echo $this->Html->link('Contact Form', array('controller' => 'contact_forms', 'action' => 'admin_index')); ?></li>
+						<li><?php echo $this->Html->link('Contact Form Emails', array('controller' => 'contact_form_emails', 'action' => 'admin_index')); ?></li>
+					</ul>
+				</li>
+				<li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'admin_logout')); ?></li>
+			</ul>
+		</div>
+	</nav>
 
 	<div class="container">
-		<div class="body-content">
-			<div class="row">
-				<header class="span12">
-					<hgroup>
-						<h1>Site</h1>
-						<h2>Admin Login</h2>
-					</hgroup>
-				</header>
-			</div>
-			<div class="row">
-		        	<div class="login" id="flash-messages">
-					<?php echo $this->Session->flash('auth'); ?>
-					<?php echo $this->Session->flash(); ?>
-				</div>
-			</div>
+		<header class="page-header">
+			<hgroup>
+				<h1>Site Admin</h1>
+			</hgroup>
+		</header>
 
-			<?php echo $this->fetch('content'); ?>
+		<?php echo $this->Session->flash('auth'); ?>
+		<?php echo $this->Session->flash(); ?>
 
-			<div class="row">
-				<div class="span12">
-					<?php echo $this->element('sql_dump'); ?>
-				</div>
-			</div>
-		</div>
-		<!-- /body-content -->
-		<footer>
-			<p>
-				© 2013-<?php echo date('Y'); ?>, system by <?php echo $this->Html->link('Manuel Alducin (malducin) - VFXfan.com', 'http://vfxfan.com'); ?></p>
-				<?php
-					if ($this->Session->read('Config.theme') == 'default') {
-						echo $this->Html->link('Switch to Mobile Site', array('controller' => 'change_themes', 'action' => 'change'), array('class' => 'btn btn-info'));
-					}
-					else {
-						echo $this->Html->link('Switch to Default Site', array('controller' => 'change_themes', 'action' => 'change'), array('class' => 'btn btn-info'));
-					}
-				?>
-			</p>
-		</footer>
-	</div>
-	<!-- /container -->
+		<?php echo $this->fetch('content'); ?>
+
+		<?php echo $this->element('sql_dump'); ?>
+	</div><!-- /container -->
+
+	<footer>
+		<p class="text-center">
+			© 2013-<?php echo date('Y'); ?>, system by <?php echo $this->Html->link('Manuel Alducin (malducin) - VFXfan.com', 'http://vfxfan.com'); ?>
+		</p>
+		<p class="text-center">
+			<?php
+				if ($this->Session->read('Config.theme') == 'default') {
+					echo $this->Html->link('Switch to Mobile Site', array('controller' => 'change_themes', 'action' => 'change'), array('class' => 'btn btn-info'));
+				} else {
+					echo $this->Html->link('Switch to Default Site', array('controller' => 'change_themes', 'action' => 'change'), array('class' => 'btn btn-info'));
+				}
+			?>
+		</p>
+	</footer>
 </body>
 </html>

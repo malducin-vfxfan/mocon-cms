@@ -5,20 +5,17 @@
  * Main page (root) of the site.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       pages
- * @subpackage    pages.views
+ * @package       vfxfan-base.Pages.View
  */
 ?>
-<div class="row">
-	<article class="page-content">
-		<header>
-			<h1><?php echo $mainpage['Page']['title']; ?></h1>
-		</header>
-		<?php echo $mainpage['PageSection'][0]['content'];?>
-	</article>
-</div>
+<article>
+	<header>
+		<h1><?php echo $mainpage['Page']['title']; ?></h1>
+	</header>
+	<?php echo $mainpage['PageSection'][0]['content'];?>
+</article>
 <div>&nbsp;</div>
 <div class="row">
 	<section id="latest-posts">

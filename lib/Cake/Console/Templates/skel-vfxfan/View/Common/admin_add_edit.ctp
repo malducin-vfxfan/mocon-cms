@@ -3,59 +3,34 @@
  * Common admin add and edit view.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       views
- * @subpackage    views.common
+ * @package       vfxfan-base.View.Common
  */
 if (Configure::read('TinyMCE.active')) {
 	echo $this->element('TinyMCE/config_basic');
 }
 ?>
-<div class="row">
-	<section class="admin-actions">
-		<h3>Actions</h3>
-		<ul class="action-buttons-list">
+<section class="page-header">
+	<div class="btn-group pull-right">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			Actions <span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu">
 			<?php echo $this->fetch('actions'); ?>
+			<?php if ($this->fetch('relatedActions')): ?>
+			<li class="divider"></li>
+			<?php echo $this->fetch('relatedActions'); ?>
+			<?php endif; ?>
 		</ul>
-	</section>
-	<section class="admin-content">
-		<h2><?php echo $this->fetch('formTitle'); ?></h2>
-		<?php echo $this->fetch('content'); ?>
-	</section>
-</div>
-<?php if ($this->fetch('relatedContent1')): ?>
-<div class="row">
-	<aside class="admin-related">
-		<?php echo $this->fetch('relatedContent1'); ?>
-	</aside>
-</div>
-<?php endif; ?>
-<?php if ($this->fetch('relatedContent2')): ?>
-<div class="row">
-	<aside class="admin-related">
-		<?php echo $this->fetch('relatedContent2'); ?>
-	</aside>
-</div>
-<?php endif; ?>
-<?php if ($this->fetch('relatedContent3')): ?>
-<div class="row">
-	<aside class="admin-related">
-		<?php echo $this->fetch('relatedContent3'); ?>
-	</aside>
-</div>
-<?php endif; ?>
-<?php if ($this->fetch('relatedContent4')): ?>
-<div class="row">
-	<aside class="admin-related">
-		<?php echo $this->fetch('relatedContent4'); ?>
-	</aside>
-</div>
-<?php endif; ?>
-<?php if ($this->fetch('relatedContent5')): ?>
-<div class="row">
-	<aside class="admin-related">
-		<?php echo $this->fetch('relatedContent5'); ?>
-	</aside>
-</div>
+	</div>
+	<h2><?php echo $this->fetch('formTitle'); ?></h2>
+</section>
+
+<?php echo $this->fetch('content'); ?>
+
+<?php if ($this->fetch('relatedContent')): ?>
+<aside>
+	<?php echo $this->fetch('relatedContent'); ?>
+</aside>
 <?php endif; ?>

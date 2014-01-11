@@ -5,8 +5,7 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, ILMfan (http://ilmfan.com)
  * @link          http://ilmfan.com ILMfan
- * @package       posts
- * @subpackage    posts.views
+ * @package       vfxfan-base.Posts.View
  */
 $this->extend('/Common/index');
 
@@ -15,7 +14,7 @@ $this->assign('contentId', 'posts');
 ?>
 		<?php foreach ($posts as $post): ?>
 		<article class="post-contents">
-			<?php echo $this->FormatImage->idImage('posts/'.$post['Post']['year'], $post['Post']['id'], array('class' => 'thumbnail image-right'), 'posts'); ?>
+			<?php echo $this->FormatImage->idImage('posts/'.$post['Post']['year'], $post['Post']['id'], array('class' => 'img-thumbnail pull-right'), 'posts'); ?>
 			<header>
 				<h2><?php echo $post['Post']['title']; ?></h2>
 				<time class="date-created" datetime="<?php echo date(DATE_ATOM, strtotime($post['Post']['created'])); ?>">

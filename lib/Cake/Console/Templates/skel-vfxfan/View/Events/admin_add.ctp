@@ -3,10 +3,9 @@
  * Events admin view.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       events
- * @subpackage    events.views
+ * @package       vfxfan-base.Events.View
  */
 $year_range = Configure::read('Admin.date_select.year_range');
 
@@ -22,11 +21,22 @@ $this->assign('formTitle', 'Add an Event');
 
 $this->start('actions');
 ?>
-			<li><?php echo $this->Html->link('List Events', array('action' => 'admin_index'), array('class' => 'btn'));?></li>
+			<li><?php echo $this->Html->link('List Events', array('action' => 'admin_index')); ?></li>
 <?php
 $this->end();
 ?>
-		<?php echo $this->Form->create('Event', array('type' => 'file'));?>
+		<?php
+			echo $this->Form->create('Event', array(
+				'type' => 'file',
+				'inputDefaults' => array(
+					'div' => array('class' => 'form-group'),
+					'class' => 'form-control',
+					'error' => array(
+						'attributes' => array('class' => 'text-danger')
+					)
+				)
+			));
+		?>
 			<fieldset>
 				<legend>Admin Add Event</legend>
 				<?php
@@ -39,4 +49,4 @@ $this->end();
 					echo $this->Form->input('File.image', array('type' => 'file'));
 				?>
 			</fieldset>
-		<?php echo $this->Form->end('Submit');?>
+		<?php echo $this->Form->end(array('label' => 'Submit', 'class' => 'btn btn-primary')); ?>

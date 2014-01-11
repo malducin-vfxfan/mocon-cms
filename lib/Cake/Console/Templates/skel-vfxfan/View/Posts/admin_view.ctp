@@ -3,10 +3,9 @@
  * Posts admin view view.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       posts
- * @subpackage    posts.views
+ * @package       vfxfan-base.Posts.View
  */
 $this->extend('/Common/admin_view');
 
@@ -14,12 +13,17 @@ $this->assign('formTitle', 'Post');
 
 $this->start('actions');
 ?>
-			<li><?php echo $this->Html->link('Edit Post', array('action' => 'admin_edit', $post['Post']['id']), array('class' => 'btn')); ?> </li>
-			<li><?php echo $this->Form->postLink('Delete Post', array('action' => 'admin_delete', $post['Post']['id']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $post['Post']['id'])); ?> </li>
-			<li><?php echo $this->Html->link('List Posts', array('action' => 'admin_index'), array('class' => 'btn')); ?> </li>
-			<li><?php echo $this->Html->link('New Post', array('action' => 'admin_add'), array('class' => 'btn')); ?> </li>
-			<li><?php echo $this->Html->link('List Users', array('controller' => 'users', 'action' => 'admin_index'), array('class' => 'btn')); ?> </li>
-			<li><?php echo $this->Html->link('New User', array('controller' => 'users', 'action' => 'admin_add'), array('class' => 'btn')); ?> </li>
+			<li><?php echo $this->Html->link('Edit Post', array('action' => 'admin_edit', $post['Post']['id'])); ?> </li>
+			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete Post', array('class' => 'text-danger')), array('action' => 'admin_delete', $post['Post']['id']), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $post['Post']['id'])); ?> </li>
+			<li><?php echo $this->Html->link('List Posts', array('action' => 'admin_index')); ?> </li>
+			<li><?php echo $this->Html->link('New Post', array('action' => 'admin_add')); ?> </li>
+<?php
+$this->end();
+
+$this->start('relatedActions');
+?>
+			<li><?php echo $this->Html->link('List Users', array('controller' => 'users', 'action' => 'admin_index')); ?> </li>
+			<li><?php echo $this->Html->link('New User', array('controller' => 'users', 'action' => 'admin_add')); ?> </li>
 <?php
 $this->end();
 ?>

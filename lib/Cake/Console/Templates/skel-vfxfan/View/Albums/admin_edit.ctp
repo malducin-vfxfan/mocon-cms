@@ -3,10 +3,9 @@
  * Albums admin view.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       albums
- * @subpackage    albums.views
+ * @package       vfxfan-base.Albums.View
  */
 $this->extend('/Common/admin_add_edit');
 
@@ -14,12 +13,23 @@ $this->assign('formTitle', 'Edit an Album');
 
 $this->start('actions');
 ?>
-			<li><?php echo $this->Form->postLink('Delete', array('action' => 'admin_delete', $this->Form->value('Album.id')), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $this->Form->value('Album.id'))); ?></li>
-			<li><?php echo $this->Html->link('List Albums', array('action' => 'admin_index'), array('class' => 'btn'));?></li>
+			<li><?php echo $this->Html->link('List Albums', array('action' => 'admin_index')); ?></li>
+			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $this->Form->value('Album.id')), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $this->Form->value('Album.id'))); ?></li>
 <?php
 $this->end();
 ?>
-		<?php echo $this->Form->create('Album', array('type' => 'file'));?>
+		<?php
+			echo $this->Form->create('Album', array(
+				'type' => 'file',
+				'inputDefaults' => array(
+					'div' => array('class' => 'form-group'),
+					'class' => 'form-control',
+					'error' => array(
+						'attributes' => array('class' => 'text-danger')
+					)
+				)
+			));
+		?>
 			<fieldset>
 				<legend>Admin Edit Album</legend>
 				<?php
@@ -30,4 +40,4 @@ $this->end();
 					echo $this->Form->input('File.image', array('type' => 'file'));
 				?>
 			</fieldset>
-		<?php echo $this->Form->end('Submit');?>
+		<?php echo $this->Form->end(array('label' => 'Submit', 'class' => 'btn btn-primary')); ?>

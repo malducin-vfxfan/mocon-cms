@@ -5,17 +5,15 @@
  * Posts actions.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       posts
- * @subpackage    posts.controller
+ * @package       vfxfan-base.Posts.Controller
  */
 App::uses('AppController', 'Controller');
 /**
  * Posts Controller
  *
  * @property Post $Post
- * @property BritaComponent $Brita
  * @property RequestHandler $RequestHandler
  * @property UploadComponent $Upload
  */
@@ -26,7 +24,7 @@ class PostsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Brita', 'RequestHandler', 'Upload');
+	public $components = array('RequestHandler', 'Upload');
 /**
  * Helpers
  *
@@ -49,10 +47,9 @@ class PostsController extends AppController {
 				$posts = $this->Post->find('latest');
 			}
 			$this->set(compact('posts'));
-		}
-		else {
+		} else {
 			$this->set('title_for_layout', 'Posts');
-			$this->set('posts', $this->paginate());
+			$this->set('posts', $this->Paginator->paginate());
 		}
 	}
 
@@ -83,7 +80,7 @@ class PostsController extends AppController {
 		$this->layout = 'default_admin';
 		$this->Post->recursive = 0;
 		$this->set('title_for_layout', 'Posts');
-		$this->set('posts', $this->paginate());
+		$this->set('posts', $this->Paginator->paginate());
 	}
 
 /**
@@ -113,17 +110,16 @@ class PostsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Post->create();
 			$this->request->data['Post']['user_id'] = $this->Auth->user('id');
-			$this->request->data['Post']['content'] = $this->brita->purify($this->request->data['Post']['content']);
 			if ($this->Post->save($this->request->data)) {
 				$options = array('conditions' => array('Post.id' => $this->Post->id));
 				$post = $this->Post->find('first', $options);
 				if ($post) {
 					$this->Upload->uploadImageThumb('img'.DS.'posts'.DS.$post['Post']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Post->id, $this->request->data['File']['image']['name']));
 				}
-				$this->Session->setFlash('The Post has been saved.', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action' => 'admin_index'));
+				$this->Session->setFlash('The Post has been saved.', 'Flash/success');
+				return $this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Post could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
+				$this->Session->setFlash('The Post could not be saved. Please, try again.', 'Flash/error');
 			}
 		}
 		$this->set('title_for_layout', 'Add Post');
@@ -140,18 +136,17 @@ class PostsController extends AppController {
 		if (!$this->Post->exists($id)) {
 			throw new NotFoundException('Invalid Post.');
 		}
-		if ($this->request->is('post') || $this->request->is('put')) {
-			$this->request->data['Post']['content'] = $this->brita->purify($this->request->data['Post']['content']);
+		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Post->save($this->request->data)) {
 				$options = array('conditions' => array('Post.id' => $this->Post->id));
 				$post = $this->Post->find('first', $options);
 				if ($post) {
 					$this->Upload->uploadImageThumb('img'.DS.'posts'.DS.$post['Post']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Post->id, $this->request->data['File']['image']['name']));
 				}
-				$this->Session->setFlash('The Post has been saved.', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action' => 'admin_index'));
+				$this->Session->setFlash('The Post has been saved.', 'Flash/success');
+				return $this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Post could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
+				$this->Session->setFlash('The Post could not be saved. Please, try again.', 'Flash/error');
 			}
 		} else {
 			$options = array('conditions' => array('Post.id' => $id));
@@ -175,10 +170,10 @@ class PostsController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Post->delete()) {
-			$this->Session->setFlash('Post deleted.', 'default', array('class' => 'alert alert-success'));
-			$this->redirect(array('action'=>'admin_index'));
+			$this->Session->setFlash('Post deleted.', 'Flash/success');
+			return $this->redirect(array('action'=>'admin_index'));
 		}
-		$this->Session->setFlash('Post was not deleted.', 'default', array('class' => 'alert alert-error'));
-		$this->redirect(array('action' => 'admin_index'));
+		$this->Session->setFlash('Post was not deleted.', 'Flash/error');
+		return $this->redirect(array('action' => 'admin_index'));
 	}
 }

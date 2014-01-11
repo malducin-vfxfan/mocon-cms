@@ -25,10 +25,9 @@
  *   value must be passed to the element from the view.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       tinymce
- * @subpackage    tinymce.views.elements.config
+ * @package       vfxfan-base.View.Elements.TinyMCE
  */
 $this->Html->script(array('tiny_mce/tiny_mce'), array('inline' => false));
 ?>
@@ -40,7 +39,7 @@ tinyMCE.init({
 	convert_urls : true,
 	relative_urls : false,
 	remove_script_host : true,
-	document_base_url : "<?php echo FULL_BASE_URL.$this->request->webroot; ?>",
+	document_base_url : "<?php echo Router::fullBaseUrl().$this->request->webroot; ?>",
 	<?php if (isset($external_image_list_url)): ?>
     external_image_list_url : "<?php echo $external_image_list_url; ?>",
     <?php endif; ?>

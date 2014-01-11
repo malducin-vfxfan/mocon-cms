@@ -5,10 +5,9 @@
  * Users actions.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       users
- * @subpackage    users.controller
+ * @package       vfxfan-base.Users.Controller
  */
 App::uses('AppController', 'Controller');
 /**
@@ -19,16 +18,6 @@ App::uses('AppController', 'Controller');
 class UsersController extends AppController {
 
 /**
- * beforeFilter method
- *
- * @return void
- */
-	public function beforeFilter() {
-		parent::beforeFilter();
-		Security::setHash('sha256');
-	}
-
-/**
  * admin_login method
  *
  * @return void
@@ -37,13 +26,9 @@ class UsersController extends AppController {
 		$this->layout = 'default_login';
 		if ($this->request->is('post')) {
 			if ($this->Auth->login()) {
-				$options = array('conditions' => array('User.id' => $this->Auth->user('id')));
-				$user_data = $this->User->find('first', $options);
-				$this->Session->write('Auth.User.groupName', $user_data['Group']['name']);
-				$this->redirect($this->Auth->redirect());
-			}
-			else {
-				$this->Session->setFlash('Username or password is incorrect.', 'default', array('class' => 'alert alert-error'), 'auth');
+				return $this->redirect($this->Auth->redirectUrl());
+			} else {
+				$this->Session->setFlash('Username or password is incorrect.', 'default', array('class' => 'alert alert-danger'), 'auth');
 			}
 		}
 		$this->set('title_for_layout', 'Login');
@@ -57,7 +42,7 @@ class UsersController extends AppController {
 	public function admin_logout() {
 		$this->layout = 'default_login';
 		$this->Session->destroy();
-		$this->redirect($this->Auth->logout());
+		return $this->redirect($this->Auth->logout());
 	}
 
 /**
@@ -69,7 +54,7 @@ class UsersController extends AppController {
 		$this->layout = 'default_admin';
 		$this->User->recursive = 0;
 		$this->set('title_for_layout', 'Users');
-		$this->set('users', $this->paginate());
+		$this->set('users', $this->Paginator->paginate());
 	}
 
 /**
@@ -89,7 +74,7 @@ class UsersController extends AppController {
 		$this->set(compact('user'));
 		$this->set('title_for_layout', 'User: '.$user['User']['username']);
 		$this->User->Post->recursive = -1;
-		$this->set('posts', $this->paginate('Post', array('Post.user_id' => $user['User']['id'])));
+		$this->set('posts', $this->Paginator->paginate('Post', array('Post.user_id' => $user['User']['id'])));
 	}
 
 /**
@@ -102,10 +87,10 @@ class UsersController extends AppController {
 		if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash('The User has been saved.', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action' => 'admin_index'));
+				$this->Session->setFlash('The User has been saved.', 'Flash/success');
+				return $this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The User could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
+				$this->Session->setFlash('The User could not be saved. Please, try again.', 'Flash/error');
 			}
 		}
 		$groups = $this->User->Group->find('list');
@@ -129,24 +114,23 @@ class UsersController extends AppController {
 		if (!$this->User->exists($id)) {
 			throw new NotFoundException('Invalid User.');
 		}
-		if ($this->request->is('post') || $this->request->is('put')) {
+		if ($this->request->is(array('post', 'put'))) {
 			if (!$this->request->data('User.passwd')) {
 				unset($this->request->data['User']['passwd']);
 				if ($this->User->save($this->request->data, array('fieldList' => array('username', 'group_id')))) {
-					$this->Session->setFlash('The User has been saved.', 'default', array('class' => 'alert alert-success'));
-					$this->redirect(array('action' => 'admin_index'));
+					$this->Session->setFlash('The User has been saved.', 'Flash/success');
+					return $this->redirect(array('action' => 'admin_index'));
 				} else {
-					$this->Session->setFlash('The User could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
+					$this->Session->setFlash('The User could not be saved. Please, try again.', 'Flash/error');
 				}
-			}
-			else {
+			} else {
 				$this->request->data('User.password', $this->request->data('User.passwd'));
 				unset($this->request->data['User']['passwd']);
 				if ($this->User->save($this->request->data)) {
-					$this->Session->setFlash('The User has been saved.', 'default', array('class' => 'alert alert-success'));
-					$this->redirect(array('action' => 'admin_index'));
+					$this->Session->setFlash('The User has been saved.', 'Flash/success');
+					return $this->redirect(array('action' => 'admin_index'));
 				} else {
-					$this->Session->setFlash('The User could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
+					$this->Session->setFlash('The User could not be saved. Please, try again.', 'Flash/error');
 				}
 			}
 		} else {
@@ -173,11 +157,11 @@ class UsersController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->User->delete()) {
-			$this->Session->setFlash('User deleted.', 'default', array('class' => 'alert alert-success'));
-			$this->redirect(array('action'=>'admin_index'));
+			$this->Session->setFlash('User deleted.', 'Flash/success');
+			return $this->redirect(array('action'=>'admin_index'));
 		}
-		$this->Session->setFlash('User was not deleted.', 'default', array('class' => 'alert alert-error'));
-		$this->redirect(array('action' => 'admin_index'));
+		$this->Session->setFlash('User was not deleted.', 'Flash/error');
+		return $this->redirect(array('action' => 'admin_index'));
 	}
 
 }

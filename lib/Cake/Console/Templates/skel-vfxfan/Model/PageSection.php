@@ -8,13 +8,11 @@
  * (not displayed) section.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       page_sections
- * @subpackage    page_sections.model
+ * @package       vfxfan-base.PageSections.Model
  */
 App::uses('AppModel', 'Model');
-App::uses('MySanitize', 'Utility');
 /**
  * PageSection Model
  *
@@ -124,9 +122,10 @@ class PageSection extends AppModel {
  * @return array
  */
 	private function _cleanData($data) {
-		$data['PageSection']['title'] = MySanitize::cleanSafe($data['PageSection']['title']);
-		$data['PageSection']['page_id'] = MySanitize::paranoid(MySanitize::cleanSafe($data['PageSection']['page_id'], array('quotes' => ENT_NOQUOTES)));
-		$data['PageSection']['section'] = MySanitize::paranoid(MySanitize::cleanSafe($data['PageSection']['section'], array('quotes' => ENT_NOQUOTES)));
+		$data['PageSection']['title'] = PageSection::clean(PageSection::purify($data['PageSection']['title']));
+		$data['PageSection']['content'] = PageSection::purify($data['PageSection']['content']);
+		$data['PageSection']['page_id'] = filter_var($data['PageSection']['page_id'], FILTER_SANITIZE_NUMBER_INT);
+		$data['PageSection']['section'] = filter_var($data['PageSection']['section'], FILTER_SANITIZE_NUMBER_INT);
 		return $data;
 	}
 

@@ -5,13 +5,11 @@
  * Manage Event data.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       events
- * @subpackage    events.model
+ * @package       vfxfan-base.Events.Model
  */
 App::uses('AppModel', 'Model');
-App::uses('MySanitize', 'Utility');
 /**
  * Event Model
  *
@@ -135,6 +133,12 @@ class Event extends AppModel {
 				'required' => true,
 				'last' => true, // Stop validation after this rule
 			),
+			'alphanumericextended' => array(
+				'rule' => array('alphaNumericDashUnderscoreSpaceColon'),
+				'message' => 'Names must only contain letters, numbers, spaces, dashes, underscores and colons.',
+				'required' => true,
+				'last' => true // Stop validation after this rule
+			),
 			'maxlength' => array(
 				'rule' => array('maxLength', 140),
 				'message' => 'Names must be no larger than 140 characters long.',
@@ -188,7 +192,7 @@ class Event extends AppModel {
  * @param boolean $created
  * @return void
  */
-	public function afterSave($created) {
+	public function afterSave($created, $options = array()) {
 		// check to see if a year folder exists and if not, create one
 		if ($created) {
 			$options = array('conditions' => array('Event.id' => $this->id));
@@ -254,13 +258,13 @@ class Event extends AppModel {
  * @return array
  */
 	private function _cleanData($data) {
-		$data['Event']['name'] = MySanitize::cleanSafe($data['Event']['name']);
-		$data['Event']['date_start'] = Sanitize::paranoid(MySanitize::cleanSafe($data['Event']['date_start'], array('quotes' => ENT_NOQUOTES)), array('-', ':', ' '));
-		$data['Event']['date_end'] = Sanitize::paranoid(MySanitize::cleanSafe($data['Event']['date_end'], array('quotes' => ENT_NOQUOTES)), array('-', ':', ' '));
-		$data['Event']['location'] = MySanitize::cleanSafe($data['Event']['location']);
-		$data['Event']['description'] = MySanitize::cleanSafe($data['Event']['description']);
-		$data['Event']['webpage'] = MySanitize::cleanSafe($data['Event']['webpage'], array('quotes' => ENT_QUOTES));
-		$data['Event']['slug'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Event']['slug'], array('quotes' => ENT_NOQUOTES)), array('-', '_'));
+		$data['Event']['name'] = Event::clean(Event::purify($data['Event']['name']));
+		$data['Event']['date_start'] = Event::clean(Event::purify($data['Event']['date_start']), array('encode' => false));
+		$data['Event']['date_end'] = Event::clean(Event::purify($data['Event']['date_end']), array('encode' => false));
+		$data['Event']['location'] = Event::clean(Event::purify($data['Event']['location']));
+		$data['Event']['description'] = Event::clean(Event::purify($data['Event']['description']));
+		$data['Event']['webpage'] = Event::clean(Event::purify(filter_var($data['Event']['webpage'], FILTER_SANITIZE_URL)), array('encode' => false));
+		$data['Event']['slug'] = Event::clean(Event::purify($data['Event']['slug']), array('encode' => false));
 		return $data;
 	}
 

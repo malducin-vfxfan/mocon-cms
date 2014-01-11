@@ -8,10 +8,9 @@
  * root value is added to the list of available parent items.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       menus
- * @subpackage    menus.controller
+ * @package       vfxfan-base.Menus.Controller
  */
 App::uses('AppController', 'Controller');
 /**
@@ -68,7 +67,7 @@ class MenusController extends AppController {
 		$this->layout = 'default_admin';
 		$this->Menu->recursive = 0;
 		$this->set('title_for_layout', 'Menu Items');
-		$this->set('menus', $this->paginate());
+		$this->set('menus', $this->Paginator->paginate());
 	}
 
 /**
@@ -98,10 +97,10 @@ class MenusController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Menu->create();
 			if ($this->Menu->save($this->request->data)) {
-				$this->Session->setFlash('The Menu has been saved.', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action' => 'admin_index'));
+				$this->Session->setFlash('The Menu has been saved.', 'Flash/success');
+				return $this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Menu could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
+				$this->Session->setFlash('The Menu could not be saved. Please, try again.', 'Flash/error');
 			}
 		}
 		$menuParents = $this->Menu->find('list', array('fields' => array('Menu.id', 'Menu.name'), 'order' => 'Menu.id'));
@@ -123,12 +122,12 @@ class MenusController extends AppController {
 		if (!$this->Menu->exists($id)) {
 			throw new NotFoundException('Invalid Menu.');
 		}
-		if ($this->request->is('post') || $this->request->is('put')) {
+		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Menu->save($this->request->data)) {
-				$this->Session->setFlash('The menu has been saved.', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action' => 'admin_index'));
+				$this->Session->setFlash('The menu has been saved.', 'Flash/success');
+				return $this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Menu could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
+				$this->Session->setFlash('The Menu could not be saved. Please, try again.', 'Flash/error');
 			}
 		} else {
 			$options = array('conditions' => array('Menu.id' => $id));
@@ -157,10 +156,10 @@ class MenusController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Menu->delete()) {
-			$this->Session->setFlash('Menu deleted.', 'default', array('class' => 'alert alert-success'));
-			$this->redirect(array('action'=>'admin_index'));
+			$this->Session->setFlash('Menu deleted.', 'Flash/success');
+			return $this->redirect(array('action'=>'admin_index'));
 		}
-		$this->Session->setFlash('Menu was not deleted.', 'default', array('class' => 'alert alert-error'));
-		$this->redirect(array('action' => 'admin_index'));
+		$this->Session->setFlash('Menu was not deleted.', 'Flash/error');
+		return $this->redirect(array('action' => 'admin_index'));
 	}
 }

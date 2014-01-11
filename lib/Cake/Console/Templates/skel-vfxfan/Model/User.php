@@ -5,13 +5,12 @@
  * Manage User data. Users belong to a group.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       users
- * @subpackage    users.model
+ * @package       vfxfan-base.Users.Model
  */
 App::uses('AppModel', 'Model');
-App::uses('MySanitize', 'Utility');
+App::uses('BlowfishAdvancedPasswordHasher', 'Controller/Component/Auth');
 /**
  * User Model
  *
@@ -37,7 +36,7 @@ class User extends AppModel {
  *
  * @var array
  */
-//	public $actsAs = array('Acl' => array('type' => 'requester'));
+	public $actsAs = array('Acl' => array('type' => 'requester'));
 /**
  * Validation rules
  *
@@ -48,31 +47,31 @@ class User extends AppModel {
 			'notempty' => array(
 				'rule' => array('notEmpty'),
 				'message' => 'This field cannot be left blank.',
-				'required' =>true,
+				'required' => true,
 				'last' => true // Stop validation after this rule
 			),
-			'alphanumeric' => array(
-				'rule' => array('alphaNumeric'),
-				'message' => 'Usernames must only contain letters and numbers.',
-				'required' =>true,
+			'alphanumericextended' => array(
+				'rule' => array('alphaNumericDashUnderscoreSpaceColon'),
+				'message' => 'Usernames must only contain letters, numbers, spaces, dashes, underscores and colons.',
+				'required' => true,
 				'last' => true // Stop validation after this rule
 			),
 			'minlength' => array(
 				'rule' => array('minLength', 8),
 				'message' => 'Usernames must be at least 8 characters long.',
-				'required' =>true,
+				'required' => true,
 				'last' => true // Stop validation after this rule
 			),
 			'maxlength' => array(
-				'rule' => array('maxLength', 32),
+				'rule' => array('maxLength', 64),
 				'message' => 'Usernames must be no larger than 32 characters long.',
-				'required' =>true,
+				'required' => true,
 				'last' => true // Stop validation after this rule
 			),
 			'isunique' => array(
 				'rule' => array('isUnique'),
 				'message' => 'This username has already been taken.',
-				'required' =>true,
+				'required' => true,
 				'last' => true // Stop validation after this rule
 			),
 		),
@@ -80,7 +79,13 @@ class User extends AppModel {
 			'notempty' => array(
 				'rule' => array('notEmpty'),
 				'message' => 'This field cannot be left blank.',
-				'required' =>true,
+				'required' => true,
+				'last' => true // Stop validation after this rule
+			),
+			'maxlength' => array(
+				'rule' => array('maxLength', 60),
+				'message' => 'Passwords must be no larger than 60 characters long.',
+				'required' => true,
 				'last' => true // Stop validation after this rule
 			),
 		),
@@ -88,13 +93,13 @@ class User extends AppModel {
 			'notempty' => array(
 				'rule' => array('notEmpty'),
 				'message' => 'This field cannot be left blank.',
-				'required' =>true,
+				'required' => true,
 				'last' => true // Stop validation after this rule
 			),
 			'numeric' => array(
 				'rule' => array('numeric'),
 				'message' => 'This field is numeric.',
-				'required' =>true,
+				'required' => true,
 				'last' => true // Stop validation after this rule
 			),
 		),
@@ -144,7 +149,8 @@ class User extends AppModel {
  * @return boolean
  */
 	public function beforeSave($options = array()) {
-		$this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
+		$blowfishHasher = new BlowfishAdvancedPasswordHasher();
+		$this->data['User']['password'] = $blowfishHasher->hash($this->data['User']['password']);
 		return true;
 	}
 
@@ -163,14 +169,12 @@ class User extends AppModel {
 		}
 		if (isset($this->data['User']['group_id'])) {
 			$groupId = $this->data['User']['group_id'];
-		}
-		else {
+		} else {
 			$groupId = $this->field('group_id');
 		}
 		if (!$groupId) {
 			return null;
-		}
-		else {
+		} else {
 			return array('Group' => array('id' => $groupId));
 		}
 	}
@@ -184,9 +188,9 @@ class User extends AppModel {
  * @return array
  */
 	private function _cleanData($data) {
-        $data['User']['username'] = MySanitize::paranoid(MySanitize::cleanSafe($data['User']['username'], array('quotes' => ENT_NOQUOTES)), array('-', '_'));
-        $data['User']['password'] = MySanitize::paranoid(MySanitize::cleanSafe($data['User']['password'], array('quotes' => ENT_NOQUOTES)), array('-', '_'));
-        $data['User']['group_id'] = MySanitize::paranoid(MySanitize::cleanSafe($data['User']['group_id'], array('quotes' => ENT_NOQUOTES)));
+		$data['User']['username'] = User::clean(User::purify($data['User']['username']), array('encode' => false));
+		$data['User']['password'] = User::clean(User::purify($data['User']['password']), array('encode' => false));
+		$data['User']['group_id'] = filter_var($data['User']['group_id'], FILTER_SANITIZE_NUMBER_INT);
 		return $data;
 	}
 

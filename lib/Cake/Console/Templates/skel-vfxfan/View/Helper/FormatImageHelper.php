@@ -7,10 +7,9 @@
  * from a folder named on the id.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       views
- * @subpackage    views.helpers
+ * @package       vfxfan-base.View.Helper
  */
 /**
  * FormatImage Helper
@@ -85,7 +84,7 @@ class FormatImageHelper extends AppHelper {
 	public function idImage($location = null, $id = null, $options = array(), $location_default = null) {
 		$default = array(
 			'alt' => 'Image',
-			'class' => 'thumbnail',
+			'class' => 'img-thumbnail',
 		);
 
 		$options = array_merge($default, $options);
@@ -108,16 +107,14 @@ class FormatImageHelper extends AppHelper {
 		}
 		if ($image_name) {
 			$img_link = $this->Html->image($location.'/'.$image_name, $options);
-		}
-		else {
+		} else {
 			// if default image is in the same location
 			if (!$location_default) {
 				$img_link = $this->Html->image($location.'/'.'default.png', $options);
-			}
-			// use the specified location of the default image
-			// usually for images that are in subfolders like posts and events where the
-			// default is in the enclosing folder
-			else {
+			} else {
+				// use the specified location of the default image
+				// usually for images that are in subfolders like posts and events where the
+				// default is in the enclosing folder
 				$img_link = $this->Html->image($location_default.'/'.'default.png', $options);
 			}
 		}

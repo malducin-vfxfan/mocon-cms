@@ -3,10 +3,9 @@
  * Posts RSS view.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       posts
- * @subpackage    posts.views.rss
+ * @package       vfxfan-base.Posts.View.rss
  */
 
 $this->set('documentData', array('xmlns:dc' => 'http://purl.org/dc/elements/1.1/'));
@@ -17,7 +16,7 @@ $this->set('channelData', array(
 	'link' => $this->Html->url('/', true),
 	'description' => 'Most recent Site news.',
 	'language' => 'en-us',
-	'copyright' => 'Copyright 2011-'.date('Y').', '.FULL_BASE_URL,
+	'copyright' => 'Copyright 2011-'.date('Y').', '.Router::fullBaseUrl(),
 	'generator' => 'VFXfan.com CMS',
 	'image' => array('url' => '/img/rss_site.png', 'width' => 100, 'height' => 100),
 	'atom:link' => array('attrib' => array('href' => $this->Html->url(array('controller' => 'posts', 'action' => 'index.rss')), 'rel' => 'self', 'type' => 'application/rss+xml')),

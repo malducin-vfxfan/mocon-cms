@@ -3,12 +3,11 @@
  * Albums admin view view.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       albums
- * @subpackage    albums.views
+ * @package       vfxfan-base.Albums.View
  */
-echo $this->Html->css('/slimbox2/css/slimbox2', null, array('inline' => false));
+echo $this->Html->css('/slimbox2/css/slimbox2', array('inline' => false));
 echo $this->Html->script(array('/slimbox2/js/slimbox2'), array('inline' => false));
 
 $this->extend('/Common/admin_view');
@@ -17,11 +16,16 @@ $this->assign('formTitle', 'Album');
 
 $this->start('actions');
 ?>
-			<li><?php echo $this->Html->link('Edit Album', array('action' => 'admin_edit', $album['Album']['id']), array('class' => 'btn')); ?> </li>
-			<li><?php echo $this->Form->postLink('Delete Album', array('action' => 'admin_delete', $album['Album']['id']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $album['Album']['id'])); ?> </li>
-			<li><?php echo $this->Html->link('List Albums', array('action' => 'admin_index'), array('class' => 'btn')); ?> </li>
-			<li><?php echo $this->Html->link('New Album', array('action' => 'admin_add'), array('class' => 'btn')); ?> </li>
-			<li><?php echo $this->Html->link('Upload Album Image', array('action' => 'admin_uploadAlbumImage', $album['Album']['id']), array('class' => 'btn')); ?> </li>
+			<li><?php echo $this->Html->link('Edit Album', array('action' => 'admin_edit', $album['Album']['id'])); ?> </li>
+			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete Album', array('class' => 'text-danger')), array('action' => 'admin_delete', $album['Album']['id']), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $album['Album']['id'])); ?> </li>
+			<li><?php echo $this->Html->link('List Albums', array('action' => 'admin_index')); ?> </li>
+			<li><?php echo $this->Html->link('New Album', array('action' => 'admin_add')); ?> </li>
+<?php
+$this->end();
+
+$this->start('relatedActions');
+?>
+			<li><?php echo $this->Html->link('Upload Album Image', array('action' => 'admin_uploadAlbumImage', $album['Album']['id'])); ?> </li>
 <?php
 $this->end();
 ?>
@@ -57,7 +61,7 @@ $this->end();
 			</dd>
 			<dt>Image</dt>
 			<dd>
-				<?php echo $this->FormatImage->idImage('albums/'.$album['Album']['year'], $album['Album']['id'], array('class' => 'thumbnail'), 'albums'); ?>
+				<?php echo $this->FormatImage->idImage('albums/'.$album['Album']['year'], $album['Album']['id'], array('class' => 'img-thumbnail'), 'albums'); ?>
 				&nbsp;
 			</dd>
 <?php
@@ -74,8 +78,8 @@ $this->start('contentHtml');
 <?php
 		endif;
 ?>
-		<div class="span2">
-			<?php echo $this->Html->link($this->Html->image($images_path.'thumbnails/'.$image, array('class' => 'thumbnail image-center', 'alt' => $image, 'title' => $image)), '/img/'.$images_path.$image, array('rel' => 'lightbox-project', 'escape' => false)) ;?>
+		<div class="col-md-2">
+			<?php echo $this->Html->link($this->Html->image($images_path.'thumbnails/'.$image, array('class' => null, 'alt' => $image, 'title' => $image)), '/img/'.$images_path.$image, array('class' =>'thumbnail', 'rel' => 'lightbox-project', 'escapeTitle' => false)) ;?>
 			<div>
 				<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteAlbumImage', $album['Album']['id'], $image), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $image)); ?>
 			</div>

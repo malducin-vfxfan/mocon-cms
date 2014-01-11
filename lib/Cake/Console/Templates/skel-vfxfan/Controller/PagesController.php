@@ -7,17 +7,15 @@
  * upload page images one at a time and delete them.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       pages
- * @subpackage    pages.controller
+ * @package       vfxfan-base.Pages.Controller
  */
 App::uses('AppController', 'Controller');
 /**
  * Pages Controller
  *
  * @property Page $Page
- * @property BritaComponent $Brita
  * @property UploadComponent $Upload
  */
 class PagesController extends AppController {
@@ -39,7 +37,7 @@ class PagesController extends AppController {
  *
  * @var array
  */
-	public $components = array('Brita', 'Upload');
+	public $components = array('Upload');
 /**
  * Pagination
  *
@@ -122,7 +120,7 @@ class PagesController extends AppController {
 		$this->set('title_for_layout', $page['Page']['title']);
 		$this->set(compact('page'));
 		$this->Page->PageSection->recursive = -1;
-		$this->set('pageSections', $this->paginate('PageSection', array('PageSection.page_id' => $page['Page']['id'], 'PageSection.section >' => 0)));
+		$this->set('pageSections', $this->Paginator->paginate('PageSection', array('PageSection.page_id' => $page['Page']['id'], 'PageSection.section >' => 0)));
 	}
 
 /**
@@ -134,7 +132,7 @@ class PagesController extends AppController {
 		$this->layout = 'default_admin';
 		$this->Page->recursive = 0;
 		$this->set('title_for_layout', 'Pages');
-		$this->set('pages', $this->paginate());
+		$this->set('pages', $this->Paginator->paginate());
 	}
 
 /**
@@ -171,12 +169,6 @@ class PagesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Page->create();
 
-			// purify page sections
-			$page_sections_num = count($this->request->data['PageSection']);
-			for ($i = 0; $i < $page_sections_num; $i++) {
-				$this->request->data['PageSection'][$i]['content'] = $this->brita->purify($this->request->data['PageSection'][$i]['content']);
-			}
-
 			// do not validate page_id of the page sections
 			unset($this->Page->PageSection->validate['page_id']);
 
@@ -196,15 +188,13 @@ class PagesController extends AppController {
 					}
 				}
 				if ($page_sections_ok) {
-					$this->Session->setFlash('The Page has been saved.', 'default', array('class' => 'alert alert-success'));
-				}
-				else {
+					$this->Session->setFlash('The Page has been saved.', 'Flash/success');
+				} else {
 					$this->Session->setFlash('The Page has been saved, but there was a problem saving one or more sections.', 'default', array('class' => 'alert alert-info'));
 				}
-				$this->redirect(array('action' => 'admin_index'));
-			}
-			else {
-				$this->Session->setFlash('The Page could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
+				return $this->redirect(array('action' => 'admin_index'));
+			} else {
+				$this->Session->setFlash('The Page could not be saved. Please, try again.', 'Flash/error');
 			}
 		}
 		$this->set('title_for_layout', 'Add Page');
@@ -223,13 +213,7 @@ class PagesController extends AppController {
 		if (!$this->Page->exists($id)) {
 			throw new NotFoundException('Invalid Page.');
 		}
-		if ($this->request->is('post') || $this->request->is('put')) {
-			// purify page sections
-			$page_sections_num = count($this->request->data['PageSection']);
-			for ($i = 0; $i < $page_sections_num; $i++) {
-				$this->request->data['PageSection'][$i]['content'] = $this->brita->purify($this->request->data['PageSection'][$i]['content']);
-			}
-
+		if ($this->request->is(array('post', 'put'))) {
 			// save associated data non-atomically since we're not using transactions
 			$result = $this->Page->saveAssociated($this->request->data, array('atomic' => false));
 			if ($result['Page']) {
@@ -245,18 +229,15 @@ class PagesController extends AppController {
 					}
 				}
 				if ($page_sections_ok) {
-					$this->Session->setFlash('The Page has been saved.', 'default', array('class' => 'alert alert-success'));
-				}
-				else {
+					$this->Session->setFlash('The Page has been saved.', 'Flash/success');
+				} else {
 					$this->Session->setFlash('The Page has been saved, but there was a problem saving one or more sections.', 'default', array('class' => 'alert alert-info'));
 				}
-				$this->redirect(array('action' => 'admin_index'));
+				return $this->redirect(array('action' => 'admin_index'));
+			} else {
+				$this->Session->setFlash('The Page could not be saved. Please, try again.', 'Flash/error');
 			}
-			else {
-				$this->Session->setFlash('The Page could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
-			}
-		}
-		else {
+		} else {
 			$options = array('conditions' => array('Page.id' => $id));
 			$this->request->data = $this->Page->find('first', $options);
 		}
@@ -283,11 +264,11 @@ class PagesController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Page->delete()) {
-			$this->Session->setFlash('Page deleted.', 'default', array('class' => 'alert alert-success'));
-			$this->redirect(array('action'=>'admin_index'));
+			$this->Session->setFlash('Page deleted.', 'Flash/success');
+			return $this->redirect(array('action'=>'admin_index'));
 		}
-		$this->Session->setFlash('Page was not deleted.', 'default', array('class' => 'alert alert-error'));
-		$this->redirect(array('action' => 'admin_index'));
+		$this->Session->setFlash('Page was not deleted.', 'Flash/error');
+		return $this->redirect(array('action' => 'admin_index'));
 	}
 
 /**
@@ -313,18 +294,18 @@ class PagesController extends AppController {
 		$this->request->onlyAllow('post', 'delete');
 		if ($location == 'images') {
 			if ($this->Page->deleteFile($id, $filename)) {
-				$this->Session->setFlash('File deleted.', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action'=>'admin_view', $id));
+				$this->Session->setFlash('File deleted.', 'Flash/success');
+				return $this->redirect(array('action'=>'admin_view', $id));
 			}
 		}
 		if ($location == 'files') {
 			if ($this->Page->deleteFile($id, $filename, FILES)) {
-				$this->Session->setFlash('File deleted.', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action'=>'admin_view', $id));
+				$this->Session->setFlash('File deleted.', 'Flash/success');
+				return $this->redirect(array('action'=>'admin_view', $id));
 			}
 		}
-		$this->Session->setFlash('File was not deleted.', 'default', array('class' => 'alert alert-error'));
-		$this->redirect(array('action' => 'admin_view', $id));
+		$this->Session->setFlash('File was not deleted.', 'Flash/error');
+		return $this->redirect(array('action' => 'admin_view', $id));
 	}
 
 }

@@ -7,13 +7,11 @@
  * is stored in the page sections.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       pages
- * @subpackage    pages.model
+ * @package       vfxfan-base.Pages.Model
  */
 App::uses('AppModel', 'Model');
-App::uses('MySanitize', 'Utility');
 /**
  * Page Model
  *
@@ -63,6 +61,12 @@ class Page extends AppModel {
 			'notempty' => array(
 				'rule' => array('notEmpty'),
 				'message' => 'This field cannot be left blank.',
+				'required' => true,
+				'last' => true // Stop validation after this rule
+			),
+			'alphanumericextended' => array(
+				'rule' => array('alphaNumericDashUnderscoreSpaceColon'),
+				'message' => 'Names must only contain letters, numbers, spaces, dashes, underscores and colons.',
 				'required' => true,
 				'last' => true // Stop validation after this rule
 			),
@@ -160,7 +164,7 @@ class Page extends AppModel {
  * @param boolean $created
  * @return void
  */
-	public function afterSave($created) {
+	public function afterSave($created, $options = array()) {
 		if ($created) {
 			mkdir(IMAGES.'pages'.DS.sprintf("%010d", $this->id));
 			mkdir(FILES.'pages'.DS.sprintf("%010d", $this->id));
@@ -210,10 +214,17 @@ class Page extends AppModel {
  * @return array
  */
 	private function _cleanData($data) {
-		$data['Page']['title'] = MySanitize::cleanSafe($data['Page']['title']);
-		$data['Page']['slug'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Page']['slug'], array('quotes' => ENT_NOQUOTES)), array('-', '_'));
-		$data['Page']['published'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Page']['published'], array('quotes' => ENT_NOQUOTES)));
-		$data['Page']['main'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Page']['main'], array('quotes' => ENT_NOQUOTES)));
+		$data['Page']['title'] = Page::clean(Page::purify($data['Page']['title']));
+		$data['Page']['slug'] = Page::clean(Page::purify($data['Page']['slug']), array('encode' => false));
+		$data['Page']['published'] = filter_var($data['Page']['published'], FILTER_SANITIZE_NUMBER_INT);
+		$data['Page']['main'] = filter_var($data['Page']['main'], FILTER_SANITIZE_NUMBER_INT);
+
+		// purify page sections
+		$page_sections_num = count($data['PageSection']);
+		for ($i = 0; $i < $page_sections_num; $i++) {
+			$data['PageSection'][$i]['content'] = Page::purify($data['PageSection'][$i]['content']);
+		}
+
 		return $data;
 	}
 
@@ -257,7 +268,13 @@ class Page extends AppModel {
 	public function deleteFile($id = null, $filename = null, $location = IMAGES) {
 		if (!$id || !$filename || !$location) return false;
 
-		return unlink($location.'pages'.DS.sprintf("%010d", $id).DS.$filename);
+		$options = array('conditions' => array('Page.id' => $id));
+		$page = $this->find('first', $options);
+		if ($album) {
+			return unlink($location.'pages'.DS.sprintf("%010d", $page['Page']['id']).DS.$filename);
+		} else {
+			return false;
+		}
 	}
 
 }

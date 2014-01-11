@@ -2,8 +2,6 @@
 /**
  * AppShell file
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -25,7 +23,7 @@ App::uses('Shell', 'Console');
  * Add your application-wide methods in the class below, your shells
  * will inherit them.
  *
- * @package       app.Console.Command
+ * @package       vfxfan-base.Console.Command
  */
 class AppShell extends Shell {
 

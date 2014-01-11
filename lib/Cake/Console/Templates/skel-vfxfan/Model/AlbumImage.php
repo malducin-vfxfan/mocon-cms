@@ -6,13 +6,11 @@
  * sortable and paged results.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       album_images
- * @subpackage    album_images.model
+ * @package       vfxfan-base.AlbumImages.Model
  */
 App::uses('AppModel', 'Model');
-App::uses('MySanitize', 'Utility');
 /**
  * AlbumImage Model
  *

@@ -5,10 +5,9 @@
  * Should be placed at the bottom of the head section of a layout.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       google
- * @subpackage    google.analytics.views.elements
+ * @package       vfxfan-base.View.Elements.Google.Analytics
  */
 $ga_code = Configure::read('Google.Analytics.trackerCode');
 if ($ga_code):

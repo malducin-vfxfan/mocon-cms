@@ -3,10 +3,9 @@
  * Posts view view.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       events
- * @subpackage    events.views
+ * @package       vfxfan-base.Events.View
  */
 $this->extend('/Common/view');
 
@@ -14,7 +13,7 @@ $this->assign('title', $event['Event']['name']);
 $this->assign('contentStartDate', $event['Event']['date_start']);
 $this->assign('contentEndDate', $event['Event']['date_end']);
 $this->assign('sectionModified', $event['Event']['modified']);
-$this->assign('contentThumbnail', $this->FormatImage->idImage('events/'.$event['Event']['year'], $event['Event']['id'], array('class' => 'thumbnail image-right'), 'events'));
+$this->assign('contentThumbnail', $this->FormatImage->idImage('events/'.$event['Event']['year'], $event['Event']['id'], array('class' => 'img-thumbnail pull-right'), 'events'));
 ?>
 		<p>@ <span class="event-location"><?php echo $event['Event']['location']; ?></span></p>
 		<p><?php echo $event['Event']['description']; ?></p>

@@ -3,10 +3,9 @@
  * Menus admin add view.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       menus
- * @subpackage    menus.views
+ * @package       vfxfan-base.Menus.View
  */
 $this->extend('/Common/admin_add_edit');
 
@@ -14,11 +13,21 @@ $this->assign('formTitle', 'Add a Menu Item');
 
 $this->start('actions');
 ?>
-			<li><?php echo $this->Html->link('List Menus', array('action' => 'admin_index'), array('class' => 'btn'));?></li>
+			<li><?php echo $this->Html->link('List Menus', array('action' => 'admin_index')); ?></li>
 <?php
 $this->end();
 ?>
-		<?php echo $this->Form->create('Menu');?>
+		<?php
+			echo $this->Form->create('Menu', array(
+				'inputDefaults' => array(
+					'div' => array('class' => 'form-group'),
+					'class' => 'form-control',
+					'error' => array(
+						'attributes' => array('class' => 'text-danger')
+					)
+				)
+			));
+		?>
 			<fieldset>
 				<legend>Admin Add Menu Item</legend>
 				<?php
@@ -28,9 +37,9 @@ $this->end();
 					echo $this->Form->input('priority', array('type' => 'number', 'min' => 0, 'default' => 0));
 				?>
 			</fieldset>
-		<?php echo $this->Form->end('Submit');?>
+		<?php echo $this->Form->end(array('label' => 'Submit', 'class' => 'btn btn-primary')); ?>
 <?php
-$this->start('relatedContent1');
+$this->start('relatedContent');
 ?>
 		<h3>Pages</h3>
 		<?php if (!empty($pages)): ?>
@@ -55,8 +64,8 @@ $this->start('relatedContent1');
 					<td><?php echo $page['Page']['modified'];?></td>
 					<td>
 						<?php echo $this->Html->link('Add Slug to Link', '#', array('class' => 'btn btn-info menu-page-slug', 'id' => $page['Page']['slug'])); ?>
-						<?php echo $this->Html->link('View', array('controller' => 'pages', 'action' => 'admin_view', $page['Page']['id']), array('class' => 'btn')); ?>
-						<?php echo $this->Html->link('Edit', array('controller' => 'pages', 'action' => 'admin_edit', $page['Page']['id']), array('class' => 'btn')); ?>
+						<?php echo $this->Html->link('View', array('controller' => 'pages', 'action' => 'admin_view', $page['Page']['id']), array('class' => 'btn btn-default')); ?>
+						<?php echo $this->Html->link('Edit', array('controller' => 'pages', 'action' => 'admin_edit', $page['Page']['id']), array('class' => 'btn btn-default')); ?>
 						<?php echo $this->Form->postLink('Delete', array('controller' => 'pages', 'action' => 'admin_delete', $page['Page']['id']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $page['Page']['id'])); ?>
 					</td>
 				</tr>

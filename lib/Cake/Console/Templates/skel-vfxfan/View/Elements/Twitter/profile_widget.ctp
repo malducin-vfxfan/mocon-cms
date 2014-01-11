@@ -3,40 +3,15 @@
  * AddThis profile widget element.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       twitter
- * @subpackage    twitter.views.elements.widget
+ * @package       twitter.View.Elements.Twitter
  */
 $twitter_profile = Configure::read('Twitter.profile');
 if ($twitter_profile):
 ?>
-<script src="http://widgets.twimg.com/j/2/widget.js"></script>
+<a class="twitter-timeline" href="https://twitter.com/<?php echo $twitter_profile; ?>" data-widget-id="421039201677606912">Tweets by @ILMVFX</a>
 <script>
-new TWTR.Widget({
-  version: 2,
-  type: 'profile',
-  rpp: <?php echo Configure::read('Twitter.widget_num_tweets'); ?>,
-  interval: <?php echo Configure::read('Twitter.widget_interval'); ?>,
-  width: <?php echo Configure::read('Twitter.widget_width'); ?>,
-  height: <?php echo Configure::read('Twitter.widget_height'); ?>,
-  theme: {
-    shell: {
-      background: '<?php echo Configure::read('Twitter.widget_shell_bg'); ?>',
-      color: '<?php echo Configure::read('Twitter.widget_shell_color'); ?>'
-    },
-    tweets: {
-      background: '<?php echo Configure::read('Twitter.widget_tweets_bg'); ?>',
-      color: '<?php echo Configure::read('Twitter.widget_tweets_color'); ?>',
-      links: '<?php echo Configure::read('Twitter.widget_tweets_links'); ?>'
-    }
-  },
-  features: {
-    scrollbar: <?php echo Configure::read('Twitter.widget_scrollbar'); ?>,
-    loop: false,
-    live: <?php echo Configure::read('Twitter.widget_live'); ?>,
-    behavior: 'all'
-  }
-}).render().setUser('<?php echo $twitter_profile; ?>').start();
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 </script>
 <?php endif; ?>

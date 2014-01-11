@@ -7,10 +7,9 @@
  * in the page sections.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       page_sections
- * @subpackage    page_sections.views
+ * @package       vfxfan-base.PageSections.View
  */
 $images_list = array();
 $page_folder = sprintf("%010d", $page_id);

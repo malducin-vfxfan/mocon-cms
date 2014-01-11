@@ -3,16 +3,21 @@
  * Project configuration.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       app
- * @subpackage    app.config
+ * @package       vfxfan-base.Config
  */
-define('FILES', WWW_ROOT.'files'.DS);
-// for use in shells and other places where FULL_BASE_URL might not be set,
-// but we do not want to override
-if (!defined('WEBSITE_BASE_URL')) {
-	define('WEBSITE_BASE_URL', 'http://');
+if (!defined('IMAGES')) {
+	define('IMAGES', WWW_ROOT . 'img' . DS);
+}
+if (!defined('CSS')) {
+	define('CSS', WWW_ROOT . 'css' . DS);
+}
+if (!defined('JS')) {
+	define('JS', WWW_ROOT . 'js' . DS);
+}
+if (!defined('FILES')) {
+	define('FILES', WWW_ROOT . 'files' . DS);
 }
 $config = array(
 	'Meta' => array(
@@ -27,6 +32,12 @@ $config = array(
 			'year_range' => 5,
 		),
 	),
+	'Security' => array(
+		'BlowfishAdvanced' => array(
+			'salt_prefix' => '2y', // can be 2y, 2a or 2x; 2a is legacy for PHP < 5.3.7, 2y is perferred but CakePHP only uses 2a
+			'cost' => 10 // two digit cost parameter must be in range 04-31
+		)
+	),
 	'Posts' => array(
 		'latest_num' => 5,
 	),
@@ -40,11 +51,11 @@ $config = array(
 		'posts' => true,
 	),
 	'Jquery' => array(
-		'version' => 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js',
+		'version' => 'http://code.jquery.com/jquery-1.10.2.min.js',
 	),
 	'JqueryUi' => array(
-		'version' => 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js',
-		'theme' => 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/base/jquery-ui.css',
+		'version' => 'https://code.jquery.com/ui/1.10.3/jquery-ui.js',
+		'theme' => 'https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css',
 	),
 	'Google' => array(
 		'Analytics' => array(

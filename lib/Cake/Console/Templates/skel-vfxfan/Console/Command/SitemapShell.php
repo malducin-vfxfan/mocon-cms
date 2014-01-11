@@ -9,11 +9,19 @@
  * resources.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       console.command
- * @subpackage    sitemap
+ * @package       vfxfan-base.Console.Command
  */
+/**
+ * WEBSITE_BASE_URL constant
+ *
+ * Define a constant to more easily generate the sitemap.
+ *
+ * @constant
+ */
+//define('WEBSITE_BASE_URL', 'http://');
+
 class SitemapShell extends AppShell {
 /**
  * Uses

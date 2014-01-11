@@ -5,13 +5,11 @@
  * Manage Contact Form Email data.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       contact_form_emails
- * @subpackage    contact_form_emails.model
+ * @package       vfxfan-base.ContactFormEmails.Model
  */
 App::uses('AppModel', 'Model');
-App::uses('MySanitize', 'Utility');
 /**
  * ContactFormEmail Model
  *
@@ -68,6 +66,12 @@ class ContactFormEmail extends AppModel {
 			),
 		),
 		'name' => array(
+			'alphanumericextended' => array(
+				'rule' => array('alphaNumericDashUnderscoreSpaceColon'),
+				'message' => 'Names must only contain letters, numbers, spaces, dashes, underscores and colons.',
+				'required' => true,
+				'last' => true // Stop validation after this rule
+			),
 			'maxlength' => array(
 				'rule' => array('maxLength', 64),
 				'message' => 'Names must be no larger than 128 characters long.',
@@ -142,9 +146,9 @@ class ContactFormEmail extends AppModel {
  * @return array
  */
 	private function _cleanData($data) {
-		$data['ContactFormEmail']['email'] = MySanitize::cleanSafe($data['ContactFormEmail']['email']);
-		$data['ContactFormEmail']['name'] = MySanitize::cleanSafe($data['ContactFormEmail']['name']);
-		$data['ContactFormEmail']['active'] = MySanitize::paranoid(MySanitize::cleanSafe($data['ContactFormEmail']['active'], array('quotes' => ENT_NOQUOTES)));
+		$data['ContactFormEmail']['email'] = ContactFormEmail::clean(ContactFormEmail::purify(filter_var($data['ContactFormEmail']['email'], FILTER_SANITIZE_EMAIL)));
+		$data['ContactFormEmail']['name'] = ContactFormEmail::clean(ContactFormEmail::purify($data['ContactFormEmail']['name']));
+		$data['ContactFormEmail']['active'] = filter_var($data['ContactFormEmail']['active'], FILTER_SANITIZE_NUMBER_INT);
 		return $data;
 	}
 

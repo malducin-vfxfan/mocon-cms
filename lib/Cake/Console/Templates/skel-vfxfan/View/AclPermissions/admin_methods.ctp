@@ -3,10 +3,9 @@
  * Pages admin view view.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       acl_permissions
- * @subpackage    acl_permissions.views
+ * @package       vfxfan-base.AclPermissions.View
  */
 $this->extend('/Common/admin_view');
 
@@ -14,8 +13,8 @@ $this->assign('formTitle', 'Methods - Controller ACOs');
 
 $this->start('actions');
 ?>
-			<li><?php echo $this->Html->link('ACO Update', array('action' => 'admin_aco_update'), array('class' => 'btn')); ?></li>
-			<li><?php echo $this->Html->link('List ACOs', array('action' => 'admin_index'), array('class' => 'btn')); ?></li>
+			<li><?php echo $this->Html->link('ACO Update', array('action' => 'admin_aco_update')); ?></li>
+			<li><?php echo $this->Html->link('List ACOs', array('action' => 'admin_index')); ?></li>
 <?php
 $this->end();
 ?>
@@ -25,7 +24,7 @@ $this->end();
 				&nbsp;
 			</dd>
 <?php
-$this->start('relatedContent1');
+$this->start('relatedContent');
 ?>
 		<h3>Methods</h3>
 		<?php if (!empty($controllerMethods)): ?>
@@ -45,7 +44,7 @@ $this->start('relatedContent1');
 					<td><?php echo $controllerMethod['Aco']['parent_id']; ?></td>
 					<td><?php echo $controllerMethod['Aco']['alias'] ?></td>
 					<td>
-						<?php echo $this->Html->link('View Permissions', array('action' => 'admin_view', $controllerMethod['Aco']['id']), array('class' => 'btn')); ?>
+						<?php echo $this->Html->link('View Permissions', array('action' => 'admin_view', $controllerMethod['Aco']['id']), array('class' => 'btn btn-default')); ?>
 					</td>
 				</tr>
 				<?php endforeach; ?>

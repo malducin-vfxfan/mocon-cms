@@ -3,10 +3,9 @@
  * Users admin view view.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       users
- * @subpackage    users.views
+ * @package       vfxfan-base.Users.View
  */
 $this->extend('/Common/admin_view');
 
@@ -14,14 +13,19 @@ $this->assign('formTitle', 'User');
 
 $this->start('actions');
 ?>
-		<li><?php echo $this->Html->link('Edit User', array('action' => 'admin_edit', $user['User']['id']), array('class' => 'btn')); ?> </li>
-		<li><?php echo $this->Form->postLink('Delete User', array('action' => 'admin_delete', $user['User']['id']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $user['User']['id'])); ?> </li>
-		<li><?php echo $this->Html->link('List Users', array('action' => 'admin_index'), array('class' => 'btn')); ?> </li>
-		<li><?php echo $this->Html->link('New User', array('action' => 'admin_add'), array('class' => 'btn')); ?> </li>
-		<li><?php echo $this->Html->link('List Groups', array('controller' => 'groups', 'action' => 'admin_index'), array('class' => 'btn')); ?> </li>
-		<li><?php echo $this->Html->link('New Group', array('controller' => 'groups', 'action' => 'admin_add'), array('class' => 'btn')); ?> </li>
-		<li><?php echo $this->Html->link('List Posts', array('controller' => 'posts', 'action' => 'admin_index'), array('class' => 'btn')); ?> </li>
-		<li><?php echo $this->Html->link('New Post', array('controller' => 'posts', 'action' => 'admin_add'), array('class' => 'btn')); ?> </li>
+		<li><?php echo $this->Html->link('Edit User', array('action' => 'admin_edit', $user['User']['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete User', array('class' => 'text-danger')), array('action' => 'admin_delete', $user['User']['id']), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $user['User']['id'])); ?> </li>
+		<li><?php echo $this->Html->link('List Users', array('action' => 'admin_index')); ?> </li>
+		<li><?php echo $this->Html->link('New User', array('action' => 'admin_add')); ?> </li>
+<?php
+$this->end();
+
+$this->start('relatedActions');
+?>
+		<li><?php echo $this->Html->link('List Groups', array('controller' => 'groups', 'action' => 'admin_index')); ?> </li>
+		<li><?php echo $this->Html->link('New Group', array('controller' => 'groups', 'action' => 'admin_add')); ?> </li>
+		<li><?php echo $this->Html->link('List Posts', array('controller' => 'posts', 'action' => 'admin_index')); ?> </li>
+		<li><?php echo $this->Html->link('New Post', array('controller' => 'posts', 'action' => 'admin_add')); ?> </li>
 <?php
 $this->end();
 ?>
@@ -56,8 +60,16 @@ $this->end();
 			&nbsp;
 		</dd>
 <?php
-$this->start('relatedContent1');
+$this->start('relatedContent');
 ?>
+		<div class="btn-group pull-right">
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				Related Actions <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" role="menu">
+				<li><?php echo $this->Html->link('New Post', array('controller' => 'posts', 'action' => 'admin_add')); ?></li>
+			</ul>
+		</div>
 		<h3>Related Posts</h3>
 		<?php if (!empty($posts)): ?>
 		<table class="table table-striped table-bordered table-hover">
@@ -78,8 +90,8 @@ $this->start('relatedContent1');
 					<td><?php echo $post['Post']['created'];?></td>
 					<td><?php echo $post['Post']['modified'];?></td>
 					<td>
-						<?php echo $this->Html->link('View', array('controller' => 'posts', 'action' => 'admin_view', $post['Post']['id']), array('class' => 'btn')); ?>
-						<?php echo $this->Html->link('Edit', array('controller' => 'posts', 'action' => 'admin_edit', $post['Post']['id']), array('class' => 'btn')); ?>
+						<?php echo $this->Html->link('View', array('controller' => 'posts', 'action' => 'admin_view', $post['Post']['id']), array('class' => 'btn btn-default')); ?>
+						<?php echo $this->Html->link('Edit', array('controller' => 'posts', 'action' => 'admin_edit', $post['Post']['id']), array('class' => 'btn btn-default')); ?>
 						<?php echo $this->Form->postLink('Delete', array('controller' => 'posts', 'action' => 'admin_delete', $post['Post']['id']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $post['Post']['id'])); ?>
 					</td>
 				</tr>
@@ -94,23 +106,15 @@ $this->start('relatedContent1');
 		?>
 		</p>
 
-		<div class="pagination">
-			<ul>
-			<?php
-				echo $this->Paginator->prev('« previous', array('tag' => 'li', 'disabledTag' => 'span'), null, array());
-				echo $this->Paginator->numbers(array('separator' => '', 'first' => 'first', 'last' => 'last', 'tag' => 'li', 'currentTag' => 'span', 'currentClass' => 'active'));
-				echo $this->Paginator->next('next »', array('tag' => 'li', 'disabledTag' => 'span'), null, array());
-			?>
-			</ul>
-		</div>
-		<?php endif; ?>
+		<ul class="pagination">
+		<?php
+			echo $this->Paginator->prev('« previous', array('tag' => 'li', 'disabledTag' => 'span'), null, array());
+			echo $this->Paginator->numbers(array('separator' => '', 'first' => 'first', 'last' => 'last', 'tag' => 'li', 'currentTag' => 'span', 'currentClass' => 'active'));
+			echo $this->Paginator->next('next »', array('tag' => 'li', 'disabledTag' => 'span'), null, array());
+		?>
+		</ul>
 
-		<section class="admin-view-related-actions">
-			<h4>Related Actions</h4>
-			<ul class="action-buttons-list">
-				<li><?php echo $this->Html->link('New Post', array('controller' => 'posts', 'action' => 'admin_add'), array('class' => 'btn'));?> </li>
-			</ul>
-		</section>
+		<?php endif; ?>
 <?php
 $this->end();
 ?>

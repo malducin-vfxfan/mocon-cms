@@ -8,10 +8,9 @@
  * more secure.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       contact_forms
- * @subpackage    contact_forms.controller
+ * @package       vfxfan-base.ContactForms.Controller
  */
 App::uses('AppController', 'Controller');
 App::uses('CakeEmail', 'Network/Email');
@@ -49,10 +48,10 @@ class ContactFormsController extends AppController {
 			$this->ContactForm->create();
 			if ($this->ContactForm->save($this->request->data)) {
 				$this->_sendContactEmail($this->ContactForm->id);
-				$this->Session->setFlash('The Contact Form message has been sent.', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('controller' => 'pages', 'action' => 'index'));
+				$this->Session->setFlash('The Contact Form message has been sent.', 'Flash/success');
+				return $this->redirect(array('controller' => 'pages', 'action' => 'index'));
 			} else {
-				$this->Session->setFlash('The Contact Form message could not be sent. Please, try again.', 'default', array('class' => 'alert alert-error'));
+				$this->Session->setFlash('The Contact Form message could not be sent. Please, try again.', 'Flash/error');
 			}
 		}
 		$this->set('title_for_layout', 'Contact Us');
@@ -67,7 +66,7 @@ class ContactFormsController extends AppController {
 		$this->layout = 'default_admin';
 		$this->ContactForm->recursive = -1;
 		$this->set('title_for_layout', 'Contact Form messages');
-		$this->set('contactForms', $this->paginate());
+		$this->set('contactForms', $this->Paginator->paginate());
 	}
 
 /**
@@ -102,11 +101,11 @@ class ContactFormsController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->ContactForm->delete()) {
-			$this->Session->setFlash('Contact Form message deleted.', 'default', array('class' => 'alert alert-success'));
-			$this->redirect(array('action'=>'admin_index'));
+			$this->Session->setFlash('Contact Form message deleted.', 'Flash/success');
+			return $this->redirect(array('action'=>'admin_index'));
 		}
-		$this->Session->setFlash('Contact Form message was not deleted.', 'default', array('class' => 'alert alert-error'));
-		$this->redirect(array('action' => 'admin_index'));
+		$this->Session->setFlash('Contact Form message was not deleted.', 'Flash/error');
+		return $this->redirect(array('action' => 'admin_index'));
 	}
 
 /**

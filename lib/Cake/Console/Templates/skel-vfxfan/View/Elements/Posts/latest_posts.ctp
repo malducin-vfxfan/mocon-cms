@@ -6,16 +6,15 @@
  * list of posts to display (mainly in the main page).
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       posts
- * @subpackage    posts.views.elements
+ * @package       vfxfan-base.Posts.View.Elements
  */
 ?>
 <h2>Latest News</h2>
 <?php foreach ($posts as $post): ?>
 		<article class="post-contents">
-			<?php echo $this->FormatImage->idImage('posts/'.$post['Post']['year'], $post['Post']['id'], array('class' => 'thumbnail image-right'), 'posts'); ?>
+			<?php echo $this->FormatImage->idImage('posts/'.$post['Post']['year'], $post['Post']['id'], array('class' => 'img-thumbnail pull-right'), 'posts'); ?>
 			<header>
 				<h3><?php echo $post['Post']['title']; ?></h3>
 				<time class="date-created" datetime="<?php echo date(DATE_ATOM, strtotime($post['Post']['created'])); ?>">

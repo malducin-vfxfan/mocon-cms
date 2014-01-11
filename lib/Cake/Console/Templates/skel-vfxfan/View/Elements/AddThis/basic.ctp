@@ -3,10 +3,9 @@
  * AddThis basic element.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       add_this
- * @subpackage    add_this.views.elements
+ * @package       vfxfan-base.View.Elements.AddThis
  */
 $addthis_pubid = Configure::read('AddThis.pubid');
 if ($addthis_pubid):

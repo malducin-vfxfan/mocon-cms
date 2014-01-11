@@ -1,12 +1,11 @@
 <?php
 /**
- * Layout for flash() messages.
+ * Layout for flash messages.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009, 2011, ILMfan (http://ilmfan.com)
  * @link          http://ilmfan.com ILMfan
- * @package       layouts
- * @subpackage    layouts.flash
+ * @package       vfxfan-base.View.Layouts
  */
 ?>
 <!doctype html>

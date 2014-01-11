@@ -6,16 +6,15 @@
  * list of events to display (mainly in the main page).
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       events
- * @subpackage    events.views.elements
+ * @package       vfxfan-base.Events.View.Elements
  */
 ?>
 <h2>Upcoming Events</h2>
 <?php foreach ($events as $event): ?>
 <article class="event-contents">
-	<?php echo $this->FormatImage->idImage('events/'.$event['Event']['year'], $event['Event']['id'], array('class' => 'thumbnail image-right'), 'events'); ?>
+	<?php echo $this->FormatImage->idImage('events/'.$event['Event']['year'], $event['Event']['id'], array('class' => 'img-thumbnail pull-right'), 'events'); ?>
 	<header>
 		<h3><?php echo $event['Event']['name']; ?></h3>
 		<time class="date-start" datetime="<?php echo $event['Event']['date_start']; ?>">

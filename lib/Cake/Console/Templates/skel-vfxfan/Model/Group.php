@@ -5,13 +5,11 @@
  * Manage Group data. Groups can have many users.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       groups
- * @subpackage    groups.model
+ * @package       vfxfan-base.Groups.Model
  */
 App::uses('AppModel', 'Model');
-App::uses('MySanitize', 'Utility');
 /**
  * Group Model
  *
@@ -36,7 +34,7 @@ class Group extends AppModel {
  *
  * @var array
  */
-//	public $actsAs = array('Acl' => array('type' => 'requester'));
+	public $actsAs = array('Acl' => array('type' => 'requester'));
 /**
  * Validation rules
  *
@@ -47,25 +45,25 @@ class Group extends AppModel {
 			'notempty' => array(
 				'rule' => array('notEmpty'),
 				'message' => 'This field cannot be left blank.',
-				'required' =>true,
+				'required' => true,
 				'last' => true // Stop validation after this rule
 			),
-			'alphanumeric' => array(
-				'rule' => array('alphaNumeric'),
-				'message' => 'Names must only contain letters and numbers.',
-				'required' =>true,
+			'alphanumericextended' => array(
+				'rule' => array('alphaNumericDashUnderscoreSpaceColon'),
+				'message' => 'Names must only contain letters, numbers, spaces, dashes, underscores and colons.',
+				'required' => true,
 				'last' => true // Stop validation after this rule
 			),
 			'maxlength' => array(
-				'rule' => array('maxLength', 32),
-				'message' => 'Names must be no larger than 32 characters long.',
-				'required' =>true,
+				'rule' => array('maxLength', 64),
+				'message' => 'Names must be no larger than 64 characters long.',
+				'required' => true,
 				'last' => true // Stop validation after this rule
 			),
 			'isunique' => array(
 				'rule' => array('isUnique'),
 				'message' => 'This name has already been taken.',
-				'required' =>true,
+				'required' => true,
 				'last' => true // Stop validation after this rule
 			),
 		),
@@ -118,7 +116,7 @@ class Group extends AppModel {
  * @return array
  */
 	private function _cleanData($data) {
-		$data['Group']['name'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Group']['name'], array('quotes' => ENT_NOQUOTES)), array(' ', '-', '_'));
+		$data['Group']['name'] = Group::clean(Group::purify($data['Group']['name']), array('encode' => false));
 		return $data;
 	}
 

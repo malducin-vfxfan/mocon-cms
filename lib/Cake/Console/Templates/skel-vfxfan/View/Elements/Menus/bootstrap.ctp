@@ -3,10 +3,9 @@
  * Menus Bootstrap from Twitter style element.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       menus
- * @subpackage    menus.views.elements
+ * @package       vfxfan-base.Menus.View.Elements
  */
 
 /**
@@ -23,22 +22,19 @@
 function menuIterator($array, $htmlInstance) {
 	foreach ($array as $item) {
 		if (!empty($item['children'])) {
-			echo "<li class=\"dropdown\">" . $htmlInstance->link($item['Menu']['name'].$htmlInstance->tag('span', '', array('class' => 'caret')), $item['Menu']['link'], array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'escape' => false))."\n";
+			echo "<li class=\"dropdown\">" . $htmlInstance->link($item['Menu']['name'].$htmlInstance->tag('span', '', array('class' => 'caret')), $item['Menu']['link'], array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'escapeTitle' => false))."\n";
 			echo "<ul class=\"dropdown-menu\">\n";
 			menuIterator($item['children'], $htmlInstance);
 			echo "</ul>\n";
-		}
-		else {
+		} else {
 			echo "<li>" . $htmlInstance->link($item['Menu']['name'], $item['Menu']['link'])."\n";
 		}
-		echo "\n</li>\n";
+		echo "</li>\n";
 	}
 }
 
 $menuItems = $this->requestAction('menus/menu');
 ?>
-	<ul class="nav">
-		<?php
-			menuIterator($menuItems, $this->Html);
-		?>
+	<ul class="nav navbar-nav">
+		<?php menuIterator($menuItems, $this->Html); ?>
 	</ul>

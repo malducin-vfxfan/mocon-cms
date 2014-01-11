@@ -5,13 +5,11 @@
  * Manage Contact Form data.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       contact_forms
- * @subpackage    contact_forms.model
+ * @package       vfxfan-base.ContactForms.Model
  */
 App::uses('AppModel', 'Model');
-App::uses('MySanitize', 'Utility');
 /**
  * ContactForm Model
  *
@@ -41,6 +39,12 @@ class ContactForm extends AppModel {
 				'message' => 'This field cannot be left blank.',
 				'required' => true,
 				'last' => true, // Stop validation after this rule
+			),
+			'alphanumericextended' => array(
+				'rule' => array('alphaNumericDashUnderscoreSpaceColon'),
+				'message' => 'Names must only contain letters, numbers, spaces, dashes, underscores and colons.',
+				'required' => true,
+				'last' => true // Stop validation after this rule
 			),
 			'maxlength' => array(
 				'rule' => array('maxLength', 64),
@@ -100,9 +104,9 @@ class ContactForm extends AppModel {
  * @return array
  */
 	private function _cleanData($data) {
-		$data['ContactForm']['name'] = MySanitize::cleanSafe($data['ContactForm']['name']);
-		$data['ContactForm']['email'] = MySanitize::cleanSafe($data['ContactForm']['email']);
-		$data['ContactForm']['message'] = MySanitize::cleanSafe($data['ContactForm']['message']);
+		$data['ContactForm']['name'] = ContactForm::clean(ContactForm::purify($data['ContactForm']['name']));
+		$data['ContactForm']['email'] = ContactForm::clean(ContactForm::purify(filter_var($data['ContactForm']['email'], FILTER_SANITIZE_EMAIL)));
+		$data['ContactForm']['message'] = nl2br(ContactForm::clean(ContactForm::purify($data['ContactForm']['message']), array('clean_whitespace' => false)));
 		return $data;
 	}
 

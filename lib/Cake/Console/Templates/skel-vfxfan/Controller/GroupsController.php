@@ -5,10 +5,9 @@
  * Groups actions.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       groups
- * @subpackage    groups.controller
+ * @package       vfxfan-base.Groups.Controller
  */
 App::uses('AppController', 'Controller');
 /**
@@ -27,7 +26,7 @@ class GroupsController extends AppController {
 		$this->layout = 'default_admin';
 		$this->Group->recursive = 0;
 		$this->set('title_for_layout', 'Groups');
-		$this->set('groups', $this->paginate());
+		$this->set('groups', $this->Paginator->paginate());
 	}
 
 /**
@@ -47,7 +46,7 @@ class GroupsController extends AppController {
 		$this->set(compact('group'));
 		$this->set('title_for_layout', 'Group: '.$group['Group']['name']);
 		$this->Group->User->recursive = -1;
-		$this->set('users', $this->paginate('User', array('User.group_id' => $group['Group']['id'])));
+		$this->set('users', $this->Paginator->paginate('User', array('User.group_id' => $group['Group']['id'])));
 	}
 
 /**
@@ -60,10 +59,10 @@ class GroupsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Group->create();
 			if ($this->Group->save($this->request->data)) {
-				$this->Session->setFlash('The Group has been saved.', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action' => 'admin_index'));
+				$this->Session->setFlash('The Group has been saved.', 'Flash/success');
+				return $this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Group could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
+				$this->Session->setFlash('The Group could not be saved. Please, try again.', 'Flash/error');
 			}
 		}
 		$this->set('title_for_layout', 'Add Group');
@@ -80,12 +79,12 @@ class GroupsController extends AppController {
 		if (!$this->Group->exists($id)) {
 			throw new NotFoundException('Invalid Group.');
 		}
-		if ($this->request->is('post') || $this->request->is('put')) {
+		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Group->save($this->request->data)) {
-				$this->Session->setFlash('The Group has been saved.', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action' => 'admin_index'));
+				$this->Session->setFlash('The Group has been saved.', 'Flash/success');
+				return $this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Group could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
+				$this->Session->setFlash('The Group could not be saved. Please, try again.', 'Flash/error');
 			}
 		} else {
 			$options = $options = array('conditions' => array('Group.id' => $id));
@@ -109,10 +108,10 @@ class GroupsController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Group->delete()) {
-			$this->Session->setFlash('Group deleted.', 'default', array('class' => 'alert alert-success'));
-			$this->redirect(array('action'=>'admin_index'));
+			$this->Session->setFlash('Group deleted.', 'Flash/success');
+			return $this->redirect(array('action'=>'admin_index'));
 		}
-		$this->Session->setFlash('Group was not deleted.', 'default', array('class' => 'alert alert-error'));
-		$this->redirect(array('action' => 'admin_index'));
+		$this->Session->setFlash('Group was not deleted.', 'Flash/error');
+		return $this->redirect(array('action' => 'admin_index'));
 	}
 }

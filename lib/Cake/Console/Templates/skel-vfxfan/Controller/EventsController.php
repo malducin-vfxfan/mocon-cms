@@ -5,10 +5,9 @@
  * Events actions.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       events
- * @subpackage    events.controller
+ * @package       vfxfan-base.Events.Controller
  */
 App::uses('AppController', 'Controller');
 /**
@@ -49,9 +48,9 @@ class EventsController extends AppController {
  */
 	public function index() {
 		$this->Event->recursive = 0;
-		$this->paginate = array('conditions' => array('Event.date_end >= CURDATE()'));
+		$this->Paginator->settings = array('conditions' => array('Event.date_end >= CURDATE()'));
 		$this->set('title_for_layout', 'Upcoming Events');
-		$this->set('events', $this->paginate());
+		$this->set('events', $this->Paginator->paginate());
 	}
 
 /**
@@ -78,10 +77,10 @@ class EventsController extends AppController {
  * @return void
  */
 	public function archive() {
-		$this->paginate = array('conditions' => array('Event.date_end <' => date('Y-m-d')), 'order' => array('Event.date_start' => 'DESC'));
+		$this->Paginator->settings = array('conditions' => array('Event.date_end <' => date('Y-m-d')), 'order' => array('Event.date_start' => 'DESC'));
 		$this->Event->recursive = 0;
 		$this->set('title_for_layout', 'Past Events');
-		$this->set('events', $this->paginate());
+		$this->set('events', $this->Paginator->paginate());
 	}
 
 /**
@@ -91,10 +90,10 @@ class EventsController extends AppController {
  */
 	public function admin_index() {
 		$this->layout = 'default_admin';
-		$this->paginate = array('order' => array('Event.date_start' => 'DESC'));
+		$this->Paginator->settings = array('order' => array('Event.date_start' => 'DESC'));
 		$this->Event->recursive = 0;
 		$this->set('title_for_layout', 'Events');
-		$this->set('events', $this->paginate());
+		$this->set('events', $this->Paginator->paginate());
 	}
 
 /**
@@ -129,10 +128,10 @@ class EventsController extends AppController {
 				if ($event) {
 					$this->Upload->uploadImageThumb('img'.DS.'events'.DS.$event['Event']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->request->data['File']['image']['name']));
 				}
-				$this->Session->setFlash('The Event has been saved.', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action' => 'admin_index'));
+				$this->Session->setFlash('The Event has been saved.', 'Flash/success');
+				return $this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Event could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
+				$this->Session->setFlash('The Event could not be saved. Please, try again.', 'Flash/error');
 			}
 		}
 		$this->set('title_for_layout', 'Add Event');
@@ -149,17 +148,17 @@ class EventsController extends AppController {
 		if (!$this->Event->exists($id)) {
 			throw new NotFoundException('Invalid Event.');
 		}
-		if ($this->request->is('post') || $this->request->is('put')) {
+		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Event->save($this->request->data)) {
 				$options = array('conditions' => array('Event.id' => $this->Event->id));
 				$event = $this->Event->find('first', $options);
 				if ($event) {
 					$this->Upload->uploadImageThumb('img'.DS.'events'.DS.$event['Event']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->request->data['File']['image']['name']));
 				}
-				$this->Session->setFlash('The Event has been saved.', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action' => 'admin_index'));
+				$this->Session->setFlash('The Event has been saved.', 'Flash/success');
+				return $this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Event could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
+				$this->Session->setFlash('The Event could not be saved. Please, try again.', 'Flash/error');
 			}
 		} else {
 			$options = array('conditions' => array('Event.id' => $id));
@@ -183,10 +182,10 @@ class EventsController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Event->delete()) {
-			$this->Session->setFlash('Event deleted.', 'default', array('class' => 'alert alert-success'));
-			$this->redirect(array('action'=>'admin_index'));
+			$this->Session->setFlash('Event deleted.', 'Flash/success');
+			return $this->redirect(array('action'=>'admin_index'));
 		}
-		$this->Session->setFlash('Event was not deleted.', 'default', array('class' => 'alert alert-error'));
-		$this->redirect(array('action' => 'admin_index'));
+		$this->Session->setFlash('Event was not deleted.', 'Flash/error');
+		return $this->redirect(array('action' => 'admin_index'));
 	}
 }

@@ -5,10 +5,9 @@
  * Change Themes actions. Allow the user to switch between themes.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       change_themes
- * @subpackage    change_themes.controller
+ * @package       vfxfan-base.ChangeThemes.Controller
  */
 App::uses('AppController', 'Controller');
 /**
@@ -42,11 +41,10 @@ class ChangeThemesController extends AppController {
 	public function admin_change() {
 		if ($this->Session->read('Config.theme') == 'default') {
 			$this->Session->write('Config.theme', 'mobile');
-		}
-		else {
+		} else {
 			$this->Session->write('Config.theme', 'default');
 		}
-		$this->redirect($this->request->referer());
+		return $this->redirect($this->request->referer());
 	}
 
 /**
@@ -57,11 +55,10 @@ class ChangeThemesController extends AppController {
 	public function change() {
 		if ($this->Session->read('Config.theme') == 'default') {
 			$this->Session->write('Config.theme', 'mobile');
-		}
-		else {
+		} else {
 			$this->Session->write('Config.theme', 'default');
 		}
-		$this->redirect($this->request->referer());
+		return $this->redirect($this->request->referer());
 	}
 
 }

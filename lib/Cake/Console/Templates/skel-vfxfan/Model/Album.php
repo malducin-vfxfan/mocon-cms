@@ -8,13 +8,11 @@
  * them is their location.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       albums
- * @subpackage    albums.model
+ * @package       vfxfan-base.Albums.Model
  */
 App::uses('AppModel', 'Model');
-App::uses('MySanitize', 'Utility');
 /**
  * Album Model
  *
@@ -78,6 +76,12 @@ class Album extends AppModel {
 				'message' => 'This field cannot be left blank.',
 				'required' => true,
 				'last' => true, // Stop validation after this rule
+			),
+			'alphanumericextended' => array(
+				'rule' => array('alphaNumericDashUnderscoreSpaceColon'),
+				'message' => 'Names must only contain letters, numbers, spaces, dashes, underscores and colons.',
+				'required' => true,
+				'last' => true // Stop validation after this rule
 			),
 			'maxlength' => array(
 				'rule' => array('maxLength', 128),
@@ -146,7 +150,7 @@ class Album extends AppModel {
  * @param boolean $created
  * @return void
  */
-	public function afterSave($created) {
+	public function afterSave($created, $options = array()) {
 		if ($created) {
 			$options = array('conditions' => array('Album.id' => $this->id));
 			$album = $this->find('first', $options);
@@ -218,9 +222,9 @@ class Album extends AppModel {
  * @return array
  */
 	private function _cleanData($data) {
-		$data['Album']['name'] = MySanitize::cleanSafe($data['Album']['name']);
-		$data['Album']['slug'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Album']['slug'], array('quotes' => ENT_NOQUOTES)), array('-', '_'));
-		$data['Album']['description'] = MySanitize::cleanSafe($data['Album']['description']);
+		$data['Album']['name'] = Album::clean(Album::purify($data['Album']['name']));
+		$data['Album']['slug'] = Album::clean(Album::purify($data['Album']['slug']), array('encode' => false));
+		$data['Album']['description'] = Album::clean(Album::purify($data['Album']['description']));
 		return $data;
 	}
 
@@ -267,12 +271,11 @@ class Album extends AppModel {
 		$options = array('conditions' => array('Album.id' => $id));
 		$album = $this->find('first', $options);
 		if ($album) {
-			$del_thumb = unlink(IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id).DS.'thumbnails'.DS.$filename);
-			$del_image = unlink(IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id).DS.$filename);
+			$del_thumb = unlink(IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $album['Album']['id']).DS.'thumbnails'.DS.$filename);
+			$del_image = unlink(IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $album['Album']['id']).DS.$filename);
 
 			return ($del_thumb && $del_image);
-		}
-		else {
+		} else {
 			return false;
 		}
 	}

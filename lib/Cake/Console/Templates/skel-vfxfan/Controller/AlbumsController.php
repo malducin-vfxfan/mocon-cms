@@ -6,10 +6,9 @@
  * though FTP would be faster.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       albums
- * @subpackage    albums.controller
+ * @package       vfxfan-base.Albums.Controller
  */
 App::uses('AppController', 'Controller');
 /**
@@ -41,7 +40,7 @@ class AlbumsController extends AppController {
 	public function index() {
 		$this->Album->recursive = 0;
 		$this->set('title_for_layout', 'Albums');
-		$this->set('albums', $this->paginate());
+		$this->set('albums', $this->Paginator->paginate());
 	}
 
 /**
@@ -59,13 +58,13 @@ class AlbumsController extends AppController {
 			throw new NotFoundException('Invalid Album.');
 		}
 
-		$this->paginate = array(
+		$this->Paginator->settings = array(
 			'conditions' => array('directory' => 'albums'.DS.$album['Album']['year'].DS.sprintf('%010d', $album['Album']['id'])),
 			'limit' => 60,
 		);
 
 		$this->set(compact('album'));
-		$this->set('albumImages', $this->paginate('AlbumImage'));
+		$this->set('albumImages', $this->Paginator->paginate('AlbumImage'));
 		$this->set('title_for_layout', 'Album: '.$album['Album']['name']);
 	}
 
@@ -78,7 +77,7 @@ class AlbumsController extends AppController {
 		$this->layout = 'default_admin';
 		$this->Album->recursive = -1;
 		$this->set('title_for_layout', 'Albums');
-		$this->set('albums', $this->paginate());
+		$this->set('albums', $this->Paginator->paginate());
 	}
 
 /**
@@ -114,10 +113,10 @@ class AlbumsController extends AppController {
 				if ($album) {
 					$this->Upload->uploadImageThumb('img'.DS.'albums'.DS.$album['Album']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Album->id, $this->request->data['File']['image']['name']));
 				}
-				$this->Session->setFlash('The Album has been saved.', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action' => 'admin_index'));
+				$this->Session->setFlash('The Album has been saved.', 'Flash/success');
+				return $this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Album could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
+				$this->Session->setFlash('The Album could not be saved. Please, try again.', 'Flash/error');
 			}
 		}
 		$this->set('title_for_layout', 'Add Album');
@@ -134,17 +133,17 @@ class AlbumsController extends AppController {
 		if (!$this->Album->exists($id)) {
 			throw new NotFoundException('Invalid Album.');
 		}
-		if ($this->request->is('post') || $this->request->is('put')) {
+		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Album->save($this->request->data)) {
 				$options = array('conditions' => array('Album.id' => $this->Album->id));
 				$album = $this->Album->find('first', $options);
 				if ($album) {
 					$this->Upload->uploadImageThumb('img'.DS.'albums'.DS.$album['Album']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Album->id, $this->request->data['File']['image']['name']));
 				}
-				$this->Session->setFlash('The Album has been saved.', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action' => 'admin_index'));
+				$this->Session->setFlash('The Album has been saved.', 'Flash/success');
+				return $this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Album could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
+				$this->Session->setFlash('The Album could not be saved. Please, try again.', 'Flash/error');
 			}
 		} else {
 			$options = array('conditions' => array('Album.id' => $id));
@@ -168,11 +167,11 @@ class AlbumsController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Album->delete()) {
-			$this->Session->setFlash('Album deleted.', 'default', array('class' => 'alert alert-success'));
-			$this->redirect(array('action'=>'admin_index'));
+			$this->Session->setFlash('Album deleted.', 'Flash/success');
+			return $this->redirect(array('action'=>'admin_index'));
 		}
-		$this->Session->setFlash('Album was not deleted.', 'default', array('class' => 'alert alert-error'));
-		$this->redirect(array('action' => 'admin_index'));
+		$this->Session->setFlash('Album was not deleted.', 'Flash/error');
+		return $this->redirect(array('action' => 'admin_index'));
 	}
 
 /**
@@ -190,17 +189,17 @@ class AlbumsController extends AppController {
 		if (!$this->Album->exists($id)) {
 			throw new NotFoundException('Invalid Album.');
 		}
-		$this->request->onlyAllow('post');
-		$options = array('conditions' => array('Album.id' => $id));
-		$album = $this->Album->find('first', $options);
-		if ($album) {
-			$result = $this->Upload->uploadImageThumb('img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $id), $this->request->data['File']['image'], $this->request->data['File']['image']['name'], array('create_thumb' => true));
-			if ($result) {
-				$this->Session->setFlash('The Album image has been saved.', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action' => 'admin_view', $id));
-			}
-			else {
-				$this->Session->setFlash('The Album image could not be saved. Please, try again.', 'default', array('class' => 'alert alert-success'));
+		if ($this->request->is('post')) {
+			$options = array('conditions' => array('Album.id' => $id));
+			$album = $this->Album->find('first', $options);
+			if ($album) {
+				$result = $this->Upload->uploadImageThumb('img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $id), $this->request->data['File']['image'], $this->request->data['File']['image']['name'], array('create_thumb' => true));
+				if ($result) {
+					$this->Session->setFlash('The Album image has been saved.', 'Flash/success');
+					return $this->redirect(array('action' => 'admin_view', $id));
+				} else {
+					$this->Session->setFlash('The Album image could not be saved. Please, try again.', 'Flash/success');
+				}
 			}
 		}
 	}
@@ -219,8 +218,8 @@ class AlbumsController extends AppController {
 		$this->layout = 'default_admin';
 
 		if (!$id or !$image) {
-			$this->Session->setFlash('Invalid Album or image.', 'default', array('class' => 'alert alert-error'));
-			$this->redirect(array('action' => 'admin_index'));
+			$this->Session->setFlash('Invalid Album or image.', 'Flash/error');
+			return $this->redirect(array('action' => 'admin_index'));
 		}
 
 		if (!$this->Album->exists($id)) {
@@ -229,11 +228,11 @@ class AlbumsController extends AppController {
 
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Album->deleteFile($id, $image)) {
-			$this->Session->setFlash('Album image deleted.', 'default', array('class' => 'alert alert-success'));
-			$this->redirect(array('action' => 'admin_view', $id));
+			$this->Session->setFlash('Album image deleted.', 'Flash/success');
+			return $this->redirect(array('action' => 'admin_view', $id));
 		}
-		$this->Session->setFlash('There was a problem deleting the Album image.', 'default', array('class' => 'alert alert-success'));
-		$this->redirect(array('action' => 'admin_view', $id));
+		$this->Session->setFlash('There was a problem deleting the Album image.', 'Flash/success');
+		return $this->redirect(array('action' => 'admin_view', $id));
 	}
 
 }

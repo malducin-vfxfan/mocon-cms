@@ -9,10 +9,9 @@
  * HTMLPurifier can be found at http://htmlpurifier.org/
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       component
- * @subpackage    component.brita
+ * @package       vfxfan-base.Controller.Component
  */
 App::import('Vendor', 'HTMLPurifier', array('file' => 'htmlpurifier'.DS.'library'.DS.'HTMLPurifier.auto.php'));
 /**

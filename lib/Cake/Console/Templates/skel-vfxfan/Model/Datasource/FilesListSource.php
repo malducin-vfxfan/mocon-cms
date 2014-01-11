@@ -8,10 +8,9 @@
  * database.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       datasources
- * @subpackage    datasources.files_list
+ * @package       vfxfan-base.Model.Datasource
  */
 /**
  * FilesListSource Data Source
@@ -41,7 +40,7 @@ class FilesListSource extends DataSource {
  * listSources() is for caching. You'll likely want to implement caching in
  * your own way with a custom datasource. So just 'return null'.
  */
-	public function listSources() {
+	public function listSources($data = null) {
 		return null;
 	}
 
@@ -61,12 +60,11 @@ class FilesListSource extends DataSource {
 /**
  * Implement the R in CRUD. Calls to Model::find() arrive here.
  */
-	public function read(Model $Model, $data = array()) {
+	public function read(Model $Model, $queryData = array(), $recursive = null) {
 		// check to see if we defined a directory in the paginate conditions
-		 if (!empty($data['conditions']['directory'])) {
-		 	$directory = $this->config['basePath'].$data['conditions']['directory'].DS;
-		 }
-		 else {
+		 if (!empty($queryData['conditions']['directory'])) {
+		 	$directory = $this->config['basePath'].$queryData['conditions']['directory'].DS;
+		 } else {
 		 	$directory = $this->config['basePath'];
 		 }
 
@@ -88,19 +86,18 @@ class FilesListSource extends DataSource {
 		 */
 
 		if ($files) {
-			if ($data['fields'] == 'COUNT') {
+			if ($queryData['fields'] == 'COUNT') {
 				return array(array(array('count' => count($files))));
 			}
 
 			// used for sorting
-			$files = $this->__sortItems($files, $data['order'][0]);
+			$files = $this->__sortItems($files, $queryData['order'][0]);
 
 			//used for pagination
-			$files = $this->__getPage($files, $data);
+			$files = $this->__getPage($files, $queryData);
 
-		}
-		else {
-			if ($data['fields'] == 'COUNT') {
+		} else {
+			if ($queryData['fields'] == 'COUNT') {
 				return array(array(array('count' => count($files))));
 			}
 		}
@@ -136,8 +133,7 @@ class FilesListSource extends DataSource {
 
 		if ($direction == SORT_ASC) {
 			sort($files);
-		}
-		else {
+		} else {
 			rsort($files);
 		}
 
@@ -155,8 +151,7 @@ class FilesListSource extends DataSource {
 
 		if (!isset($data['limit']) || empty($data['limit'])) {
 			$limit = 20;
-		}
-		else {
+		} else {
 			$limit = $data['limit'];
 		}
 		$page = $data['page'];

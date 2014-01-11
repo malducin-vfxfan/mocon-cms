@@ -5,13 +5,11 @@
  * Manage Post data.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       posts
- * @subpackage    posts.model
+ * @package       vfxfan-base.Posts.Model
  */
 App::uses('AppModel', 'Model');
-App::uses('MySanitize', 'Utility');
 /**
  * Post Model
  *
@@ -88,6 +86,12 @@ class Post extends AppModel {
 			'notempty' => array(
 				'rule' => array('notEmpty'),
 				'message' => 'This field cannot be left blank.',
+				'required' => true,
+				'last' => true // Stop validation after this rule
+			),
+			'alphanumericextended' => array(
+				'rule' => array('alphaNumericDashUnderscoreSpaceColon'),
+				'message' => 'Names must only contain letters, numbers, spaces, dashes, underscores and colons.',
 				'required' => true,
 				'last' => true // Stop validation after this rule
 			),
@@ -173,7 +177,7 @@ class Post extends AppModel {
  * @param boolean $created
  * @return void
  */
-	public function afterSave($created) {
+	public function afterSave($created, $options = array()) {
 		// check to see if a year folder exists and if not, create one
 		if ($created) {
 			$options = array('conditions' => array('Post.id' => $this->id), 'recursive' => -1);
@@ -242,10 +246,12 @@ class Post extends AppModel {
  * @return array
  */
 	private function _cleanData($data) {
-		$data['Post']['title'] = MySanitize::cleanSafe($data['Post']['title']);
-		$data['Post']['summary'] = MySanitize::cleanSafe($data['Post']['summary']);
-		$data['Post']['slug'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Post']['slug'], array('quotes' => ENT_NOQUOTES)), array('-', '_'));
-		$data['Post']['user_id'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Post']['user_id'], array('quotes' => ENT_NOQUOTES)));
+		$data['Post']['title'] = Post::clean(Post::purify($data['Post']['title']));
+		$data['Post']['summary'] = Post::clean(Post::purify($data['Post']['summary']));
+		$data['Post']['content'] = Post::purify($data['Post']['content']);
+		$data['Post']['slug'] = Post::clean(Post::purify($data['Post']['slug']), array('encode' => false));
+		$data['Post']['user_id'] = filter_var($data['Post']['user_id'], FILTER_SANITIZE_NUMBER_INT);
 		return $data;
 	}
+
 }

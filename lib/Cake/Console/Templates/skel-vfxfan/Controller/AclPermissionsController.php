@@ -5,10 +5,9 @@
  * ACL Permissions actions.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       acl_permissions
- * @subpackage    acl_permissions.controller
+ * @package       vfxfan-base.AclPermissions.Controller
  */
 App::uses('AppController', 'Controller');
 /**
@@ -40,14 +39,14 @@ class AclPermissionsController extends AppController {
 
 		$rootAco = $this->Acl->Aco->find('first', array('conditions' => array('alias' => $this->rootNode), 'recursive' => -1));
 
-		$this->paginate = array(
+		$this->Paginator->settings = array(
 			'conditions' => array('parent_id' => $rootAco['Aco']['id']),
 			'recursive' => -1,
 			'order' => array('lft'),
 		);
 
 		$this->set('title_for_layout', 'Top Level ACOs');
-		$this->set('acos', $this->paginate('Aco'));
+		$this->set('acos', $this->Paginator->paginate('Aco'));
 		$this->set(compact('rootAco'));
 
 	}
@@ -77,7 +76,7 @@ class AclPermissionsController extends AppController {
 		$controllerMethods = $this->Acl->Aco->children($aco_id, true);
 		if (!$controllerMethods) {
 			$this->Session->setFlash('No methods found for this controller (ACO).', 'default', array('class' => 'alert alert-info'));
-			$this->redirect(array('action' => 'admin_index'));
+			return $this->redirect(array('action' => 'admin_index'));
 		}
 
 		$this->set('title_for_layout', 'Methods - Controller ACOs: '.$completePath);
@@ -104,10 +103,10 @@ class AclPermissionsController extends AppController {
 		}
 		$completePath = implode('/', $pathComponents);
 
-		$this->paginate = array(
+		$this->Paginator->settings = array(
 			'recursive' => 0
 		);
-		$users = $this->paginate('User');
+		$users = $this->Paginator->paginate('User');
 
 		// attach groups and users permission information
 		foreach ($users as &$user) {
@@ -129,7 +128,7 @@ class AclPermissionsController extends AppController {
 	public function admin_edit($aco_id = null, $model = 'User', $id = null) {
 		$this->layout = 'default_admin';
 
-		if ($this->request->is('post')) {
+		if ($this->request->is(array('post', 'put'))) {
 			$path = $this->Acl->Aco->getPath($aco_id);
 			if (!$path) {
 				throw new NotFoundException('Invalid ACO.');
@@ -150,8 +149,7 @@ class AclPermissionsController extends AppController {
 					}
 					if ($permission) {
 						$this->Acl->deny(array('model' => 'User', 'foreign_key' => $id), $completePath);
-					}
-					else {
+					} else {
 						$this->Acl->allow(array('model' => 'User', 'foreign_key' => $id), $completePath);
 					}
 
@@ -164,8 +162,7 @@ class AclPermissionsController extends AppController {
 
 					if ($permission) {
 						$this->Acl->deny(array('model' => 'Group', 'foreign_key' => $id), $completePath);
-					}
-					else {
+					} else {
 						$this->Acl->allow(array('model' => 'Group', 'foreign_key' => $id), $completePath);
 					}
 
@@ -176,8 +173,8 @@ class AclPermissionsController extends AppController {
 					break;
 			}
 
-			$this->Session->setFlash('The ACL Permission has been changed and/or added.', 'default', array('class' => 'alert alert-success'));
-			$this->redirect(array('action' => 'admin_view', $aco_id));
+			$this->Session->setFlash('The ACL Permission has been changed and/or added.', 'Flash/success');
+			return $this->redirect(array('action' => 'admin_view', $aco_id));
 		}
 	}
 
@@ -226,8 +223,8 @@ class AclPermissionsController extends AppController {
 				break;
 		}
 
-		$this->Session->setFlash('The ACL Permission has been deleted.', 'default', array('class' => 'alert alert-success'));
-		$this->redirect(array('action' => 'admin_view', $aco_id));
+		$this->Session->setFlash('The ACL Permission has been deleted.', 'Flash/success');
+		return $this->redirect(array('action' => 'admin_view', $aco_id));
 	}
 
 /**
@@ -274,7 +271,7 @@ class AclPermissionsController extends AppController {
 		}
 
 		$this->Session->setFlash('The ACOs have been updated.', 'default', array('class' => 'alert alert-info'));
-		$this->redirect(array('action' => 'admin_index'));
+		return $this->redirect(array('action' => 'admin_index'));
 	}
 
 /**

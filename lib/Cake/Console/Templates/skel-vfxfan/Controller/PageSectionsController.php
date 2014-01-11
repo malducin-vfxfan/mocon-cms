@@ -5,26 +5,17 @@
  * Page Sections actions.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       page_sections
- * @subpackage    page_sections.controller
+ * @package       vfxfan-base.PageSections.Controller
  */
 App::uses('AppController', 'Controller');
 /**
  * PageSections Controller
  *
  * @property PageSection $PageSection
- * @property BritaComponent $Brita
  */
 class PageSectionsController extends AppController {
-
-/**
- * Components
- *
- * @var array
- */
-	public $components = array('Brita');
 
 /**
  * beforeFilter method
@@ -47,7 +38,7 @@ class PageSectionsController extends AppController {
 		$this->layout = 'default_admin';
 		$this->PageSection->recursive = 0;
 		$this->set('title_for_layout', 'Page Sections');
-		$this->set('pageSections', $this->paginate());
+		$this->set('pageSections', $this->Paginator->paginate());
 	}
 
 /**
@@ -79,14 +70,13 @@ class PageSectionsController extends AppController {
 		$this->layout = 'default_admin';
 		if ($this->request->is('post')) {
 			$this->PageSection->create();
-			$this->request->data['PageSection']['content'] = $this->brita->purify($this->request->data['PageSection']['content']);
 			if ($this->PageSection->save($this->request->data)) {
 				$options = array('conditions' => array('PageSection.id' => $this->PageSection->id));
 				$pageSection = $this->PageSection->find('first', $options);
-				$this->Session->setFlash('The Page Section has been saved.', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('controller' => 'pages', 'action' => 'admin_view', $pageSection['PageSection']['page_id']));
+				$this->Session->setFlash('The Page Section has been saved.', 'Flash/success');
+				return $this->redirect(array('controller' => 'pages', 'action' => 'admin_view', $pageSection['PageSection']['page_id']));
 			} else {
-				$this->Session->setFlash('The Page Section could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
+				$this->Session->setFlash('The Page Section could not be saved. Please, try again.', 'Flash/error');
 			}
 		}
 		$pages = $this->PageSection->Page->find('list');
@@ -106,15 +96,14 @@ class PageSectionsController extends AppController {
 		if (!$this->PageSection->exists($id)) {
 			throw new NotFoundException('Invalid Page Section.');
 		}
-		if ($this->request->is('post') || $this->request->is('put')) {
-			$this->request->data['PageSection']['content'] = $this->brita->purify($this->request->data['PageSection']['content']);
+		if ($this->request->is(array('post', 'put'))) {
 			if ($this->PageSection->save($this->request->data)) {
 				$options = array('conditions' => array('PageSection.id' => $this->PageSection->id));
 				$pageSection = $this->PageSection->find('first', $options);
-				$this->Session->setFlash('The Page Section has been saved.', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('controller' => 'pages', 'action' => 'admin_view', $pageSection['PageSection']['page_id']));
+				$this->Session->setFlash('The Page Section has been saved.', 'Flash/success');
+				return $this->redirect(array('controller' => 'pages', 'action' => 'admin_view', $pageSection['PageSection']['page_id']));
 			} else {
-				$this->Session->setFlash('The Page Section could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
+				$this->Session->setFlash('The Page Section could not be saved. Please, try again.', 'Flash/error');
 			}
 		} else {
 			$options = array('conditions' => array('PageSection.id' => $id));
@@ -140,11 +129,11 @@ class PageSectionsController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->PageSection->delete()) {
-			$this->Session->setFlash('Page Section deleted.', 'default', array('class' => 'alert alert-success'));
-			$this->redirect(array('action'=>'admin_index'));
+			$this->Session->setFlash('Page Section deleted.', 'Flash/success');
+			return $this->redirect(array('action'=>'admin_index'));
 		}
-		$this->Session->setFlash('Page Section was not deleted.', 'default', array('class' => 'alert alert-error'));
-		$this->redirect(array('action' => 'admin_index'));
+		$this->Session->setFlash('Page Section was not deleted.', 'Flash/error');
+		return $this->redirect(array('action' => 'admin_index'));
 	}
 
 /**

@@ -3,10 +3,9 @@
  * Pages view view.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       pages
- * @subpackage    pages.views
+ * @package       vfxfan-base.Pages.View
  */
 $this->extend('/Common/view');
 

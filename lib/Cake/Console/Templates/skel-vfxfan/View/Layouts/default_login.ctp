@@ -3,10 +3,9 @@
  * Default login layout.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       app
- * @subpackage    app.views.layouts.default.login
+ * @package       vfxfan-base.View.Layouts
  */
 ?>
 <!doctype html>
@@ -29,7 +28,7 @@
 		echo $this->Html->meta('icon');
 		echo $this->fetch('meta');
 
-		echo $this->Html->css('project');
+		echo $this->Html->css('project.min');
 		echo $this->fetch('css');
 
 		if (Configure::read('Jquery.version')) {
@@ -38,54 +37,43 @@
 		echo $this->fetch('script');
 	?>
 </head>
-<body style="background: #fff;">
-	<nav class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<?php echo $this->Html->link('Site', '/', array('class' => 'brand')); ?>
-			</div>
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<?php echo $this->Html->link('Site', '/', array('class' => 'navbar-brand')); ?>
 		</div>
-	</nav> <!-- /topbar -->
+	</nav>
 
 	<div class="container">
-		<div class="body-content">
-			<div class="row">
-				<header class="span12">
-					<hgroup>
-						<h1>Site</h1>
-						<h2>Admin Login</h2>
-					</hgroup>
-				</header>
-			</div>
-			<div class="row">
-		        <div class="login" id="flash-messages">
-					<?php echo $this->Session->flash('auth'); ?>
-					<?php echo $this->Session->flash(); ?>
-				</div>
-			</div>
+		<header class="page-header">
+			<hgroup>
+				<h1>Site</h1>
+				<h2>Admin Login</h2>
+			</hgroup>
+		</header>
 
-			<?php echo $this->fetch('content'); ?>
+		<?php echo $this->Session->flash('auth'); ?>
+		<?php echo $this->Session->flash(); ?>
 
-			<div class="row">
-				<div class="span12">
-					<?php echo $this->element('sql_dump'); ?>
-				</div>
-			</div>
-		</div>
-		<!-- /body-content -->
-		<footer>
-			<p>
-				© 2013-<?php echo date('Y'); ?>, system by <?php echo $this->Html->link('Manuel Alducin (malducin) - VFXfan.com', 'http://vfxfan.com'); ?></p>
-				<?php
-					if ($this->Session->read('Config.theme') == 'default') {
-						echo $this->Html->link('Switch to Mobile Site', array('controller' => 'change_themes', 'action' => 'change'), array('class' => 'btn btn-info'));
-					}
-					else {
-						echo $this->Html->link('Switch to Default Site', array('controller' => 'change_themes', 'action' => 'change'), array('class' => 'btn btn-info'));
-					}
-				?>
-			</p>
-		</footer>
-	</div> <!-- /container -->
+		<?php echo $this->fetch('content'); ?>
+
+		<?php echo $this->element('sql_dump'); ?>
+	</div><!-- /container -->
+
+	<footer>
+		<p class="text-center">
+			© 2013-<?php echo date('Y'); ?>, system by <?php echo $this->Html->link('Manuel Alducin (malducin) - VFXfan.com', 'http://vfxfan.com'); ?>
+		</p>
+		<p class="text-center">
+			<?php
+				if ($this->Session->read('Config.theme') == 'default') {
+					echo $this->Html->link('Switch to Mobile Site', array('controller' => 'change_themes', 'action' => 'change'), array('class' => 'btn btn-info'));
+				} else {
+					echo $this->Html->link('Switch to Default Site', array('controller' => 'change_themes', 'action' => 'change'), array('class' => 'btn btn-info'));
+				}
+			?>
+		</p>
+	</footer>
 </body>
 </html>

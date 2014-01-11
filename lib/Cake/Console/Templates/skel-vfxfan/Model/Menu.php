@@ -10,13 +10,11 @@
  * priority of 0 hides the menu item.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       menus
- * @subpackage    menus.model
+ * @package       vfxfan-base.Nenus.Model
  */
 App::uses('AppModel', 'Model');
-App::uses('MySanitize', 'Utility');
 /**
  * Menu Model
  *
@@ -50,6 +48,12 @@ class Menu extends AppModel {
 				'message' => 'This field cannot be left blank.',
 				'required' => false,
 				'last' => true, // Stop validation after this rule
+			),
+			'alphanumericextended' => array(
+				'rule' => array('alphaNumericDashUnderscoreSpaceColon'),
+				'message' => 'Names must only contain letters, numbers, spaces, dashes, underscores and colons.',
+				'required' => true,
+				'last' => true // Stop validation after this rule
 			),
 			'maxlength' => array(
 				'rule' => array('maxLength', 128),
@@ -122,7 +126,7 @@ class Menu extends AppModel {
  * @param boolean $created
  * @return void
  */
-	public function afterSave($created) {
+	public function afterSave($created, $options = array()) {
 		Cache::delete('menu');
 	}
 
@@ -135,10 +139,10 @@ class Menu extends AppModel {
  * @return array
  */
 	private function _cleanData($data) {
-		$data['Menu']['name'] = MySanitize::cleanSafe($data['Menu']['name']);
-		$data['Menu']['link'] = MySanitize::cleanSafe($data['Menu']['link']);
-		$data['Menu']['parent_id'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Menu']['parent_id'], array('quotes' => ENT_NOQUOTES)));
-		$data['Menu']['priority'] = MySanitize::paranoid(MySanitize::cleanSafe($data['Menu']['priority'], array('quotes' => ENT_NOQUOTES)));
+		$data['Menu']['name'] = Menu::clean(Menu::purify($data['Menu']['name']));
+		$data['Menu']['link'] = Menu::clean(Menu::purify(filter_var($data['Menu']['link'], FILTER_SANITIZE_URL)), array('encode' => false));
+		$data['Menu']['parent_id'] = filter_var($data['Menu']['parent_id'], FILTER_SANITIZE_NUMBER_INT);
+		$data['Menu']['priority'] = filter_var($data['Menu']['priority'], FILTER_SANITIZE_NUMBER_INT);
 		return $data;
 	}
 

@@ -8,10 +8,9 @@
  * a thumbnail on upload.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       component
- * @subpackage    component.upload
+ * @package       vfxfan-base.Controller.Component
  */
 /**
  * Upload Component
@@ -109,8 +108,7 @@ class UploadComponent extends Component {
 
 					if ($options['twidth'] / $options['theight'] > $ratio_orig) {
 						$width = $options['theight'] * $ratio_orig;
-					}
-					else {
+					} else {
 						$height = $options['twidth'] / $ratio_orig;
 					}
 					// thumbnail identifier
@@ -210,8 +208,7 @@ class UploadComponent extends Component {
 						// file uploaded correctly
 						if ($file_name) {
 							$result = move_uploaded_file($data['tmp_name'], $options['base_dir'].$folder.DS.$file_name);
-						}
-						else {
+						} else {
 							$result = move_uploaded_file($data['tmp_name'], $options['base_dir'].$folder.DS.$data['name']);
 						}
 						break;

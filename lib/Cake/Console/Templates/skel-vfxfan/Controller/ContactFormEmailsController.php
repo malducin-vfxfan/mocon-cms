@@ -5,10 +5,9 @@
  * Contact Form Emails actions.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       contact_form_emails
- * @subpackage    contact_form_emails.controller
+ * @package       vfxfan-base.ContactFormEmails.Controller
  */
 App::uses('AppController', 'Controller');
 /**
@@ -27,7 +26,7 @@ class ContactFormEmailsController extends AppController {
 		$this->layout = 'default_admin';
 		$this->ContactFormEmail->recursive = -1;
 		$this->set('title_for_layout', 'Contact Form Emails');
-		$this->set('contactFormEmails', $this->paginate());
+		$this->set('contactFormEmails', $this->Paginator->paginate());
 	}
 
 /**
@@ -57,10 +56,10 @@ class ContactFormEmailsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->ContactFormEmail->create();
 			if ($this->ContactFormEmail->save($this->request->data)) {
-				$this->Session->setFlash('The Contact Form Email has been saved.', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action' => 'admin_index'));
+				$this->Session->setFlash('The Contact Form Email has been saved.', 'Flash/success');
+				return $this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Contact Form Email could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
+				$this->Session->setFlash('The Contact Form Email could not be saved. Please, try again.', 'Flash/error');
 			}
 		}
 		$this->set('title_for_layout', 'Add Contact Form Email');
@@ -77,12 +76,12 @@ class ContactFormEmailsController extends AppController {
 		if (!$this->ContactFormEmail->exists($id)) {
 			throw new NotFoundException('Invalid Contact Form Email.');
 		}
-		if ($this->request->is('post') || $this->request->is('put')) {
+		if ($this->request->is(array('post', 'put'))) {
 			if ($this->ContactFormEmail->save($this->request->data)) {
-				$this->Session->setFlash('The Contact Form Email has been saved.', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action' => 'admin_index'));
+				$this->Session->setFlash('The Contact Form Email has been saved.', 'Flash/success');
+				return $this->redirect(array('action' => 'admin_index'));
 			} else {
-				$this->Session->setFlash('The Contact Form Email could not be saved. Please, try again.', 'default', array('class' => 'alert alert-error'));
+				$this->Session->setFlash('The Contact Form Email could not be saved. Please, try again.', 'Flash/error');
 			}
 		} else {
 			$options = array('conditions' => array('ContactFormEmail.id' => $id));
@@ -106,10 +105,10 @@ class ContactFormEmailsController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->ContactFormEmail->delete()) {
-			$this->Session->setFlash('Contact Form Email deleted.', 'default', array('class' => 'alert alert-success'));
-			$this->redirect(array('action'=>'admin_index'));
+			$this->Session->setFlash('Contact Form Email deleted.', 'Flash/success');
+			return $this->redirect(array('action'=>'admin_index'));
 		}
-		$this->Session->setFlash('Contact Form Email was not deleted.', 'default', array('class' => 'alert alert-error'));
-		$this->redirect(array('action' => 'admin_index'));
+		$this->Session->setFlash('Contact Form Email was not deleted.', 'Flash/error');
+		return $this->redirect(array('action' => 'admin_index'));
 	}
 }

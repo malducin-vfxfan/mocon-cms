@@ -3,10 +3,9 @@
  * Albums admin index view.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       albums
- * @subpackage    albums.views
+ * @package       vfxfan-base.Albums.View
  */
 $this->extend('/Common/index');
 
@@ -15,7 +14,7 @@ $this->assign('contentId', 'albums');
 ?>
 		<?php foreach ($albums as $album): ?>
 		<article class="album-contents">
-			<?php echo $this->FormatImage->idImage('albums/'.$album['Album']['year'], $album['Album']['id'], array('class' => 'thumbnail image-right'), 'albums'); ?>
+			<?php echo $this->FormatImage->idImage('albums/'.$album['Album']['year'], $album['Album']['id'], array('class' => 'img-thumbnail pull-right'), 'albums'); ?>
 			<header>
 				<h2><?php echo $album['Album']['name']; ?></h2>
 				<time class="date-created" datetime="<?php echo date(DATE_ATOM, strtotime($album['Album']['created'])); ?>">

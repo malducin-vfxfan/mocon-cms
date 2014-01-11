@@ -5,10 +5,9 @@
  * Display results of a custom google search for the site.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2012, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       google
- * @subpackage    google.search_results.controller
+ * @package       vfxfan-base.SearchResults.Controller
  */
 App::uses('AppController', 'Controller');
 /**
