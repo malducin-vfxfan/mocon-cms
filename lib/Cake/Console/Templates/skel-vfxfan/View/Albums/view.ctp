@@ -12,8 +12,8 @@
  * @link          http://vfxfan.com VFXfan
  * @package       vfxfan-base.Albums.View
  */
-echo $this->Html->css('/slimbox2/css/slimbox2', array('inline' => false));
-echo $this->Html->script(array('/slimbox2/js/slimbox2'), array('inline' => false));
+echo $this->Html->css('magnific-popup', array('inline' => false));
+echo $this->Html->script(array('jquery.magnific-popup'), array('inline' => false));
 
 $this->extend('/Common/view');
 
@@ -23,21 +23,21 @@ $this->assign('contentCreated', $album['Album']['created']);
 		<p><?php echo $album['Album']['description']; ?></p>
 <?php
 $this->start('extraContent');
-
+?>
+<div id="gallery">
+<?php
 	$i = 0;
 	$last = count($albumImages['AlbumImage']) - 1;
 	$images_path = 'albums/'.$album['Album']['year'].'/'.sprintf("%010d", $album['Album']['id']).'/';
 	foreach ($albumImages['AlbumImage'] as $image):
-?>
-<?php
 		if ($i%6 == 0):
 ?>
 <div class="row"> <!-- start thumbnails row -->
 <?php
 		endif;
 ?>
-	<div class="col-md-2">
-		<?php echo $this->Html->link($this->Html->image($images_path.'thumbnails/'.$image, array('class' => null, 'alt' => $image, 'title' => $image)), '/img/'.$images_path.$image, array('class' =>'thumbnail', 'rel' => 'lightbox-project', 'escapeTitle' => false)) ;?>
+	<div class="col-md-2 text-center">
+		<?php echo $this->Html->link($this->Html->image($images_path.'thumbnails/'.$image, array('class' => 'img-thumbnail', 'alt' => $image, 'title' => $image)), '/img/'.$images_path.$image, array('escapeTitle' => false, 'title' => $image)) ;?>
 	</div>
 <?php
 		if (($i%6 == 5) || ($i == $last)):
@@ -46,9 +46,10 @@ $this->start('extraContent');
 <div>&nbsp;</div>
 <?php
 		endif;
-?>
-<?php
 	$i++;
 	endforeach;
+?>
+</div>
+<?php
 $this->end();
 ?>

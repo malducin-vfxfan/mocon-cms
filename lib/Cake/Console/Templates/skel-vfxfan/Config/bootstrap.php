@@ -94,7 +94,6 @@ Cache::config('default', Cache::settings('short'));
  * CakePlugin::load('DebugKit'); //Loads a single plugin named DebugKit
  *
  */
-CakePlugin::load('Slimbox2');
 CakePlugin::load('Recaptcha', array('bootstrap' => true));
 //CakePlugin::load('DebugKit');
 

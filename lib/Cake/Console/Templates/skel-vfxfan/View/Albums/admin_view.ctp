@@ -7,8 +7,8 @@
  * @link          http://vfxfan.com VFXfan
  * @package       vfxfan-base.Albums.View
  */
-echo $this->Html->css('/slimbox2/css/slimbox2', array('inline' => false));
-echo $this->Html->script(array('/slimbox2/js/slimbox2'), array('inline' => false));
+echo $this->Html->css('magnific-popup', array('inline' => false));
+echo $this->Html->script(array('jquery.magnific-popup'), array('inline' => false));
 
 $this->extend('/Common/admin_view');
 
@@ -70,19 +70,17 @@ $this->start('contentHtml');
 	$last = count($images) - 1;
 	$images_path = 'albums/'.$album['Album']['year'].'/'.sprintf("%010d", $album['Album']['id']).'/';
 	foreach ($images as $image):
-?>
-<?php
 		if ($i%6 == 0):
 ?>
 	<div class="row"> <!-- start thumbnails row -->
 <?php
 		endif;
 ?>
-		<div class="col-md-2">
-			<?php echo $this->Html->link($this->Html->image($images_path.'thumbnails/'.$image, array('class' => null, 'alt' => $image, 'title' => $image)), '/img/'.$images_path.$image, array('class' =>'thumbnail', 'rel' => 'lightbox-project', 'escapeTitle' => false)) ;?>
-			<div>
+		<div class="col-md-2 text-center">
+			<?php echo $this->Html->link($this->Html->image($images_path.'thumbnails/'.$image, array('class' => 'img-thumbnail', 'alt' => $image, 'title' => $image)), '/img/'.$images_path.$image, array('class' => 'popup-link', 'escapeTitle' => false, 'title' => $image)) ;?>
+			<p>
 				<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteAlbumImage', $album['Album']['id'], $image), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $image)); ?>
-			</div>
+			</p>
 		</div>
 <?php
 		if (($i%6 == 5) || ($i == $last)):
@@ -90,8 +88,6 @@ $this->start('contentHtml');
 	</div> <!-- end thumbnails row -->
 <?php
 		endif;
-?>
-<?php
 	$i++;
 	endforeach;
 $this->end();
