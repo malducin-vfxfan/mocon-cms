@@ -60,6 +60,7 @@ $config = array(
 	'Google' => array(
 		'Analytics' => array(
 			'trackerCode' => '',
+			'trackerSite' => ''
 		),
 		'Maps' => array(
 			'key' => '',
