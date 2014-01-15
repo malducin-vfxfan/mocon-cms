@@ -73,8 +73,11 @@ class UsersController extends AppController {
 		$user = $this->User->find('first', $options);
 		$this->set(compact('user'));
 		$this->set('title_for_layout', 'User: '.$user['User']['username']);
+		$this->Paginator->settings = array(
+			'conditions' => array('Post.user_id' => $user['User']['id'])
+		);
 		$this->User->Post->recursive = -1;
-		$this->set('posts', $this->Paginator->paginate('Post', array('Post.user_id' => $user['User']['id'])));
+		$this->set('posts', $this->Paginator->paginate('Post'));
 	}
 
 /**

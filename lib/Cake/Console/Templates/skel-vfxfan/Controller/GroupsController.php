@@ -45,8 +45,11 @@ class GroupsController extends AppController {
 		$group = $this->Group->find('first', $options);
 		$this->set(compact('group'));
 		$this->set('title_for_layout', 'Group: '.$group['Group']['name']);
+		$this->Paginator->settings = array(
+			'conditions' => array('User.group_id' => $group['Group']['id'])
+		);
 		$this->Group->User->recursive = -1;
-		$this->set('users', $this->Paginator->paginate('User', array('User.group_id' => $group['Group']['id'])));
+		$this->set('users', $this->Paginator->paginate('User'));
 	}
 
 /**

@@ -38,12 +38,6 @@ class PagesController extends AppController {
  * @var array
  */
 	public $components = array('Upload');
-/**
- * Pagination
- *
- * @var array
- */
-	public $paginate = array('PageSection' => array('limit' => 1));
 
 /**
  * beforeFilter method
@@ -119,8 +113,12 @@ class PagesController extends AppController {
 		}
 		$this->set('title_for_layout', $page['Page']['title']);
 		$this->set(compact('page'));
+		$this->Paginator->settings = array(
+			'conditions' => array('PageSection.page_id' => $page['Page']['id'], 'PageSection.section >' => 0),
+			'limit' => 1
+		);
 		$this->Page->PageSection->recursive = -1;
-		$this->set('pageSections', $this->Paginator->paginate('PageSection', array('PageSection.page_id' => $page['Page']['id'], 'PageSection.section >' => 0)));
+		$this->set('pageSections', $this->Paginator->paginate('PageSection'));
 	}
 
 /**
