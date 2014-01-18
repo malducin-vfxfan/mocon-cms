@@ -40,9 +40,7 @@ class AlbumsController extends AppController {
 	public function index() {
 		$this->set('title_for_layout', 'Albums');
 
-		$this->Paginator->settings = array(
-			'recursive' => 0,
-		);
+		$this->Paginator->settings = array('recursive' => 0);
 		$this->set('albums', $this->Paginator->paginate());
 	}
 
@@ -63,7 +61,7 @@ class AlbumsController extends AppController {
 
 		$this->Paginator->settings = array(
 			'conditions' => array('directory' => 'albums'.DS.$album['Album']['year'].DS.sprintf('%010d', $album['Album']['id'])),
-			'limit' => 60,
+			'limit' => 60
 		);
 
 		$this->set(compact('album'));
@@ -80,9 +78,7 @@ class AlbumsController extends AppController {
 		$this->layout = 'default_admin';
 		$this->set('title_for_layout', 'Albums');
 
-		$this->Paginator->settings = array(
-			'recursive' => -1,
-		);
+		$this->Paginator->settings = array('recursive' => -1);
 		$this->set('albums', $this->Paginator->paginate());
 	}
 

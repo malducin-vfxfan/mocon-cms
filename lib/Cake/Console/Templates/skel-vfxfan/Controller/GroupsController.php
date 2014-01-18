@@ -26,9 +26,7 @@ class GroupsController extends AppController {
 		$this->layout = 'default_admin';
 		$this->set('title_for_layout', 'Groups');
 
-		$this->Paginator->settings = array(
-			'recursive' => 0,
-		);
+		$this->Paginator->settings = array('recursive' => 0);
 		$this->set('groups', $this->Paginator->paginate());
 	}
 
@@ -47,7 +45,7 @@ class GroupsController extends AppController {
 
 		$options = array(
 			'conditions' => array('Group.id' => $id),
-			'recursive' => -1,
+			'recursive' => -1
 		);
 		$group = $this->Group->find('first', $options);
 		$this->set(compact('group'));
@@ -55,7 +53,7 @@ class GroupsController extends AppController {
 
 		$this->Paginator->settings = array(
 			'conditions' => array('User.group_id' => $group['Group']['id']),
-			'recursive' => -1,
+			'recursive' => -1
 		);
 		$this->set('users', $this->Paginator->paginate('User'));
 	}

@@ -114,8 +114,8 @@ class PagesController extends AppController {
 
 		$this->Paginator->settings = array(
 			'conditions' => array('PageSection.page_id' => $page['Page']['id'], 'PageSection.section >' => 0),
-			'recursive' => -1,
 			'limit' => 1,
+			'recursive' => -1
 		);
 		$this->set('pageSections', $this->Paginator->paginate('PageSection'));
 	}
@@ -129,9 +129,7 @@ class PagesController extends AppController {
 		$this->layout = 'default_admin';
 		$this->set('title_for_layout', 'Pages');
 
-		$this->Paginator->settings = array(
-			'recursive' => 0,
-		);
+		$this->Paginator->settings = array('recursive' => 0);
 		$this->set('pages', $this->Paginator->paginate());
 	}
 

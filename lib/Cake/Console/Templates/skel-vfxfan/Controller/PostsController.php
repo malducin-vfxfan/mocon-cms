@@ -49,9 +49,7 @@ class PostsController extends AppController {
 		} else {
 			$this->set('title_for_layout', 'Posts');
 
-			$this->Paginator->settings = array(
-				'recursive' => 0,
-			);
+			$this->Paginator->settings = array('recursive' => 0);
 			$this->set('posts', $this->Paginator->paginate());
 		}
 	}
@@ -83,9 +81,7 @@ class PostsController extends AppController {
 		$this->layout = 'default_admin';
 		$this->set('title_for_layout', 'Posts');
 
-		$this->Paginator->settings = array(
-			'recursive' => 0,
-		);
+		$this->Paginator->settings = array('recursive' => 0);
 		$this->set('posts', $this->Paginator->paginate());
 	}
 

@@ -38,9 +38,7 @@ class PageSectionsController extends AppController {
 		$this->layout = 'default_admin';
 		$this->set('title_for_layout', 'Page Sections');
 
-		$this->Paginator->settings = array(
-			'recursive' => 0,
-		);
+		$this->Paginator->settings = array('recursive' => 0);
 		$this->set('pageSections', $this->Paginator->paginate());
 	}
 

@@ -66,9 +66,7 @@ class ContactFormsController extends AppController {
 		$this->layout = 'default_admin';
 		$this->set('title_for_layout', 'Contact Form messages');
 
-		$this->Paginator->settings = array(
-			'recursive' => -1,
-		);
+		$this->Paginator->settings = array('recursive' => -1);
 		$this->set('contactForms', $this->Paginator->paginate());
 	}
 

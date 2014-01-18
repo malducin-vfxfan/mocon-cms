@@ -51,7 +51,7 @@ class EventsController extends AppController {
 
 		$this->Paginator->settings = array(
 			'conditions' => array('Event.date_end >= CURDATE()'),
-			'recursive' => 0,
+			'recursive' => 0
 		);
 		$this->set('events', $this->Paginator->paginate());
 	}
@@ -83,8 +83,9 @@ class EventsController extends AppController {
 		$this->set('title_for_layout', 'Past Events');
 
 		$this->Paginator->settings = array(
-			'conditions' => array('Event.date_end <' => date('Y-m-d')), 'order' => array('Event.date_start' => 'DESC'),
-			'recursive' => 0,
+			'conditions' => array('Event.date_end <' => date('Y-m-d')),
+			'order' => array('Event.date_start' => 'DESC'),
+			'recursive' => 0
 		);
 		$this->set('events', $this->Paginator->paginate());
 	}
@@ -100,7 +101,7 @@ class EventsController extends AppController {
 
 		$this->Paginator->settings = array(
 			'order' => array('Event.date_start' => 'DESC'),
-			'recursive' => 0,
+			'recursive' => 0
 		);
 		$this->set('events', $this->Paginator->paginate());
 	}

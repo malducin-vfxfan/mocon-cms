@@ -37,12 +37,16 @@ class AclPermissionsController extends AppController {
 	public function admin_index() {
 		$this->layout = 'default_admin';
 
-		$rootAco = $this->Acl->Aco->find('first', array('conditions' => array('alias' => $this->rootNode), 'recursive' => -1));
+		$options = array(
+			'conditions' => array('alias' => $this->rootNode),
+			'recursive' => -1
+		);
+		$rootAco = $this->Acl->Aco->find('first', $options);
 
 		$this->Paginator->settings = array(
 			'conditions' => array('parent_id' => $rootAco['Aco']['id']),
-			'recursive' => -1,
 			'order' => array('lft'),
+			'recursive' => -1
 		);
 
 		$this->set('title_for_layout', 'Top Level ACOs');
@@ -103,9 +107,7 @@ class AclPermissionsController extends AppController {
 		}
 		$completePath = implode('/', $pathComponents);
 
-		$this->Paginator->settings = array(
-			'recursive' => 0,
-		);
+		$this->Paginator->settings = array('recursive' => 0);
 		$users = $this->Paginator->paginate('User');
 
 		// attach groups and users permission information
