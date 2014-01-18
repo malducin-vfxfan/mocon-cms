@@ -24,8 +24,11 @@ class GroupsController extends AppController {
  */
 	public function admin_index() {
 		$this->layout = 'default_admin';
-		$this->Group->recursive = 0;
 		$this->set('title_for_layout', 'Groups');
+
+		$this->Paginator->settings = array(
+			'recursive' => 0,
+		);
 		$this->set('groups', $this->Paginator->paginate());
 	}
 
@@ -37,18 +40,23 @@ class GroupsController extends AppController {
  */
 	public function admin_view($id = null) {
 		$this->layout = 'default_admin';
-		$this->Group->recursive = -1;
+
 		if (!$this->Group->exists($id)) {
 			throw new NotFoundException('Invalid Group.');
 		}
-		$options = array('conditions' => array('Group.id' => $id));
+
+		$options = array(
+			'conditions' => array('Group.id' => $id),
+			'recursive' => -1,
+		);
 		$group = $this->Group->find('first', $options);
 		$this->set(compact('group'));
 		$this->set('title_for_layout', 'Group: '.$group['Group']['name']);
+
 		$this->Paginator->settings = array(
-			'conditions' => array('User.group_id' => $group['Group']['id'])
+			'conditions' => array('User.group_id' => $group['Group']['id']),
+			'recursive' => -1,
 		);
-		$this->Group->User->recursive = -1;
 		$this->set('users', $this->Paginator->paginate('User'));
 	}
 

@@ -52,8 +52,11 @@ class UsersController extends AppController {
  */
 	public function admin_index() {
 		$this->layout = 'default_admin';
-		$this->User->recursive = 0;
 		$this->set('title_for_layout', 'Users');
+
+		$this->Paginator->settings = array(
+			'recursive' => 0,
+		);
 		$this->set('users', $this->Paginator->paginate());
 	}
 
@@ -65,18 +68,23 @@ class UsersController extends AppController {
  */
 	public function admin_view($id = null) {
 		$this->layout = 'default_admin';
-		$this->User->recursive = 0;
+
 		if (!$this->User->exists($id)) {
 			throw new NotFoundException('Invalid User.');
 		}
-		$options = array('conditions' => array('User.id' => $id));
+
+		$options = array(
+			'conditions' => array('User.id' => $id),
+			'recursive' => 0,
+		);
 		$user = $this->User->find('first', $options);
 		$this->set(compact('user'));
 		$this->set('title_for_layout', 'User: '.$user['User']['username']);
+
 		$this->Paginator->settings = array(
-			'conditions' => array('Post.user_id' => $user['User']['id'])
+			'conditions' => array('Post.user_id' => $user['User']['id']),
+			'recursive' => -1,
 		);
-		$this->User->Post->recursive = -1;
 		$this->set('posts', $this->Paginator->paginate('Post'));
 	}
 

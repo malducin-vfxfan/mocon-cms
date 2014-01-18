@@ -104,7 +104,7 @@ class AclPermissionsController extends AppController {
 		$completePath = implode('/', $pathComponents);
 
 		$this->Paginator->settings = array(
-			'recursive' => 0
+			'recursive' => 0,
 		);
 		$users = $this->Paginator->paginate('User');
 

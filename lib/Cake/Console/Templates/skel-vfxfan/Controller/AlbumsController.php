@@ -38,8 +38,11 @@ class AlbumsController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->Album->recursive = 0;
 		$this->set('title_for_layout', 'Albums');
+
+		$this->Paginator->settings = array(
+			'recursive' => 0,
+		);
 		$this->set('albums', $this->Paginator->paginate());
 	}
 
@@ -75,8 +78,11 @@ class AlbumsController extends AppController {
  */
 	public function admin_index() {
 		$this->layout = 'default_admin';
-		$this->Album->recursive = -1;
 		$this->set('title_for_layout', 'Albums');
+
+		$this->Paginator->settings = array(
+			'recursive' => -1,
+		);
 		$this->set('albums', $this->Paginator->paginate());
 	}
 

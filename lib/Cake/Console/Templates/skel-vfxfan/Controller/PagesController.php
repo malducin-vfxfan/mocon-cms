@@ -71,8 +71,6 @@ class PagesController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->Page->recursive = 1;
-
 		// get cached latest posts, if expired find the latest
 		$posts = Cache::read('latest_posts');
 		if ($posts === false) {
@@ -100,10 +98,10 @@ class PagesController extends AppController {
  * @return void
  */
 	public function view($slug = null) {
-		$this->Page->recursive = -1;
 		if (!$slug) {
 			throw new NotFoundException('Invalid Page.');
 		}
+		$this->Page->recursive = -1;
 		$page = $this->Page->findBySlug($slug);
 		if (!$page) {
 			throw new NotFoundException('Invalid Page.');
@@ -113,11 +111,12 @@ class PagesController extends AppController {
 		}
 		$this->set('title_for_layout', $page['Page']['title']);
 		$this->set(compact('page'));
+
 		$this->Paginator->settings = array(
 			'conditions' => array('PageSection.page_id' => $page['Page']['id'], 'PageSection.section >' => 0),
-			'limit' => 1
+			'recursive' => -1,
+			'limit' => 1,
 		);
-		$this->Page->PageSection->recursive = -1;
 		$this->set('pageSections', $this->Paginator->paginate('PageSection'));
 	}
 
@@ -128,8 +127,11 @@ class PagesController extends AppController {
  */
 	public function admin_index() {
 		$this->layout = 'default_admin';
-		$this->Page->recursive = 0;
 		$this->set('title_for_layout', 'Pages');
+
+		$this->Paginator->settings = array(
+			'recursive' => 0,
+		);
 		$this->set('pages', $this->Paginator->paginate());
 	}
 

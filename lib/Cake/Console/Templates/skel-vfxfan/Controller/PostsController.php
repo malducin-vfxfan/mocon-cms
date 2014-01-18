@@ -38,7 +38,6 @@ class PostsController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->Post->recursive = 0;
 		if ($this->RequestHandler->isRss()) {
 			// get cached results
 			$posts = Cache::read('latest_posts');
@@ -49,6 +48,10 @@ class PostsController extends AppController {
 			$this->set(compact('posts'));
 		} else {
 			$this->set('title_for_layout', 'Posts');
+
+			$this->Paginator->settings = array(
+				'recursive' => 0,
+			);
 			$this->set('posts', $this->Paginator->paginate());
 		}
 	}
@@ -78,8 +81,11 @@ class PostsController extends AppController {
  */
 	public function admin_index() {
 		$this->layout = 'default_admin';
-		$this->Post->recursive = 0;
 		$this->set('title_for_layout', 'Posts');
+
+		$this->Paginator->settings = array(
+			'recursive' => 0,
+		);
 		$this->set('posts', $this->Paginator->paginate());
 	}
 

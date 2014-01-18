@@ -99,7 +99,7 @@ class AppController extends Controller {
  */
 	public function beforeFilter() {
 		// always allow index and view access
-		$this->Auth->allow('index', 'view');
+		$this->Auth->allow(array('index', 'view'));
 
 		// set the login and logout actions
 		$this->Auth->loginAction = array('controller' => 'users', 'action' => 'admin_login');

@@ -45,13 +45,15 @@ class MenusController extends AppController {
  * @return array
  */
  	public function menu() {
-		$this->Menu->recursive = -1;
-
 		// get menu items from cache, if expired get elements and cache
 		$menuItems = Cache::read('menu', 'medium');
 		if ($menuItems === false) {
 			// if cache expired or non-existent, get latest
-			$menuItems = $this->Menu->find('threaded', array('conditions' => array('priority >' => 0)));
+			$options = array(
+				'conditions' => array('Menu.priority >' => 0),
+				'recursive' => -1
+			);
+			$menuItems = $this->Menu->find('threaded', $options);
 			Cache::write('menu', $menuItems, 'medium');
 		}
 
@@ -65,8 +67,11 @@ class MenusController extends AppController {
  */
 	public function admin_index() {
 		$this->layout = 'default_admin';
-		$this->Menu->recursive = 0;
 		$this->set('title_for_layout', 'Menu Items');
+
+		$this->Paginator->settings = array(
+			'recursive' => 0,
+		);
 		$this->set('menus', $this->Paginator->paginate());
 	}
 
