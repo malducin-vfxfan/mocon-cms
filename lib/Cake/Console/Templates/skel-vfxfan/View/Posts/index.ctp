@@ -5,7 +5,7 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2012, ILMfan (http://ilmfan.com)
  * @link          http://ilmfan.com ILMfan
- * @package       vfxfan-base.Posts.View
+ * @package       vfxfan-base.View.Posts
  */
 $this->extend('/Common/index');
 

@@ -5,7 +5,7 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       vfxfan-base.Events.View
+ * @package       vfxfan-base.View.Events
  */
 $year_range = Configure::read('Admin.date_select.year_range');
 

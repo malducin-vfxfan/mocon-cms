@@ -28,7 +28,7 @@ App::import('Vendor', 'HTMLPurifier', array('file' => 'htmlpurifier'.DS.'library
  * Add your application-wide methods in the class below, your models
  * will inherit them.
  *
- * @package       app.Model
+ * @package       vfxfan-base.Model
  */
 class AppModel extends Model {
 

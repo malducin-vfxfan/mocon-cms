@@ -9,7 +9,7 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       vfxfan-base.PageSections.View
+ * @package       vfxfan-base.View.PageSections
  */
 $images_list = array();
 $page_folder = sprintf("%010d", $page_id);

@@ -8,7 +8,7 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       vfxfan-base.SystemInfos.Controller
+ * @package       vfxfan-base.Controller.SystemInfos
  */
 App::uses('AppController', 'Controller');
 /**
