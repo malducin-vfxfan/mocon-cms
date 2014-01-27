@@ -161,7 +161,9 @@ class UsersController extends AppController {
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		if (!$this->User->exists($id)) {
+
+		$this->User->id = $id;
+		if (!$this->User->exists()) {
 			throw new NotFoundException('Invalid User.');
 		}
 		$this->request->onlyAllow('post', 'delete');

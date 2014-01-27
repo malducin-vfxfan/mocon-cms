@@ -167,7 +167,9 @@ class PostsController extends AppController {
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		if (!$this->Post->exists($id)) {
+
+		$this->Post->id = $id;
+		if (!$this->Post->exists()) {
 			throw new NotFoundException('Invalid Post.');
 		}
 		$this->request->onlyAllow('post', 'delete');

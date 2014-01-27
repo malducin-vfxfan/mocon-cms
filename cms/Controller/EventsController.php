@@ -187,7 +187,9 @@ class EventsController extends AppController {
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		if (!$this->Event->exists($id)) {
+
+		$this->Event->id = $id;
+		if (!$this->Event->exists()) {
 			throw new NotFoundException('Invalid Event.');
 		}
 		$this->request->onlyAllow('post', 'delete');

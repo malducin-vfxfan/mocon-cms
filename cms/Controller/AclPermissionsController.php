@@ -199,7 +199,8 @@ class AclPermissionsController extends AppController {
 
 		switch ($model) {
 			case 'User':
-				if (!$this->User->exists($id)) {
+				$this->User->id = $id;
+				if (!$this->User->exists()) {
 					throw new NotFoundException('Invalid User.');
 				}
 
@@ -210,7 +211,8 @@ class AclPermissionsController extends AppController {
 				break;
 
 			case 'Group':
-				if (!$this->User->Group->exists($id)) {
+				$this->User->Group->id = $id;
+				if (!$this->User->Group->exists()) {
 					throw new NotFoundException('Invalid Group.');
 				}
 

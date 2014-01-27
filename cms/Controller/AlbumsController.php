@@ -164,7 +164,9 @@ class AlbumsController extends AppController {
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		if (!$this->Album->exists($id)) {
+
+		$this->Album->id = $id;
+		if (!$this->Album->exists()) {
 			throw new NotFoundException('Invalid Album.');
 		}
 		$this->request->onlyAllow('post', 'delete');

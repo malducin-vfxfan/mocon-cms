@@ -125,6 +125,8 @@ class PageSectionsController extends AppController {
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
+
+		$this->PageSection->id = $id;
 		if (!$this->PageSection->exists($id)) {
 			throw new NotFoundException('Invalid Page Section.');
 		}

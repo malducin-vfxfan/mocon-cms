@@ -112,7 +112,9 @@ class GroupsController extends AppController {
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		if (!$this->Group->exists($id)) {
+
+		$this->Group->id = $id;
+		if (!$this->Group->exists()) {
 			throw new NotFoundException('Invalid Group.');
 		}
 		$this->request->onlyAllow('post', 'delete');

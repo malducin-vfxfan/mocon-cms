@@ -257,7 +257,9 @@ class PagesController extends AppController {
  */
 	public function admin_delete($id = null) {
 		$this->layout = 'default_admin';
-		if (!$this->Page->exists($id)) {
+
+		$this->Page->id = $id;
+		if (!$this->Page->exists()) {
 			throw new NotFoundException('Invalid Page.');
 		}
 		$this->request->onlyAllow('post', 'delete');
