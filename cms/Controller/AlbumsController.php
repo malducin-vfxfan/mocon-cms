@@ -60,7 +60,7 @@ class AlbumsController extends AppController {
 		}
 
 		$this->Paginator->settings = array(
-			'conditions' => array('directory' => 'albums'.DS.$album['Album']['year'].DS.sprintf('%010d', $album['Album']['id'])),
+			'conditions' => array('folder' => WWW_ROOT.'img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf('%010d', $album['Album']['id'])),
 			'limit' => 60
 		);
 

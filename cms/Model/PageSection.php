@@ -13,6 +13,8 @@
  * @package       vfxfan-base.Model.PageSections
  */
 App::uses('AppModel', 'Model');
+App::uses('Folder', 'Utility');
+
 /**
  * PageSection Model
  *
@@ -140,20 +142,12 @@ class PageSection extends AppModel {
  * @param string $location
  * @return array
  */
-	public function listFiles($id = null, $location = IMAGES) {
+	public function listFiles($id = null, $location = null) {
 		if (!$id || !$location) return;
 
-		$files = array();
-		$directory = $location.'pages'.DS.sprintf("%010d", $id);
-		$filesList = new DirectoryIterator($directory);
+		$dir = new Folder($location.DS.'pages'.DS.sprintf("%010d", $id));
+		$files = $dir->find('.*', true);
 
-		foreach ($filesList as $filename) {
-			if ($filename->isFile()) {
-				$files[] = $filename->getBasename();
-			}
-		}
-
-		sort($files);
 		return $files;
 	}
 

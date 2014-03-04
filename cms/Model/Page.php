@@ -12,6 +12,9 @@
  * @package       vfxfan-base.Model.Pages
  */
 App::uses('AppModel', 'Model');
+App::uses('Folder', 'Utility');
+App::uses('File', 'Utility');
+
 /**
  * Page Model
  *
@@ -166,8 +169,9 @@ class Page extends AppModel {
  */
 	public function afterSave($created, $options = array()) {
 		if ($created) {
-			mkdir(IMAGES.'pages'.DS.sprintf("%010d", $this->id));
-			mkdir(FILES.'pages'.DS.sprintf("%010d", $this->id));
+			$dir = new Folder();
+			$dir->create(WWW_ROOT.'img'.DS.'pages'.DS.sprintf("%010d", $this->id));
+			$dir->create(WWW_ROOT.'files'.DS.'pages'.DS.sprintf("%010d", $this->id));
 		}
 	}
 
@@ -180,27 +184,16 @@ class Page extends AppModel {
  * @return boolean
  */
 	public function beforeDelete($cascade = true) {
-		$directory = IMAGES.'pages'.DS.sprintf("%010d", $this->id);
-		$files = new DirectoryIterator($directory);
+		$options = array('conditions' => array('Page.id' => $this->id));
+		$page = $this->find('first', $options);
 
-		foreach ($files as $filename) {
-			if ($filename->isFile()) {
-				unlink(IMAGES.'pages'.DS.sprintf("%010d", $this->id).DS.$filename->getBasename());
-			}
+		if ($page) {
+			$dir = new Folder(WWW_ROOT.'img'.DS.'pages'.DS.sprintf("%010d", $this->id));
+			$dir->delete();
+
+			$dir = new Folder(WWW_ROOT.'files'.DS.'pages'.DS.sprintf("%010d", $this->id));
+			$dir->delete();
 		}
-
-		rmdir($directory);
-
-		$directory = FILES.'pages'.DS.sprintf("%010d", $this->id);
-		$files = new DirectoryIterator($directory);
-
-		foreach ($files as $filename) {
-			if ($filename->isFile()) {
-				unlink(FILES.'pages'.DS.sprintf("%010d", $this->id).DS.$filename->getBasename());
-			}
-		}
-
-		rmdir($directory);
 
 		return true;
 	}
@@ -237,20 +230,12 @@ class Page extends AppModel {
  * @param string $location
  * @return array
  */
-	public function listFiles($id = null, $location = IMAGES) {
+	public function listFiles($id = null, $location = null) {
 		if (!$id || !$location) return;
 
-		$files = array();
-		$directory = $location.'pages'.DS.sprintf("%010d", $id);
-		$filesList = new DirectoryIterator($directory);
+		$dir = new Folder($location.DS.'pages'.DS.sprintf("%010d", $id));
+		$files = $dir->find('.*', true);
 
-		foreach ($filesList as $filename) {
-			if ($filename->isFile()) {
-				$files[] = $filename->getBasename();
-			}
-		}
-
-		sort($files);
 		return $files;
 	}
 
@@ -265,13 +250,14 @@ class Page extends AppModel {
  * @param string $location
  * @return boolean
  */
-	public function deleteFile($id = null, $filename = null, $location = IMAGES) {
+	public function deleteFile($id = null, $filename = null, $location = null) {
 		if (!$id || !$filename || !$location) return false;
 
 		$options = array('conditions' => array('Page.id' => $id));
 		$page = $this->find('first', $options);
-		if ($album) {
-			return unlink($location.'pages'.DS.sprintf("%010d", $page['Page']['id']).DS.$filename);
+		if ($page) {
+			$file = new File($location.DS.'pages'.DS.sprintf("%010d", $page['Page']['id']).DS.$filename);
+			return $file->delete();
 		} else {
 			return false;
 		}

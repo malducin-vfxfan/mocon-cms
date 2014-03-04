@@ -10,6 +10,9 @@
  * @package       vfxfan-base.Model.Posts
  */
 App::uses('AppModel', 'Model');
+App::uses('Folder', 'Utility');
+App::uses('File', 'Utility');
+
 /**
  * Post Model
  *
@@ -183,8 +186,10 @@ class Post extends AppModel {
 			$options = array('conditions' => array('Post.id' => $this->id), 'recursive' => -1);
 			$post = $this->find('first', $options);
 			if ($post) {
-				if (!is_file(IMAGES.'posts'.DS.$post['Post']['year'])) {
-					mkdir(IMAGES.'posts'.DS.$post['Post']['year']);
+				$folder = WWW_ROOT.'img'.DS.'posts'.DS.$post['Post']['year'];
+				$dir = new Folder();
+				if (!is_file($folder)) {
+					$dir->create($folder);
 				}
 			}
 		}
@@ -202,14 +207,14 @@ class Post extends AppModel {
 	public function beforeDelete($cascade = true) {
 		$options = array('conditions' => array('Post.id' => $this->id), 'recursive' => -1);
 		$post = $this->find('first', $options);
-		if ($post) {
-			$directory = IMAGES.'posts'.DS.$post['Post']['year'];
-			$filebasename = sprintf("%010d", $this->id);
 
-			$images = glob($directory.DS.$filebasename.'.*');
+		if ($post) {
+			$dir = new Folder(WWW_ROOT.'img'.DS.'posts'.DS.$post['Post']['year']);
+			$images = $dir->find(sprintf("%010d", $this->id).'.*', true);
 
 			foreach ($images as $image) {
-				unlink($image);
+				$image = new File($dir->pwd().DS.$image);
+				$image->delete();
 			}
 		}
 

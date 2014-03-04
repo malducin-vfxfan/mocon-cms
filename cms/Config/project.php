@@ -7,18 +7,6 @@
  * @link          http://vfxfan.com VFXfan
  * @package       vfxfan-base.Config
  */
-if (!defined('IMAGES')) {
-	define('IMAGES', WWW_ROOT . 'img' . DS);
-}
-if (!defined('CSS')) {
-	define('CSS', WWW_ROOT . 'css' . DS);
-}
-if (!defined('JS')) {
-	define('JS', WWW_ROOT . 'js' . DS);
-}
-if (!defined('FILES')) {
-	define('FILES', WWW_ROOT . 'files' . DS);
-}
 $config = array(
 	'Meta' => array(
 		'author' => 'Manuel Alducin',

@@ -12,6 +12,8 @@
  * @link          http://vfxfan.com VFXfan
  * @package       vfxfan-base.Model.Datasource
  */
+App::uses('Folder', 'Utility');
+
 /**
  * FilesListSource Data Source
  *
@@ -23,14 +25,6 @@ class FilesListSource extends DataSource {
  * @var string
  */
 	public $displayField = 'A files list datasource.';
-/**
- * Our default config options. These options will be customized in our
- * app/Config/database.php and will be merged in the __construct().
- * By default list the files in the web root directory.
- */
-	public $config = array(
-		'basePath' => WWW_ROOT,
-	);
 
 /**
  * Since datasources normally connect to a database there are a few things
@@ -62,20 +56,14 @@ class FilesListSource extends DataSource {
  */
 	public function read(Model $Model, $queryData = array(), $recursive = null) {
 		// check to see if we defined a directory in the paginate conditions
-		 if (!empty($queryData['conditions']['directory'])) {
-		 	$directory = $this->config['basePath'].$queryData['conditions']['directory'].DS;
-		 } else {
-		 	$directory = $this->config['basePath'];
-		 }
-
-		$files = array();
-		$filesList = new DirectoryIterator($directory);
-
-		foreach ($filesList as $filename) {
-			if ($filename->isFile()) {
-				$files[] = $filename->getBasename();
-			}
+		if (!empty($queryData['conditions']['folder'])) {
+			$folder = $queryData['conditions']['folder'];
+		} else {
+			$folder = WWW_ROOT.'img';
 		}
+
+		$dir = new Folder($folder);
+		$files = $dir->find('.*', true);
 
 		/**
 		 * Here we do the actual count as instructed by our calculate()

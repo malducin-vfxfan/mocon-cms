@@ -17,7 +17,6 @@
  *
  * @property UploadComponent $UploadComponent
  * @property-read array
- * @property-read array
  */
 class UploadComponent extends Component {
 

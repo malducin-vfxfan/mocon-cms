@@ -40,24 +40,12 @@
 				<td><?php echo WWW_ROOT; ?>&nbsp;</td>
 			</tr>
 			<tr>
-				<td>IMAGES</td>
-				<td><?php echo IMAGES; ?>&nbsp;</td>
-			</tr>
-			<tr>
 				<td>App.imageBaseUrl</td>
 				<td><?php echo Configure::read('App.imageBaseUrl'); ?>&nbsp;</td>
 			</tr>
 			<tr>
-				<td>CSS</td>
-				<td><?php echo CSS; ?>&nbsp;</td>
-			</tr>
-			<tr>
 				<td>App.cssBaseUrl</td>
 				<td><?php echo Configure::read('App.cssBaseUrl'); ?>&nbsp;</td>
-			</tr>
-			<tr>
-				<td>JS</td>
-				<td><?php echo JS; ?>&nbsp;</td>
 			</tr>
 			<tr>
 				<td>App.jsBaseUrl</td>

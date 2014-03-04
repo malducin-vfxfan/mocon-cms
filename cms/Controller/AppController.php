@@ -85,7 +85,7 @@ class AppController extends Controller {
  *
  * @var array
  */
-	public $helpers = array('Form', 'Html', 'Session');
+	public $helpers = array('Form', 'Html', 'Menu', 'Session');
 
 /**
  * beforeFilter method

@@ -148,8 +148,8 @@ class PagesController extends AppController {
 		$page = $this->Page->find('first', $options);
 		$this->set(compact('page'));
 		$this->set('title_for_layout', 'Page: '.$page['Page']['title']);
-		$this->set('images', $this->Page->listFiles($page['Page']['id']));
-		$this->set('documents', $this->Page->listFiles($page['Page']['id'], FILES));
+		$this->set('images', $this->Page->listFiles($page['Page']['id'], WWW_ROOT.'img'));
+		$this->set('documents', $this->Page->listFiles($page['Page']['id'], WWW_ROOT.'files'));
 	}
 
 /**
@@ -243,8 +243,8 @@ class PagesController extends AppController {
 		$pageSections = $this->Page->PageSection->find('all', $options);
 		$this->set('title_for_layout', 'Edit Page');
 		$this->set(compact('pageSections'));
-		$this->set('images', $this->Page->listFiles($id));
-		$this->set('documents', $this->Page->listFiles($id, FILES));
+		$this->set('images', $this->Page->listFiles($id, WWW_ROOT.'img'));
+		$this->set('documents', $this->Page->listFiles($id, WWW_ROOT.'files'));
 	}
 
 /**
@@ -293,13 +293,13 @@ class PagesController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($location == 'images') {
-			if ($this->Page->deleteFile($id, $filename)) {
+			if ($this->Page->deleteFile($id, $filename, WWW_ROOT.'img')) {
 				$this->Session->setFlash('File deleted.', 'Flash/success');
 				return $this->redirect(array('action'=>'admin_view', $id));
 			}
 		}
 		if ($location == 'files') {
-			if ($this->Page->deleteFile($id, $filename, FILES)) {
+			if ($this->Page->deleteFile($id, $filename, WWW_ROOT.'files')) {
 				$this->Session->setFlash('File deleted.', 'Flash/success');
 				return $this->redirect(array('action'=>'admin_view', $id));
 			}

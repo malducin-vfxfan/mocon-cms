@@ -11,6 +11,9 @@
  * @link          http://vfxfan.com VFXfan
  * @package       vfxfan-base.View.Helper
  */
+App::uses('Folder', 'Utility');
+App::uses('File', 'Utility');
+
 /**
  * FormatImage Helper
  *
@@ -32,7 +35,6 @@ class FormatImageHelper extends AppHelper {
  * @var array
  */
 	private $exts = array('jpg', 'png', 'gif');
-
 
 /**
  * randomImage method
@@ -56,17 +58,11 @@ class FormatImageHelper extends AppHelper {
 
 		if (!$location) return;
 
-		$directory = IMAGES.$location;
-		$files = new DirectoryIterator($directory);
-
-		foreach ($files as $filename) {
-			if ($filename->isFile()) {
-				$images[] = $filename->getFilename();
-			}
-		}
+		$dir = new Folder(WWW_ROOT.'img'.DS.$location);
+		$images = $dir->find('.*', true);
 
 		$imglink = $this->Html->image($location.'/'.$images[array_rand($images)], array('alt' => $options['alt'], 'title' => $options['title']));
-		return $this->output($imglink);
+		return $imglink;
 	}
 
 /**
@@ -93,15 +89,16 @@ class FormatImageHelper extends AppHelper {
 
 		if (!$location or !$id) return;
 
-		$directory = IMAGES.$location;
-		$file_basename = sprintf("%010d", $id);
-		$images = glob($directory.DS.$file_basename.'.*');
+		$dir = new Folder(WWW_ROOT.'img'.DS.$location);
+		$images = $dir->find(sprintf("%010d", $id).'.*', true);
 
 		$image_name = '';
 		foreach ($images as $image) {
-			$info = pathinfo($image);
-			if (in_array($info['extension'], $this->exts)) {
-				$image_name = $info['basename'];
+			$image = new File($dir->pwd().DS.$image);
+			$ext = $image->ext();
+
+			if (in_array($ext, $this->exts)) {
+				$image_name = $image->name;
 				break;
 			}
 		}
@@ -119,6 +116,6 @@ class FormatImageHelper extends AppHelper {
 			}
 		}
 
-		return $this->output($img_link);
+		return $img_link;
 	}
 }

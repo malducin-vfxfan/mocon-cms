@@ -13,6 +13,9 @@
  * @package       vfxfan-base.Model.Albums
  */
 App::uses('AppModel', 'Model');
+App::uses('Folder', 'Utility');
+App::uses('File', 'Utility');
+
 /**
  * Album Model
  *
@@ -155,11 +158,12 @@ class Album extends AppModel {
 			$options = array('conditions' => array('Album.id' => $this->id));
 			$album = $this->find('first', $options);
 			if ($album) {
-				if (!is_file(IMAGES.'albums'.DS.$album['Album']['year'])) {
-					mkdir(IMAGES.'albums'.DS.$album['Album']['year']);
+				$folder = WWW_ROOT.'img'.DS.'albums'.DS.$album['Album']['year'];
+				$dir = new Folder();
+				if (!is_file($folder)) {
+					$dir->create($folder);
 				}
-				mkdir(IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id));
-				mkdir(IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id).DS.'thumbnails');
+				$dir->create($folder.DS.sprintf("%010d", $this->id).DS.'thumbnails');
 			}
 		}
 	}
@@ -178,35 +182,19 @@ class Album extends AppModel {
 	public function beforeDelete($cascade = true) {
 		$options = array('conditions' => array('Album.id' => $this->id));
 		$album = $this->find('first', $options);
+
 		if ($album) {
-			$directory = IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id);
-			$files = new DirectoryIterator($directory.DS.'thumbnails');
+			$folder = WWW_ROOT.'img'.DS.'albums'.DS.$album['Album']['year'];
+			$dir = new Folder($folder.DS.sprintf("%010d", $this->id));
 
-			foreach ($files as $filename) {
-				if ($filename->isFile()) {
-					unlink($directory.DS.'thumbnails'.DS.$filename->getBasename());
-				}
-			}
+			$dir->delete();
 
-			rmdir($directory.DS.'thumbnails');
-
-			$files = new DirectoryIterator($directory);
-
-			foreach ($files as $filename) {
-				if ($filename->isFile()) {
-					unlink($directory.DS.$filename->getBasename());
-				}
-			}
-
-			rmdir($directory);
-
-			$directory = IMAGES.'albums'.DS.$album['Album']['year'];
-			$filebasename = sprintf("%010d", $this->id);
-
-			$images = glob($directory.DS.$filebasename.'.*');
+			$dir = new Folder($folder);
+			$images = $dir->find(sprintf("%010d", $this->id).'.*', true);
 
 			foreach ($images as $image) {
-				unlink($image);
+				$image = new File($dir->pwd().DS.$image);
+				$image->delete();
 			}
 		}
 
@@ -239,17 +227,9 @@ class Album extends AppModel {
 	public function getAlbumThumbnails($id = null, $year = null) {
 		if (!$id || !$year) return array();
 
-		$images = array();
-		$directory = IMAGES.'albums'.DS.$year.DS.sprintf("%010d", $id).DS.'thumbnails';
-		$files = new DirectoryIterator($directory);
+		$dir = new Folder(WWW_ROOT.'img'.DS.'albums'.DS.$year.DS.sprintf("%010d", $id).DS.'thumbnails');
+		$images = $dir->find('.*', true);
 
-		foreach ($files as $filename) {
-			if ($filename->isFile()) {
-				$images[] = $filename->getBasename();
-			}
-		}
-
-		sort($images);
 		return $images;
 	}
 
@@ -270,9 +250,13 @@ class Album extends AppModel {
 
 		$options = array('conditions' => array('Album.id' => $id));
 		$album = $this->find('first', $options);
+
 		if ($album) {
-			$del_thumb = unlink(IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $album['Album']['id']).DS.'thumbnails'.DS.$filename);
-			$del_image = unlink(IMAGES.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $album['Album']['id']).DS.$filename);
+			$folder = WWW_ROOT.'img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $album['Album']['id']);
+			$image = new File($folder.DS.'thumbnails'.DS.$filename);
+			$del_thumb = $image->delete();
+			$image = new File($folder.DS.$filename);
+			$del_image = $image->delete();
 
 			return ($del_thumb && $del_image);
 		} else {

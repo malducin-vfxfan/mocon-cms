@@ -10,6 +10,9 @@
  * @package       vfxfan-base.Model.Events
  */
 App::uses('AppModel', 'Model');
+App::uses('Folder', 'Utility');
+App::uses('File', 'Utility');
+
 /**
  * Event Model
  *
@@ -198,8 +201,10 @@ class Event extends AppModel {
 			$options = array('conditions' => array('Event.id' => $this->id));
 			$event = $this->find('first', $options);
 			if ($event) {
-				if (!is_file(IMAGES.'events'.DS.$event['Event']['year'])) {
-					mkdir(IMAGES.'events'.DS.$event['Event']['year']);
+				$folder = WWW_ROOT.'img'.DS.'events'.DS.$event['Event']['year'];
+				$dir = new Folder();
+				if (!is_file($folder)) {
+					$dir->create($folder);
 				}
 			}
 		}
@@ -214,14 +219,14 @@ class Event extends AppModel {
 	public function beforeDelete($cascade = true) {
 		$options = array('conditions' => array('Event.id' => $this->id));
 		$event = $this->find('first', $options);
-		if ($event) {
-			$directory = IMAGES.'events'.DS.$event['Event']['year'];
-			$filebasename = sprintf("%010d", $this->id);
 
-			$images = glob($directory.DS.$filebasename.'.*');
+		if ($event) {
+			$dir = new Folder(WWW_ROOT.'img'.DS.'events'.DS.$event['Event']['year']);
+			$images = $dir->find(sprintf("%010d", $this->id).'.*', true);
 
 			foreach ($images as $image) {
-				unlink($image);
+				$image = new File($dir->pwd().DS.$image);
+				$image->delete();
 			}
 		}
 

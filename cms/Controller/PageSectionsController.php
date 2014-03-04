@@ -57,8 +57,8 @@ class PageSectionsController extends AppController {
 		$pageSection = $this->PageSection->find('first', $options);
 		$this->set(compact('pageSection'));
 		$this->set('title_for_layout', 'Page Section: '.$pageSection['PageSection']['title']);
-		$this->set('images', $this->PageSection->listFiles($pageSection['PageSection']['page_id']));
-		$this->set('documents', $this->PageSection->listFiles($pageSection['PageSection']['page_id'], FILES));
+		$this->set('images', $this->PageSection->listFiles($pageSection['PageSection']['page_id'], WWW_ROOT.'img'));
+		$this->set('documents', $this->PageSection->listFiles($pageSection['PageSection']['page_id'], WWW_ROOT.'files'));
 	}
 
 /**
@@ -127,7 +127,7 @@ class PageSectionsController extends AppController {
 		$this->layout = 'default_admin';
 
 		$this->PageSection->id = $id;
-		if (!$this->PageSection->exists($id)) {
+		if (!$this->PageSection->exists()) {
 			throw new NotFoundException('Invalid Page Section.');
 		}
 		$this->request->onlyAllow('post', 'delete');
@@ -153,7 +153,7 @@ class PageSectionsController extends AppController {
 
 		 if (!$id) return;
 
-		$images = $this->PageSection->listFiles($id);
+		$images = $this->PageSection->listFiles($id, WWW_ROOT.'img');
 		$this->set(compact('images'));
 		$this->set('page_id', $id);
 	}
