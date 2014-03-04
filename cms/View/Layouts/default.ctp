@@ -64,8 +64,11 @@
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="main-navigation">
-			<?php echo $this->element('Menus/bootstrap'); ?>
-			<?php echo $this->element('Google/Search/search'); ?>
+			<?php
+				$menuItems = $this->requestAction('menus/menu');
+				echo $this->Menu->bootstrapMenu($menuItems);
+				echo $this->element('Google/Search/search');
+			?>
 		</div>
 	</nav>
 
