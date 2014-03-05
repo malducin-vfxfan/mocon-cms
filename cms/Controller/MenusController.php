@@ -39,12 +39,17 @@ class MenusController extends AppController {
 /**
  * menu method
  *
- * Return an array of threaded menu item to be displayed (via an element).
+ * Return an array of threaded menu item to be displayed (via a Helper).
  * Priority must be greater than zero to display the menu item.
  *
  * @return array
  */
- 	public function menu() {
+	public function menu() {
+		//  checks to make sure method is actually originating from requestAction()
+		if (empty($this->request->params['requested'])) {
+			throw new ForbiddenException();
+		}
+
 		// get menu items from cache, if expired get elements and cache
 		$menuItems = Cache::read('menu', 'medium');
 		if ($menuItems === false) {
