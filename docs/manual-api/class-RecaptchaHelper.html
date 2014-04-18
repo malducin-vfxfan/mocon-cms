@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class RecaptchaHelper | VFXfan CMS API Documentation</title>
+
+	<script type="text/javascript" src="resources/combined.js?2055424151"></script>
+	<script type="text/javascript" src="elementlist.js?1111761187"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Packages</h3>
+			<ul>
+				<li><a href="package-app.html">app<span></span></a>
+						<ul>
+				<li><a href="package-app.Config.html">Config<span></span></a>
+						<ul>
+				<li><a href="package-app.Config.Schema.html">Schema</a>
+						</li>
+							</ul></li></ul></li>
+				<li><a href="package-None.html">None</a>
+						</li>
+				<li class="active"><a href="package-recaptcha.html">recaptcha<span></span></a>
+						<ul>
+				<li><a href="package-recaptcha.controllers.html">controllers<span></span></a>
+						<ul>
+				<li><a href="package-recaptcha.controllers.components.html">components</a>
+						</li>
+							</ul></li>
+				<li><a href="package-recaptcha.models.html">models<span></span></a>
+						<ul>
+				<li><a href="package-recaptcha.models.behaviors.html">behaviors</a>
+						</li>
+							</ul></li>
+				<li><a href="package-recaptcha.tests.html">tests<span></span></a>
+						<ul>
+				<li><a href="package-recaptcha.tests.cases.html">cases<span></span></a>
+						<ul>
+				<li><a href="package-recaptcha.tests.cases.components.html">components</a>
+						</li>
+				<li><a href="package-recaptcha.tests.cases.helper.html">helper</a>
+						</li>
+				<li><a href="package-recaptcha.tests.cases.helpers.html">helpers</a>
+						</li>
+							</ul></li>
+				<li><a href="package-recaptcha.tests.fixtures.html">fixtures</a>
+						</li>
+							</ul></li>
+				<li class="active"><a href="package-recaptcha.views.html">views<span></span></a>
+						<ul>
+				<li class="active"><a href="package-recaptcha.views.helpers.html">helpers</a>
+						</li>
+							</ul></li></ul></li>
+				<li><a href="package-vfxfan.base.html">vfxfan-base<span></span></a>
+						<ul>
+				<li><a href="package-vfxfan.base.Console.html">Console<span></span></a>
+						<ul>
+				<li><a href="package-vfxfan.base.Console.Command.html">Command</a>
+						</li>
+							</ul></li>
+				<li><a href="package-vfxfan.base.Controller.html">Controller<span></span></a>
+						<ul>
+				<li><a href="package-vfxfan.base.Controller.AclPermissions.html">AclPermissions</a>
+						</li>
+				<li><a href="package-vfxfan.base.Controller.Albums.html">Albums</a>
+						</li>
+				<li><a href="package-vfxfan.base.Controller.ChangeThemes.html">ChangeThemes</a>
+						</li>
+				<li><a href="package-vfxfan.base.Controller.Component.html">Component<span></span></a>
+						<ul>
+				<li><a href="package-vfxfan.base.Controller.Component.Auth.html">Auth</a>
+						</li>
+							</ul></li>
+				<li><a href="package-vfxfan.base.Controller.ContactFormEmails.html">ContactFormEmails</a>
+						</li>
+				<li><a href="package-vfxfan.base.Controller.ContactForms.html">ContactForms</a>
+						</li>
+				<li><a href="package-vfxfan.base.Controller.Events.html">Events</a>
+						</li>
+				<li><a href="package-vfxfan.base.Controller.Groups.html">Groups</a>
+						</li>
+				<li><a href="package-vfxfan.base.Controller.Menus.html">Menus</a>
+						</li>
+				<li><a href="package-vfxfan.base.Controller.Pages.html">Pages</a>
+						</li>
+				<li><a href="package-vfxfan.base.Controller.PageSections.html">PageSections</a>
+						</li>
+				<li><a href="package-vfxfan.base.Controller.Posts.html">Posts</a>
+						</li>
+				<li><a href="package-vfxfan.base.Controller.SearchResults.html">SearchResults</a>
+						</li>
+				<li><a href="package-vfxfan.base.Controller.SystemInfos.html">SystemInfos</a>
+						</li>
+				<li><a href="package-vfxfan.base.Controller.Users.html">Users</a>
+						</li>
+							</ul></li>
+				<li><a href="package-vfxfan.base.Model.html">Model<span></span></a>
+						<ul>
+				<li><a href="package-vfxfan.base.Model.AlbumImages.html">AlbumImages</a>
+						</li>
+				<li><a href="package-vfxfan.base.Model.Albums.html">Albums</a>
+						</li>
+				<li><a href="package-vfxfan.base.Model.ContactFormEmails.html">ContactFormEmails</a>
+						</li>
+				<li><a href="package-vfxfan.base.Model.ContactForms.html">ContactForms</a>
+						</li>
+				<li><a href="package-vfxfan.base.Model.Datasource.html">Datasource</a>
+						</li>
+				<li><a href="package-vfxfan.base.Model.Events.html">Events</a>
+						</li>
+				<li><a href="package-vfxfan.base.Model.Groups.html">Groups</a>
+						</li>
+				<li><a href="package-vfxfan.base.Model.Menus.html">Menus</a>
+						</li>
+				<li><a href="package-vfxfan.base.Model.Pages.html">Pages</a>
+						</li>
+				<li><a href="package-vfxfan.base.Model.PageSections.html">PageSections</a>
+						</li>
+				<li><a href="package-vfxfan.base.Model.Posts.html">Posts</a>
+						</li>
+				<li><a href="package-vfxfan.base.Model.Users.html">Users</a>
+						</li>
+							</ul></li>
+				<li><a href="package-vfxfan.base.View.html">View<span></span></a>
+						<ul>
+				<li><a href="package-vfxfan.base.View.Helper.html">Helper</a>
+						</li>
+							</ul></li></ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-RecaptchaHelper.html">RecaptchaHelper</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="package-recaptcha.views.helpers.html" title="Summary of recaptcha\views\helpers"><span>Package</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class RecaptchaHelper</h1>
+
+
+	<div class="description">
+	
+<p>CakePHP Recaptcha helper</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+Helper
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+			<a href="class-AppHelper.html"><span>AppHelper</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:60px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>RecaptchaHelper</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+		<b>Package:</b> <a href="package-recaptcha.html">recaptcha</a>\<a href="package-recaptcha.views.html">views</a>\<a href="package-recaptcha.views.helpers.html">helpers</a><br />
+
+				<b>Copyright:</b>
+				Copyright 2009-2010, Cake Development Corporation (<a
+href="http://cakedc.com">http://cakedc.com</a>)<br />
+				<b>License:</b>
+				<a href="MIT">License (http://www.opensource.org/licenses/mit-license.php)</a><br />
+		<b>Located at</b> <a href="source-class-RecaptchaHelper.html#13-271" title="Go to source code">Plugin/Recaptcha/View/Helper/RecaptchaHelper.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-RecaptchaHelper.html#43-47" title="Go to source code">__construct</a>( <span>View <var>$View</var></span>, <span>mixed <var>$settings</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isError" id="_isError">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isError">#</a>
+		<code><a href="source-class-RecaptchaHelper.html#49-51" title="Go to source code">isError</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getError" id="_getError">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getError">#</a>
+		<code><a href="source-class-RecaptchaHelper.html#53-55" title="Go to source code">getError</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="display" id="_display">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_display">#</a>
+		<code><a href="source-class-RecaptchaHelper.html#57-165" title="Go to source code">display</a>( <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Displays the Recaptcha input</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Displays the Recaptcha input</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options An array of options ### Options: - <code>element</code> String, name of
+the view element that can be used instead of the hardcoded HTML structure from
+this helper - <code>publicKey</code> String, default is read from
+Configure::read('Recaptcha.publicKey'), you can override it here -
+<code>error</code> String, optional error message that is displayed using
+Form::error() - <code>ssl</code> Boolean, use SSL or not, default is true -
+<code>div</code> Array of options for the div tag the recaptcha is wrapped with,
+set to false if you want to disable it - <code>recaptchaOptions</code> assoc
+array of options to pass into RecaptchaOptions var, like 'theme', 'lang' or
+'custom_translations' to runtime configure the widget.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The resulting mark up<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="signupUrl" id="_signupUrl">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_signupUrl">#</a>
+		<code><a href="source-class-RecaptchaHelper.html#167-174" title="Go to source code">signupUrl</a>( <span>mixed <var>$appName</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Recaptcha signup URL</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Recaptcha signup URL</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__AesPad" id="___AesPad">
+
+		<td class="attributes"><code>
+			 private 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___AesPad">#</a>
+		<code><a href="source-class-RecaptchaHelper.html#176-186" title="Go to source code">__AesPad</a>( <span>string <var>$val</var></span> )</code>
+
+		<div class="description short">
+			
+<p>AES Pad</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>AES Pad</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$val</var></dt>
+					<dd><code>string</code><br>value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__AesEncrypt" id="___AesEncrypt">
+
+		<td class="attributes"><code>
+			 private 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___AesEncrypt">#</a>
+		<code><a href="source-class-RecaptchaHelper.html#188-203" title="Go to source code">__AesEncrypt</a>( <span>mixed <var>$value</var></span>, <span>mixed <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+<p>AES Encryption</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>AES Encryption</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__mailhideUrlbase64" id="___mailhideUrlbase64">
+
+		<td class="attributes"><code>
+			 private 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___mailhideUrlbase64">#</a>
+		<code><a href="source-class-RecaptchaHelper.html#205-212" title="Go to source code">__mailhideUrlbase64</a>( <span>mixed <var>$x</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Mail-hide URL</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Mail-hide URL</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>base 64 encrypted string<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="mailHideUrl" id="_mailHideUrl">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_mailHideUrl">#</a>
+		<code><a href="source-class-RecaptchaHelper.html#214-232" title="Go to source code">mailHideUrl</a>( <span>mixed <var>$email</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Gets the reCAPTCHA Mailhide url for a given email</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Gets the reCAPTCHA Mailhide url for a given email</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$email</var></dt>
+					<dd><code>mixed</code><br>$email</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__hideEmailParts" id="___hideEmailParts">
+
+		<td class="attributes"><code>
+			 private 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___hideEmailParts">#</a>
+		<code><a href="source-class-RecaptchaHelper.html#234-254" title="Go to source code">__hideEmailParts</a>( <span>string <var>$email</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Get a part of the email to show</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get a part of the email to show</p>
+
+<p>Given johndoe@example,com return ["john", "example.com"]. the email is then
+displayed as <a
+href="mailto:john...&#64;example.com">john...&#64;<!---->example.com</a></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$email</var></dt>
+					<dd><code>string</code><br>email</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="mailHide" id="_mailHide">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_mailHide">#</a>
+		<code><a href="source-class-RecaptchaHelper.html#256-269" title="Go to source code">mailHide</a>( <span>string <var>$email</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Gets html to display an email address given a public an private key to get a
+key go to: <a
+href="http://mailhide.recaptcha.net/apikey">http://mailhide.recaptcha.net/apikey</a></p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Gets html to display an email address given a public an private key to get a
+key go to: <a
+href="http://mailhide.recaptcha.net/apikey">http://mailhide.recaptcha.net/apikey</a></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$email</var></dt>
+					<dd><code>string</code><br>Email</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="secureApiUrl" id="$secureApiUrl">
+		<td class="attributes"><code>
+			public  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-RecaptchaHelper.html#21-26" title="Go to source code"><var>$secureApiUrl</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'https://www.google.com/recaptcha/api'</span></code></td>
+		<td class="description"><div>
+			<a href="#$secureApiUrl" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Secure API Url</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Secure API Url</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="apiUrl" id="$apiUrl">
+		<td class="attributes"><code>
+			public  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-RecaptchaHelper.html#28-33" title="Go to source code"><var>$apiUrl</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'http://www.google.com/recaptcha/api'</span></code></td>
+		<td class="description"><div>
+			<a href="#$apiUrl" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>API Url</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>API Url</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="helpers" id="$helpers">
+		<td class="attributes"><code>
+			public  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-RecaptchaHelper.html#35-40" title="Go to source code"><var>$helpers</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>(<span class="php-quote">'Form'</span>, <span class="php-quote">'Html'</span>)</code></td>
+		<td class="description"><div>
+			<a href="#$helpers" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>View helpers</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>View helpers</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="settings" id="$settings">
+		<td class="attributes"><code>
+			public  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-RecaptchaHelper.html#41" title="Go to source code"><var>$settings</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>(<span class="php-quote">'error'</span> =&gt; <span class="php-keyword1">null</span>, <span class="php-quote">'useActions'</span> =&gt; <span class="php-keyword1">true</span>, <span class="php-quote">'errorType'</span> =&gt; <span class="php-quote">'simulateError'</span>)</code></td>
+		<td class="description"><div>
+			<a href="#$settings" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		VFXfan CMS API Documentation API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
