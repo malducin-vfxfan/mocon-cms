@@ -1,0 +1,29 @@
+//
+// Basic customization
+// -------------------------
+
+// Custom font variables
+// -------------------------
+@web-font-sans-serif: 'Ubuntu', Helvetica, Arial, sans-serif;
+
+// Project color system (for example for headers)
+// -------------------------
+@project-primary: #36c;
+@project-primary-light: lighten(@project-primary, 15%);
+@project-primary-lighter: lighten(@project-primary, 30%);
+@project-primary-dark: darken(@project-primary, 15%);
+@project-primary-darker: darken(@project-primary, 30%);
+
+// Override link colors
+@link-color: @project-primary;
+@link-hover-color: @project-primary-dark;
+
+// Override headings font and colors
+@headings-font-family: @web-font-sans-serif;
+@headings-color: @project-primary;
+@headings-small-color: @project-primary-light;
+
+// Other customizations
+// -------------------------
+
+@navbar-default-brand-color: @project-primary;

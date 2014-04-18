@@ -1,0 +1,46 @@
+//
+// Other components customization
+// -------------------------
+
+// Glyphicons
+// -------------------------
+.glyphicon-primary-dark {
+	color: @project-primary-dark;
+}
+
+// Navbar
+// -------------------------
+.navbar-brand {
+	font-family: @web-font-sans-serif;
+}
+
+// Headings
+h1, h2, h3, h4, h5, h6 {
+	font-family: @headings-font-family;
+	color: @headings-color;
+
+	small {
+		color: @headings-small-color;
+	}
+}
+
+// Image, captions and thumbails customizations
+// -------------------------
+
+// Center text in a figcaption
+// Center text in tag like p
+figcaption, .image-caption {
+	font-style: italic;
+	text-align: center;
+}
+
+// CakePHP form validation errors
+// -------------------------
+
+// Error styles for forms elements (validation)
+.form-error {
+	.form-control-validation(@state-danger-text; @state-danger-text; @state-danger-bg);
+}
+
+.separator-content-sections {
+}

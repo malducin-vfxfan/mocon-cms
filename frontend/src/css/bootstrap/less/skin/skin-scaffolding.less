@@ -1,0 +1,66 @@
+//
+// Scaffolding customizations
+// -------------------------
+
+// Scaffolding
+// -------------------------
+
+body {
+	background: @body-bg;
+	padding-top: 50px; /* 50px to make the container go all the way to the bottom of the topbar */
+}
+
+// More semantic shortcuts for content
+// -------------------------
+#latest-posts, #upcoming-events {
+	.make-md-column(6);
+}
+
+.album-thumbail-md {
+	.make-md-column(2);
+}
+
+// Add a hover state for linked versions of thumbnail style images
+// -------------------------
+a:hover > img.img-thumbnail, a:focus > img.img-thumbnail {
+	.transition(all .2s ease-in-out);
+	border-color: @link-color;
+}
+
+// Project customizations for different types of contents
+// -------------------------
+.contents {
+}
+.content-info {
+}
+.date-created, .date-modified, .date-start, .date-end {
+	font-style: italic;
+}
+.author, .event-location {
+	font-weight: bold;
+}
+.contents-summary {
+	font-style: italic;
+}
+.paginator {
+}
+
+.top-page {
+	position: fixed;
+	display: block;
+	bottom: 5px;
+	right: 5px;
+}
+
+.featured-story {
+}
+
+#login {
+}
+#content-section-modified {
+}
+
+// Content areas with minimal heights, to place thumbnails
+.post-contents, .event-contents, .album-contents {
+	min-height: 110px;
+}
