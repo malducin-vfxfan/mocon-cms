@@ -36,7 +36,7 @@ $this->start('extraContent');
 <?php
 		endif;
 ?>
-	<div class="col-md-2 text-center">
+	<div class="album-thumbail-md text-center">
 		<?php echo $this->Html->link($this->Html->image($images_path.'thumbnails/'.$image, array('class' => 'img-thumbnail', 'alt' => $image, 'title' => $image)), '/img/'.$images_path.$image, array('escapeTitle' => false, 'title' => $image)) ;?>
 	</div>
 <?php
