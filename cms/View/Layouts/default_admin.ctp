@@ -40,7 +40,7 @@
 		if (Configure::read('JqueryUi.version')) {
 			echo $this->Html->script(Configure::read('JqueryUi.version'));
 		}
-		echo $this->Html->script(array('bootstrap.min', 'admin'));
+		echo $this->Html->script(array('bootstrap.min', 'admin.min'));
 		echo $this->fetch('script');
 	?>
 </head>

@@ -44,7 +44,7 @@
 		if (Configure::read('JqueryUi.version')) {
 			echo $this->Html->script(Configure::read('JqueryUi.version'));
 		}
-		echo $this->Html->script(array('bootstrap.min', 'project'));
+		echo $this->Html->script(array('bootstrap.min', 'project.min'));
 		echo $this->fetch('script');
 		echo $this->element('Google/Analytics/page_tracker');
 	?>
