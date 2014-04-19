@@ -14,7 +14,7 @@ $this->assign('contentId', 'events');
 ?>
 		<?php foreach ($events as $event): ?>
 		<article class="event-contents">
-			<?php echo $this->FormatImage->idImage('events/'.$event['Event']['year'], $event['Event']['id'], array('class' => 'img-thumbnail pull-right'), 'events'); ?>
+			<?php echo $this->FormatImage->idImage('events/'.$event['Event']['year'].'/'.sprintf('%010d', $event['Event']['id']), $event['Event']['id'], array('class' => 'img-thumbnail pull-right'), 'events'); ?>
 			<header>
 				<h2><?php echo $event['Event']['name']; ?></h2>
 				<time class="date-start" datetime="<?php echo $event['Event']['date_start']; ?>">

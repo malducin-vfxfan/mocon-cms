@@ -13,7 +13,7 @@ $this->assign('title', $event['Event']['name']);
 $this->assign('contentStartDate', $event['Event']['date_start']);
 $this->assign('contentEndDate', $event['Event']['date_end']);
 $this->assign('sectionModified', $event['Event']['modified']);
-$this->assign('contentThumbnail', $this->FormatImage->idImage('events/'.$event['Event']['year'], $event['Event']['id'], array('class' => 'img-thumbnail pull-right'), 'events'));
+$this->assign('contentThumbnail', $this->FormatImage->idImage('events/'.$event['Event']['year'].'/'.sprintf("%010d", $event['Event']['id']), $event['Event']['id'], array('class' => 'img-thumbnail pull-right'), 'events'));
 ?>
 		<p>@ <span class="event-location"><?php echo $event['Event']['location']; ?></span></p>
 		<p><?php echo $event['Event']['description']; ?></p>

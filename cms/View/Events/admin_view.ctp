@@ -72,6 +72,6 @@ $this->end();
 			</dd>
 			<dt>Image</dt>
 			<dd>
-				<?php echo $this->FormatImage->idImage('events/'.$event['Event']['year'], $event['Event']['id'], array(), 'events'); ?>
+				<?php echo $this->FormatImage->idImage('events/'.$event['Event']['year'].'/'.sprintf("%010d", $event['Event']['id']), $event['Event']['id'], array(), 'events'); ?>
 				&nbsp;
 			</dd>

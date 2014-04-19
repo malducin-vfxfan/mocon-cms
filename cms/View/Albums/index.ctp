@@ -14,7 +14,7 @@ $this->assign('contentId', 'albums');
 ?>
 		<?php foreach ($albums as $album): ?>
 		<article class="album-contents">
-			<?php echo $this->FormatImage->idImage('albums/'.$album['Album']['year'], $album['Album']['id'], array('class' => 'img-thumbnail pull-right'), 'albums'); ?>
+			<?php echo $this->FormatImage->idImage('albums/'.$album['Album']['year'].'/'.sprintf("%010d", $album['Album']['id']).'/preview', $album['Album']['id'], array('class' => 'img-thumbnail pull-right'), 'albums'); ?>
 			<header>
 				<h2><?php echo $album['Album']['name']; ?></h2>
 				<time class="date-created" datetime="<?php echo date(DATE_ATOM, strtotime($album['Album']['created'])); ?>">

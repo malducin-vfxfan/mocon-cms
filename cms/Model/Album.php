@@ -158,12 +158,13 @@ class Album extends AppModel {
 			$options = array('conditions' => array('Album.id' => $this->id));
 			$album = $this->find('first', $options);
 			if ($album) {
-				$folder = WWW_ROOT.'img'.DS.'albums'.DS.$album['Album']['year'];
+				$folder = WWW_ROOT.'img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id);
 				$dir = new Folder();
 				if (!is_file($folder)) {
 					$dir->create($folder);
 				}
-				$dir->create($folder.DS.sprintf("%010d", $this->id).DS.'thumbnails');
+				$dir->create($folder.DS.'thumbnails');
+				$dir->create($folder.DS.'preview');
 			}
 		}
 	}
@@ -184,18 +185,10 @@ class Album extends AppModel {
 		$album = $this->find('first', $options);
 
 		if ($album) {
-			$folder = WWW_ROOT.'img'.DS.'albums'.DS.$album['Album']['year'];
-			$dir = new Folder($folder.DS.sprintf("%010d", $this->id));
+			$folder = WWW_ROOT.'img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id);
+			$dir = new Folder($folder);
 
 			$dir->delete();
-
-			$dir = new Folder($folder);
-			$images = $dir->find(sprintf("%010d", $this->id).'.*', true);
-
-			foreach ($images as $image) {
-				$image = new File($dir->pwd().DS.$image);
-				$image->delete();
-			}
 		}
 
 		return true;

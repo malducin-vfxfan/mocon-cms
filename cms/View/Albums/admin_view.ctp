@@ -61,7 +61,7 @@ $this->end();
 			</dd>
 			<dt>Image</dt>
 			<dd>
-				<?php echo $this->FormatImage->idImage('albums/'.$album['Album']['year'], $album['Album']['id'], array('class' => 'img-thumbnail'), 'albums'); ?>
+				<?php echo $this->FormatImage->idImage('albums/'.$album['Album']['year'].'/'.sprintf("%010d", $album['Album']['id']).'/preview', $album['Album']['id'], array('class' => 'img-thumbnail'), 'albums'); ?>
 				&nbsp;
 			</dd>
 <?php

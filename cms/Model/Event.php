@@ -201,7 +201,7 @@ class Event extends AppModel {
 			$options = array('conditions' => array('Event.id' => $this->id));
 			$event = $this->find('first', $options);
 			if ($event) {
-				$folder = WWW_ROOT.'img'.DS.'events'.DS.$event['Event']['year'];
+				$folder = WWW_ROOT.'img'.DS.'events'.DS.$event['Event']['year'].DS.sprintf("%010d", $this->id);
 				$dir = new Folder();
 				if (!is_file($folder)) {
 					$dir->create($folder);
@@ -221,13 +221,8 @@ class Event extends AppModel {
 		$event = $this->find('first', $options);
 
 		if ($event) {
-			$dir = new Folder(WWW_ROOT.'img'.DS.'events'.DS.$event['Event']['year']);
-			$images = $dir->find(sprintf("%010d", $this->id).'.*', true);
-
-			foreach ($images as $image) {
-				$image = new File($dir->pwd().DS.$image);
-				$image->delete();
-			}
+			$dir = new Folder(WWW_ROOT.'img'.DS.'events'.DS.$event['Event']['year'].DS.sprintf("%010d", $this->id));
+			$dir->delete();
 		}
 
 		return true;

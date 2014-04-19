@@ -69,6 +69,6 @@ $this->end();
 			</dd>
 			<dt>Image</dt>
 			<dd>
-				<?php echo $this->FormatImage->idImage('posts/'.$post['Post']['year'], $post['Post']['id'], array(), 'posts'); ?>
+				<?php echo $this->FormatImage->idImage('posts/'.$post['Post']['year'].'/'.sprintf("%010d", $post['Post']['id']), $post['Post']['id'], array(), 'posts'); ?>
 				&nbsp;
 			</dd>

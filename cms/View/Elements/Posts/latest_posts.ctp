@@ -14,7 +14,7 @@
 <h2>Latest News</h2>
 <?php foreach ($posts as $post): ?>
 		<article class="post-contents">
-			<?php echo $this->FormatImage->idImage('posts/'.$post['Post']['year'], $post['Post']['id'], array('class' => 'img-thumbnail pull-right'), 'posts'); ?>
+			<?php echo $this->FormatImage->idImage('posts/'.$post['Post']['year'].'/'.sprintf("%010d", $post['Post']['id']), $post['Post']['id'], array('class' => 'img-thumbnail pull-right'), 'posts'); ?>
 			<header>
 				<h3><?php echo $post['Post']['title']; ?></h3>
 				<time class="date-created" datetime="<?php echo date(DATE_ATOM, strtotime($post['Post']['created'])); ?>">

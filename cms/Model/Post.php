@@ -186,7 +186,7 @@ class Post extends AppModel {
 			$options = array('conditions' => array('Post.id' => $this->id), 'recursive' => -1);
 			$post = $this->find('first', $options);
 			if ($post) {
-				$folder = WWW_ROOT.'img'.DS.'posts'.DS.$post['Post']['year'];
+				$folder = WWW_ROOT.'img'.DS.'posts'.DS.$post['Post']['year'].DS.sprintf("%010d", $this->id);
 				$dir = new Folder();
 				if (!is_file($folder)) {
 					$dir->create($folder);
@@ -209,13 +209,8 @@ class Post extends AppModel {
 		$post = $this->find('first', $options);
 
 		if ($post) {
-			$dir = new Folder(WWW_ROOT.'img'.DS.'posts'.DS.$post['Post']['year']);
-			$images = $dir->find(sprintf("%010d", $this->id).'.*', true);
-
-			foreach ($images as $image) {
-				$image = new File($dir->pwd().DS.$image);
-				$image->delete();
-			}
+			$dir = new Folder(WWW_ROOT.'img'.DS.'posts'.DS.$post['Post']['year'].DS.sprintf("%010d", $this->id));
+			$dir->delete();
 		}
 
 		return true;

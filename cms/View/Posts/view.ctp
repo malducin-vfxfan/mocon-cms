@@ -13,7 +13,7 @@ $this->assign('title', $post['Post']['title']);
 $this->assign('contentCreated', $post['Post']['created']);
 $this->assign('contentAuthor', $post['User']['username']);
 $this->assign('sectionModified', $post['Post']['modified']);
-$this->assign('contentThumbnail', $this->FormatImage->idImage('posts/'.$post['Post']['year'], $post['Post']['id'], array('class' => 'img-thumbnail pull-right'), 'posts'));
+$this->assign('contentThumbnail', $this->FormatImage->idImage('posts/'.$post['Post']['year'].'/'.sprintf("%010d", $post['Post']['id']), $post['Post']['id'], array('class' => 'img-thumbnail pull-right'), 'posts'));
 ?>
 		<div>
 			<?php

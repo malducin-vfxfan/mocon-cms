@@ -113,7 +113,7 @@ class AlbumsController extends AppController {
 				$options = array('conditions' => array('Album.id' => $this->Album->id));
 				$album = $this->Album->find('first', $options);
 				if ($album) {
-					$this->Upload->uploadImageThumb('img'.DS.'albums'.DS.$album['Album']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Album->id, $this->request->data['File']['image']['name']));
+					$this->Upload->uploadImageThumb('img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d",$this->Album->id).DS.'preview', $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Album->id, $this->request->data['File']['image']['name']));
 				}
 				$this->Session->setFlash('The Album has been saved.', 'Flash/success');
 				return $this->redirect(array('action' => 'admin_index'));
@@ -140,7 +140,7 @@ class AlbumsController extends AppController {
 				$options = array('conditions' => array('Album.id' => $this->Album->id));
 				$album = $this->Album->find('first', $options);
 				if ($album) {
-					$this->Upload->uploadImageThumb('img'.DS.'albums'.DS.$album['Album']['year'], $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Album->id, $this->request->data['File']['image']['name']));
+					$this->Upload->uploadImageThumb('img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d",$this->Album->id).DS.'preview', $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Album->id, $this->request->data['File']['image']['name']));
 				}
 				$this->Session->setFlash('The Album has been saved.', 'Flash/success');
 				return $this->redirect(array('action' => 'admin_index'));

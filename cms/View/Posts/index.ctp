@@ -14,7 +14,7 @@ $this->assign('contentId', 'posts');
 ?>
 		<?php foreach ($posts as $post): ?>
 		<article class="post-contents">
-			<?php echo $this->FormatImage->idImage('posts/'.$post['Post']['year'], $post['Post']['id'], array('class' => 'img-thumbnail pull-right'), 'posts'); ?>
+			<?php echo $this->FormatImage->idImage('posts/'.$post['Post']['year'].'/'.sprintf("%010d", $post['Post']['id']), $post['Post']['id'], array('class' => 'img-thumbnail pull-right'), 'posts'); ?>
 			<header>
 				<h2><?php echo $post['Post']['title']; ?></h2>
 				<time class="date-created" datetime="<?php echo date(DATE_ATOM, strtotime($post['Post']['created'])); ?>">
