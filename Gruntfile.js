@@ -107,15 +107,6 @@ module.exports = function(grunt) {
           }
         },
         command: 'php apigen.php --source C:/work/projects/vfxfan-cms/cms --destination C:/work/projects/vfxfan-cms/docs/manual-api --extensions "php,ctp" --title "VFXfan CMS API Documentation" --access-levels "public,protected,private"'
-      },
-      developmentDocs: {
-        options: {
-          stdout: true,
-          execOptions: {
-            cwd: 'C:/work/projects/vfxfan-cms/docs/development'
-          }
-        },
-        command: 'make.bat html'
       }
     }
   });
@@ -140,7 +131,6 @@ module.exports = function(grunt) {
 
   // Documentation tasks.
   grunt.registerTask('dist-docs', ['clean:apiDocs', 'shell:apiDocs']);
-  grunt.registerTask('dist-development-docs', ['shell:developmentDocs']);
 
   // Default task.
   grunt.registerTask('default', ['dist-css']);
