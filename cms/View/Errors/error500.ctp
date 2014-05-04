@@ -8,7 +8,7 @@
  * @package       vfxfan-base.View.Errors
  */
 ?>
-<h1><?php echo $name; ?></h1>
+<h1><?php echo $message; ?></h1>
 <p class="alert alert-danger">
 	<strong>Error: </strong>
 	An Internal Error Has Occurred.
