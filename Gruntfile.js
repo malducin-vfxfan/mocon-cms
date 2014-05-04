@@ -11,7 +11,7 @@ module.exports = function(grunt) {
     less: {
       compileSkin: {
         files: {
-          'frontend/tmp/css/skin.css': 'frontend/src/css/bootstrap/less/skin/skin.less'
+          'frontend/build/css/skin.css': 'frontend/src/css/bootstrap/less/skin/skin.less'
         }
       }
     },
@@ -22,14 +22,14 @@ module.exports = function(grunt) {
         'ids': false
       },
       checkSkin: {
-        src: ['frontend/tmp/css/*.css']
+        src: ['frontend/build/css/skin.css']
       }
     },
 
     cssmin: {
       compressSkin: {
         files : {
-          'frontend/tmp/css/skin.min.css' : ['frontend/tmp/css/skin.css']
+          'frontend/build/css/skin.min.css' : ['frontend/build/css/skin.css']
         }
       }
     },
@@ -56,11 +56,11 @@ module.exports = function(grunt) {
 
     concat: {
       projectCssMin: {
-        src: ['frontend/src/css/bootstrap/css/bootstrap.min.css', 'frontend/tmp/css/skin.min.css'],
+        src: ['frontend/src/css/bootstrap/css/bootstrap.min.css', 'frontend/build/css/skin.min.css'],
         dest: 'frontend/build/css/project.min.css'
       },
       projectCss: {
-        src: ['frontend/src/css/bootstrap/css/bootstrap.css', 'frontend/tmp/css/skin.css'],
+        src: ['frontend/src/css/bootstrap/css/bootstrap.css', 'frontend/build/css/skin.css'],
         dest: 'frontend/build/css/project.css'
       }
 
