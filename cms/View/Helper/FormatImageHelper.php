@@ -34,7 +34,7 @@ class FormatImageHelper extends AppHelper {
  *
  * @var array
  */
-	private $exts = array('jpg', 'png', 'gif');
+	private $exts = array('jpg', 'png', 'svg', 'gif');
 
 /**
  * randomImage method
@@ -93,6 +93,7 @@ class FormatImageHelper extends AppHelper {
 		$images = $dir->find(sprintf("%010d", $id).'.*', true);
 
 		$image_name = '';
+		$ext = '';
 		foreach ($images as $image) {
 			$image = new File($dir->pwd().DS.$image);
 			$ext = $image->ext();
@@ -103,7 +104,15 @@ class FormatImageHelper extends AppHelper {
 			}
 		}
 		if ($image_name) {
-			$img_link = $this->Html->image($location.'/'.$image_name, $options);
+			if ($ext == 'svg') {
+				$svg_options = array('type' => 'image/svg+xml', 'data' => $location.'/'.$image_name);
+				$options = array_merge($svg_options, $options);
+
+				$img_link = $this->Html->tag('object', $options['title'].' (your browser does not support SVG)', $options);
+			}
+			else {
+				$img_link = $this->Html->image($location.'/'.$image_name, $options);
+			}
 		} else {
 			// if default image is in the same location
 			if (!$location_default) {
