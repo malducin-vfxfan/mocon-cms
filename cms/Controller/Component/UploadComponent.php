@@ -25,7 +25,7 @@ class UploadComponent extends Component {
  *
  * @var array
  */
-	private $permitted_images = array('image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png', 'image/gif');
+	private $permitted_images = array('image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png', 'image/svg+xml', 'image/gif');
 /**
  * Permitted file types.
  *
