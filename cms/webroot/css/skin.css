@@ -1,0 +1,115 @@
+body {
+  background: #ffffff;
+  padding-top: 50px;
+  /* 50px to make the container go all the way to the bottom of the topbar */
+}
+#latest-posts,
+#upcoming-events {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 992px) {
+  #latest-posts,
+  #upcoming-events {
+    float: left;
+    width: 50%;
+  }
+}
+.album-thumbail-md {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 992px) {
+  .album-thumbail-md {
+    float: left;
+    width: 16.66666667%;
+  }
+}
+a:hover > img.img-thumbnail,
+a:focus > img.img-thumbnail {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  border-color: #3366cc;
+}
+.date-created,
+.date-modified,
+.date-start,
+.date-end {
+  font-style: italic;
+}
+.author,
+.event-location {
+  font-weight: bold;
+}
+.contents-summary {
+  font-style: italic;
+}
+.top-page {
+  position: fixed;
+  display: block;
+  bottom: 5px;
+  right: 5px;
+}
+.post-contents,
+.event-contents,
+.album-contents {
+  min-height: 110px;
+}
+.glyphicon-primary-dark {
+  color: #24478f;
+}
+.navbar-brand {
+  font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+  color: #3366cc;
+}
+h1 small,
+h2 small,
+h3 small,
+h4 small,
+h5 small,
+h6 small {
+  color: #7094db;
+}
+figcaption,
+.image-caption {
+  font-style: italic;
+  text-align: center;
+}
+.form-error .help-block,
+.form-error .control-label,
+.form-error .radio,
+.form-error .checkbox,
+.form-error .radio-inline,
+.form-error .checkbox-inline {
+  color: #a94442;
+}
+.form-error .form-control {
+  border-color: #a94442;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.form-error .form-control:focus {
+  border-color: #843534;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+}
+.form-error .input-group-addon {
+  color: #a94442;
+  border-color: #a94442;
+  background-color: #f2dede;
+}
+.form-error .form-control-feedback {
+  color: #a94442;
+}

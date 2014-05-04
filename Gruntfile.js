@@ -68,11 +68,22 @@ module.exports = function(grunt) {
 
     copy: {
       projectCss: {
-        expand: true,
-        cwd: 'frontend/build/css/',
-        src: '*.css',
-        dest: '../../wamp/www/vfxfan-base/css/',
-        flatten: true,
+        files: [
+          {
+            expand: true,
+            cwd: 'frontend/build/css/',
+            src: '*.css',
+            dest: 'cms/webroot/css/',
+            flatten: true,
+          },
+          {
+            expand: true,
+            cwd: 'frontend/build/css/',
+            src: '*.css',
+            dest: '../../wamp/www/vfxfan-base/css/',
+            flatten: true,
+          },
+        ]
       },
       projectJs: {
         expand: true,
