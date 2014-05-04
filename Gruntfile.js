@@ -86,11 +86,22 @@ module.exports = function(grunt) {
         ]
       },
       projectJs: {
-        expand: true,
-        cwd: 'frontend/build/js/',
-        src: '*.js',
-        dest: '../../wamp/www/vfxfan-base/js/',
-        flatten: true,
+        files: [
+          {
+            expand: true,
+            cwd: 'frontend/build/js/',
+            src: '*.js',
+            dest: 'cms/webroot/js/',
+            flatten: true,
+          },
+          {
+            expand: true,
+            cwd: 'frontend/build/js/',
+            src: '*.js',
+            dest: '../../wamp/www/vfxfan-base/js/',
+            flatten: true,
+          },
+        ]
       }
     },
 
