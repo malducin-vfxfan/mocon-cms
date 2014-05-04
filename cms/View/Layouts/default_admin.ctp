@@ -28,7 +28,10 @@
 		echo $this->Html->meta('icon');
 		echo $this->fetch('meta');
 
-		echo $this->Html->css('project.min');
+		if (Configure::read('Bootstrap.css_version')) {
+			echo $this->Html->css(Configure::read('Bootstrap.css_version'));
+		}
+		echo $this->Html->css('skin.min');
 		if (Configure::read('JqueryUi.theme')) {
 			echo $this->Html->css(Configure::read('JqueryUi.theme'));
 		}
@@ -40,7 +43,7 @@
 		if (Configure::read('JqueryUi.version')) {
 			echo $this->Html->script(Configure::read('JqueryUi.version'));
 		}
-		echo $this->Html->script(array('bootstrap.min', 'admin.min'));
+		echo $this->Html->script(array('admin.min'));
 		echo $this->fetch('script');
 	?>
 </head>

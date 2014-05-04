@@ -38,6 +38,10 @@ $config = array(
 		'style_32' => false,
 		'posts' => true,
 	),
+	'Bootstrap' => array(
+		'css_version' => 'https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css',
+		'js_version' => 'https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js',
+	),
 	'Jquery' => array(
 		'version' => 'http://code.jquery.com/jquery-1.10.2.min.js',
 	),

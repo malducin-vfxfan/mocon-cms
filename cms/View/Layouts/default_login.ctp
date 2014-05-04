@@ -28,7 +28,10 @@
 		echo $this->Html->meta('icon');
 		echo $this->fetch('meta');
 
-		echo $this->Html->css('project.min');
+		if (Configure::read('Bootstrap.css_version')) {
+			echo $this->Html->css(Configure::read('Bootstrap.css_version'));
+		}
+		echo $this->Html->css('skin.min');
 		echo $this->fetch('css');
 
 		if (Configure::read('Jquery.version')) {
