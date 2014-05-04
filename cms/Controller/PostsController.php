@@ -172,7 +172,7 @@ class PostsController extends AppController {
 		if (!$this->Post->exists()) {
 			throw new NotFoundException('Invalid Post.');
 		}
-		$this->request->onlyAllow('post', 'delete');
+		$this->request->allowMethod('post', 'delete');
 		if ($this->Post->delete()) {
 			$this->Session->setFlash('Post deleted.', 'Flash/success');
 			return $this->redirect(array('action'=>'admin_index'));

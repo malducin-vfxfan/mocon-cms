@@ -130,7 +130,7 @@ class PageSectionsController extends AppController {
 		if (!$this->PageSection->exists()) {
 			throw new NotFoundException('Invalid Page Section.');
 		}
-		$this->request->onlyAllow('post', 'delete');
+		$this->request->allowMethod('post', 'delete');
 		if ($this->PageSection->delete()) {
 			$this->Session->setFlash('Page Section deleted.', 'Flash/success');
 			return $this->redirect(array('action'=>'admin_index'));

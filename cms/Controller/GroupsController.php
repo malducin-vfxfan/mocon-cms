@@ -117,7 +117,7 @@ class GroupsController extends AppController {
 		if (!$this->Group->exists()) {
 			throw new NotFoundException('Invalid Group.');
 		}
-		$this->request->onlyAllow('post', 'delete');
+		$this->request->allowMethod('post', 'delete');
 		if ($this->Group->delete()) {
 			$this->Session->setFlash('Group deleted.', 'Flash/success');
 			return $this->redirect(array('action'=>'admin_index'));

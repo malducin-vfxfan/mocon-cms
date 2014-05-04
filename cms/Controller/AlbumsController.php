@@ -169,7 +169,7 @@ class AlbumsController extends AppController {
 		if (!$this->Album->exists()) {
 			throw new NotFoundException('Invalid Album.');
 		}
-		$this->request->onlyAllow('post', 'delete');
+		$this->request->allowMethod('post', 'delete');
 		if ($this->Album->delete()) {
 			$this->Session->setFlash('Album deleted.', 'Flash/success');
 			return $this->redirect(array('action'=>'admin_index'));
@@ -230,7 +230,7 @@ class AlbumsController extends AppController {
 			throw new NotFoundException('Invalid Album.');
 		}
 
-		$this->request->onlyAllow('post', 'delete');
+		$this->request->allowMethod('post', 'delete');
 		if ($this->Album->deleteFile($id, $image)) {
 			$this->Session->setFlash('Album image deleted.', 'Flash/success');
 			return $this->redirect(array('action' => 'admin_view', $id));

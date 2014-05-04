@@ -106,7 +106,7 @@ class ContactFormEmailsController extends AppController {
 		if (!$this->ContactFormEmail->exists()) {
 			throw new NotFoundException('Invalid Contact Form Email.');
 		}
-		$this->request->onlyAllow('post', 'delete');
+		$this->request->allowMethod('post', 'delete');
 		if ($this->ContactFormEmail->delete()) {
 			$this->Session->setFlash('Contact Form Email deleted.', 'Flash/success');
 			return $this->redirect(array('action'=>'admin_index'));
