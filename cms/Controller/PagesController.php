@@ -262,7 +262,7 @@ class PagesController extends AppController {
 		if (!$this->Page->exists()) {
 			throw new NotFoundException('Invalid Page.');
 		}
-		$this->request->onlyAllow('post', 'delete');
+		$this->request->allowMethod('post', 'delete');
 		if ($this->Page->delete()) {
 			$this->Session->setFlash('Page deleted.', 'Flash/success');
 			return $this->redirect(array('action'=>'admin_index'));
@@ -291,7 +291,7 @@ class PagesController extends AppController {
 		if (!$filename) {
 			throw new NotFoundException('Invalid File.');
 		}
-		$this->request->onlyAllow('post', 'delete');
+		$this->request->allowMethod('post', 'delete');
 		if ($location == 'images') {
 			if ($this->Page->deleteFile($id, $filename, WWW_ROOT.'img')) {
 				$this->Session->setFlash('File deleted.', 'Flash/success');

@@ -192,7 +192,7 @@ class EventsController extends AppController {
 		if (!$this->Event->exists()) {
 			throw new NotFoundException('Invalid Event.');
 		}
-		$this->request->onlyAllow('post', 'delete');
+		$this->request->allowMethod('post', 'delete');
 		if ($this->Event->delete()) {
 			$this->Session->setFlash('Event deleted.', 'Flash/success');
 			return $this->redirect(array('action'=>'admin_index'));

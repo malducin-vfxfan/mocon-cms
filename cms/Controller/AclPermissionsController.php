@@ -190,7 +190,7 @@ class AclPermissionsController extends AppController {
 	public function admin_delete($aco_id = null, $model = 'User', $id = null) {
 		$this->layout = 'default_admin';
 
-		$this->request->onlyAllow('post', 'delete');
+		$this->request->allowMethod('post', 'delete');
 
 		$path = $this->Acl->Aco->getPath($aco_id);
 		if (!$path) {

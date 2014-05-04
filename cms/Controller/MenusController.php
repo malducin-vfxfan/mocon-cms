@@ -164,7 +164,7 @@ class MenusController extends AppController {
 		if (!$this->Menu->exists()) {
 			throw new NotFoundException('Invalid Menu.');
 		}
-		$this->request->onlyAllow('post', 'delete');
+		$this->request->allowMethod('post', 'delete');
 		if ($this->Menu->delete()) {
 			$this->Session->setFlash('Menu deleted.', 'Flash/success');
 			return $this->redirect(array('action'=>'admin_index'));

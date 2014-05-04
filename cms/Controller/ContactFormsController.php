@@ -102,7 +102,7 @@ class ContactFormsController extends AppController {
 		if (!$this->ContactForm->exists()) {
 			throw new NotFoundException('Invalid Contact Form message.');
 		}
-		$this->request->onlyAllow('post', 'delete');
+		$this->request->allowMethod('post', 'delete');
 		if ($this->ContactForm->delete()) {
 			$this->Session->setFlash('Contact Form message deleted.', 'Flash/success');
 			return $this->redirect(array('action'=>'admin_index'));
