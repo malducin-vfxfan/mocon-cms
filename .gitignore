@@ -1,0 +1,40 @@
+# don't track temp directories
+tmp
+
+# don't track Eclipse project files
+.buildpath
+.project
+.settings
+
+# don't track local Node installation
+node_modules
+
+# don't track Sphinx build files
+.buildinfo
+objects.inv
+doctrees
+docs/development/build/html/_sources/
+docs/development/build/html/_static/
+
+# Don't track images
+*.jpg
+*.png
+*.ico
+*.gif
+*.rw2
+*.psd
+*.svg
+
+# Don't track other media
+*.mp3
+*.wav
+*.flac
+
+# dont' track other documents
+*.pdf
+*.mwb
+
+# don't track font files
+*.ttf
+*.eot
+*.woff
