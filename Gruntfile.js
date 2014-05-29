@@ -76,13 +76,6 @@ module.exports = function(grunt) {
             dest: 'cms/webroot/css/',
             flatten: true,
           },
-          {
-            expand: true,
-            cwd: 'frontend/build/css/',
-            src: '*.css',
-            dest: '../../wamp/www/vfxfan-base/css/',
-            flatten: true,
-          },
         ]
       },
       projectJs: {
@@ -92,13 +85,6 @@ module.exports = function(grunt) {
             cwd: 'frontend/build/js/',
             src: '*.js',
             dest: 'cms/webroot/js/',
-            flatten: true,
-          },
-          {
-            expand: true,
-            cwd: 'frontend/build/js/',
-            src: '*.js',
-            dest: '../../wamp/www/vfxfan-base/js/',
             flatten: true,
           },
         ]
