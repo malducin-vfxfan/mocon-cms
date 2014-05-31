@@ -72,7 +72,7 @@ module.exports = function(grunt) {
           {
             expand: true,
             cwd: 'frontend/build/css/',
-            src: '*.css',
+            src: '**/*.css',
             dest: 'cms/webroot/css/',
             flatten: true,
           },
@@ -83,7 +83,7 @@ module.exports = function(grunt) {
           {
             expand: true,
             cwd: 'frontend/build/js/',
-            src: '*.js',
+            src: '**/*.js',
             dest: 'cms/webroot/js/',
             flatten: true,
           },
