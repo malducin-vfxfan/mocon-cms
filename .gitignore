@@ -16,6 +16,9 @@ doctrees
 docs/development/build/html/_sources/
 docs/development/build/html/_static/
 
+# don't track the winmerge folder
+winmerge
+
 # Don't track images
 *.jpg
 *.png
