@@ -1,5 +1,4 @@
 body {
-  background: #ffffff;
   padding-top: 50px;
   /* 50px to make the container go all the way to the bottom of the topbar */
 }
@@ -32,8 +31,9 @@ body {
 a:hover > img.img-thumbnail,
 a:focus > img.img-thumbnail {
   -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
-  border-color: #3366cc;
+  border-color: #428bca;
 }
 .date-created,
 .date-modified,
@@ -60,27 +60,10 @@ a:focus > img.img-thumbnail {
   min-height: 110px;
 }
 .glyphicon-primary-dark {
-  color: #24478f;
+  color: #2a6496;
 }
 .navbar-brand {
-  font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
-  color: #3366cc;
-}
-h1 small,
-h2 small,
-h3 small,
-h4 small,
-h5 small,
-h6 small {
-  color: #7094db;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
 figcaption,
 .image-caption {
