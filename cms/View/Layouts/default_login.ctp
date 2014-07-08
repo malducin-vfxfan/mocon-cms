@@ -30,8 +30,11 @@
 
 		if (Configure::read('Bootstrap.css_version')) {
 			echo $this->Html->css(Configure::read('Bootstrap.css_version'));
+			echo $this->Html->css('skin.min');
 		}
-		echo $this->Html->css('skin.min');
+		else {
+			echo $this->Html->css('project.min');
+		}
 		echo $this->fetch('css');
 
 		if (Configure::read('Jquery.version')) {

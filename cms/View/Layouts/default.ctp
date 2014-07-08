@@ -34,8 +34,11 @@
 
 		if (Configure::read('Bootstrap.css_version')) {
 			echo $this->Html->css(Configure::read('Bootstrap.css_version'));
+			echo $this->Html->css('skin.min');
 		}
-		echo $this->Html->css('skin.min');
+		else {
+			echo $this->Html->css('project.min');
+		}
 		if (Configure::read('JqueryUi.theme')) {
 			echo $this->Html->css(Configure::read('JqueryUi.theme'));
 		}
