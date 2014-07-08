@@ -39,7 +39,7 @@ $config = array(
 		'posts' => true,
 	),
 	'Bootstrap' => array(
-		'css_version' => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css',
+		'css_version' => '', // Bootstrap CDN: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'
 		'js_version' => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js',
 	),
 	'Jquery' => array(
