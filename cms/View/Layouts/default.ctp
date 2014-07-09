@@ -20,7 +20,7 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet' type='text/css'>
 	<?php
 		echo $this->Html->meta(array('name' => 'author', 'content' => Configure::read('Meta.author')));
 		echo $this->Html->meta(array('name' => 'generator', 'content' => Configure::read('Meta.generator')));
