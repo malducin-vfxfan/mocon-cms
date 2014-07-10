@@ -1,6 +1,9 @@
 # don't track temp directories
 tmp
 
+# don't track configuration directory
+configurations
+
 # don't track Eclipse project files
 .buildpath
 .project
