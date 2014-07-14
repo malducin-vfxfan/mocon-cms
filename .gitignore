@@ -16,8 +16,8 @@ node_modules
 .buildinfo
 objects.inv
 doctrees
-docs/development/build/html/_sources/
-docs/development/build/html/_static/
+docs/**/build/html/_sources/
+docs/**/build/html/_static/
 
 # don't track the winmerge folder
 winmerge
