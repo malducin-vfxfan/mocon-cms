@@ -10,6 +10,7 @@
  * @package       vfxfan-base.View.Pages
  */
 ?>
+<?php if (!empty($mainpage)): ?>
 <article>
 	<header>
 		<h1><?php echo $mainpage['Page']['title']; ?></h1>
@@ -17,6 +18,7 @@
 	<?php echo $mainpage['PageSection'][0]['content'];?>
 </article>
 <div>&nbsp;</div>
+<?php endif; ?>
 <div class="row">
 	<section id="latest-posts">
 		<?php echo $this->element('Posts/latest_posts', $posts); ?>
