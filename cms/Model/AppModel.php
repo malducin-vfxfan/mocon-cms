@@ -147,8 +147,8 @@ class AppModel extends Model {
  *
  * See http://www.regular-expressions.info/unicode.html
  *
- * @param string $str String to sanitize
- * @return string validated string string
+ * @param array $check array with data to validate
+ * @return bool validation check
  */
 	public function alphaNumericDashUnderscoreSpaceColon($check) {
 		// $data array is passed using the form field name as the key
@@ -158,4 +158,23 @@ class AppModel extends Model {
 
 		return preg_match('/^[\p{Ll}\p{Lm}\p{Lo}\p{Lt}\p{Lu}\p{Nd}\s-_:]+$/Du', $value);
 	}
+
+/**
+ * Validate strings to contain only letters, numbers, dashes and
+ * underscores.
+ *
+ * Taken
+ *
+ * @param array $check array with data to validate
+ * @return bool validation check
+ */
+	public function alphaNumericDashUnderscore($check) {
+		// $data array is passed using the form field name as the key
+		// have to extract the value to make the function generic
+		$value = array_values($check);
+		$value = $value[0];
+
+		return preg_match('/^[0-9a-zA-Z_-]*$/', $value);
+	}
+
 }
