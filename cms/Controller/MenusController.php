@@ -113,7 +113,7 @@ class MenusController extends AppController {
 		}
 		$menuParents = $this->Menu->find('list', array('fields' => array('Menu.id', 'Menu.name'), 'order' => 'Menu.id'));
 		$menuRoot = array(0 => 'Root');
-		$parents = array_merge($menuRoot, $menuParents);
+		$parents = $menuRoot + $menuParents;
 		$pages = $this->Page->find('all');
 		$this->set('title_for_layout', 'Add Menu Item');
 		$this->set(compact('parents', 'pages'));
@@ -143,7 +143,7 @@ class MenusController extends AppController {
 		}
 		$menuParents = $this->Menu->find('list', array('fields' => array('Menu.id', 'Menu.name'), 'order' => 'Menu.id'));
 		$menuRoot = array(0 => 'Root');
-		$parents = array_merge($menuRoot, $menuParents);
+		$parents = $menuRoot + $menuParents;
 		$pages = $this->Page->find('all');
 		$this->set('title_for_layout', 'Edit Menu Item');
 		$this->set(compact('parents', 'pages'));
