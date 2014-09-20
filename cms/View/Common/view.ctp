@@ -9,33 +9,48 @@
  */
 ?>
 <article>
-	<?php
-		if ($this->fetch('contentThumbnail')) {
-			echo $this->fetch('contentThumbnail');
-		}
-	?>
+	<?php if ($this->fetch('contentPreviewImage')): ?>
+	<header class="row">
+		<div class="content-preview-image">
+			<?php echo $this->fetch('contentPreviewImage'); ?>
+		</div>
+		<div class="content-preview">
+			<h1><?php echo $this->fetch('title'); ?></h1>
+			<?php if ($this->fetch('contentCreated') || $this->fetch('contentAuthor')): ?>
+			<div class="content-detail text-muted">
+				<p>
+					<?php if ($this->fetch('contentCreated')): ?>
+					<time class="date-created" datetime="<?php echo date(DATE_ATOM, strtotime($this->fetch('contentCreated'))); ?>">
+						<?php echo strftime("%B %d, %Y %H:%M:%S", strtotime($this->fetch('contentCreated'))); ?>,
+					</time>
+					<?php endif; ?>
+					<?php if ($this->fetch('contentAuthor')): ?>
+					by <span class="author"><?php echo $this->fetch('contentAuthor'); ?></span>
+					<?php endif; ?>
+				</p>
+			</div>
+			<?php endif; ?>
+		</div>
+	</header>
+	<?php else: ?>
 	<header>
 		<h1><?php echo $this->fetch('title'); ?></h1>
-		<?php if ($this->fetch('contentCreated')): ?>
-		<time class="date-created" datetime="<?php echo date(DATE_ATOM, strtotime($this->fetch('contentCreated'))); ?>">
-			<?php echo strftime("%B %d, %Y %H:%M:%S", strtotime($this->fetch('contentCreated'))); ?>
-		</time>
-		<?php endif; ?>
-		<?php if ($this->fetch('contentStartDate')): ?>
-		<time class="date-start" datetime="<?php echo $this->fetch('contentStartDate'); ?>">
-			<?php echo strftime("%B %d, %Y", strtotime($this->fetch('contentStartDate'))); ?>
-		</time>
-		<?php endif; ?>
-		<?php if ($this->fetch('contentEndDate')): ?>
-		-
-		<time class="date-end" datetime="<?php echo $this->fetch('contentEndDate') ?>">
-			<?php echo strftime("%B %d, %Y", strtotime($this->fetch('contentEndDate'))); ?>
-		</time>
-		<?php endif; ?>
-		<?php if ($this->fetch('contentAuthor')): ?>
-		<p>by <span class="author"><?php echo $this->fetch('contentAuthor'); ?></span></p>
+		<?php if ($this->fetch('contentCreated') || $this->fetch('contentAuthor')): ?>
+		<div class="content-detail text-muted">
+			<p>
+				<?php if ($this->fetch('contentCreated')): ?>
+				<time class="date-created" datetime="<?php echo date(DATE_ATOM, strtotime($this->fetch('contentCreated'))); ?>">
+					<?php echo strftime("%B %d, %Y %H:%M:%S", strtotime($this->fetch('contentCreated'))); ?>,
+				</time>
+				<?php endif; ?>
+				<?php if ($this->fetch('contentAuthor')): ?>
+				by <span class="author"><?php echo $this->fetch('contentAuthor'); ?></span>
+				<?php endif; ?>
+			</p>
+		</div>
 		<?php endif; ?>
 	</header>
+	<?php endif; ?>
 
 	<div class="contents">
 		<?php echo $this->fetch('content'); ?>
