@@ -73,7 +73,7 @@ class FormatImageHelper extends AppHelper {
  *
  * @param string $location
  * @param string $id
- * @param arrayn $options
+ * @param array $options
  * @param string $location_default Location of default image, usually an enclosing folder (for example for posts)
  * @return mixed
  */
@@ -127,4 +127,40 @@ class FormatImageHelper extends AppHelper {
 
 		return $img_link;
 	}
+
+/**
+ * getPreviewImage method
+ *
+ * Return the first preview image in the passed in array.
+ *
+ * @param array $preview_images array of image names in the preferred order
+ * @param array $options
+ * @return string
+ */
+	public function getPreviewImage($preview_images = array(), $options = array()) {
+		$default = array(
+			'size' => '',
+		);
+		$options = array_merge($default, $options);
+
+		$preview_image = '';
+
+		// search for a specific size array
+		if (!empty($options['size'])) {
+			if (array_key_exists($options['size'], $preview_images)) {
+				if (!empty($preview_images[$options['size']])) {
+					return $preview_images[$options['size']][0];
+				}
+			}
+		}
+
+		foreach ($preview_images as $size => $images) {
+			if (!empty($images)) {
+					$preview_image = $images[0];
+				break;
+			}
+		}
+		return $preview_image;
+	}
+
 }
