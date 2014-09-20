@@ -223,12 +223,12 @@
 /**
  * A random string used in security hashing methods.
  */
-	Configure::write('Security.salt', 'DYhG93b0qyJfIxfs2guVoUubWwvniR2G0FgaC9mi');
+	Configure::write('Security.salt', '84079c49a13a70bba377eae6fdac263f03cd26e1');
 
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.
  */
-	Configure::write('Security.cipherSeed', '76859309657453542496749683645');
+	Configure::write('Security.cipherSeed', '356564613563316663316461616162');
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).
@@ -328,7 +328,7 @@
  * 			'127.0.0.1:11211' // localhost, default port 11211
  * 		), //[optional]
  * 		'persistent' => 'my_connection', // [optional] The name of the persistent connection.
- * 		'compress' => false, // [optional] compress data in Memcache (slower, but uses less memory)
+ * 		'compress' => false, // [optional] compress data in Memcached (slower, but uses less memory)
  *	));
  *
  *  Wincache (http://php.net/wincache)
