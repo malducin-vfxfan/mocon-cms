@@ -140,6 +140,13 @@ class Post extends AppModel {
 	);
 
 /**
+ * Preview images order
+ *
+ * @var array
+ */
+	public $orderPreviewImages = array('md', 'sm', 'xs', 'ml', 'lg');
+
+/**
  * constructor method
  *
  * Create virtual fields.
@@ -214,6 +221,31 @@ class Post extends AppModel {
 		}
 
 		return true;
+	}
+
+/**
+ * afterFind method
+ *
+ * Add preview_images to the results.
+ *
+ * @param array $results
+ * @param boolean $primary
+ * @return array
+ */
+ 	public function afterFind($results, $primary = false) {
+		foreach ($results as $key => $val) {
+			// check to see we have an id key, for example to exclude distinct years list
+			if (isset($results[$key]['Post']['id']) && $primary) {
+				$dir = new Folder(WWW_ROOT.'img'.DS.'posts'.DS.$results[$key]['Post']['year'].DS.sprintf("%010d",$results[$key]['Post']['id']));
+				foreach ($this->orderPreviewImages as $value) {
+					$images[$value] = $dir->find('.*\.'.$value.'\.jpg', true);
+					$results[$key]['Post']['preview_images'] = $images;
+				}
+				$others = $dir->find('.*\.(?!xs|sm|md|ml|lg|vl|xl).{2}\.jpg', true);
+				$results[$key]['Post']['preview_images']['others'] = $others;
+			}
+		}
+		return $results;
 	}
 
 /**
