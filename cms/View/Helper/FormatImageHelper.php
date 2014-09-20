@@ -162,5 +162,4 @@ class FormatImageHelper extends AppHelper {
 		}
 		return $preview_image;
 	}
-
 }
