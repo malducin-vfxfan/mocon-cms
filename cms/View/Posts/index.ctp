@@ -30,7 +30,7 @@ $this->assign('contentId', 'posts');
 				?>
 			</div>
 			<p><?php echo $post['Post']['summary']; ?></p>
-			<p><?php echo $this->Html->link('Read more »', array('controller' => 'posts', 'action' => 'view', $post['Post']['slug'])); ?></p>
+			<p><?php echo $this->Html->link('Read More', array('controller' => 'posts', 'action' => 'view', $post['Post']['slug']), array('class' => 'btn btn-primary')); ?></p>
 		</article>
 		<hr />
 		<?php endforeach; ?>
