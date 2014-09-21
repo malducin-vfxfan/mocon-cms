@@ -2,16 +2,14 @@ body {
   padding-top: 50px;
   /* 50px to make the container go all the way to the bottom of the topbar */
 }
-#latest-posts,
-#upcoming-events {
+.half-page-section {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
 }
 @media (min-width: 992px) {
-  #latest-posts,
-  #upcoming-events {
+  .half-page-section {
     float: left;
     width: 50%;
   }
@@ -26,6 +24,30 @@ body {
   .album-thumbail-md {
     float: left;
     width: 16.66666667%;
+  }
+}
+.content-preview-image {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 992px) {
+  .content-preview-image {
+    float: left;
+    width: 33.33333333%;
+  }
+}
+.content-preview {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 992px) {
+  .content-preview {
+    float: left;
+    width: 66.66666667%;
   }
 }
 a:hover > img.img-thumbnail,
