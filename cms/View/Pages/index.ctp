@@ -22,10 +22,10 @@
 <div class="row">
 	<section id="latest-posts">
 		<?php echo $this->element('Posts/latest_posts', $posts); ?>
-		<?php echo $this->Html->link('Previous posts »', array('controller' => 'posts', 'action' => 'index')); ?>
+		<?php echo $this->Html->link('Previous Posts', array('controller' => 'posts', 'action' => 'index'), array('class' => 'btn btn-info btn-lg', 'escape' => false)); ?>
 	</section>
 	<section id="upcoming-events">
 		<?php echo $this->element('Events/upcoming_events', $events); ?>
-		<?php echo $this->Html->link('More events »', array('controller' => 'events', 'action' => 'index')); ?>
+		<?php echo $this->Html->link('More Events', array('controller' => 'events', 'action' => 'index'), array('class' => 'btn btn-info btn-lg', 'escape' => false)); ?>
 	</section>
 </div>
