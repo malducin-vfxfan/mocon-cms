@@ -67,8 +67,55 @@ $this->end();
 				<?php echo $post['Post']['modified']; ?>
 				&nbsp;
 			</dd>
-			<dt>Image</dt>
-			<dd>
-				<?php echo $this->FormatImage->idImage('posts/'.$post['Post']['year'].'/'.sprintf("%010d", $post['Post']['id']), $post['Post']['id'], array(), 'posts'); ?>
-				&nbsp;
-			</dd>
+<?php
+$this->start('relatedContent');
+?>
+		<h3>Tags</h3>
+		<table class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ($post['Tag'] as $tag): ?>
+				<tr>
+					<td><?php echo $this->Html->link($tag['name'], array('controller' => 'tags', 'action' => 'admin_view', $tag['id'])); ?></td>
+					<td>
+						<?php echo $this->Html->link('View', array('controller' => 'tags', 'action' => 'admin_view', $tag['id']), array('class' => 'btn btn-default')); ?>
+						<?php echo $this->Html->link('Edit', array('controller' => 'tags', 'action' => 'admin_edit', $tag['id']), array('class' => 'btn btn-default')); ?>
+					</td>
+				</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+
+		<h3>Preview Images</h3>
+		<table class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Filename</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+					foreach ($post['Post']['preview_images'] as $size => $images):
+						foreach ($images as $image):
+				?>
+				<tr>
+					<td><?php echo $this->Html->link($image, '/img/posts/'.$post['Post']['year'].'/'.sprintf("%010d", $post['Post']['id']).'/'.$image, array('target' => '_blank')); ?></td>
+					<td>
+						<?php echo $this->Html->link('View', '/img/posts/'.$post['Post']['year'].'/'.sprintf("%010d", $post['Post']['id']).'/'.$image, array('class' => 'btn btn-default', 'target' => '_blank')); ?>
+					</td>
+				</tr>
+				<?php
+						endforeach;
+					endforeach;
+				?>
+			</tbody>
+		</table>
+<?php
+$this->end();
+?>

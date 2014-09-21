@@ -49,8 +49,35 @@ $this->end();
 					echo $this->Form->input('File.image', array('type' => 'file'));
 				?>
 			</fieldset>
-			<fieldset>
-				<legend>Current Image</legend>
-				<?php echo $this->FormatImage->idImage('events/'.$this->Form->value('year'), $this->Form->value('id'), array(), 'events'); ?>
-			</fieldset>
 		<?php echo $this->Form->end(array('label' => 'Submit', 'class' => 'btn btn-primary')); ?>
+<?php
+$this->start('relatedContent');
+?>
+		<h3>Preview Images</h3>
+		<table class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Filename</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+					foreach ($this->request['data']['Event']['preview_images'] as $size => $images):
+						foreach ($images as $image):
+				?>
+				<tr>
+					<td><?php echo $this->Html->link($image, '/img/events/'.$this->request['data']['Event']['year'].'/'.sprintf("%010d", $this->request['data']['Event']['id']).'/'.$image, array('target' => '_blank')); ?></td>
+					<td>
+						<?php echo $this->Html->link('View', '/img/events/'.$this->request['data']['Event']['year'].'/'.sprintf("%010d", $this->request['data']['Event']['id']).'/'.$image, array('class' => 'btn btn-default', 'target' => '_blank')); ?>
+					</td>
+				</tr>
+				<?php
+						endforeach;
+					endforeach;
+				?>
+			</tbody>
+		</table>
+<?php
+$this->end();
+?>

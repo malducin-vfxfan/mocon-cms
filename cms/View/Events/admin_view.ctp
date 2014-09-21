@@ -70,8 +70,34 @@ $this->end();
 				<?php echo $event['Event']['modified']; ?>
 				&nbsp;
 			</dd>
-			<dt>Image</dt>
-			<dd>
-				<?php echo $this->FormatImage->idImage('events/'.$event['Event']['year'].'/'.sprintf("%010d", $event['Event']['id']), $event['Event']['id'], array(), 'events'); ?>
-				&nbsp;
-			</dd>
+<?php
+$this->start('relatedContent');
+?>
+		<h3>Preview Images</h3>
+		<table class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Filename</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+					foreach ($event['Event']['preview_images'] as $size => $images):
+						foreach ($images as $image):
+				?>
+				<tr>
+					<td><?php echo $this->Html->link($image, '/img/events/'.$event['Event']['year'].'/'.sprintf("%010d", $event['Event']['id']).'/'.$image, array('target' => '_blank')); ?></td>
+					<td>
+						<?php echo $this->Html->link('View', '/img/events/'.$event['Event']['year'].'/'.sprintf("%010d", $event['Event']['id']).'/'.$image, array('class' => 'btn btn-default', 'target' => '_blank')); ?>
+					</td>
+				</tr>
+				<?php
+						endforeach;
+					endforeach;
+				?>
+			</tbody>
+		</table>
+<?php
+$this->end();
+?>
