@@ -241,7 +241,7 @@ class Post extends AppModel {
 					$images[$value] = $dir->find('.*\.'.$value.'\.jpg', true);
 					$results[$key]['Post']['preview_images'] = $images;
 				}
-				$others = $dir->find('.*\.(?!xs|sm|md|ml|lg|vl|xl).{2}\.jpg', true);
+				$others = $dir->find('.*(?!\.xs|\.sm|\.md|\.ml|\.lg|\.vl|\.xl).{3}\.jpg', true);
 				$results[$key]['Post']['preview_images']['others'] = $others;
 			}
 		}
