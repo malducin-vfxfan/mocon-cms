@@ -12,24 +12,52 @@
  */
 ?>
 <h2>Upcoming Events</h2>
-<?php foreach ($events as $event): ?>
-<article class="event-contents">
-	<?php echo $this->FormatImage->idImage('events/'.$event['Event']['year'].'/'.sprintf("%010d", $event['Event']['id']), $event['Event']['id'], array('class' => 'img-thumbnail pull-right'), 'events'); ?>
-	<header>
-		<h3><?php echo $event['Event']['name']; ?></h3>
-		<time class="date-start" datetime="<?php echo $event['Event']['date_start']; ?>">
-			<?php echo strftime("%B %d, %Y", strtotime($event['Event']['date_start'])); ?>
-		</time>
-		-
-		<time class="date-end" datetime="<?php echo $event['Event']['date_end']; ?>">
-			<?php echo strftime("%B %d, %Y", strtotime($event['Event']['date_end'])); ?>
-		</time>
-		<p>@ <span class="event-location"><?php echo $event['Event']['location']; ?></span></p>
-	</header>
-	<p><?php echo $event['Event']['description']; ?></p>
-	<?php if ($event['Event']['webpage']): ?>
-		<p>Web: <?php echo $this->Html->link($event['Event']['webpage'], $event['Event']['webpage'], array('target' => '_blank')); ?></p>
+<?php
+foreach ($events as $event):
+	$preview_image = $this->FormatImage->getPreviewImage($event['Event']['preview_images']);
+?>
+	<?php if (!empty($preview_image)): ?>
+		<article class="row">
+			<div class="content-preview-image">
+				<?php echo $this->Html->image('events/'.$event['Event']['year'].'/'.sprintf("%010d", $event['Event']['id']).'/'.$preview_image, array('class' => 'img-responsive center-block', 'alt' => $event['Event']['name'], 'title' => $$event['Event']['name'])); ?>
+			</div>
+			<div class="content-preview">
+				<header>
+					<h3><?php echo $event['Event']['name']; ?></h3>
+					<p><time class="date-start" datetime="<?php echo $event['Event']['date_start']; ?>">
+					<?php echo strftime("%B %d, %Y", strtotime($event['Event']['date_start'])); ?>
+					</time>
+					-
+					<time class="date-end" datetime="<?php echo $event['Event']['date_end']; ?>">
+						<?php echo strftime("%B %d, %Y", strtotime($event['Event']['date_end'])); ?>
+					</time>
+					@ <span class="event-location"><?php echo $event['Event']['location']; ?></span></p>
+				</header>
+				<p><?php echo $event['Event']['description']; ?></p>
+				<?php if ($event['Event']['webpage']): ?>
+				<p>Web: <?php echo $this->Html->link($event['Event']['webpage'], $event['Event']['webpage'], array('target' => '_blank')); ?></p>
+				<?php endif; ?>
+			</div>
+		</article>
+	<?php else: ?>
+		<article>
+			<header>
+				<h3><?php echo $event['Event']['name']; ?></h3>
+				<p><time class="date-start" datetime="<?php echo $event['Event']['date_start']; ?>">
+				<?php echo strftime("%B %d, %Y", strtotime($event['Event']['date_start'])); ?>
+				</time>
+				-
+				<time class="date-end" datetime="<?php echo $event['Event']['date_end']; ?>">
+					<?php echo strftime("%B %d, %Y", strtotime($event['Event']['date_end'])); ?>
+				</time>
+				@ <span class="event-location"><?php echo $event['Event']['location']; ?></span></p>
+			</header>
+			<p><?php echo $event['Event']['description']; ?></p>
+			<?php if ($event['Event']['webpage']): ?>
+			<p>Web: <?php echo $this->Html->link($event['Event']['webpage'], $event['Event']['webpage'], array('target' => '_blank')); ?></p>
+			<?php endif; ?>
+		</article>
 	<?php endif; ?>
-</article>
-<hr />
+
+		<hr />
 <?php endforeach; ?>
