@@ -107,7 +107,7 @@
 				if ($this->Session->read('Config.theme') == 'default') {
 					echo $this->Html->link('Switch to Mobile Site', array('controller' => 'change_themes', 'action' => 'change'), array('class' => 'btn btn-info'));
 				} else {
-					echo $this->Html->link('Switch to Default Site', array('controller' => 'change_themes', 'action' => 'change'), array('class' => 'btn btn-info'));
+					echo $this->Html->link('Switch to Lower Bandwidth Site', array('controller' => 'change_themes', 'action' => 'change'), array('class' => 'btn btn-info'));
 				}
 			?>
 		</p>
