@@ -49,6 +49,9 @@ $config = array(
 		'version' => 'https://code.jquery.com/ui/1.10.3/jquery-ui.js',
 		'theme' => 'https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css',
 	),
+	'FontAwesome' => array(
+		'version' => 'https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css',
+	),
 	'Google' => array(
 		'Analytics' => array(
 			'trackerCode' => '',
