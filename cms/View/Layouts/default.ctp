@@ -98,7 +98,7 @@
 
 		<?php echo $this->element('sql_dump'); ?>
 
-		<p class="top-page"><span class="glyphicon glyphicon-circle-arrow-up glyphicon-primary-dark"></span><?php echo $this->Html->link('Back to top', '#page-header', array('class' => 'label label-default')); ?></p>
+		<div class="top-page"><?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'fa fa-arrow-circle-o-up fa-3x')), '#page-header', array('escape' => false)); ?></div>
 	</div><!-- /container -->
 
 	<footer>

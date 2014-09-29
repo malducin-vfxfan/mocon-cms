@@ -27,11 +27,29 @@ body {
 	.make-md-column(8);
 }
 
+#footer {
+	margin-top: 20px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: #eee;
+}
+
+.footer-map {
+	height: 300px;
+}
+
 // Add a hover state for linked versions of thumbnail style images
 // -------------------------
 a:hover > img.img-thumbnail, a:focus > img.img-thumbnail {
 	.transition(all .2s ease-in-out);
 	border-color: @link-color;
+}
+
+// Add a hover state for linked versions of Font Awesome icons
+// -------------------------
+a:hover > span.fa, a:focus > span.fa {
+	.transition(all .2s ease-in-out);
+	color: @project-primary-lighter;
 }
 
 // Project customizations for different types of contents
@@ -56,7 +74,7 @@ a:hover > img.img-thumbnail, a:focus > img.img-thumbnail {
 	position: fixed;
 	display: block;
 	bottom: 5px;
-	right: 5px;
+	right: 20px;
 }
 
 .featured-story {
