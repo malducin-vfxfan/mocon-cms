@@ -101,19 +101,48 @@
 		<div class="top-page"><?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'fa fa-arrow-circle-o-up fa-3x')), '#page-header', array('escape' => false)); ?></div>
 	</div><!-- /container -->
 
-	<footer>
+
+	<footer id="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<p><strong>Follow Us:</strong></p>
+					<p>
+						<?php
+							echo $this->Html->link($this->Html->tag('span', '', array('class' => 'fa fa-envelope fa-3x')), array('controller' => 'contact_forms'), array('target' => '_blank', 'escape' => false));
+							echo ' '.$this->Html->link($this->Html->tag('span', '', array('class' => 'fa fa-globe fa-3x')), 'http://ilmfan.com/', array('target' => '_blank', 'escape' => false));
+							echo ' '.$this->Html->link($this->Html->tag('span', '', array('class' => 'fa fa-twitter-square fa-3x')), 'https://twitter.com/malducin', array('target' => '_blank', 'escape' => false));
+						?>
+					</p>
+				</div>
+				<div class="col-md-4">
+					<address>
+						<strong>Company name</strong><br>
+						Street Address<br>
+						City, State, Zip Code<br>
+						Country<br>
+						<span class="fa fa-phone"></span> +1 () XXX-XXXX
+					</address>
+				</div>
+				<div class="col-md-4 embed-responsive footer-map">
+					Google Map
+				</div>
+			</div>
 		<p class="text-center">
-			© 2013-<?php echo date('Y'); ?>, system by <?php echo $this->Html->link('Manuel Alducin (malducin) - VFXfan.com', 'http://vfxfan.com'); ?>
+			© 2014-<?php echo date('Y'); ?>, system by <?php echo $this->Html->link('Manuel Alducin (malducin) - VFXfan.com', 'http://vfxfan.com'); ?>
 		</p>
-		<p class="text-center">
-			<?php
-				if ($this->Session->read('Config.theme') == 'default') {
-					echo $this->Html->link('Switch to Mobile Site', array('controller' => 'change_themes', 'action' => 'change'), array('class' => 'btn btn-info'));
-				} else {
-					echo $this->Html->link('Switch to Lower Bandwidth Site', array('controller' => 'change_themes', 'action' => 'change'), array('class' => 'btn btn-info'));
-				}
-			?>
-		</p>
+			<p class="text-center">
+				<?php
+					if ($this->Session->read('Config.theme') == 'default') {
+						echo $this->Html->link('Switch to Lower Bandwidth Site', array('controller' => 'change_themes', 'action' => 'change'), array('class' => 'btn btn-info'));
+					} else {
+						echo $this->Html->link('Switch to Default Site', array('controller' => 'change_themes', 'action' => 'change'), array('class' => 'btn btn-info'));
+					}
+				?>
+			</p>
+		</div>
 	</footer>
+
+
 </body>
 </html>
