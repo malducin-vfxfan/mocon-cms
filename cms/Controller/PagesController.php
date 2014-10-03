@@ -283,7 +283,7 @@ class PagesController extends AppController {
  * @param string $location
  * @return void
  */
-	public function admin_deleteFile($id = null, $filename = null, $location = 'images') {
+	public function admin_deleteFile($id = null, $filename = null, $location = 'img', $redirect_action = 'admin_view') {
 		$this->layout = 'default_admin';
 		if (!$this->Page->exists($id)) {
 			throw new NotFoundException('Invalid Page.');
@@ -292,20 +292,19 @@ class PagesController extends AppController {
 			throw new NotFoundException('Invalid File.');
 		}
 		$this->request->allowMethod('post', 'delete');
-		if ($location == 'images') {
-			if ($this->Page->deleteFile($id, $filename, WWW_ROOT.'img')) {
+
+		if ($location == 'img' || $location == 'files') {
+			if ($this->Page->deleteFile($id, $filename, WWW_ROOT.$location)) {
 				$this->Session->setFlash('File deleted.', 'Flash/success');
-				return $this->redirect(array('action'=>'admin_view', $id));
+			}
+			else {
+				$this->Session->setFlash('File was not deleted.', 'Flash/error');
 			}
 		}
-		if ($location == 'files') {
-			if ($this->Page->deleteFile($id, $filename, WWW_ROOT.'files')) {
-				$this->Session->setFlash('File deleted.', 'Flash/success');
-				return $this->redirect(array('action'=>'admin_view', $id));
-			}
+		else {
+			$this->Session->setFlash('File was not deleted.', 'Flash/error');
 		}
-		$this->Session->setFlash('File was not deleted.', 'Flash/error');
-		return $this->redirect(array('action' => 'admin_view', $id));
+		return $this->redirect(array('action' => $redirect_action, $id));
 	}
 
 }
