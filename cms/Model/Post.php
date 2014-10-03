@@ -286,4 +286,28 @@ class Post extends AppModel {
 		return $data;
 	}
 
+/**
+ * deleteFile method
+ *
+ * Delete one file from the post images folder given the post id and
+ * the filename.
+ *
+ * @param string $id
+ * @param string $filename
+ * @param string $location
+ * @return boolean
+ */
+	public function deleteFile($id = null, $filename = null, $location = null) {
+		if (!$id || !$filename || !$location) return false;
+
+		$options = array('conditions' => array('Post.id' => $id));
+		$post = $this->find('first', $options);
+		if ($post) {
+			$file = new File($location.DS.'posts'.DS.sprintf("%010d", $post['Post']['id']).DS.$filename);
+			return $file->delete();
+		} else {
+			return false;
+		}
+	}
+
 }
