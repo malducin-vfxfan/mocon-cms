@@ -200,4 +200,42 @@ class EventsController extends AppController {
 		$this->Session->setFlash('Event was not deleted.', 'Flash/error');
 		return $this->redirect(array('action' => 'admin_index'));
 	}
+
+/**
+ * admin_deleteFile method
+ *
+ * Delete one image file of an event.
+ *
+ * @throws NotFoundException
+ * @throws MethodNotAllowedException
+ * @param string $id
+ * @param string $filename
+ * @param string $location
+ * @param string $redirect_action
+ * @return void
+ */
+	public function admin_deleteFile($id = null, $filename = null, $location = 'img', $redirect_action = 'admin_view') {
+		$this->layout = 'default_admin';
+		if (!$this->Event->exists($id)) {
+			throw new NotFoundException('Invalid Event.');
+		}
+		if (!$filename) {
+			throw new NotFoundException('Invalid File.');
+		}
+		$this->request->allowMethod('post', 'delete');
+
+		if ($location == 'img') {
+			if ($this->Event->deleteFile($id, $filename, WWW_ROOT.$location)) {
+				$this->Session->setFlash('File deleted.', 'Flash/success');
+			}
+			else {
+				$this->Session->setFlash('File was not deleted.', 'Flash/error');
+			}
+		}
+		else {
+			$this->Session->setFlash('File was not deleted.', 'Flash/error');
+		}
+		return $this->redirect(array('action' => $redirect_action, $id));
+	}
+
 }

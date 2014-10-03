@@ -281,6 +281,7 @@ class PagesController extends AppController {
  * @param string $id
  * @param string $filename
  * @param string $location
+ * @param string $redirect_action
  * @return void
  */
 	public function admin_deleteFile($id = null, $filename = null, $location = 'img', $redirect_action = 'admin_view') {
