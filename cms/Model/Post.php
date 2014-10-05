@@ -303,7 +303,7 @@ class Post extends AppModel {
 		$options = array('conditions' => array('Post.id' => $id));
 		$post = $this->find('first', $options);
 		if ($post) {
-			$file = new File($location.DS.'posts'.DS.sprintf("%010d", $post['Post']['id']).DS.$filename);
+			$file = new File($location.DS.'posts'.DS.$post['Post']['year'].DS.sprintf("%010d", $post['Post']['id']).DS.$filename);
 			return $file->delete();
 		} else {
 			return false;

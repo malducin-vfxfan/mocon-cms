@@ -317,7 +317,7 @@ class Event extends AppModel {
 		$options = array('conditions' => array('Event.id' => $id));
 		$event = $this->find('first', $options);
 		if ($event) {
-			$file = new File($location.DS.'events'.DS.sprintf("%010d", $event['Event']['id']).DS.$filename);
+			$file = new File($location.DS.'events'.DS.$event['Event']['year'].DS.sprintf("%010d", $event['Event']['id']).DS.$filename);
 			return $file->delete();
 		} else {
 			return false;
