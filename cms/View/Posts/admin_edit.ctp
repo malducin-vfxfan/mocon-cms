@@ -74,7 +74,7 @@ $this->start('relatedContent');
 					<td><?php echo $this->Html->link($image, '/img/posts/'.$this->request['data']['Post']['year'].'/'.sprintf("%010d", $this->request['data']['Post']['id']).'/'.$image, array('target' => '_blank')); ?></td>
 					<td>
 						<?php echo $this->Html->link('View', '/img/posts/'.$this->request['data']['Post']['year'].'/'.sprintf("%010d", $this->request['data']['Post']['id']).'/'.$image, array('class' => 'btn btn-default', 'target' => '_blank')); ?>
-						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->request['data']['Post']['id'], $image, 'img', 'admin_edit'), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this image?'); ?>
+						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->request['data']['Post']['id'], $image, 'admin_edit'), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this image?'); ?>
 					</td>
 				</tr>
 				<?php

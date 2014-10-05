@@ -194,7 +194,7 @@ class PostsController extends AppController {
  * @param string $redirect_action
  * @return void
  */
-	public function admin_deleteFile($id = null, $filename = null, $location = 'img', $redirect_action = 'admin_view') {
+	public function admin_deleteFile($id = null, $filename = null, $redirect_action = 'admin_view') {
 		$this->layout = 'default_admin';
 		if (!$this->Post->exists($id)) {
 			throw new NotFoundException('Invalid Post.');
@@ -204,17 +204,13 @@ class PostsController extends AppController {
 		}
 		$this->request->allowMethod('post', 'delete');
 
-		if ($location == 'img') {
-			if ($this->Post->deleteFile($id, $filename, WWW_ROOT.$location)) {
-				$this->Session->setFlash('File deleted.', 'Flash/success');
-			}
-			else {
-				$this->Session->setFlash('File was not deleted.', 'Flash/error');
-			}
+		if ($this->Post->deleteFile($id, $filename, WWW_ROOT.'img')) {
+			$this->Session->setFlash('File deleted.', 'Flash/success');
 		}
 		else {
 			$this->Session->setFlash('File was not deleted.', 'Flash/error');
 		}
+
 		return $this->redirect(array('action' => $redirect_action, $id));
 	}
 
