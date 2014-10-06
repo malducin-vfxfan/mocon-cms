@@ -210,7 +210,6 @@ class EventsController extends AppController {
  * @throws MethodNotAllowedException
  * @param string $id
  * @param string $filename
- * @param string $location
  * @param string $redirect_action
  * @return void
  */
