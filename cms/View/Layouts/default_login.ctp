@@ -14,7 +14,7 @@
 	<meta charset="utf-8">
 	<title>
 		Site - Admin -
-		<?php echo $title_for_layout; ?>
+		<?php echo $this->fetch('title'); ?>
 	</title>
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
