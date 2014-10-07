@@ -13,7 +13,7 @@ $preview_image = $this->FormatImage->getPreviewImage($event['Event']['preview_im
 <article>
 	<div class="row">
 		<div class="content-preview-image">
-			<?php echo $this->Html->image('events/'.$event['Event']['year'].'/'.sprintf("%010d", $event['Event']['id']).'/'.$preview_image, array('class' => 'img-responsive center-block', 'alt' => $event['Event']['name'], 'title' => $$event['Event']['name'])); ?>
+			<?php echo $this->Html->image('events/'.$event['Event']['year'].'/'.sprintf("%010d", $event['Event']['id']).'/'.$preview_image, array('class' => 'img-responsive center-block', 'alt' => $event['Event']['name'], 'title' => $event['Event']['name'])); ?>
 		</div>
 		<div class="content-preview">
 			<header>
