@@ -63,25 +63,27 @@
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navigation">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<?php echo $this->Html->link('Site', '/', array('class' => 'navbar-brand')); ?>
-		</div>
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navigation">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<?php echo $this->Html->link('Site', '/', array('class' => 'navbar-brand')); ?>
+			</div>
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="main-navigation">
-			<?php
-				$menuItems = $this->requestAction(array('controller' => 'menus', 'action' => 'menu'));
-				echo $this->Menu->bootstrapMenu($menuItems);
-				echo $this->element('Google/Search/search');
-			?>
-		</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="main-navigation">
+				<?php
+					$menuItems = $this->requestAction(array('controller' => 'menus', 'action' => 'menu'));
+					echo $this->Menu->bootstrapMenu($menuItems);
+					echo $this->element('Google/Search/search');
+				?>
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container -->
 	</nav>
 
 	<div class="container">

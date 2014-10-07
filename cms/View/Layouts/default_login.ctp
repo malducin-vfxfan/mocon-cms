@@ -45,10 +45,12 @@
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<?php echo $this->Html->link('Site', '/', array('class' => 'navbar-brand')); ?>
-		</div>
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<?php echo $this->Html->link('Site', '/', array('class' => 'navbar-brand')); ?>
+			</div>
+		</div><!-- /.container -->
 	</nav>
 
 	<div class="container">
