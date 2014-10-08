@@ -169,7 +169,7 @@ class UsersController extends AppController {
 		$this->request->allowMethod('post', 'delete');
 		if ($this->User->delete()) {
 			$this->Session->setFlash('User deleted.', 'Flash/success');
-			return $this->redirect(array('action'=>'admin_index'));
+			return $this->redirect(array('action'=> 'admin_index'));
 		}
 		$this->Session->setFlash('User was not deleted.', 'Flash/error');
 		return $this->redirect(array('action' => 'admin_index'));

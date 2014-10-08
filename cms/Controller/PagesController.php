@@ -265,7 +265,7 @@ class PagesController extends AppController {
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Page->delete()) {
 			$this->Session->setFlash('Page deleted.', 'Flash/success');
-			return $this->redirect(array('action'=>'admin_index'));
+			return $this->redirect(array('action'=> 'admin_index'));
 		}
 		$this->Session->setFlash('Page was not deleted.', 'Flash/error');
 		return $this->redirect(array('action' => 'admin_index'));

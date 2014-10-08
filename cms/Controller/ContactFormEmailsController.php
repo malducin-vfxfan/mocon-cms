@@ -109,7 +109,7 @@ class ContactFormEmailsController extends AppController {
 		$this->request->allowMethod('post', 'delete');
 		if ($this->ContactFormEmail->delete()) {
 			$this->Session->setFlash('Contact Form Email deleted.', 'Flash/success');
-			return $this->redirect(array('action'=>'admin_index'));
+			return $this->redirect(array('action'=> 'admin_index'));
 		}
 		$this->Session->setFlash('Contact Form Email was not deleted.', 'Flash/error');
 		return $this->redirect(array('action' => 'admin_index'));

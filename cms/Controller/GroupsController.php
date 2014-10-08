@@ -120,7 +120,7 @@ class GroupsController extends AppController {
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Group->delete()) {
 			$this->Session->setFlash('Group deleted.', 'Flash/success');
-			return $this->redirect(array('action'=>'admin_index'));
+			return $this->redirect(array('action'=> 'admin_index'));
 		}
 		$this->Session->setFlash('Group was not deleted.', 'Flash/error');
 		return $this->redirect(array('action' => 'admin_index'));

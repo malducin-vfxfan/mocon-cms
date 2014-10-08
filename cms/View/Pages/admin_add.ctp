@@ -43,10 +43,10 @@ $this->end();
 			<fieldset>
 				<legend>Admin Add Page</legend>
 				<?php
-					echo $this->Form->input('Page.title', array('label'=>'Page Title'));
+					echo $this->Form->input('Page.title', array('label'=> 'Page Title'));
 					echo $this->Form->input('Page.published', array('div' => 'checkbox', 'class' => 'checkbox'));
 					echo $this->Form->input('Page.main', array('div' => 'checkbox', 'class' => 'checkbox'));
-					echo $this->Form->input('PageSection.0.title', array('label'=>'Section Title'));
+					echo $this->Form->input('PageSection.0.title', array('label'=> 'Section Title'));
 					echo $this->Form->input('PageSection.0.section', array('default' => 0, 'type' => 'number', 'min' => 0));
 					echo $this->Form->input('PageSection.0.content');
 				?>

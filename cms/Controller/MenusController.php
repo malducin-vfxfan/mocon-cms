@@ -167,7 +167,7 @@ class MenusController extends AppController {
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Menu->delete()) {
 			$this->Session->setFlash('Menu deleted.', 'Flash/success');
-			return $this->redirect(array('action'=>'admin_index'));
+			return $this->redirect(array('action'=> 'admin_index'));
 		}
 		$this->Session->setFlash('Menu was not deleted.', 'Flash/error');
 		return $this->redirect(array('action' => 'admin_index'));

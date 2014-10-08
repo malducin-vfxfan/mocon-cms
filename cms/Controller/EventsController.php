@@ -195,7 +195,7 @@ class EventsController extends AppController {
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Event->delete()) {
 			$this->Session->setFlash('Event deleted.', 'Flash/success');
-			return $this->redirect(array('action'=>'admin_index'));
+			return $this->redirect(array('action'=> 'admin_index'));
 		}
 		$this->Session->setFlash('Event was not deleted.', 'Flash/error');
 		return $this->redirect(array('action' => 'admin_index'));
