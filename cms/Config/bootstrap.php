@@ -26,25 +26,25 @@
 // very short
 Cache::config('veryshort', array(
 	'engine' => 'File',
-	'duration'=> '+5 minutes',
+	'duration' => '+5 minutes',
 	'prefix' => '')
 );
 // short
 Cache::config('short', array(
 	'engine' => 'File',
-	'duration'=> '+1 hours',
+	'duration' => '+1 hours',
 	'prefix' => '')
 );
 // medium
 Cache::config('medium', array(
 	'engine' => 'File',
-	'duration'=> '+1 day',
+	'duration' => '+1 day',
 	'prefix' => '')
 );
 // long
 Cache::config('long', array(
 	'engine' => 'File',
-	'duration'=> '+1 week',
+	'duration' => '+1 week',
 	'prefix' => '')
 );
 // Setup a 'default' cache configuration for use in the application.

@@ -172,7 +172,7 @@ class AlbumsController extends AppController {
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Album->delete()) {
 			$this->Session->setFlash('Album deleted.', 'Flash/success');
-			return $this->redirect(array('action'=> 'admin_index'));
+			return $this->redirect(array('action' => 'admin_index'));
 		}
 		$this->Session->setFlash('Album was not deleted.', 'Flash/error');
 		return $this->redirect(array('action' => 'admin_index'));

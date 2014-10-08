@@ -175,7 +175,7 @@ class PostsController extends AppController {
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Post->delete()) {
 			$this->Session->setFlash('Post deleted.', 'Flash/success');
-			return $this->redirect(array('action'=> 'admin_index'));
+			return $this->redirect(array('action' => 'admin_index'));
 		}
 		$this->Session->setFlash('Post was not deleted.', 'Flash/error');
 		return $this->redirect(array('action' => 'admin_index'));

@@ -133,7 +133,7 @@ class PageSectionsController extends AppController {
 		$this->request->allowMethod('post', 'delete');
 		if ($this->PageSection->delete()) {
 			$this->Session->setFlash('Page Section deleted.', 'Flash/success');
-			return $this->redirect(array('action'=> 'admin_index'));
+			return $this->redirect(array('action' => 'admin_index'));
 		}
 		$this->Session->setFlash('Page Section was not deleted.', 'Flash/error');
 		return $this->redirect(array('action' => 'admin_index'));
