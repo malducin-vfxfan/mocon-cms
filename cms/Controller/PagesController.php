@@ -284,28 +284,22 @@ class PagesController extends AppController {
  * @param string $redirect_action
  * @return void
  */
-	public function admin_deleteFile($id = null, $filename = null, $location = 'img', $redirect_action = 'admin_view') {
+	public function admin_deleteFile($id = null) {
 		$this->layout = 'default_admin';
 		if (!$this->Page->exists($id)) {
 			throw new NotFoundException('Invalid Page.');
 		}
-		if (!$filename) {
-			throw new NotFoundException('Invalid File.');
-		}
+
 		$this->request->allowMethod('post', 'delete');
 
-		if ($location == 'img' || $location == 'files') {
-			if ($this->Page->deleteFile($id, $filename, WWW_ROOT.$location)) {
-				$this->Session->setFlash('File deleted.', 'Flash/success');
-			}
-			else {
-				$this->Session->setFlash('File was not deleted.', 'Flash/error');
-			}
+		if ($this->Page->deleteFile($id, $this->request->named['file_name'], WWW_ROOT.$this->request->named['base_location'])) {
+			$this->Session->setFlash('File deleted.', 'Flash/success');
 		}
 		else {
 			$this->Session->setFlash('File was not deleted.', 'Flash/error');
 		}
-		return $this->redirect(array('action' => $redirect_action, $id));
+
+		return $this->redirect(array('action' => $this->request->named['redirect_action'], $id));
 	}
 
 }

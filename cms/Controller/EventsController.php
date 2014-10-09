@@ -213,24 +213,22 @@ class EventsController extends AppController {
  * @param string $redirect_action
  * @return void
  */
-	public function admin_deleteFile($id = null, $filename = null, $redirect_action = 'admin_view') {
+	public function admin_deleteFile($id = null) {
 		$this->layout = 'default_admin';
 		if (!$this->Event->exists($id)) {
 			throw new NotFoundException('Invalid Event.');
 		}
-		if (!$filename) {
-			throw new NotFoundException('Invalid File.');
-		}
+
 		$this->request->allowMethod('post', 'delete');
 
-		if ($this->Event->deleteFile($id, $filename, WWW_ROOT.'img')) {
+		if ($this->Event->deleteFile($id, $this->request->named['file_name'], WWW_ROOT.'img')) {
 			$this->Session->setFlash('File deleted.', 'Flash/success');
 		}
 		else {
 			$this->Session->setFlash('File was not deleted.', 'Flash/error');
 		}
 
-		return $this->redirect(array('action' => $redirect_action, $id));
+		return $this->redirect(array('action' => $this->request->named['redirect_action'], $id));
 	}
 
 }
