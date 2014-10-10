@@ -137,10 +137,10 @@ class Album extends AppModel {
  */
 	public function beforeValidate($options = array()) {
 		if (!empty($this->data)) {
-			$this->data = $this->_cleanData($this->data);
 			if (!$this->id) {
 				$this->data['Album']['slug'] = strtolower(Inflector::slug($this->data['Album']['name'], '-'));
 			}
+			$this->data = $this->_cleanData($this->data);
 		}
 		return true;
 	}
