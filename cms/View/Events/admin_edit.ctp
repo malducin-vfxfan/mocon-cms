@@ -19,7 +19,7 @@ $this->assign('formTitle', 'Edit an Event');
 $this->start('actions');
 ?>
 			<li><?php echo $this->Html->link('List Events', array('action' => 'admin_index')); ?></li>
-			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $this->request['data']['Event']['id']), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $this->request['data']['Event']['id'])); ?></li>
+			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $this->request->data('Event.id')), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $this->request->data('Event.id'))); ?></li>
 <?php
 $this->end();
 ?>
@@ -63,14 +63,14 @@ $this->start('relatedContent');
 			</thead>
 			<tbody>
 				<?php
-					foreach ($this->request['data']['Event']['preview_images'] as $size => $images):
+					foreach ($this->request->data('Event.preview_images') as $size => $images):
 						foreach ($images as $image):
 				?>
 				<tr>
-					<td><?php echo $this->Html->link($image, '/img/events/'.$this->request['data']['Event']['year'].'/'.sprintf("%010d", $this->request['data']['Event']['id']).'/'.$image, array('target' => '_blank')); ?></td>
+					<td><?php echo $this->Html->link($image, '/img/events/'.$this->request->data('Event.year').'/'.sprintf("%010d", $this->request->data('Event.id')).'/'.$image, array('target' => '_blank')); ?></td>
 					<td>
-						<?php echo $this->Html->link('View', '/img/events/'.$this->request['data']['Event']['year'].'/'.sprintf("%010d", $this->request['data']['Event']['id']).'/'.$image, array('class' => 'btn btn-default', 'target' => '_blank')); ?>
-						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile',$this->request['data']['Event']['id'], 'file_name' => $image, 'base_location' => 'img', 'redirect_action' => 'admin_edit'), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this image?'); ?>
+						<?php echo $this->Html->link('View', '/img/events/'.$this->request->data('Event.year').'/'.sprintf("%010d", $this->request->data('Event.id')).'/'.$image, array('class' => 'btn btn-default', 'target' => '_blank')); ?>
+						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->request->data('Event.id'), 'file_name' => $image, 'base_location' => 'img', 'redirect_action' => 'admin_edit'), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this image?'); ?>
 					</td>
 				</tr>
 				<?php

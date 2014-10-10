@@ -14,7 +14,7 @@ $this->assign('formTitle', 'Edit an Album');
 $this->start('actions');
 ?>
 			<li><?php echo $this->Html->link('List Albums', array('action' => 'admin_index')); ?></li>
-			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $this->request['data']['Album']['id']), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $this->request['data']['Album']['id'])); ?></li>
+			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $this->request->data('Album.id')), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $this->request->data('Album.id'))); ?></li>
 <?php
 $this->end();
 ?>
