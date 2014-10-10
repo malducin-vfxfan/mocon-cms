@@ -14,14 +14,14 @@ $this->assign('formTitle', 'Edit a Page');
 $this->start('actions');
 ?>
 			<li><?php echo $this->Html->link('List Pages', array('action' => 'admin_index')); ?></li>
-			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $this->Form->value('Page.id')), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $this->Form->value('Page.id'))); ?></li>
+			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $this->request['data']['Page']['id']), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $this->request['data']['Page']['id'])); ?></li>
 <?php
 $this->end();
 
 $this->start('relatedActions');
 ?>
 			<li><?php echo $this->Html->link('List Page Sections', array('controller' => 'page_sections', 'action' => 'admin_index')); ?></li>
-			<li><?php echo $this->Html->link('New Page Section', array('controller' => 'page_sections', 'action' => 'admin_add', $this->Form->value('Page.id'))); ?></li>
+			<li><?php echo $this->Html->link('New Page Section', array('controller' => 'page_sections', 'action' => 'admin_add', $this->request['data']['Page']['id'])); ?></li>
 <?php
 $this->end();
 ?>
@@ -109,10 +109,10 @@ $this->start('relatedContent');
 			<tbody>
 				<?php foreach ($images as $image): ?>
 				<tr>
-					<td><?php echo $this->Html->link($image, '/img/pages/'.sprintf("%010d", $this->Form->value('Page.id')).'/'.$image, array('target' => '_blank')); ?></td>
+					<td><?php echo $this->Html->link($image, '/img/pages/'.sprintf("%010d", $this->request['data']['Page']['id']).'/'.$image, array('target' => '_blank')); ?></td>
 					<td>
-						<?php echo $this->Html->link('View', '/img/pages/'.sprintf("%010d", $this->Form->value('Page.id')).'/'.$image, array('class' => 'btn btn-default', 'target' => '_blank')); ?>
-						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->Form->value('Page.id'), 'file_name' => $image, 'base_location' => 'img', 'redirect_action' => 'admin_edit'), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this image?'); ?>
+						<?php echo $this->Html->link('View', '/img/pages/'.sprintf("%010d", $this->request['data']['Page']['id']).'/'.$image, array('class' => 'btn btn-default', 'target' => '_blank')); ?>
+						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->request['data']['Page']['id'], 'file_name' => $image, 'base_location' => 'img', 'redirect_action' => 'admin_edit'), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this image?'); ?>
 					</td>
 				</tr>
 				<?php endforeach; ?>
@@ -130,10 +130,10 @@ $this->start('relatedContent');
 			<tbody>
 				<?php foreach ($documents as $document): ?>
 				<tr>
-					<td><?php echo $this->Html->link($document, '/files/pages/'.sprintf("%010d", $this->Form->value('Page.id')).'/'.$document, array('target' => '_blank')); ?></td>
+					<td><?php echo $this->Html->link($document, '/files/pages/'.sprintf("%010d", $this->request['data']['Page']['id']).'/'.$document, array('target' => '_blank')); ?></td>
 					<td>
-						<?php echo $this->Html->link('View', '/files/pages/'.sprintf("%010d", $this->Form->value('Page.id')).'/'.$document, array('class' => 'btn btn-default', 'target' => '_blank')); ?>
-						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->Form->value('Page.id'), 'file_name' => $document, 'base_location' => 'files', 'redirect_action' => 'admin_edit'), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this document?'); ?>
+						<?php echo $this->Html->link('View', '/files/pages/'.sprintf("%010d",$this->request['data']['Page']['id']).'/'.$document, array('class' => 'btn btn-default', 'target' => '_blank')); ?>
+						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->request['data']['Page']['id'], 'file_name' => $document, 'base_location' => 'files', 'redirect_action' => 'admin_edit'), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this document?'); ?>
 					</td>
 				</tr>
 				<?php endforeach; ?>

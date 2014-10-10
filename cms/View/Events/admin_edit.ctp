@@ -19,7 +19,7 @@ $this->assign('formTitle', 'Edit an Event');
 $this->start('actions');
 ?>
 			<li><?php echo $this->Html->link('List Events', array('action' => 'admin_index')); ?></li>
-			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $this->Form->value('Event.id')), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $this->Form->value('Event.id'))); ?></li>
+			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $this->request['data']['Event']['id']), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $this->request['data']['Event']['id'])); ?></li>
 <?php
 $this->end();
 ?>

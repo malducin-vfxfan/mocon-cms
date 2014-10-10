@@ -18,7 +18,7 @@ $this->assign('formTitle', 'Edit a Post');
 $this->start('actions');
 ?>
 			<li><?php echo $this->Html->link('List Posts', array('action' => 'admin_index')); ?></li>
-			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $this->Form->value('Post.id')), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $this->Form->value('Post.id'))); ?></li>
+			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $this->request['data']['Post']['id']), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $this->request['data']['Post']['id'])); ?></li>
 <?php
 $this->end();
 

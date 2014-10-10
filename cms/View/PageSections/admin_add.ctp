@@ -8,7 +8,7 @@
  * @package       vfxfan-base.View.PageSections
  */
 if (Configure::read('TinyMCE.active')) {
-	echo $this->element('TinyMCE/config_basic', array('external_image_list_url' => $this->Html->url(array('controller' => 'page_sections', 'action' => 'admin_tinymceImageList', $this->Form->value('Page.id')))));
+	echo $this->element('TinyMCE/config_basic', array('external_image_list_url' => $this->Html->url(array('controller' => 'page_sections', 'action' => 'admin_tinymceImageList', $this->request['data']['Page']['id']))));
 }
 
 $this->extend('/Common/admin_add_edit');

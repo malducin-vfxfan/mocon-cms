@@ -14,7 +14,7 @@ $this->assign('formTitle', 'Edit a Menu Item');
 $this->start('actions');
 ?>
 			<li><?php echo $this->Html->link('List Menus', array('action' => 'admin_index')); ?></li>
-			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $this->Form->value('Menu.id')), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $this->Form->value('Menu.id'))); ?></li>
+			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $this->request['data']['Menu']['id']), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $this->request['data']['Menu']['id'])); ?></li>
 <?php
 $this->end();
 ?>
