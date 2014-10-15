@@ -30,7 +30,7 @@ $(document).ready(function() {
 
 		// insert the new elements after the last "duplicatable" input field
 		$('fieldset#extraPageSections').append('<div class="input text">');
-		$('fieldset#extraPageSections').append('<label for="PageSection' + num + 'Title">Section Title</label>');
+		$('fieldset#extraPageSections').append('<label class="page-section-title" for="PageSection' + num + 'Title">Section Title</label>');
 		$('fieldset#extraPageSections').append(newElemTitle);
 		$('fieldset#extraPageSections').append('</div>');
 		$('fieldset#extraPageSections').append('<div class="input number">');
@@ -41,7 +41,7 @@ $(document).ready(function() {
 		$('fieldset#extraPageSections').append('<div class="input textarea">');
 		$('fieldset#extraPageSections').append(newElemContent);
 		$('fieldset#extraPageSections').append('</div>');
-		$('fieldset#extraPageSections').append('<div><hr /></div>');
+		$('fieldset#extraPageSections').append('<hr>');
 
 		// can only add 4 more page sections
 		if (num == 5)  $('#addPageSection').attr('disabled','disabled');
