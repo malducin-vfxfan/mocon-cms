@@ -47,10 +47,13 @@ module.exports = function(grunt) {
         mangle: false
       },
       projectJs: {
-        files: {
-          'frontend/build/js/admin.min.js': ['frontend/src/js/admin.js'],
-          'frontend/build/js/project.min.js': ['frontend/src/js/project.js'],
-       }
+        files: [{
+          expand: true,
+          cwd: 'frontend/src/js',
+          src: '*.js',
+          ext: '.min.js',
+          dest: 'frontend/build/js'
+       }]
       }
     },
 
@@ -82,7 +85,7 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
-            src: ['frontend/src/js/*.js', 'frontend/build/js/*.js'],
+            src: ['frontend/src/js/**/*.js', 'frontend/build/js/*.js'],
             dest: 'cms/webroot/js/',
             flatten: true,
           },
