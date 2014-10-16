@@ -60,13 +60,4 @@ $(document).ready(function() {
 
 		$('#MenuLink').val('/pages/view/' + slug);
 	});
-
-	/**
-	 * Handler to enable the Magnific Popup lightbox.
-	 */
-	 $('.popup-link').magnificPopup({
-		type: 'image',
-		titleSrc: 'title',
-	});
-
 });

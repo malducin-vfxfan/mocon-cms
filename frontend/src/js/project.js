@@ -12,10 +12,4 @@
  * Check the document is ready.
  */
 $(document).ready(function() {
-	$('#gallery').magnificPopup({
-		delegate: 'a',
-		type: 'image',
-		titleSrc: 'title',
-		gallery: {enabled: true}
-	});
 });

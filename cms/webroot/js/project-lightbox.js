@@ -1,7 +1,7 @@
 /**
- * Javascript for the project (public sections).
+ * Javascript for the lightbox in the project (public sections).
  *
- * Javascript for the project, mainly to add interactivity.
+ * Javascript for the project, lightbox to display images.
  *
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
@@ -12,4 +12,10 @@
  * Check the document is ready.
  */
 $(document).ready(function() {
+	$('#gallery').magnificPopup({
+		delegate: 'a',
+		type: 'image',
+		titleSrc: 'title',
+		gallery: {enabled: true}
+	});
 });

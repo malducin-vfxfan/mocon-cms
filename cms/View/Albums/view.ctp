@@ -11,7 +11,7 @@
  * @package       vfxfan-base.View.Albums
  */
 echo $this->Html->css('magnific-popup', array('inline' => false));
-echo $this->Html->script(array('jquery.magnific-popup'), array('inline' => false));
+echo $this->Html->script(array('jquery.magnific-popup', 'project-lightbox'), array('inline' => false));
 
 $this->extend('/Common/view');
 
