@@ -19,5 +19,5 @@ foreach ($images as $image) {
 ?>
 var tinyMCEImageList = new Array(
 	// Name, URL
-	<?php echo implode(",",$images_list); ?>
+	<?php echo implode(",", $images_list); ?>
 );

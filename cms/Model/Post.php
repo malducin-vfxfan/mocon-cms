@@ -236,7 +236,7 @@ class Post extends AppModel {
 		foreach ($results as $key => $val) {
 			// check to see we have an id key, for example to exclude distinct years list
 			if (isset($results[$key]['Post']['id']) && $primary) {
-				$dir = new Folder(WWW_ROOT.'img'.DS.'posts'.DS.$results[$key]['Post']['year'].DS.sprintf("%010d",$results[$key]['Post']['id']));
+				$dir = new Folder(WWW_ROOT.'img'.DS.'posts'.DS.$results[$key]['Post']['year'].DS.sprintf("%010d", $results[$key]['Post']['id']));
 				foreach ($this->orderPreviewImages as $value) {
 					$images[$value] = $dir->find('.*\.'.$value.'\.jpg', true);
 					$results[$key]['Post']['preview_images'] = $images;

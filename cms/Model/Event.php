@@ -248,7 +248,7 @@ class Event extends AppModel {
 		foreach ($results as $key => $val) {
 			// check to see we have an id key, for example to exclude distinct years list
 			if (isset($results[$key]['Event']['id']) && $primary) {
-				$dir = new Folder(WWW_ROOT.'img'.DS.'events'.DS.$results[$key]['Event']['year'].DS.sprintf("%010d",$results[$key]['Event']['id']));
+				$dir = new Folder(WWW_ROOT.'img'.DS.'events'.DS.$results[$key]['Event']['year'].DS.sprintf("%010d", $results[$key]['Event']['id']));
 				foreach ($this->orderPreviewImages as $value) {
 					$images[$value] = $dir->find('.*\.'.$value.'\.jpg', true);
 					$results[$key]['Event']['preview_images'] = $images;
