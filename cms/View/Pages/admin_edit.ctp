@@ -43,8 +43,8 @@ $this->end();
 					echo $this->Form->input('id');
 					echo $this->Form->input('title');
 					echo $this->Form->input('slug');
-					echo $this->Form->input('published', array('div' => 'checkbox', 'class' => 'checkbox'));
-					echo $this->Form->input('main', array('div' => 'checkbox', 'class' => 'checkbox'));
+					echo $this->Form->input('published', array('div' => 'checkbox', 'class' => 'checkbox', 'label' => false, 'before' => '<label>', 'after' => 'Published</label>'));
+					echo $this->Form->input('main', array('div' => 'checkbox', 'class' => 'checkbox', 'label' => false, 'before' => '<label>', 'after' => 'Main</label>'));
 					echo $this->Form->input('File.image', array('type' => 'file'));
 					echo $this->Form->input('File.document', array('type' => 'file'));
 				?>

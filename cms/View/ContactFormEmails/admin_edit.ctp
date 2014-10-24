@@ -35,7 +35,7 @@ $this->end();
 					echo $this->Form->input('id');
 					echo $this->Form->input('email');
 					echo $this->Form->input('name');
-					echo $this->Form->input('active', array('div' => 'checkbox', 'class' => 'checkbox'));
+					echo $this->Form->input('active', array('div' => 'checkbox', 'class' => 'checkbox', 'label' => false, 'before' => '<label>', 'after' => 'Active</label>'));
 				?>
 			</fieldset>
 		<?php echo $this->Form->end(array('label' => 'Submit', 'class' => 'btn btn-primary')); ?>
