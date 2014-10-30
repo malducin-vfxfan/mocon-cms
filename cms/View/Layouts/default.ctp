@@ -27,6 +27,8 @@
 		echo $this->Html->meta(array('name' => 'description', 'content' => Configure::read('Meta.description')));
 		echo $this->Html->meta('Latest News', '/posts/index.rss', array('type' => 'rss'));
 		echo $this->Html->meta('icon');
+		echo $this->Html->meta(array('http-equiv' => 'X-UA-Compatible', 'content' => 'IE=edge'));
+		echo $this->Html->meta(array('name' => 'viewport', 'content' => 'width=device-width, initial-scale=1'));
 		if (Configure::read('Google.SiteVerification.key')) {
 			echo $this->Html->meta(array('name' => 'google-site-verification', 'content' => Configure::read('Google.SiteVerification.key')));
 		}
