@@ -116,7 +116,11 @@ figcaption,
 .form-error .radio,
 .form-error .checkbox,
 .form-error .radio-inline,
-.form-error .checkbox-inline {
+.form-error .checkbox-inline,
+.form-error.radio label,
+.form-error.checkbox label,
+.form-error.radio-inline label,
+.form-error.checkbox-inline label {
   color: #a94442;
 }
 .form-error .form-control {
