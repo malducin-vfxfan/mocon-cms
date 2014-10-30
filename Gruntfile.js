@@ -19,7 +19,8 @@ module.exports = function(grunt) {
     csslint: {
       options: {
         'compatible-vendor-prefixes': false,
-        'ids': false
+        'ids': false,
+        'adjoining-classes': false
       },
       checkSkin: {
         src: ['frontend/build/css/skin.css']
