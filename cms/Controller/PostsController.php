@@ -203,8 +203,7 @@ class PostsController extends AppController {
 
 		if ($this->Post->deleteFile($id, $this->request->named['file_name'], WWW_ROOT.'img')) {
 			$this->Session->setFlash('File deleted.', 'Flash/success');
-		}
-		else {
+		} else {
 			$this->Session->setFlash('File was not deleted.', 'Flash/error');
 		}
 

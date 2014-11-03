@@ -173,8 +173,7 @@ class AppController extends Controller {
 		if ($type == 'csrf') {
 			$this->Session->setFlash('The Form has expired, please try again.', 'Flash/error');
 			return $this->redirect(array('action' => $this->request->action));
-		}
-		elseif ($type == 'auth') {
+		} elseif ($type == 'auth') {
 			$this->Session->setFlash('There was a problem with the action (probably validation), please try again.', 'Flash/error');
 			return $this->redirect(array('action' => $this->request->action));
 		} else {

@@ -223,8 +223,7 @@ class EventsController extends AppController {
 
 		if ($this->Event->deleteFile($id, $this->request->named['file_name'], WWW_ROOT.'img')) {
 			$this->Session->setFlash('File deleted.', 'Flash/success');
-		}
-		else {
+		} else {
 			$this->Session->setFlash('File was not deleted.', 'Flash/error');
 		}
 

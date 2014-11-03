@@ -294,8 +294,7 @@ class PagesController extends AppController {
 
 		if ($this->Page->deleteFile($id, $this->request->named['file_name'], WWW_ROOT.$this->request->named['base_location'])) {
 			$this->Session->setFlash('File deleted.', 'Flash/success');
-		}
-		else {
+		} else {
 			$this->Session->setFlash('File was not deleted.', 'Flash/error');
 		}
 

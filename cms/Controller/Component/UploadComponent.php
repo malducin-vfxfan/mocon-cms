@@ -157,8 +157,7 @@ class UploadComponent extends Component {
 					$result = move_uploaded_file($data['tmp_name'], $options['base_dir'].$folder.DS.$image_name);
 				}
 			}
-		}
-		elseif ($data['error'] == UPLOAD_ERR_NO_FILE) {
+		} elseif ($data['error'] == UPLOAD_ERR_NO_FILE) {
 			$result = true;
 		}
 		return $result;
