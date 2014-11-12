@@ -1,11 +1,11 @@
 <?php
 /**
- * Copyright 2009-2010, Cake Development Corporation (http://cakedc.com)
+ * Copyright 2009-2014, Cake Development Corporation (http://cakedc.com)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright Copyright 2009-2010, Cake Development Corporation (http://cakedc.com)
+ * @copyright Copyright 2009-2014, Cake Development Corporation (http://cakedc.com)
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
@@ -15,8 +15,26 @@ App::uses('RecaptchaBehavior', 'Recaptcha.Model/Behavior');
  * Slugged Article
  */
 class RecaptchaArticle extends CakeTestModel {
+
+/**
+ * Class name.
+ *
+ * @var string
+ */
 	public $name = 'RecaptchaArticle';
+
+/**
+ * An array of names of behaviors to load.
+ *
+ * @var array
+ */
 	public $actsAs = array('Recaptcha.Recaptcha');
+
+/**
+ * Use table.
+ *
+ * @var mixed False or table name
+ */
 	public $useTable = 'articles';
 }
 
