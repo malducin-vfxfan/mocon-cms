@@ -43,11 +43,11 @@ $config = array(
 		'js_version' => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js',
 	),
 	'Jquery' => array(
-		'version' => 'http://code.jquery.com/jquery-1.10.2.min.js',
+		'version' => 'http://code.jquery.com/jquery-1.11.1.min.js',
 	),
 	'JqueryUi' => array(
-		'version' => 'https://code.jquery.com/ui/1.10.3/jquery-ui.js',
-		'theme' => 'https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css',
+		'version' => 'https://code.jquery.com/ui/1.11.2/jquery-ui.js',
+		'theme' => 'https://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css',
 	),
 	'FontAwesome' => array(
 		'version' => 'https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css',
