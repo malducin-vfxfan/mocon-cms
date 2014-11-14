@@ -64,14 +64,14 @@ a:focus > img.img-thumbnail {
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
-  border-color: #428bca;
+  border-color: #337ab7;
 }
 a:hover > span.fa,
 a:focus > span.fa {
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
-  color: #b9d4ec;
+  color: #a0c4e4;
 }
 .date-created,
 .date-modified,
@@ -98,10 +98,10 @@ a:focus > span.fa {
   min-height: 110px;
 }
 .glyphicon-primary-dark {
-  color: #2a6496;
+  color: #23527c;
 }
 .fa {
-  color: #428bca;
+  color: #337ab7;
 }
 .navbar-brand {
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
