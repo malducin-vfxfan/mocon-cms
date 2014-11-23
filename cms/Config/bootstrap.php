@@ -94,7 +94,8 @@ Cache::config('default', Cache::settings('short'));
  * CakePlugin::load('DebugKit'); //Loads a single plugin named DebugKit
  *
  */
-CakePlugin::load('Recaptcha', array('bootstrap' => true));
+CakePlugin::load('SimpleRecaptcha', array('bootstrap' => true));
+//CakePlugin::load('Recaptcha', array('bootstrap' => true));
 //CakePlugin::load('DebugKit');
 
 /**

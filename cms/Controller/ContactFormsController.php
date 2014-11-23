@@ -33,7 +33,7 @@ class ContactFormsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Recaptcha.Recaptcha' => array('actions' => array('index')));
+	public $components = array('SimpleRecaptcha.SimpleRecaptcha');
 
 /**
  * index method
@@ -46,10 +46,16 @@ class ContactFormsController extends AppController {
 	public function index() {
 		if ($this->request->is('post')) {
 			$this->ContactForm->create();
-			if ($this->ContactForm->save($this->request->data)) {
-				$this->_sendContactEmail($this->ContactForm->id);
-				$this->Session->setFlash('The Contact Form message has been sent.', 'Flash/success');
-				return $this->redirect(array('controller' => 'pages', 'action' => 'index'));
+
+			$result = $this->SimpleRecaptcha->verify($this->request->data['g-recaptcha-response']);
+			if ($result['success'] === true) {
+				if ($this->ContactForm->save($this->request->data)) {
+					$this->_sendContactEmail($this->ContactForm->id);
+					$this->Session->setFlash('The Contact Form message has been sent.', 'Flash/success');
+					return $this->redirect(array('controller' => 'pages', 'action' => 'index'));
+				} else {
+					$this->Session->setFlash('The Contact Form message could not be sent. Please, try again.', 'Flash/error');
+				}
 			} else {
 				$this->Session->setFlash('The Contact Form message could not be sent. Please, try again.', 'Flash/error');
 			}
