@@ -19,19 +19,72 @@
  * @property-read array
  */
 class UploadComponent extends Component {
+/**
+ * uploadFile method
+ *
+ * Uploads an file to the given folder, uses the original image
+ * name if none is specified. It also check to see that the file
+ * uploaded is of the correct type specified in the $options array.
+ *
+ * Options:
+ *
+ * - base_dir base directory for the folder where to store the files,
+ *   defaults to the webroot. Could be set to something like TMP to
+ *   store outside the webroot.
+ * - files_types array of permitted MIME types.
+ * - create_thumb a boolean to specify if we want to create a
+ *   thumbnail image.
+ * - twidth is the thumbnail width in pixels.
+ * - theight is the thumbnail height in pixels.
+ *
+ * @param $foder string
+ * @param $data array
+ * @param $file_name string
+ * @param $options array
+ * @return boolean
+ */
+	public function uploadFile($folder = null, $data = null, $file_name = null, $options = array()) {
+		$result = false;
+		$typeOK = false;
 
-/**
- * Permitted image types.
- *
- * @var array
- */
-	private $permitted_images = array('image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png', 'image/svg+xml', 'image/gif');
-/**
- * Permitted file types.
- *
- * @var array
- */
-	private $permitted_files = array('application/pdf');
+		$default = array(
+			'base_dir' => WWW_ROOT,
+			'file_types' => array(),
+			'create_thumb' => false,
+			'twidth' => 200,
+			'theight' => 200,
+			'thumbs_folder' => true,
+			'only_thumbnail' => false,
+		);
+
+		$options = array_merge($default, $options);
+
+		// if no file name is given use uploaded file name
+		if (empty($file_name)) {
+			$file_name = $data['name'];
+		}
+
+		// check file was uploaded
+		if ($data['error'] === UPLOAD_ERR_OK) {
+			$typeOk = $this->checkTypes($data['type'], $options['file_types']);
+
+			// file type allowed
+			if ($typeOk) {
+				if ($options['create_thumb']) {
+					$this->createThumbnail($folder, $data, $file_name, $options);
+				}
+
+				if (empty($options['only_thumbnail'])) {
+					$result = move_uploaded_file($data['tmp_name'], $options['base_dir'].$folder.DS.$file_name);
+				}
+			} elseif ($data['error'] === UPLOAD_ERR_NO_FILE) {
+				// no file to upload
+				$result = true;
+			}
+		}
+
+		return $result;
+	}
 
 /**
  * convertFilenameToId method
@@ -48,220 +101,116 @@ class UploadComponent extends Component {
 	}
 
 /**
- * uploadImageThumb method
- *
- * Uploads an image to the given folder, Uses the original image
- * name if none is specified. It also check to see that the file
- * uploaded is of the correct type specified in the $permitted_images
- * array.
- *
- * Several options can be specified:
- *
- * - create_thumb if true, create a thumbnail of the image, to be saved
- *   in a thumbnails folde specified in the $folder parameter. Default
- *   is false.
- * - twidth is the thumbnail maximum width, default 100px.
- * - theight is the thumbnail maximum height, default 100px.
- * - base_dir base directory for the folder where to store  the images,
- *   defaults to the webroot. Could be set to something like TMP to
- *   store outside the webroot.
- *
- * @param $folder string
- * @param $data array
- * @param $imagename string
- * @param array $options Array of options to use.
- * @return boolean
- */
-	public function uploadImageThumb($folder = null, $data = null, $image_name = null, $options = array()) {
-		$result = false;
-		$typeOK = false;
-
-		$default = array(
-			'create_thumb' => false,
-			'twidth' => 100,
-			'theight' => 100,
-			'base_dir' => WWW_ROOT
-		);
-
-		$options = array_merge($default, $options);
-
-		// if no image name given use uploaded file name
-		if (!$image_name)
-			$image_name = $data['name'];
-
-		// check file was uploaded
-		if ($data['error'] == UPLOAD_ERR_OK) {
-			$typeOK = $this->_checkTypes($data['type']);
-
-			if ($typeOK) {
-				//if we need to create a thumbnail
-				if ($options['create_thumb']) {
-					// Set initial maximum height and width
-					$width = $options['twidth'];
-					$height = $options['theight'];
-
-					// Get original dimensions
-					list($width_orig, $height_orig) = getimagesize($data['tmp_name']);
-
-					$ratio_orig = $width_orig / $height_orig;
-
-					if ($options['twidth'] / $options['theight'] > $ratio_orig) {
-						$width = $options['theight'] * $ratio_orig;
-					} else {
-						$height = $options['twidth'] / $ratio_orig;
-					}
-					// thumbnail identifier
-					$thumb = imagecreatetruecolor($width, $height);
-
-					// Create image identifier of original upload
-					switch ($data['type']) {
-						case 'image/jpg':
-						case 'image/jpeg':
-						case 'image/pjpeg':
-							$image_orig = imagecreatefromjpeg($data['tmp_name']);
-							break;
-						case 'image/png':
-						case 'image/x-png':
-							$image_orig = imagecreatefrompng($data['tmp_name']);
-							break;
-						case 'image/gif':
-							$image_orig = imagecreatefromgif($data['tmp_name']);
-							break;
-					}
-
-					// resample original to create thumbnail
-					imagecopyresampled($thumb, $image_orig, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
-
-                    // copy thumbnail
-					switch ($data['type']) {
-						case 'image/jpg':
-						case 'image/jpeg':
-						case 'image/pjpeg':
-							imagejpeg($thumb, $options['base_dir'].$folder.DS.'thumbnails'.DS.$image_name, 100);
-							break;
-						case 'image/png':
-						case 'image/x-png':
-							imagepng($thumb, $options['base_dir'].$folder.DS.'thumbnails'.DS.$image_name, 0);
-							break;
-						case 'image/gif':
-							imagegif($thumb, $options['base_dir'].$folder.DS.'thumbnails'.DS.$image_name);
-							break;
-					}
-
-					// destroy thumbnail, no longer needed
-					imagedestroy($thumb);
-				}
-
-				// move uploaded image
-				if ($image_name) {
-					$result = move_uploaded_file($data['tmp_name'], $options['base_dir'].$folder.DS.$image_name);
-				}
-			}
-		} elseif ($data['error'] == UPLOAD_ERR_NO_FILE) {
-			$result = true;
-		}
-		return $result;
-	}
-
-/**
- * uploadFile method
- *
- * Uploads an file to the given folder, Uses the original image
- * name if none is specified. It also check to see that the file
- * uploaded is of the correct type specified in the $permitted_files
- * array.
- *
- * One option can be specified:
- *
- * - base_dir base directory for the folder where to store the files,
- *   defaults to the webroot. Could be set to something like TMP to
- *   store outside the webroot.
- *
- * @param $foder string
- * @param $data array
- * @param $filename string
- * @return boolean
- */
-	public function uploadFile($folder = null, $data = null, $file_name = null, $options = array()) {
-		$result = false;
-		$typeOK = false;
-
-		$default = array(
-			'base_dir' => WWW_ROOT
-		);
-
-		$options = array_merge($default, $options);
-
-		// if no image name given use uploaded file name
-		if (!$file_name)
-			$file_name = $data['name'];
-
-		// check file was uploaded
-		if ($data['error'] == UPLOAD_ERR_OK) {
-			$typeOK = $this->_checkTypes($data['type'], array('file_types' => 'files'));
-
-			if ($typeOK) {
-				switch ($data['error']) {
-					case UPLOAD_ERR_OK:
-						// file uploaded correctly
-						if ($file_name) {
-							$result = move_uploaded_file($data['tmp_name'], $options['base_dir'].$folder.DS.$file_name);
-						} else {
-							$result = move_uploaded_file($data['tmp_name'], $options['base_dir'].$folder.DS.$data['name']);
-						}
-						break;
-					case UPLOAD_ERR_NO_FILE:
-						// no file to upload
-						$result = true;
-						break;
-				}
-			}
-		}
-
-		return $result;
-	}
-
-/**
- * _checkTypes method
+ * checkTypes method
  *
  * Check to see if the uploaded file is of a permitted MIME type. It
- * includes the option to specify what type of file to check: images
- * or general files and defaults to images.
+ * includes the option to specify what type of file to check.
+ * If no type is given, it defaults to images.
  *
  * @param $form_data_type array
  * @param $file_type array
  * @return boolean
  */
-	private function _checkTypes($form_data_type = null, $options = array()) {
+	private function checkTypes($form_data_type = null, $file_types = array()) {
 		$type_ok = false;
 
-		$default = array(
-			'file_types' => 'images',
-		);
-
-		$options = array_merge($default, $options);
-
-		if (empty($form_data_type))
-			return $type_ok;
-
-		switch ($options['file_types']) {
-			case 'files':
-				foreach ($this->permitted_files as $type) {
-					if ($type == $form_data_type) {
-						$type_ok = true;
-						break;
-					}
-				}
-				break;
-			case 'images':
-			default:
-				foreach ($this->permitted_images as $type) {
-					if ($type == $form_data_type) {
-						$type_ok = true;
-						break;
-					}
-				}
+		if (empty($file_types)) {
+			$file_types = array('image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png', 'image/svg+xml', 'image/gif');
 		}
+
+		if (empty($form_data_type)) {
+			return $type_ok;
+		}
+
+		foreach ($file_types as $type) {
+			if ($type === $form_data_type) {
+				$type_ok = true;
+				break;
+			}
+		}
+
 		return $type_ok;
+	}
+
+/**
+ * createThumbnail method
+ *
+ * Create a thumbail when we upload an image and place in the
+ * thumbnails directory where the original image is stored.
+ *
+ * @param $foder string
+ * @param $data array
+ * @param $file_name string
+ * @param $options array
+ * @return boolean
+ */
+	private function createThumbnail($folder = null, $data = null, $file_name = null, $options = array()) {
+		if (empty($folder) || empty($data)) {
+			return false;
+		}
+
+		// Set initial maximum height and width
+		$width = $options['twidth'];
+		$height = $options['theight'];
+
+		// Get original dimensions
+		list($width_orig, $height_orig) = getimagesize($data['tmp_name']);
+
+		$ratio_orig = $width_orig / $height_orig;
+
+		if ($options['twidth'] / $options['theight'] > $ratio_orig) {
+			$width = $options['theight'] * $ratio_orig;
+		} else {
+			$height = $options['twidth'] / $ratio_orig;
+		}
+		// thumbnail identifier
+		$thumb = imagecreatetruecolor($width, $height);
+
+		// Create image identifier of original upload
+		switch ($data['type']) {
+			case 'image/jpg':
+			case 'image/jpeg':
+			case 'image/pjpeg':
+				$image_orig = imagecreatefromjpeg($data['tmp_name']);
+				break;
+			case 'image/png':
+			case 'image/x-png':
+				$image_orig = imagecreatefrompng($data['tmp_name']);
+				break;
+			case 'image/gif':
+				$image_orig = imagecreatefromgif($data['tmp_name']);
+				break;
+		}
+
+		// resample original to create thumbnail
+		imagecopyresampled($thumb, $image_orig, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
+
+		// check to see if we should use thumbnails folder
+		if ($options['thumbs_folder']) {
+			$location = $folder.DS.'thumbnails';
+		} else {
+			$location = $folder;
+		}
+
+		// copy thumbnail
+		switch ($data['type']) {
+			case 'image/jpg':
+			case 'image/jpeg':
+			case 'image/pjpeg':
+				imagejpeg($thumb, $options['base_dir'].$location.DS.$file_name, 100);
+				break;
+			case 'image/png':
+			case 'image/x-png':
+				imagepng($thumb, $options['base_dir'].$location.DS.$file_name, 0);
+				break;
+			case 'image/gif':
+				imagegif($thumb, $options['base_dir'].$location.DS.$file_name);
+				break;
+		}
+
+		// destroy thumbnail, no longer needed
+		imagedestroy($thumb);
+
+		return true;
 	}
 }
