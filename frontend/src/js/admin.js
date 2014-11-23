@@ -20,32 +20,30 @@ $(document).ready(function() {
 	 * Handler to add Page Sections in add Page form. Allows to input
 	 * several sections on initial Page creation.
 	 */
-	$('#addPageSection').click(function() {
-		var num = $('.page-section-title').length; // how many page sections based on title field
+	$('#add-page-section').click(function() {
+		var num = $('.page-section').length;
+		var namePrefix = 'data[PageSection]';
+		var idPrefix = 'PageSection';
+		var idPageSection = 'page-section-';
 
-		// create the new elements via clone(), and manipulate it's ID using newNum value
-		var newElemTitle = $('#PageSection0Title').clone().attr('id', 'PageSection' + num + 'Title').attr('name', 'data[PageSection][' + num + '][title]');
-		var newElemSection = $('#PageSection0Section').clone().attr('id', 'PageSection' + num + 'Section').attr('name', 'data[PageSection][' + num + '][section]');
-		var newElemContent = $('#PageSection0Content').clone().attr('id', 'PageSection' + num + 'Content').attr('name', 'data[PageSection][' + num + '][content]');
+		var newPageSection = $('#page-section-0').clone();
 
-		// insert the new elements after the last "duplicatable" input field
-		$('fieldset#extraPageSections').append('<div class="input text">');
-		$('fieldset#extraPageSections').append('<label class="page-section-title" for="PageSection' + num + 'Title">Section Title</label>');
-		$('fieldset#extraPageSections').append(newElemTitle);
-		$('fieldset#extraPageSections').append('</div>');
-		$('fieldset#extraPageSections').append('<div class="input number">');
-		$('fieldset#extraPageSections').append('<label for="PageSection' + num + 'Section">Section</label>');
-		$('fieldset#extraPageSections').append(newElemSection);
-		$('fieldset#extraPageSections').append('</div>');
-		$('fieldset#extraPageSections').append('<label for="PageSection' + num + 'Content">Content</label>');
-		$('fieldset#extraPageSections').append('<div class="input textarea">');
-		$('fieldset#extraPageSections').append(newElemContent);
-		$('fieldset#extraPageSections').append('</div>');
-		$('fieldset#extraPageSections').append('<hr>');
+		$(newPageSection).attr('id', idPageSection + num);
 
-		// can only add 4 more page sections
-		if (num == 5)  $('#addPageSection').attr('disabled','disabled');
+		$(newPageSection).find('label[for=PageSection0Title]').attr('for', idPrefix + num + 'Title');
+		$(newPageSection).find('#PageSection0Title').attr('name', namePrefix + '[' + num + ']' + '[title]').attr('id', idPrefix + num + 'Title');
 
+		$(newPageSection).find('label[for=PageSection0Section]').attr('for', idPrefix + num + 'Section');
+		$(newPageSection).find('#PageSection0Section').attr('name', namePrefix + '[' + num + ']' + '[section]').attr('id', idPrefix + num + 'Section');
+
+		$(newPageSection).find('label[for=PageSection0Content]').attr('for', idPrefix + num + 'Content');
+		$(newPageSection).find('#PageSection0Content').attr('name', namePrefix + '[' + num + ']' + '[content]').attr('id', idPrefix + num + 'Content');
+
+		$('div#extra-page-sections').append(newPageSection);
+		$('div#extra-page-sections').append('<hr>');
+
+		// can only add 5 more page sections
+		if (num === 5)  $('#add-page-section').attr('disabled','disabled');
 	});
 
 	/**

@@ -17,7 +17,7 @@ $this->assign('formTitle', 'Add a Page');
 
 $this->start('actions');
 ?>
-			<li><?php echo $this->Html->link('Add Page Section to Form', '#', array('id' => 'addPageSection')); ?></li>
+
 			<li><?php echo $this->Html->link('List Pages', array('action' => 'admin_index')); ?></li>
 <?php
 $this->end();
@@ -46,12 +46,18 @@ $this->end();
 					echo $this->Form->input('Page.title', array('label' => 'Page Title'));
 					echo $this->Form->input('Page.published', array('div' => 'checkbox', 'class' => 'checkbox', 'label' => false, 'before' => '<label>', 'after' => 'Published</label>'));
 					echo $this->Form->input('Page.main', array('div' => 'checkbox', 'class' => 'checkbox', 'label' => false, 'before' => '<label>', 'after' => 'Main</label>'));
+				?>
+			</fieldset>
+			<fieldset id="page-section-0" class="page-section">
+				<?php
 					echo $this->Form->input('PageSection.0.title', array('label' => array('text' => 'Section Title', 'class' => 'page-section-title')));
 					echo $this->Form->input('PageSection.0.section', array('default' => 0, 'type' => 'number', 'min' => 0));
 					echo $this->Form->input('PageSection.0.content');
 				?>
 			</fieldset>
-			<fieldset id="extraPageSections">
-				<legend>Extra Page Sections</legend>
-			</fieldset>
+			<div id="extra-page-sections">
+				<h3>Extra Page Sections</h3>
+				<button type="button" class="btn btn-default" id="add-page-section">Add Page Section</button>
+				<hr>
+			</div>
 		<?php echo $this->Form->end(array('label' => 'Submit', 'class' => 'btn btn-primary')); ?>
