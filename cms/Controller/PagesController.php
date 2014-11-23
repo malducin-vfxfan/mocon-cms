@@ -215,8 +215,8 @@ class PagesController extends AppController {
 			// save associated data non-atomically since we're not using transactions
 			$result = $this->Page->saveAssociated($this->request->data, array('atomic' => false));
 			if ($result['Page']) {
-				$this->Upload->uploadImageThumb('img'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->data['File']['image']);
-				$this->Upload->uploadFile('files'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->data['File']['document']);
+				$this->Upload->uploadFile('img'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->data['File']['image']);
+				$this->Upload->uploadFile('files'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->data['File']['document'], null, array('file_types' => array('application/pdf')));
 
 				// check page sections
 				$page_sections_ok = true;

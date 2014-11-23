@@ -116,7 +116,7 @@ class PostsController extends AppController {
 				$options = array('conditions' => array('Post.id' => $this->Post->id));
 				$post = $this->Post->find('first', $options);
 				if ($post) {
-					$this->Upload->uploadImageThumb('img'.DS.'posts'.DS.$post['Post']['year'].DS.sprintf("%010d", $this->Post->id), $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Post->id, $this->request->data['File']['image']['name']));
+					$this->Upload->uploadFile('img'.DS.'posts'.DS.$post['Post']['year'].DS.sprintf("%010d", $this->Post->id), $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Post->id, $this->request->data['File']['image']['name']));
 				}
 				$this->Session->setFlash('The Post has been saved.', 'Flash/success');
 				return $this->redirect(array('action' => 'admin_index'));
@@ -143,7 +143,7 @@ class PostsController extends AppController {
 				$options = array('conditions' => array('Post.id' => $this->Post->id));
 				$post = $this->Post->find('first', $options);
 				if ($post) {
-					$this->Upload->uploadImageThumb('img'.DS.'posts'.DS.$post['Post']['year'].DS.sprintf("%010d", $this->Post->id), $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Post->id, $this->request->data['File']['image']['name']));
+					$this->Upload->uploadFile('img'.DS.'posts'.DS.$post['Post']['year'].DS.sprintf("%010d", $this->Post->id), $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Post->id, $this->request->data['File']['image']['name']));
 				}
 				$this->Session->setFlash('The Post has been saved.', 'Flash/success');
 				return $this->redirect(array('action' => 'admin_index'));
