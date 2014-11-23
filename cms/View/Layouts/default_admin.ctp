@@ -30,15 +30,18 @@
 		echo $this->Html->meta(array('name' => 'viewport', 'content' => 'width=device-width, initial-scale=1'));
 		echo $this->fetch('meta');
 
+		if (Configure::read('JqueryUi.theme')) {
+			echo $this->Html->css(Configure::read('JqueryUi.theme'));
+		}
+		if (Configure::read('FontAwesome.version')) {
+			echo $this->Html->css(Configure::read('FontAwesome.version'));
+		}
 		if (Configure::read('Bootstrap.css_version')) {
 			echo $this->Html->css(Configure::read('Bootstrap.css_version'));
 			echo $this->Html->css('skin.min');
 		}
 		else {
 			echo $this->Html->css('project.min');
-		}
-		if (Configure::read('JqueryUi.theme')) {
-			echo $this->Html->css(Configure::read('JqueryUi.theme'));
 		}
 		echo $this->fetch('css');
 
