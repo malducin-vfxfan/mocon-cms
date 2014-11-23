@@ -55,7 +55,7 @@ $config = array(
 	'Google' => array(
 		'Analytics' => array(
 			'trackerCode' => '',
-			'trackerSite' => ''
+			'trackerSite' => 'auto'
 		),
 		'Maps' => array(
 			'key' => '',
