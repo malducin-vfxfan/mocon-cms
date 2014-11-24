@@ -22,7 +22,7 @@ class UploadComponent extends Component {
 /**
  * uploadFile method
  *
- * Uploads an file to the given folder, uses the original image
+ * Uploads a file to the given folder, uses the original file
  * name if none is specified. It also check to see that the file
  * uploaded is of the correct type specified in the $options array.
  *
@@ -37,7 +37,7 @@ class UploadComponent extends Component {
  * - twidth is the thumbnail width in pixels.
  * - theight is the thumbnail height in pixels.
  *
- * @param $foder string
+ * @param $folder string
  * @param $data array
  * @param $file_name string
  * @param $options array
@@ -84,6 +84,26 @@ class UploadComponent extends Component {
 		}
 
 		return $result;
+	}
+
+/**
+ * uploadFiles method
+ *
+ * Uploads several files to the given folder. This method just loops
+ * over the files array and calls the uploadFile method, passing the
+ * exact same parameters.
+ *
+ * @param $folder string
+ * @param $data array
+ * @param $file_name string
+ * @param $options array
+ * @return boolean
+ */
+
+	public function uploadFiles($folder = null, $data = null, $file_name = null, $options = array()) {
+		foreach ($data as $file) {
+			$this->uploadFile($folder, $file, $file_name, $options);
+		}
 	}
 
 /**
