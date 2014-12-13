@@ -55,18 +55,18 @@ class PagesController extends AppController {
  	public function beforeFilter() {
  		parent::beforeFilter();
 
- 		if ($this->request->action === 'admin_add') {
+ 		if ($this->request->action === 'admin_add' || $this->request->action === 'admin_edit') {
  			$unlocked_add_fields = array();
  			for ($i = 1; $i < 6; $i++) {
  				$unlocked_add_fields[] = 'PageSection.'.$i.'.title';
  				$unlocked_add_fields[] = 'PageSection.'.$i.'.section';
  				$unlocked_add_fields[] = 'PageSection.'.$i.'.content';
  			}
-			$this->Security->unlockedFields = $unlocked_add_fields;
-		}
 
-		if ($this->request->action === 'admin_edit') {
-			$this->Security->unlockedFields = array('File.image', 'File.document');
+ 			$unlocked_add_fields[] = 'File.image';
+ 			$unlocked_add_fields[] = 'File.document';
+
+			$this->Security->unlockedFields = $unlocked_add_fields;
 		}
  	}
 
@@ -182,6 +182,9 @@ class PagesController extends AppController {
 			// page sections
 			$result = $this->Page->saveAssociated($this->request->data, array('atomic' => false, 'validate' => true));
 			if ($result['Page']) {
+				$this->Upload->uploadFiles('img'.DS.'pages'.DS.sprintf("%010d", $this->Page->id), $this->request->data['File']['image']);
+				$this->Upload->uploadFiles('files'.DS.'pages'.DS.sprintf("%010d", $this->Page->id), $this->request->data['File']['document'], null, array('file_types' => array('application/pdf')));
+
 				// check page sections
 				$page_sections_ok = true;
 				foreach ($result['PageSection'] as $result_page_section) {

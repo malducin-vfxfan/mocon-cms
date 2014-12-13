@@ -17,7 +17,6 @@ $this->assign('formTitle', 'Add a Page');
 
 $this->start('actions');
 ?>
-
 			<li><?php echo $this->Html->link('List Pages', array('action' => 'admin_index')); ?></li>
 <?php
 $this->end();
@@ -31,6 +30,7 @@ $this->end();
 ?>
 		<?php
 			echo $this->Form->create('Page', array(
+				'type' => 'file',
 				'inputDefaults' => array(
 					'div' => array('class' => 'form-group'),
 					'class' => 'form-control',
@@ -46,6 +46,8 @@ $this->end();
 					echo $this->Form->input('Page.title', array('label' => 'Page Title'));
 					echo $this->Form->input('Page.published', array('div' => 'checkbox', 'class' => 'checkbox', 'label' => false, 'before' => '<label>', 'after' => 'Published</label>'));
 					echo $this->Form->input('Page.main', array('div' => 'checkbox', 'class' => 'checkbox', 'label' => false, 'before' => '<label>', 'after' => 'Main</label>'));
+					echo $this->Form->input('File.image.', array('type' => 'file', 'multiple', 'label' => 'Images'));
+					echo $this->Form->input('File.document.', array('type' => 'file', 'multiple', 'label' => 'Documents'));
 				?>
 			</fieldset>
 			<fieldset id="page-section-0" class="page-section">
