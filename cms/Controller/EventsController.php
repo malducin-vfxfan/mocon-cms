@@ -136,7 +136,7 @@ class EventsController extends AppController {
 				$options = array('conditions' => array('Event.id' => $this->Event->id));
 				$event = $this->Event->find('first', $options);
 				if ($event) {
-					$this->Upload->uploadFile('img'.DS.'events'.DS.$event['Event']['year'].DS.sprintf("%010d", $this->Event->id), $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->request->data['File']['image']['name']));
+					$this->Upload->uploadFile('img'.DS.'events'.DS.$event['Event']['year'].DS.sprintf("%010d", $this->Event->id), $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->request->data['File']['image']['name']), array('thumbs_folder' => false, 'responsive_images' => true));
 				}
 				$this->Session->setFlash('The Event has been saved.', 'Flash/success');
 				return $this->redirect(array('action' => 'admin_index'));
@@ -163,7 +163,7 @@ class EventsController extends AppController {
 				$options = array('conditions' => array('Event.id' => $this->Event->id));
 				$event = $this->Event->find('first', $options);
 				if ($event) {
-					$this->Upload->uploadFile('img'.DS.'events'.DS.$event['Event']['year'].DS.sprintf("%010d", $this->Event->id), $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->request->data['File']['image']['name']));
+					$this->Upload->uploadFile('img'.DS.'events'.DS.$event['Event']['year'].DS.sprintf("%010d", $this->Event->id), $this->request->data['File']['image'], $this->Upload->convertFilenameToId($this->Event->id, $this->request->data['File']['image']['name']), array('thumbs_folder' => false, 'responsive_images' => true));
 				}
 				$this->Session->setFlash('The Event has been saved.', 'Flash/success');
 				return $this->redirect(array('action' => 'admin_index'));
