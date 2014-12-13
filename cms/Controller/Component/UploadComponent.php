@@ -205,9 +205,9 @@ class UploadComponent extends Component {
 			$location = $folder;
 		}
 
-		$thumb = new $this->ResizeImage($data['tmp_name'], $data['type']);
-		$thumb->resizeImage($options['twidth'],  $options['theight'], 'landscape');
-		$thumb->saveImage($options['base_dir'].$location.DS.$file_name, $data['type']);
+		$this->ResizeImage->openImage($data['tmp_name'], $data['type']);
+		$this->ResizeImage->resizeImage($options['twidth'],  $options['theight'], 'landscape');
+		$this->ResizeImage->saveImage($options['base_dir'].$location.DS.$file_name, $data['type']);
 
 		return true;
 	}
@@ -236,8 +236,8 @@ class UploadComponent extends Component {
 			$location = $folder;
 		}
 
-		$thumb = new $this->ResizeImage($data['tmp_name'], $data['type']);
-		$thumb->responsiveImages($options['base_dir'].$location.DS.$file_name, $data['type'], 100, $options['sizes']);
+		$this->ResizeImage->openImage($data['tmp_name'], $data['type']);
+		$this->ResizeImage->responsiveImages($options['base_dir'].$location.DS.$file_name, $data['type'], 100, $options['sizes']);
 
 		return true;
 	}
