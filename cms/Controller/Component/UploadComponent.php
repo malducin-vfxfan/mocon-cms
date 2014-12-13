@@ -19,6 +19,14 @@
  * @property-read array
  */
 class UploadComponent extends Component {
+
+/**
+ * Components
+ *
+ * @var array
+ */
+	public $components = array('ResizeImage');
+
 /**
  * uploadFile method
  *
@@ -36,6 +44,10 @@ class UploadComponent extends Component {
  *   thumbnail image.
  * - twidth is the thumbnail width in pixels.
  * - theight is the thumbnail height in pixels.
+ * - thumbs_folder if we should use the thumbnails folder
+ * - only_thumbnail if we should only create a thumbnail
+ * - responsive_images if we should create responsive images
+ * - sizes array of reponsive images widths
  *
  * @param $folder string
  * @param $data array
@@ -55,6 +67,8 @@ class UploadComponent extends Component {
 			'theight' => 200,
 			'thumbs_folder' => true,
 			'only_thumbnail' => false,
+			'responsive_images' => false,
+			'sizes' => array('xs' => 100, 'sm' => 200, 'md' => 400, 'ml' => 600, 'lg' => 800, 'lm' => 1000, 'vl' => 1200, 'xl' => 1600),
 		);
 
 		$options = array_merge($default, $options);
@@ -72,6 +86,10 @@ class UploadComponent extends Component {
 			if ($typeOk) {
 				if ($options['create_thumb']) {
 					$this->createThumbnail($folder, $data, $file_name, $options);
+				}
+
+				if ($options['responsive_images']) {
+					$this->createResponsiveImages($folder, $data, $file_name, $options);
 				}
 
 				if (empty($options['only_thumbnail'])) {
@@ -180,41 +198,36 @@ class UploadComponent extends Component {
 			return false;
 		}
 
-		// Set initial maximum height and width
-		$width = $options['twidth'];
-		$height = $options['theight'];
-
-		// Get original dimensions
-		list($width_orig, $height_orig) = getimagesize($data['tmp_name']);
-
-		$ratio_orig = $width_orig / $height_orig;
-
-		if ($options['twidth'] / $options['theight'] > $ratio_orig) {
-			$width = $options['theight'] * $ratio_orig;
+		// check to see if we should use thumbnails folder
+		if ($options['thumbs_folder']) {
+			$location = $folder.DS.'thumbnails';
 		} else {
-			$height = $options['twidth'] / $ratio_orig;
-		}
-		// thumbnail identifier
-		$thumb = imagecreatetruecolor($width, $height);
-
-		// Create image identifier of original upload
-		switch ($data['type']) {
-			case 'image/jpg':
-			case 'image/jpeg':
-			case 'image/pjpeg':
-				$image_orig = imagecreatefromjpeg($data['tmp_name']);
-				break;
-			case 'image/png':
-			case 'image/x-png':
-				$image_orig = imagecreatefrompng($data['tmp_name']);
-				break;
-			case 'image/gif':
-				$image_orig = imagecreatefromgif($data['tmp_name']);
-				break;
+			$location = $folder;
 		}
 
-		// resample original to create thumbnail
-		imagecopyresampled($thumb, $image_orig, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
+		$thumb = new $this->ResizeImage($data['tmp_name'], $data['type']);
+		$thumb->resizeImage($options['twidth'],  $options['theight'], 'landscape');
+		$thumb->saveImage($options['base_dir'].$location.DS.$file_name, $data['type']);
+
+		return true;
+	}
+
+/**
+ * createResponsiveImages method
+ *
+ * Create a thumbail when we upload an image and place in the
+ * thumbnails directory where the original image is stored.
+ *
+ * @param $foder string
+ * @param $data array
+ * @param $file_name string
+ * @param $options array
+ * @return boolean
+ */
+	private function createResponsiveImages($folder = null, $data = null, $file_name = null, $options = array()) {
+		if (empty($folder) || empty($data)) {
+			return false;
+		}
 
 		// check to see if we should use thumbnails folder
 		if ($options['thumbs_folder']) {
@@ -223,24 +236,8 @@ class UploadComponent extends Component {
 			$location = $folder;
 		}
 
-		// copy thumbnail
-		switch ($data['type']) {
-			case 'image/jpg':
-			case 'image/jpeg':
-			case 'image/pjpeg':
-				imagejpeg($thumb, $options['base_dir'].$location.DS.$file_name, 100);
-				break;
-			case 'image/png':
-			case 'image/x-png':
-				imagepng($thumb, $options['base_dir'].$location.DS.$file_name, 0);
-				break;
-			case 'image/gif':
-				imagegif($thumb, $options['base_dir'].$location.DS.$file_name);
-				break;
-		}
-
-		// destroy thumbnail, no longer needed
-		imagedestroy($thumb);
+		$thumb = new $this->ResizeImage($data['tmp_name'], $data['type']);
+		$thumb->responsiveImages($options['base_dir'].$location.DS.$file_name, $data['type'], 100, $options['sizes']);
 
 		return true;
 	}
