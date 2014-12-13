@@ -117,7 +117,18 @@ class UploadComponent extends Component {
  * @return string
  */
 	public function convertFilenameToId($id = null, $filename = null) {
-		return sprintf("%010d", $id).substr($filename, strrpos($filename, '.'));
+		$path_parts = pathinfo($filename);
+		$newFilename = sprintf("%010d", $id);
+
+		if (strrpos($path_parts['filename'], '.') !== false) {
+			$newFilename = $newFilename.substr($path_parts['filename'], strrpos($path_parts['filename'], '.'));
+		}
+
+		if (empty($path_parts['extension'])) {
+			return $newFilename;
+		} else {
+			return $newFilename.'.'.$path_parts['extension'];
+		}
 	}
 
 /**

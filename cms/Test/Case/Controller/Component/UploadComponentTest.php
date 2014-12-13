@@ -39,9 +39,23 @@ class UploadComponentTest extends CakeTestCase {
 		// Test our convertFilenameToId method with different parameters
 		$this->assertEquals('0000000001.jpg', $this->UploadComponent->convertFilenameToId('1', 'star-wars.jpg'));
 
-		$this->assertEquals('0000000001.jpg', $this->UploadComponent->convertFilenameToId('1', 'star-wars.md.jpg'));
+		$this->assertEquals('0000000001.md.jpg', $this->UploadComponent->convertFilenameToId('1', 'star-wars.md.jpg'));
+
+		$this->assertEquals('0000000001.md.jpg', $this->UploadComponent->convertFilenameToId('1', 'star-wars.many.other.extensions.md.jpg'));
+
+		$this->assertEquals('0000000001.', $this->UploadComponent->convertFilenameToId('1', 'star-wars.'));
+
+		$this->assertEquals('0000000001', $this->UploadComponent->convertFilenameToId('1', 'star-wars'));
 
 		$this->assertEquals('0000000000.jpg', $this->UploadComponent->convertFilenameToId('', 'star-wars.jpg'));
+
+		$this->assertEquals('0000000000.md.jpg', $this->UploadComponent->convertFilenameToId('', 'star-wars.md.jpg'));
+
+		$this->assertEquals('0000000000.md.jpg', $this->UploadComponent->convertFilenameToId('', 'star-wars.many.other.extensions.md.jpg'));
+
+		$this->assertEquals('0000000000.', $this->UploadComponent->convertFilenameToId('', 'star-wars.'));
+
+		$this->assertEquals('0000000000', $this->UploadComponent->convertFilenameToId('', 'star-wars'));
 
 		$this->assertEquals('0000000001', $this->UploadComponent->convertFilenameToId('1', ''));
 
