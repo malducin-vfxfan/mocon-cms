@@ -54,7 +54,8 @@ class PagesController extends AppController {
  */
  	public function beforeFilter() {
  		parent::beforeFilter();
- 		if ($this->request->action == 'admin_add') {
+
+ 		if ($this->request->action === 'admin_add') {
  			$unlocked_add_fields = array();
  			for ($i = 1; $i < 6; $i++) {
  				$unlocked_add_fields[] = 'PageSection.'.$i.'.title';
@@ -62,6 +63,10 @@ class PagesController extends AppController {
  				$unlocked_add_fields[] = 'PageSection.'.$i.'.content';
  			}
 			$this->Security->unlockedFields = $unlocked_add_fields;
+		}
+
+		if ($this->request->action === 'admin_edit') {
+			$this->Security->unlockedFields = array('File.image', 'File.document');
 		}
  	}
 
@@ -215,8 +220,8 @@ class PagesController extends AppController {
 			// save associated data non-atomically since we're not using transactions
 			$result = $this->Page->saveAssociated($this->request->data, array('atomic' => false));
 			if ($result['Page']) {
-				$this->Upload->uploadFile('img'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->data['File']['image']);
-				$this->Upload->uploadFile('files'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->data['File']['document'], null, array('file_types' => array('application/pdf')));
+				$this->Upload->uploadFiles('img'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->data['File']['image']);
+				$this->Upload->uploadFiles('files'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->data['File']['document'], null, array('file_types' => array('application/pdf')));
 
 				// check page sections
 				$page_sections_ok = true;
