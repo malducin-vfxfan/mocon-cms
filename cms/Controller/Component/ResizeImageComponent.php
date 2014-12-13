@@ -28,29 +28,13 @@ class ResizeImageComponent extends Component {
 	private $imageResized;
 
 /**
- * Constructor method
- *
- * @param $file string Complete file path
- * @param $fileType string MIME type of file
- * @return void
- */
-	public function __construct($file, $fileType)
-	{
-		// Open up the file
-		$this->image = $this->openImage($file, $fileType);
-
-		// Get width and height
-		list($this->width, $this->height) = getimagesize($file);
-	}
-
-/**
  * openImage method
  *
  * @param $file string Complete file path
  * @param $fileType string MIME type of file
  * @return mixed Image resource or boolean
  */
-	private function openImage($file = null, $fileType = null)
+	public function openImage($file = null, $fileType = null)
 	{
 		if (empty($file)) {
 			return false;
@@ -74,7 +58,9 @@ class ResizeImageComponent extends Component {
 				$img = false;
 				break;
 		}
-		return $img;
+
+		$this->image = $img;
+		list($this->width, $this->height) = getimagesize($file);
 	}
 
 /**
