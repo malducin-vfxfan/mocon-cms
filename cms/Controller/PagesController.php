@@ -56,17 +56,17 @@ class PagesController extends AppController {
  		parent::beforeFilter();
 
  		if ($this->request->action === 'admin_add' || $this->request->action === 'admin_edit') {
- 			$unlocked_add_fields = array();
+ 			$unlocked_fields = array();
  			for ($i = 1; $i < 6; $i++) {
- 				$unlocked_add_fields[] = 'PageSection.'.$i.'.title';
- 				$unlocked_add_fields[] = 'PageSection.'.$i.'.section';
- 				$unlocked_add_fields[] = 'PageSection.'.$i.'.content';
+ 				$unlocked_fields[] = 'PageSection.'.$i.'.title';
+ 				$unlocked_fields[] = 'PageSection.'.$i.'.section';
+ 				$unlocked_fields[] = 'PageSection.'.$i.'.content';
  			}
 
- 			$unlocked_add_fields[] = 'File.image';
- 			$unlocked_add_fields[] = 'File.document';
+ 			$unlocked_fields[] = 'File.image';
+ 			$unlocked_fields[] = 'File.document';
 
-			$this->Security->unlockedFields = $unlocked_add_fields;
+			$this->Security->unlockedFields = $unlocked_fields;
 		}
  	}
 
@@ -289,7 +289,6 @@ class PagesController extends AppController {
  * @param string $id
  * @param string $filename
  * @param string $location
- * @param string $redirect_action
  * @return void
  */
 	public function admin_deleteFile($id = null) {
