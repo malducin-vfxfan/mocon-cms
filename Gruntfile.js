@@ -18,8 +18,11 @@ module.exports = function(grunt) {
 
     csslint: {
       options: {
+        force: true,
         'compatible-vendor-prefixes': false,
         'ids': false,
+        'known-properties': false,
+        'box-model': false,
         'adjoining-classes': false
       },
       checkSkin: {
