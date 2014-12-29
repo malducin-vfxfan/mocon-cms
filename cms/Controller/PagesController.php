@@ -324,6 +324,7 @@ class PagesController extends AppController {
 
 		if (empty($id)) {
 			$this->response->statusCode(404);
+			return false;
 		}
 
 		if ($this->request->is(array('post'))) {
@@ -337,6 +338,7 @@ class PagesController extends AppController {
 			}
 
 			$this->response->statusCode(200);
+			return true;
 		}
 	}
 }
