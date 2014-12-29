@@ -58,4 +58,36 @@ $(document).ready(function() {
 
 		$('#MenuLink').val('/pages/view/' + slug);
 	});
+
+	/**
+	 * Handlers for files drag and drop area.
+	 *
+	 * Handlers for drag and dropping files to a div for AJAX upload.
+	 * We prevent the default events and their propagattion and set
+	 * their classes accordingly for visual feedback.
+	 */
+	$('#dropzone-files').on(
+		'dragover',
+		function(e) {
+			$(this).attr('class', 'dropzone drop');
+			e.preventDefault();
+			e.stopPropagation();
+	});
+
+	$('#dropzone-files').on(
+		'dragleave',
+		function(e) {
+			$(this).attr('class', 'dropzone');
+			e.preventDefault();
+			e.stopPropagation();
+	});
+
+	$('#dropzone-files').on(
+		'drop',
+		function(e) {
+			$(this).attr('class', 'dropzone');
+			e.preventDefault();
+			e.stopPropagation();
+	});
+
 });
