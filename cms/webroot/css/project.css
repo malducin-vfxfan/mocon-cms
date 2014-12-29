@@ -6472,3 +6472,14 @@ figcaption,
 .form-error .form-control-feedback {
   color: #a94442;
 }
+.dropzone {
+  height: 200px;
+  border: 2px dashed #ccc;
+  line-height: 200px;
+  color: #ccc;
+  text-align: center;
+}
+.dropzone.drop {
+  border-color: #222;
+  color: #222;
+}

@@ -63,6 +63,10 @@ $this->end();
 				?>
 			</fieldset>
 		<?php echo $this->Form->end(array('label' => 'Submit', 'class' => 'btn btn-primary')); ?>
+		<hr>
+		<h3>Dropzones</h3>
+		<h4>Files</h4>
+		<div class="dropzone" id="dropzone-files"><span class="fa fa-file"></span> Just drag and drop files here</div>
 <?php
 $this->start('relatedContent');
 ?>
