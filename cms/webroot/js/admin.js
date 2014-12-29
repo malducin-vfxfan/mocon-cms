@@ -92,7 +92,7 @@ $(document).ready(function() {
 			if (e.originalEvent.dataTransfer) {
 				if (e.originalEvent.dataTransfer.files.length) {
 					// upload files
-					uploadFiles(e.originalEvent.dataTransfer.files, $(this).data("base"), $(this).data("controller"), $(this).data("id"), $(this).data("upload-type"));
+					uploadFiles(e.originalEvent.dataTransfer.files, $(this).data("base"), $(this).data("controller"), $(this).data("id"), $(this).data("upload-type"), $(this).data("options"));
 				}
 			}
 	});
@@ -106,11 +106,12 @@ $(document).ready(function() {
 	 * and a uploadType (to know if were uploading images of documents).
 	 */
 
-	function uploadFiles(files, base, controller, id, uploadType) {
+	function uploadFiles(files, base, controller, id, uploadType, options) {
 		var formData = new FormData();
 		for (var i = 0; i < files.length; i++) {
 			formData.append("file-" + i, files[i]);
 		}
+		formData.append("options", JSON.stringify(options));
 
 		$.ajax({
 			url: base + '/admin/' + controller + '/ajaxUploadFiles/' + id + '/' + uploadType,
