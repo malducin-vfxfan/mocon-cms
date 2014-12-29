@@ -92,7 +92,7 @@ $(document).ready(function() {
 			if (e.originalEvent.dataTransfer) {
 				if (e.originalEvent.dataTransfer.files.length) {
 					// upload files
-					uploadFiles(e.originalEvent.dataTransfer.files, $(this).data("base"), $(this).data("controller"), $(this).data("id"), $(this).data("file-type"));
+					uploadFiles(e.originalEvent.dataTransfer.files, $(this).data("base"), $(this).data("controller"), $(this).data("id"), $(this).data("upload-type"));
 				}
 			}
 	});
@@ -103,11 +103,27 @@ $(document).ready(function() {
 	 * uploadFiles function will upload a series of files when
 	 * dragged and dropped into a dropzone, via an AJAX call. We
 	 * need a list of file, the base URL, Controller, data record id
-	 * and a fileType (to know if were uploading images of documents).
+	 * and a uploadType (to know if were uploading images of documents).
 	 */
 
-	function uploadFiles(files, base, controller, id, fileType) {
-		console.log(files);
+	function uploadFiles(files, base, controller, id, uploadType) {
+		var formData = new FormData();
+		for (var i = 0; i < files.length; i++) {
+			formData.append("file-" + i, files[i]);
+		}
+
+		$.ajax({
+			url: base + '/admin/' + controller + '/ajaxUploadFiles/' + id + '/' + uploadType,
+			type: 'POST',
+			data: formData,
+			async: false,
+			success: function (data) {
+				location.reload(true);
+			},
+			cache: false,
+			contentType: false,
+			processData: false
+		});
 	}
 
 });

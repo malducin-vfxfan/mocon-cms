@@ -68,6 +68,8 @@ class PagesController extends AppController {
 
 			$this->Security->unlockedFields = $unlocked_fields;
 		}
+
+		$this->Security->unlockedActions = array('admin_ajaxUploadFiles');
  	}
 
 /**
@@ -308,4 +310,30 @@ class PagesController extends AppController {
 		return $this->redirect(array('action' => $this->request->named['redirect_action'], $id));
 	}
 
+/**
+ * admin_ajaxUploadFiles method
+ *
+ * Upload files via AJAX.
+ *
+ * @param string $id
+ * @param string $fileType
+ * @return void
+ */
+	public function admin_ajaxUploadFiles($id = null, $uploadType = 'images') {
+		$this->autoRender = false;
+
+		if (empty($id)) {
+			$this->response->statusCode(404);
+		}
+
+		if ($this->request->is(array('post'))) {
+			switch ($uploadType) {
+				case 'files':
+					$this->Upload->uploadFiles('files'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->form, null, array('file_types' => array('application/pdf')));
+					break;
+			}
+
+			$this->response->statusCode(200);
+		}
+	}
 }
