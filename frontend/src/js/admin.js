@@ -66,7 +66,7 @@ $(document).ready(function() {
 	 * We prevent the default events and their propagattion and set
 	 * their classes accordingly for visual feedback.
 	 */
-	$('#dropzone-files').on(
+	$('#dropzone-files, #dropzone-images').on(
 		'dragover',
 		function(e) {
 			$(this).attr('class', 'dropzone drop');
@@ -74,7 +74,7 @@ $(document).ready(function() {
 			e.stopPropagation();
 	});
 
-	$('#dropzone-files').on(
+	$('#dropzone-files, #dropzone-images').on(
 		'dragleave',
 		function(e) {
 			$(this).attr('class', 'dropzone');
@@ -82,7 +82,7 @@ $(document).ready(function() {
 			e.stopPropagation();
 	});
 
-	$('#dropzone-files').on(
+	$('#dropzone-files, #dropzone-images').on(
 		'drop',
 		function(e) {
 			$(this).attr('class', 'dropzone');

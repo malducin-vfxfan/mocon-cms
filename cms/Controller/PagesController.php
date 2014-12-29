@@ -316,7 +316,7 @@ class PagesController extends AppController {
  * Upload files via AJAX.
  *
  * @param string $id
- * @param string $fileType
+ * @param string $uploadType
  * @return void
  */
 	public function admin_ajaxUploadFiles($id = null, $uploadType = 'images') {
@@ -328,6 +328,9 @@ class PagesController extends AppController {
 
 		if ($this->request->is(array('post'))) {
 			switch ($uploadType) {
+				case 'images':
+					$this->Upload->uploadFiles('img'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->form);
+					break;
 				case 'files':
 					$this->Upload->uploadFiles('files'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->form, null, array('file_types' => array('application/pdf')));
 					break;
