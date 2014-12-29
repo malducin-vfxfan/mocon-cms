@@ -66,7 +66,7 @@ $this->end();
 		<hr>
 		<h3>Dropzones</h3>
 		<h4>Files</h4>
-		<div class="dropzone" id="dropzone-files"><span class="fa fa-file"></span> Just drag and drop files here</div>
+		<div class="dropzone" id="dropzone-files" data-base="<?php echo $this->request->base; ?>" data-controller="<?php echo $this->request->controller; ?>" data-id="<?php echo $this->request->params['pass'][0]; ?>" data-file-type="files"><span class="fa fa-file"></span> Just drag and drop files here</div>
 <?php
 $this->start('relatedContent');
 ?>
