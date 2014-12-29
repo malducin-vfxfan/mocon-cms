@@ -39,6 +39,8 @@ class EventsController extends AppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
 		$this->Auth->allow('archive');
+
+		$this->Security->unlockedActions = array('admin_ajaxUploadFiles');
 	}
 
 /**
@@ -228,6 +230,37 @@ class EventsController extends AppController {
 		}
 
 		return $this->redirect(array('action' => $this->request->named['redirect_action'], $id));
+	}
+
+/**
+ * admin_ajaxUploadFiles method
+ *
+ * Upload files via AJAX.
+ *
+ * @param string $id
+ * @param string $uploadType
+ * @return void
+ */
+	public function admin_ajaxUploadFiles($id = null, $uploadType = 'images') {
+		$this->autoRender = false;
+
+		if (empty($id)) {
+			$this->response->statusCode(404);
+			return false;
+		}
+
+		$options = json_decode($this->request->data['options']);
+
+		if ($this->request->is(array('post'))) {
+			switch ($uploadType) {
+				case 'preview-images':
+					$this->Upload->uploadFiles('img'.DS.'events'.DS.$options->{'year'}.DS.sprintf("%010d", $id), $this->request->form);
+					break;
+			}
+
+			$this->response->statusCode(200);
+			return true;
+		}
 	}
 
 }

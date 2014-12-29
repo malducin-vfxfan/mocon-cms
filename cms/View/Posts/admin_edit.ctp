@@ -54,6 +54,10 @@ $this->end();
 				?>
 			</fieldset>
 		<?php echo $this->Form->end(array('label' => 'Submit', 'class' => 'btn btn-primary')); ?>
+		<h3>Dropzones</h3>
+		<?php $ajaxImagesOptions = htmlspecialchars(json_encode(array('year' => $this->request->data('Post.year')))); ?>
+		<h4>Preview Images (No Conversions)</h4>
+		<div class="dropzone" id="dropzone-preview-images" data-base="<?php echo $this->request->base; ?>" data-controller="<?php echo $this->request->controller; ?>" data-id="<?php echo $this->request->params['pass'][0]; ?>" data-upload-type="preview-images" data-options='<?php echo $ajaxImagesOptions; ?>'><span class="fa fa-file-image-o"></span> Just drag and drop images here</div>
 <?php
 $this->start('relatedContent');
 ?>

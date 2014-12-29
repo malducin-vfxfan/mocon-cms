@@ -33,6 +33,17 @@ class PostsController extends AppController {
 	public $helpers = array('FormatImage', 'Rss');
 
 /**
+ * beforeFilter method
+ *
+ * @return void
+ */
+	public function beforeFilter() {
+		parent::beforeFilter();
+
+		$this->Security->unlockedActions = array('admin_ajaxUploadFiles');
+	}
+
+/**
  * index method
  *
  * @return void
@@ -208,6 +219,37 @@ class PostsController extends AppController {
 		}
 
 		return $this->redirect(array('action' => $this->request->named['redirect_action'], $id));
+	}
+
+/**
+ * admin_ajaxUploadFiles method
+ *
+ * Upload files via AJAX.
+ *
+ * @param string $id
+ * @param string $uploadType
+ * @return void
+ */
+	public function admin_ajaxUploadFiles($id = null, $uploadType = 'images') {
+		$this->autoRender = false;
+
+		if (empty($id)) {
+			$this->response->statusCode(404);
+			return false;
+		}
+
+		$options = json_decode($this->request->data['options']);
+
+		if ($this->request->is(array('post'))) {
+			switch ($uploadType) {
+				case 'preview-images':
+					$this->Upload->uploadFiles('img'.DS.'posts'.DS.$options->{'year'}.DS.sprintf("%010d", $id), $this->request->form);
+					break;
+			}
+
+			$this->response->statusCode(200);
+			return true;
+		}
 	}
 
 }
