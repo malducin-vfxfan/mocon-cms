@@ -22,12 +22,6 @@ $this->start('actions');
 			<li><?php echo $this->Html->link('New Album', array('action' => 'admin_add')); ?> </li>
 <?php
 $this->end();
-
-$this->start('relatedActions');
-?>
-			<li><?php echo $this->Html->link('Upload Album Image', array('action' => 'admin_uploadAlbumImage', $album['Album']['id'])); ?> </li>
-<?php
-$this->end();
 ?>
 			<dt>Id</dt>
 			<dd>

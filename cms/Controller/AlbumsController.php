@@ -202,36 +202,6 @@ class AlbumsController extends AppController {
 	}
 
 /**
- * admin_uploadAlbumImage method
- *
- * Upload one album image and create its thumbnail.
- *
- * @throws NotFoundException
- * @throws MethodNotAllowedException
- * @param string $id
- * @return void
- */
-	public function admin_uploadAlbumImage($id = null) {
-		$this->layout = 'default_admin';
-		if (!$this->Album->exists($id)) {
-			throw new NotFoundException('Invalid Album.');
-		}
-		if ($this->request->is('post')) {
-			$options = array('conditions' => array('Album.id' => $id));
-			$album = $this->Album->find('first', $options);
-			if ($album) {
-				$result = $this->Upload->uploadFile('img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $id), $this->request->data['File']['image'], null, array('create_thumb' => true));
-				if ($result) {
-					$this->Session->setFlash('The Album image has been saved.', 'Flash/success');
-					return $this->redirect(array('action' => 'admin_view', $id));
-				} else {
-					$this->Session->setFlash('The Album image could not be saved. Please, try again.', 'Flash/success');
-				}
-			}
-		}
-	}
-
-/**
  * admin_deleteAlbumImage method
  *
  * Delete one album image and its thumbnail.
