@@ -37,7 +37,7 @@ $this->end();
 					echo $this->Form->input('name');
 					echo $this->Form->input('description');
 					echo $this->Form->input('slug');
-					echo $this->Form->input('File.image', array('type' => 'file'));
+					echo $this->Form->input('File.preview_image', array('type' => 'file'));
 				?>
 			</fieldset>
 		<?php echo $this->Form->end(array('label' => 'Submit', 'class' => 'btn btn-primary')); ?>
