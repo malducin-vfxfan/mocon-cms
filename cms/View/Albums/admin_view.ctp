@@ -70,20 +70,20 @@ $this->start('contentHtml');
 	$last = count($images) - 1;
 	$images_path = 'albums/'.$album['Album']['year'].'/'.sprintf("%010d", $album['Album']['id']).'/';
 	foreach ($images as $image):
-		if ($i%6 == 0):
+		if ($i%4 == 0):
 ?>
 	<div class="row"> <!-- start thumbnails row -->
 <?php
 		endif;
 ?>
-		<div class="col-md-2 text-center">
+		<div class="col-md-3 text-center">
 			<?php echo $this->Html->link($this->Html->image($images_path.'thumbnails/'.$image, array('class' => 'img-thumbnail', 'alt' => $image, 'title' => $image)), '/img/'.$images_path.$image, array('class' => 'popup-link', 'escapeTitle' => false, 'title' => $image)) ;?>
 			<p>
 				<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteAlbumImage', $album['Album']['id'], $image), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $image)); ?>
 			</p>
 		</div>
 <?php
-		if (($i%6 == 5) || ($i == $last)):
+		if (($i%4 == 3) || ($i == $last)):
 ?>
 	</div> <!-- end thumbnails row -->
 <?php
