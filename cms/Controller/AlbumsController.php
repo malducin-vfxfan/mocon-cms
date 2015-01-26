@@ -251,7 +251,7 @@ class AlbumsController extends AppController {
 		if ($result) {
 			$this->Session->setFlash('Album image deleted.', 'Flash/success');
 		} else {
-			$this->Session->setFlash('There was a problem deleting the Album image.', 'Flash/success');
+			$this->Session->setFlash('There was a problem deleting the Album image.', 'Flash/error');
 		}
 
 		if (empty($this->request->named['redirection'])) {
