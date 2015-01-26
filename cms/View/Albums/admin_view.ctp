@@ -59,9 +59,9 @@ $this->end();
 				<?php echo $album['Album']['modified']; ?>
 				&nbsp;
 			</dd>
-			<dt>Image</dt>
+			<dt>Images Folder</dt>
 			<dd>
-				<?php echo $this->FormatImage->idImage('albums/'.$album['Album']['year'].'/'.sprintf("%010d", $album['Album']['id']).'/preview', $album['Album']['id'], array('class' => 'img-thumbnail'), 'albums'); ?>
+				/img/albums/<?php echo $album['Album']['year']; ?>/<?php echo sprintf("%010d", $album['Album']['id']); ?>
 				&nbsp;
 			</dd>
 <?php
@@ -90,5 +90,37 @@ $this->start('contentHtml');
 		endif;
 	$i++;
 	endforeach;
+$this->end();
+
+$this->start('relatedContent');
+?>
+		<h3>Preview Images</h3>
+		<table class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Filename</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+					foreach ($album['Album']['preview_images'] as $size => $images):
+						foreach ($images as $image):
+				?>
+				<tr>
+					<td><?php echo $this->Html->link($image, '/img/albums/'.$album['Album']['year'].'/'.sprintf("%010d", $album['Album']['id']).'/preview/'.$image, array('target' => '_blank')); ?></td>
+					<td>
+						<?php echo $this->Html->link('View', '/img/albums/'.$album['Album']['year'].'/'.sprintf("%010d", $album['Album']['id']).'/preview/'.$image, array('class' => 'btn btn-default', 'target' => '_blank')); ?>
+						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $album['Album']['id'], 'file_name' => $image, 'redirect_action' => 'admin_edit'), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this image?'); ?>
+					</td>
+				</tr>
+				<?php
+						endforeach;
+					endforeach;
+				?>
+			</tbody>
+		</table>
+
+<?php
 $this->end();
 ?>
