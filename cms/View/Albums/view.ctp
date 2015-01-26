@@ -28,7 +28,7 @@ $this->start('extraContent');
 	$last = count($albumImages['AlbumImage']) - 1;
 	$images_path = 'albums/'.$album['Album']['year'].'/'.sprintf("%010d", $album['Album']['id']).'/';
 	foreach ($albumImages['AlbumImage'] as $image):
-		if ($i%6 == 0):
+		if ($i%4 == 0):
 ?>
 <div class="row"> <!-- start thumbnails row -->
 <?php
@@ -38,7 +38,7 @@ $this->start('extraContent');
 		<?php echo $this->Html->link($this->Html->image($images_path.'thumbnails/'.$image, array('class' => 'img-thumbnail', 'alt' => $image, 'title' => $image)), '/img/'.$images_path.$image, array('escapeTitle' => false, 'title' => $image)) ;?>
 	</div>
 <?php
-		if (($i%6 == 5) || ($i == $last)):
+		if (($i%4 == 3) || ($i == $last)):
 ?>
 </div> <!-- end thumbnails row -->
 <div>&nbsp;</div>

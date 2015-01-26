@@ -23,7 +23,7 @@ body {
 @media (min-width: 992px) {
   .album-thumbail-md {
     float: left;
-    width: 16.66666667%;
+    width: 25%;
   }
 }
 .content-preview-image {
