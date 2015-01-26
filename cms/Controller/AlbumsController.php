@@ -33,6 +33,25 @@ class AlbumsController extends AppController {
 	public $components = array('Upload');
 
 /**
+ * beforeFilter method
+ *
+ * Disable fields for multiple image uploads.
+ *
+ * @return void
+ */
+	public function beforeFilter() {
+		parent::beforeFilter();
+
+		if ($this->request->action == 'admin_add' || $this->request->action == 'admin_edit') {
+			$unlocked_fields = array();
+
+			$unlocked_fields[] = 'File.image';
+
+			$this->Security->unlockedFields = $unlocked_fields;
+		}
+	}
+
+/**
  * index method
  *
  * @return void
@@ -114,6 +133,7 @@ class AlbumsController extends AppController {
 				$album = $this->Album->find('first', $options);
 				if ($album) {
 					$this->Upload->uploadFile('img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->Album->id).DS.'preview', $this->request->data['File']['preview_image'], $this->Upload->convertFilenameToId($this->Album->id, $this->request->data['File']['preview_image']['name']), array('thumbs_folder' => false, 'responsive_images' => true));
+					$this->Upload->uploadFiles('img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->Album->id), $this->request->data['File']['image'], null, array('create_thumb' => true));
 				}
 				$this->Session->setFlash('The Album has been saved.', 'Flash/success');
 				return $this->redirect(array('action' => 'admin_index'));
@@ -141,6 +161,7 @@ class AlbumsController extends AppController {
 				$album = $this->Album->find('first', $options);
 				if ($album) {
 					$this->Upload->uploadFile('img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->Album->id).DS.'preview', $this->request->data['File']['preview_image'], $this->Upload->convertFilenameToId($this->Album->id, $this->request->data['File']['preview_image']['name']), array('thumbs_folder' => false, 'responsive_images' => true));
+					$this->Upload->uploadFiles('img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->Album->id), $this->request->data['File']['image'], null, array('create_thumb' => true));
 				}
 				$this->Session->setFlash('The Album has been saved.', 'Flash/success');
 				return $this->redirect(array('action' => 'admin_index'));
