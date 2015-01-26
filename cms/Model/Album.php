@@ -128,6 +128,13 @@ class Album extends AppModel {
 	);
 
 /**
+ * Preview images order
+ *
+ * @var array
+ */
+	public $orderPreviewImages = array('md', 'sm', 'xs', 'ml', 'lg');
+
+/**
  * beforeValidate method
  *
  * If id doesn't exist (when adding a new record), create a slug from
@@ -173,7 +180,7 @@ class Album extends AppModel {
  * beforeDelete method
  *
  * Delete all images inside the thumbnails folder and the image album
- * folder and reove the folders. Then remove the folder thumbnail.
+ * folder and remove the folders. Then remove the folder thumbnail.
  * It returns true hen the operation completes, even if there's a
  * problem removing something.
  *
@@ -192,6 +199,31 @@ class Album extends AppModel {
 		}
 
 		return true;
+	}
+
+/**
+ * afterFind method
+ *
+ * Add preview_images to the results.
+ *
+ * @param array $results
+ * @param boolean $primary
+ * @return array
+ */
+	public function afterFind($results, $primary = false) {
+		foreach ($results as $key => $val) {
+			// check to see we have an id key, for example to exclude distinct years list
+			if (isset($results[$key]['Album']['id']) && isset($results[$key]['Album']['year']) && $primary) {
+				$dir = new Folder(WWW_ROOT.'img'.DS.'articles'.DS.$results[$key]['Album']['year'].DS.sprintf("%010d", $results[$key]['Album']['id']).DS.'preview');
+				foreach ($this->orderPreviewImages as $value) {
+					$images[$value] = $dir->find('.*\.'.$value.'\.jpg', true);
+					$results[$key]['Album']['preview_images'] = $images;
+				}
+				$others = $dir->find('.*(?!\.xs|\.sm|\.md|\.ml|\.lg|\.vl|\.xl).{3}\.jpg', true);
+				$results[$key]['Album']['preview_images']['others'] = $others;
+			}
+		}
+		return $results;
 	}
 
 /**
