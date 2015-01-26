@@ -42,6 +42,21 @@ $this->end();
 				?>
 			</fieldset>
 		<?php echo $this->Form->end(array('label' => 'Submit', 'class' => 'btn btn-primary')); ?>
+		<hr>
+		<h3>Dropzones</h3>
+		<?php $ajaxImagesOptions = htmlspecialchars(json_encode(array('year' => $this->request->data('Album.year')))); ?>
+		<h4>Preview Images (No Conversions)</h4>
+		<div class="dropzone" id="dropzone-preview-images" data-base="<?php echo $this->request->base; ?>" data-controller="<?php echo $this->request->controller; ?>" data-id="<?php echo $this->request->params['pass'][0]; ?>" data-upload-type="preview-images" data-options='<?php echo $ajaxImagesOptions; ?>'><span class="fa fa-file-image-o"></span> Just drag and drop images here</div>
+		<div class="row">
+			<div class="col-md-6">
+				<h4>Gallery Images</h4>
+				<div class="dropzone" id="dropzone-album" data-base="<?php echo $this->request->base; ?>" data-controller="<?php echo $this->request->controller; ?>" data-id="<?php echo $this->request->params['pass'][0]; ?>" data-upload-type="album" data-options='<?php echo $ajaxImagesOptions; ?>'><span class="fa fa-file-image-o"></span> Just drag and drop images here</div>
+			</div>
+			<div class="col-md-6">
+				<h4>Gallery Thumbnails</h4>
+				<div class="dropzone" id="dropzone-album-thumbnails" data-base="<?php echo $this->request->base; ?>" data-controller="<?php echo $this->request->controller; ?>" data-id="<?php echo $this->request->params['pass'][0]; ?>" data-upload-type="album-thumbnails" data-options='<?php echo $ajaxImagesOptions; ?>'><span class="fa fa-file-image-o"></span> Just drag and drop images here</div>
+			</div>
+		</div>
 <?php
 $this->start('relatedContent');
 ?>
