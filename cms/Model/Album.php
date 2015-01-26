@@ -214,7 +214,7 @@ class Album extends AppModel {
 		foreach ($results as $key => $val) {
 			// check to see we have an id key, for example to exclude distinct years list
 			if (isset($results[$key]['Album']['id']) && isset($results[$key]['Album']['year']) && $primary) {
-				$dir = new Folder(WWW_ROOT.'img'.DS.'articles'.DS.$results[$key]['Album']['year'].DS.sprintf("%010d", $results[$key]['Album']['id']).DS.'preview');
+				$dir = new Folder(WWW_ROOT.'img'.DS.'albums'.DS.$results[$key]['Album']['year'].DS.sprintf("%010d", $results[$key]['Album']['id']).DS.'preview');
 				foreach ($this->orderPreviewImages as $value) {
 					$images[$value] = $dir->find('.*\.'.$value.'\.jpg', true);
 					$results[$key]['Album']['preview_images'] = $images;
