@@ -49,6 +49,8 @@ class AlbumsController extends AppController {
 
 			$this->Security->unlockedFields = $unlocked_fields;
 		}
+
+		$this->Security->unlockedActions = array('admin_ajaxUploadFiles');
 	}
 
 /**
@@ -258,6 +260,43 @@ class AlbumsController extends AppController {
 		}
 		$this->Session->setFlash('There was a problem deleting the Album image.', 'Flash/success');
 		return $this->redirect(array('action' => 'admin_view', $id));
+	}
+
+/**
+ * admin_ajaxUploadFiles method
+ *
+ * Upload files via AJAX.
+ *
+ * @param string $id
+ * @param string $uploadType
+ * @return void
+ */
+	public function admin_ajaxUploadFiles($id = null, $uploadType = 'preview-images') {
+		$this->autoRender = false;
+
+		if (empty($id)) {
+			$this->response->statusCode(404);
+			return false;
+		}
+
+		$options = json_decode($this->request->data['options']);
+
+		if ($this->request->is(array('post'))) {
+			switch ($uploadType) {
+				case 'preview-images':
+					$this->Upload->uploadFiles('img'.DS.'albums'.DS.$options->{'year'}.DS.sprintf("%010d", $id).DS.'preview', $this->request->form);
+					break;
+				case 'album':
+					$this->Upload->uploadFiles('img'.DS.'albums'.DS.$options->{'year'}.DS.sprintf("%010d", $id), $this->request->form);
+					break;
+				case 'album-thumbnails':
+					$this->Upload->uploadFiles('img'.DS.'albums'.DS.$options->{'year'}.DS.sprintf("%010d", $id).DS.'thumbnails', $this->request->form);
+					break;
+			}
+
+			$this->response->statusCode(200);
+			return true;
+		}
 	}
 
 }
