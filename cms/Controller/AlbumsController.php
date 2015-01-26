@@ -202,19 +202,21 @@ class AlbumsController extends AppController {
 	}
 
 /**
- * admin_deleteAlbumImage method
+ * admin_deleteFile method
  *
- * Delete one album image and its thumbnail.
+ * Delete one album file.
  *
  * @throws NotFoundException
  * @throws MethodNotAllowedException
  * @param string $id
+ * @param string $filename
+ * @param string $fileType
  * @return void
  */
-	public function admin_deleteAlbumImage($id = null, $image = null) {
-		$this->layout = 'default_admin';
+	public function admin_deleteFile($id = null, $filename = null, $fileType = 'preview-image') {
+		$this->autoRender = false;
 
-		if (!$id or !$image) {
+		if (empty($id) || empty($filename)) {
 			$this->Session->setFlash('Invalid Album or image.', 'Flash/error');
 			return $this->redirect(array('action' => 'admin_index'));
 		}
@@ -224,12 +226,39 @@ class AlbumsController extends AppController {
 		}
 
 		$this->request->allowMethod('post', 'delete');
-		if ($this->Album->deleteFile($id, $image)) {
-			$this->Session->setFlash('Album image deleted.', 'Flash/success');
-			return $this->redirect(array('action' => 'admin_view', $id));
+
+		$options = array('conditions' => array('Album.id' => $id));
+		$album = $this->Album->find('first', $options);
+
+		if ($album) {
+			switch ($fileType) {
+				case 'preview-image':
+					$path = WWW_ROOT.'img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $album['Album']['id']).DS.'preview'.DS.$filename;
+					$result = $this->Album->deleteFile($path);
+					break;
+
+				case 'album':
+					$path = WWW_ROOT.'img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $album['Album']['id']).DS.$filename;
+					$result = $this->Album->deleteFile($path);
+
+					$path = WWW_ROOT.'img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $album['Album']['id']).DS.'thumbnails'.DS.$filename;
+					$result = $result && $this->Album->deleteFile($path);
+					break;
+
+			}
 		}
-		$this->Session->setFlash('There was a problem deleting the Album image.', 'Flash/success');
-		return $this->redirect(array('action' => 'admin_view', $id));
+
+		if ($result) {
+			$this->Session->setFlash('Album image deleted.', 'Flash/success');
+		} else {
+			$this->Session->setFlash('There was a problem deleting the Album image.', 'Flash/success');
+		}
+
+		if (empty($this->request->named['redirection'])) {
+			return $this->redirect(array('action' => 'admin_index'));
+		} else {
+			return $this->redirect(array('action' => $this->request->named['redirection'], $id));
+		}
 	}
 
 /**

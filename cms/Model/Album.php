@@ -261,32 +261,20 @@ class Album extends AppModel {
 /**
  * deleteFile method
  *
- * delete and album file inside the album images folder. It deletes
- * both the image and its thummbnail. Returns true if both images are
- * deleted, false otherwise. This means it could potentially return
- * false if one image is deleted but not the other.
+ * Delete an Album file inside the album images folder. It deletes
+ * both the image and its thumbnail or a preview image. Returns true
+ * if the images are deleted, false otherwise.
  *
- * @param string $id
  * @param string $filename
  * @return boolean
  */
-	public function deleteFile($id = null, $filename = null) {
-		if (!$id || !$filename) return false;
+	public function deleteFile($path = null) {
+		if (empty($path)) return false;
 
-		$options = array('conditions' => array('Album.id' => $id));
-		$album = $this->find('first', $options);
+		$file = new File($path);
+		$result = $file->delete();
 
-		if ($album) {
-			$folder = WWW_ROOT.'img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $album['Album']['id']);
-			$image = new File($folder.DS.'thumbnails'.DS.$filename);
-			$del_thumb = $image->delete();
-			$image = new File($folder.DS.$filename);
-			$del_image = $image->delete();
-
-			return ($del_thumb && $del_image);
-		} else {
-			return false;
-		}
+		return $result;
 	}
 
 }
