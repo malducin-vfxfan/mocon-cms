@@ -173,6 +173,9 @@ class AlbumsController extends AppController {
 		} else {
 			$options = array('conditions' => array('Album.id' => $id));
 			$this->request->data = $this->Album->find('first', $options);
+
+			$images = $this->Album->getAlbumThumbnails($this->request->data['Album']['id'], $this->request->data['Album']['year']);
+			$this->set(compact('images'));
 		}
 		$this->set('title_for_layout', 'Edit Album');
 	}

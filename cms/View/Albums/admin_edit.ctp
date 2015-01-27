@@ -7,6 +7,9 @@
  * @link          http://vfxfan.com VFXfan
  * @package       vfxfan-base.View.Albums
  */
+echo $this->Html->css('magnific-popup', array('inline' => false));
+echo $this->Html->script(array('jquery.magnific-popup', 'admin-lightbox.min'), array('inline' => false));
+
 $this->extend('/Common/admin_add_edit');
 
 $this->assign('formTitle', 'Edit an Album');
@@ -59,6 +62,32 @@ $this->end();
 		</div>
 <?php
 $this->start('relatedContent');
+	$i = 0;
+	$last = count($images) - 1;
+	$images_path = 'albums/'.$this->request->data('Album.year').'/'.sprintf("%010d", $this->request->data('Album.id')).'/';
+	$albumId = $this->request->data('Album.id');
+	foreach ($images as $image):
+		if ($i%4 == 0):
+?>
+	<div class="row"> <!-- start thumbnails row -->
+<?php
+		endif;
+?>
+		<div class="col-md-3 text-center">
+			<?php echo $this->Html->link($this->Html->image($images_path.'thumbnails/'.$image, array('class' => 'img-thumbnail', 'alt' => $image, 'title' => $image)), '/img/'.$images_path.$image, array('class' => 'popup-link', 'escapeTitle' => false, 'title' => $image)) ;?>
+			<p>
+				<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $albumId, '?' => array('filename' => $image, 'fileType' => 'album', 'redirection' => 'admin_edit')), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $image)); ?>
+			</p>
+		</div>
+<?php
+		if (($i%4 == 3) || ($i == $last)):
+?>
+	</div> <!-- end thumbnails row -->
+<?php
+		endif;
+	$i++;
+	endforeach;
+$this->end();
 ?>
 		<h3>Preview Images</h3>
 		<table class="table table-striped table-bordered table-hover">
