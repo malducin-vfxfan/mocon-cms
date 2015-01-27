@@ -205,20 +205,39 @@ class PostsController extends AppController {
  * @return void
  */
 	public function admin_deleteFile($id = null) {
-		$this->layout = 'default_admin';
+		$this->autoRender = false;
+
+		if (empty($id) || empty($this->request->query('filename'))) {
+			$this->Session->setFlash('Invalid Post or image.', 'Flash/error');
+			return $this->redirect(array('action' => 'admin_index'));
+		}
+
 		if (!$this->Post->exists($id)) {
 			throw new NotFoundException('Invalid Post.');
 		}
 
 		$this->request->allowMethod('post', 'delete');
 
-		if ($this->Post->deleteFile($id, $this->request->named['file_name'], WWW_ROOT.'img')) {
+		$options = array('conditions' => array('Post.id' => $id));
+		$post = $this->Post->find('first', $options);
+		$filename = $this->request->query('filename');
+
+		if ($post) {
+			$path = WWW_ROOT.'img'.DS.'posts'.DS.$post['Post']['year'].DS.sprintf("%010d", $post['Post']['id']).DS.$filename;
+			$result = $this->Post->deleteFile($path);
+		}
+
+		if ($result) {
 			$this->Session->setFlash('File deleted.', 'Flash/success');
 		} else {
 			$this->Session->setFlash('File was not deleted.', 'Flash/error');
 		}
 
-		return $this->redirect(array('action' => $this->request->named['redirect_action'], $id));
+		if (empty($this->request->query('redirection'))) {
+			return $this->redirect(array('action' => 'admin_index'));
+		} else {
+			return $this->redirect(array('action' => $this->request->query('redirection'), $id));
+		}
 	}
 
 /**

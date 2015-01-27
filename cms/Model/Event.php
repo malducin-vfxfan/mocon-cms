@@ -303,25 +303,19 @@ class Event extends AppModel {
 /**
  * deleteFile method
  *
- * Delete one file from the event images folder given the event id and
- * the filename.
+ * Delete one file from the Event images folder. Returns true
+ * if the images are deleted, false otherwise.
  *
- * @param string $id
  * @param string $filename
- * @param string $location
  * @return boolean
  */
-	public function deleteFile($id = null, $filename = null, $location = null) {
-		if (!$id || !$filename || !$location) return false;
+	public function deleteFile($path = null) {
+		if (empty($path)) return false;
 
-		$options = array('conditions' => array('Event.id' => $id));
-		$event = $this->find('first', $options);
-		if ($event) {
-			$file = new File($location.DS.'events'.DS.$event['Event']['year'].DS.sprintf("%010d", $event['Event']['id']).DS.$filename);
-			return $file->delete();
-		} else {
-			return false;
-		}
+		$file = new File($path);
+		$result = $file->delete();
+
+		return $result;
 	}
 
 }
