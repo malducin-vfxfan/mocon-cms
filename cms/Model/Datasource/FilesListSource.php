@@ -74,7 +74,7 @@ class FilesListSource extends DataSource {
 		 */
 
 		if ($files) {
-			if ($queryData['fields'] == 'COUNT') {
+			if ($queryData['fields'] === 'COUNT') {
 				return array(array(array('count' => count($files))));
 			}
 
@@ -85,7 +85,7 @@ class FilesListSource extends DataSource {
 			$files = $this->__getPage($files, $queryData);
 
 		} else {
-			if ($queryData['fields'] == 'COUNT') {
+			if ($queryData['fields'] === 'COUNT') {
 				return array(array(array('count' => count($files))));
 			}
 		}
