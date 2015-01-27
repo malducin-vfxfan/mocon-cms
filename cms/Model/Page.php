@@ -242,25 +242,19 @@ class Page extends AppModel {
 /**
  * deleteFile method
  *
- * Delete one file from the page images folder given the page id and
- * the filename.
+ * Delete one file from the Page images folder. Returns true
+ * if the images are deleted, false otherwise.
  *
- * @param string $id
  * @param string $filename
- * @param string $location
  * @return boolean
  */
-	public function deleteFile($id = null, $filename = null, $location = null) {
-		if (!$id || !$filename || !$location) return false;
+	public function deleteFile($path = null) {
+		if (empty($path)) return false;
 
-		$options = array('conditions' => array('Page.id' => $id));
-		$page = $this->find('first', $options);
-		if ($page) {
-			$file = new File($location.DS.'pages'.DS.sprintf("%010d", $page['Page']['id']).DS.$filename);
-			return $file->delete();
-		} else {
-			return false;
-		}
+		$file = new File($path);
+		$result = $file->delete();
+
+		return $result;
 	}
 
 }

@@ -118,7 +118,7 @@ $this->start('relatedContent');
 					<td><?php echo $this->Html->link($image, '/img/pages/'.sprintf("%010d", $this->request->data('Page.id')).'/'.$image, array('target' => '_blank')); ?></td>
 					<td>
 						<?php echo $this->Html->link('View', '/img/pages/'.sprintf("%010d", $this->request->data('Page.id')).'/'.$image, array('class' => 'btn btn-default', 'target' => '_blank')); ?>
-						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->request->data('Page.id'), 'file_name' => $image, 'base_location' => 'img', 'redirect_action' => 'admin_edit'), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this image?'); ?>
+						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->request->data('Page.id'), '?' => array('filename' => $image, 'fileType' => 'image', 'redirection' => 'admin_edit')), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this image?'); ?>
 					</td>
 				</tr>
 				<?php endforeach; ?>
@@ -139,7 +139,7 @@ $this->start('relatedContent');
 					<td><?php echo $this->Html->link($document, '/files/pages/'.sprintf("%010d", $this->request->data('Page.id')).'/'.$document, array('target' => '_blank')); ?></td>
 					<td>
 						<?php echo $this->Html->link('View', '/files/pages/'.sprintf("%010d", $this->request->data('Page.id')).'/'.$document, array('class' => 'btn btn-default', 'target' => '_blank')); ?>
-						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->request->data('Page.id'), 'file_name' => $document, 'base_location' => 'files', 'redirect_action' => 'admin_edit'), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this document?'); ?>
+						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->request->data('Page.id'), '?' => array('filename' => $document, 'fileType' => 'file', 'redirection' => 'admin_edit')), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this image?'); ?>
 					</td>
 				</tr>
 				<?php endforeach; ?>

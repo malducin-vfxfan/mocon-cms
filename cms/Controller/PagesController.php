@@ -289,25 +289,54 @@ class PagesController extends AppController {
  * @throws NotFoundException
  * @throws MethodNotAllowedException
  * @param string $id
- * @param string $filename
- * @param string $location
  * @return void
  */
 	public function admin_deleteFile($id = null) {
-		$this->layout = 'default_admin';
+		$this->autoRender = false;
+
+		$filename = $this->request->query('filename');
+
+		if (empty($id) || empty($filename)) {
+			$this->Session->setFlash('Invalid Page or image.', 'Flash/error');
+			return $this->redirect(array('action' => 'admin_index'));
+		}
+
 		if (!$this->Page->exists($id)) {
 			throw new NotFoundException('Invalid Page.');
 		}
 
 		$this->request->allowMethod('post', 'delete');
 
-		if ($this->Page->deleteFile($id, $this->request->named['file_name'], WWW_ROOT.$this->request->named['base_location'])) {
+		$options = array('conditions' => array('Page.id' => $id));
+		$page = $this->Page->find('first', $options);
+
+		if ($page) {
+			switch ($this->request->query('fileType')) {
+				case 'image':
+					$path = WWW_ROOT.'img'.DS.'pages'.DS.sprintf("%010d", $page['Page']['id']).DS.$filename;
+					$result = $this->Page->deleteFile($path);
+					break;
+
+				case 'file':
+					$path = WWW_ROOT.'files'.DS.'pages'.DS.sprintf("%010d", $page['Page']['id']).DS.$filename;
+					$result = $this->Page->deleteFile($path);
+					break;
+
+			}
+		}
+
+		if ($result) {
 			$this->Session->setFlash('File deleted.', 'Flash/success');
 		} else {
 			$this->Session->setFlash('File was not deleted.', 'Flash/error');
 		}
 
-		return $this->redirect(array('action' => $this->request->named['redirect_action'], $id));
+		$redirection = $this->request->query('redirection');
+		if (!$redirection) {
+			return $this->redirect(array('action' => 'admin_index'));
+		} else {
+			return $this->redirect(array('action' => $redirection, $id));
+		}
 	}
 
 /**
