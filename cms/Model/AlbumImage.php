@@ -11,7 +11,6 @@
  * @package       vfxfan-base.Model.AlbumImages
  */
 App::uses('AppModel', 'Model');
-App::uses('Folder', 'Utility');
 
 /**
  * AlbumImage Model
@@ -39,14 +38,4 @@ class AlbumImage extends AppModel {
 			'className' => 'Album',
 		)
 	);
-
-/**
- * Overridden paginateCount method
- */
-	public function paginateCount($conditions = null, $recursive = 0, $extra = array()) {
-
-		$dir = new Folder($conditions['folder']);
-		$files = $dir->find('.*', true);
-		return count($files);
-	}
 }

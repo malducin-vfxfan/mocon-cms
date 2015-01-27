@@ -25,9 +25,9 @@ $this->start('extraContent');
 <div id="gallery">
 <?php
 	$i = 0;
-	$last = count($albumImages['AlbumImage']) - 1;
+	$last = count($albumImages) - 1;
 	$images_path = 'albums/'.$album['Album']['year'].'/'.sprintf("%010d", $album['Album']['id']).'/';
-	foreach ($albumImages['AlbumImage'] as $image):
+	foreach ($albumImages as $image):
 		if ($i%4 == 0):
 ?>
 <div class="row"> <!-- start thumbnails row -->
@@ -35,7 +35,7 @@ $this->start('extraContent');
 		endif;
 ?>
 	<div class="album-thumbail-md text-center">
-		<?php echo $this->Html->link($this->Html->image($images_path.'thumbnails/'.$image, array('class' => 'img-thumbnail', 'alt' => $image, 'title' => $image)), '/img/'.$images_path.$image, array('escapeTitle' => false, 'title' => $image)) ;?>
+		<?php echo $this->Html->link($this->Html->image($images_path.'thumbnails/'.$image['AlbumImage']['filename'], array('class' => 'img-thumbnail', 'alt' => $image['AlbumImage']['filename'], 'title' => $image['AlbumImage']['filename'])), '/img/'.$images_path.$image['AlbumImage']['filename'], array('escapeTitle' => false, 'title' => $image['AlbumImage']['filename'])) ;?>
 	</div>
 <?php
 		if (($i%4 == 3) || ($i == $last)):

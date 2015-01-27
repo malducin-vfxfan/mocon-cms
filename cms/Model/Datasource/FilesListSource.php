@@ -83,10 +83,9 @@ class FilesListSource extends DataSource {
 
 			//used for pagination
 			$files = $this->__getPage($files, $queryData);
-
 		} else {
 			if ($queryData['fields'] === 'COUNT') {
-				return array(array(array('count' => count($files))));
+				return array(array(array('count' => 0)));
 			}
 		}
 
@@ -94,7 +93,11 @@ class FilesListSource extends DataSource {
 		 * Return the results in an array which uses the model alias
 		 * name.
 		 */
-		return array($Model->alias => $files);
+		$results = array();
+		foreach ($files as $file) {
+			$results[] = array($Model->alias => array('filename' => $file));
+		}
+		return $results;
 	}
 
 /**
