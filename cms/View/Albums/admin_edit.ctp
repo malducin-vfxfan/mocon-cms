@@ -67,8 +67,9 @@ $this->start('relatedContent');
 <?php
 	$i = 0;
 	$last = count($images) - 1;
-	$images_path = 'albums/'.$this->request->data('Album.year').'/'.sprintf("%010d", $this->request->data('Album.id')).'/';
 	$albumId = $this->request->data('Album.id');
+	$images_path = 'albums/'.$this->request->data('Album.year').'/'.sprintf("%010d", $albumId).'/';
+
 	foreach ($images as $image):
 		if ($i%4 == 0):
 ?>
