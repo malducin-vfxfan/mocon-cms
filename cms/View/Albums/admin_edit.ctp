@@ -62,6 +62,9 @@ $this->end();
 		</div>
 <?php
 $this->start('relatedContent');
+?>
+	<h3>Gallery</h3>
+<?php
 	$i = 0;
 	$last = count($images) - 1;
 	$images_path = 'albums/'.$this->request->data('Album.year').'/'.sprintf("%010d", $this->request->data('Album.id')).'/';
@@ -87,7 +90,6 @@ $this->start('relatedContent');
 		endif;
 	$i++;
 	endforeach;
-$this->end();
 ?>
 		<h3>Preview Images</h3>
 		<table class="table table-striped table-bordered table-hover">
