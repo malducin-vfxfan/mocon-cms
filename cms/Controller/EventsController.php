@@ -211,14 +211,14 @@ class EventsController extends AppController {
  * @throws NotFoundException
  * @throws MethodNotAllowedException
  * @param string $id
- * @param string $filename
- * @param string $redirect_action
  * @return void
  */
 	public function admin_deleteFile($id = null) {
 		$this->autoRender = false;
 
-		if (empty($id) || empty($this->request->query('filename'))) {
+		$filename = $this->request->query('filename');
+
+		if (empty($id) || empty($filename)) {
 			$this->Session->setFlash('Invalid Event or image.', 'Flash/error');
 			return $this->redirect(array('action' => 'admin_index'));
 		}
@@ -231,7 +231,6 @@ class EventsController extends AppController {
 
 		$options = array('conditions' => array('Event.id' => $id));
 		$event = $this->Event->find('first', $options);
-		$filename = $this->request->query('filename');
 
 		if ($event) {
 			$path = WWW_ROOT.'img'.DS.'events'.DS.$event['Event']['year'].DS.sprintf("%010d", $event['Event']['id']).DS.$filename;
@@ -244,10 +243,11 @@ class EventsController extends AppController {
 			$this->Session->setFlash('File was not deleted.', 'Flash/error');
 		}
 
-		if (empty($this->request->query('redirection'))) {
+		$redirection = $this->request->query('redirection');
+		if (!$redirection) {
 			return $this->redirect(array('action' => 'admin_index'));
 		} else {
-			return $this->redirect(array('action' => $this->request->query('redirection'), $id));
+			return $this->redirect(array('action' => $redirection, $id));
 		}
 	}
 
