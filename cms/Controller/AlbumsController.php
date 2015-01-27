@@ -213,10 +213,10 @@ class AlbumsController extends AppController {
  * @param string $fileType
  * @return void
  */
-	public function admin_deleteFile($id = null, $filename = null, $fileType = 'preview-image') {
+	public function admin_deleteFile($id = null) {
 		$this->autoRender = false;
 
-		if (empty($id) || empty($filename)) {
+		if (empty($id) || empty($this->request->query('filename'))) {
 			$this->Session->setFlash('Invalid Album or image.', 'Flash/error');
 			return $this->redirect(array('action' => 'admin_index'));
 		}
@@ -229,9 +229,10 @@ class AlbumsController extends AppController {
 
 		$options = array('conditions' => array('Album.id' => $id));
 		$album = $this->Album->find('first', $options);
+		$filename = $this->request->query('filename');
 
 		if ($album) {
-			switch ($fileType) {
+			switch ($this->request->query('fileType')) {
 				case 'preview-image':
 					$path = WWW_ROOT.'img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $album['Album']['id']).DS.'preview'.DS.$filename;
 					$result = $this->Album->deleteFile($path);
@@ -254,10 +255,10 @@ class AlbumsController extends AppController {
 			$this->Session->setFlash('There was a problem deleting the Album image.', 'Flash/error');
 		}
 
-		if (empty($this->request->named['redirection'])) {
+		if (empty($this->request->query('redirection'))) {
 			return $this->redirect(array('action' => 'admin_index'));
 		} else {
-			return $this->redirect(array('action' => $this->request->named['redirection'], $id));
+			return $this->redirect(array('action' => $this->request->query('redirection'), $id));
 		}
 	}
 
