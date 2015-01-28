@@ -102,7 +102,7 @@ class Group extends AppModel {
  *
  * @return array
  */
-	public function parentNode() {
+	public function parentNode($type) {
 		// since groups dont have parents
 		return null;
 	}

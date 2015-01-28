@@ -163,7 +163,7 @@ class User extends AppModel {
  *
  * @return array
  */
-	public function parentNode() {
+	public function parentNode($type) {
 		if (!$this->id && empty($this->data)) {
 			return null;
 		}
