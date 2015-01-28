@@ -99,6 +99,12 @@ CakePlugin::load('SimpleRecaptcha', array('bootstrap' => true));
 //CakePlugin::load('DebugKit');
 
 /**
+ * To prefer app translation over plugin translation, you can set
+ *
+ * Configure::write('I18n.preferApp', true);
+ */
+
+/**
  * You can attach event listeners to the request lifecycle as Dispatcher Filter . By Default CakePHP bundles two filters:
  *
  * - AssetDispatcher filter will serve your asset files (css, images, js, etc) from your themes and plugins
