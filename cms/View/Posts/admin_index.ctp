@@ -53,7 +53,7 @@ $this->start('tableRows');
 							<ul class="dropdown-menu" role="menu">
 								<li><?php echo $this->Html->link('View', array('action' => 'admin_view', $post['Post']['id'])); ?></li>
 								<li><?php echo $this->Html->link('Edit', array('action' => 'admin_edit', $post['Post']['id'])); ?></li>
-								<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $post['Post']['id']), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $post['Post']['id'])); ?></li>
+								<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $post['Post']['id']), array('escape' => false, 'confirm' => sprintf('Are you sure you want to delete # %s?', $post['Post']['id']))); ?></li>
 							</ul>
 						</div>
 					</td>

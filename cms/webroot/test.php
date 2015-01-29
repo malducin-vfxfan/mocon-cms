@@ -69,6 +69,7 @@ $vendorPath = ROOT . DS . APP_DIR . DS . 'Vendor' . DS . 'cakephp' . DS . 'cakep
 $dispatcher = 'Cake' . DS . 'Console' . DS . 'ShellDispatcher.php';
 if (!defined('CAKE_CORE_INCLUDE_PATH') && file_exists($vendorPath . DS . $dispatcher)) {
 	define('CAKE_CORE_INCLUDE_PATH', $vendorPath);
+}
 
 /**
  * Editing below this line should not be necessary.

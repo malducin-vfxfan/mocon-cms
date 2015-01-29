@@ -17,7 +17,7 @@ $this->assign('formTitle', 'Edit an Album');
 $this->start('actions');
 ?>
 			<li><?php echo $this->Html->link('List Albums', array('action' => 'admin_index')); ?></li>
-			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $this->request->data('Album.id')), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $this->request->data('Album.id'))); ?></li>
+			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $this->request->data('Album.id')), array('escape' => false, 'confirm' => sprintf('Are you sure you want to delete # %s?', $this->request->data('Album.id')))); ?></li>
 <?php
 $this->end();
 ?>
@@ -80,7 +80,7 @@ $this->start('relatedContent');
 		<div class="col-md-3 text-center">
 			<?php echo $this->Html->link($this->Html->image($images_path.'thumbnails/'.$image, array('class' => 'img-thumbnail', 'alt' => $image, 'title' => $image)), '/img/'.$images_path.$image, array('class' => 'popup-link', 'escapeTitle' => false, 'title' => $image)) ;?>
 			<p>
-				<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $albumId, '?' => array('filename' => $image, 'fileType' => 'album', 'redirection' => 'admin_edit')), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $image)); ?>
+				<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $albumId, '?' => array('filename' => $image, 'fileType' => 'album', 'redirection' => 'admin_edit')), array('class' => 'btn btn-danger', 'confirm' => sprintf('Are you sure you want to delete # %s?', $image))); ?>
 			</p>
 		</div>
 <?php
@@ -109,7 +109,7 @@ $this->start('relatedContent');
 					<td><?php echo $this->Html->link($image, '/img/albums/'.$this->request->data('Album.year').'/'.sprintf("%010d", $this->request->data('Album.id')).'/preview/'.$image, array('target' => '_blank')); ?></td>
 					<td>
 						<?php echo $this->Html->link('View', '/img/albums/'.$this->request->data('Album.year').'/'.sprintf("%010d", $this->request->data('Album.id')).'/preview/'.$image, array('class' => 'btn btn-default', 'target' => '_blank')); ?>
-						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->request->data('Album.id'),  '?' => array('filename' => $image, 'fileType' => 'preview-image', 'redirection' => 'admin_edit')), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this image?'); ?>
+						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->request->data('Album.id'),  '?' => array('filename' => $image, 'fileType' => 'preview-image', 'redirection' => 'admin_edit')), array('class' => 'btn btn-danger', 'confirm' => 'Are you sure you want to delete this image?')); ?>
 					</td>
 				</tr>
 				<?php

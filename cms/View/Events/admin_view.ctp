@@ -14,7 +14,7 @@ $this->assign('formTitle', 'Event');
 $this->start('actions');
 ?>
 			<li><?php echo $this->Html->link('Edit Event', array('action' => 'admin_edit', $event['Event']['id'])); ?> </li>
-			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete Event', array('class' => 'text-danger')), array('action' => 'admin_delete', $event['Event']['id']), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $event['Event']['id'])); ?> </li>
+			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete Event', array('class' => 'text-danger')), array('action' => 'admin_delete', $event['Event']['id']), array('escape' => false, 'confirm' => sprintf('Are you sure you want to delete # %s?', $event['Event']['id']))); ?> </li>
 			<li><?php echo $this->Html->link('List Events', array('action' => 'admin_index')); ?> </li>
 			<li><?php echo $this->Html->link('New Event', array('action' => 'admin_add')); ?> </li>
 <?php
@@ -90,7 +90,7 @@ $this->start('relatedContent');
 					<td><?php echo $this->Html->link($image, '/img/events/'.$event['Event']['year'].'/'.sprintf("%010d", $event['Event']['id']).'/'.$image, array('target' => '_blank')); ?></td>
 					<td>
 						<?php echo $this->Html->link('View', '/img/events/'.$event['Event']['year'].'/'.sprintf("%010d", $event['Event']['id']).'/'.$image, array('class' => 'btn btn-default', 'target' => '_blank')); ?>
-						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $event['Event']['id'], '?' => array('filename' => $image, 'redirection' => 'admin_view')), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this image?'); ?>
+						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $event['Event']['id'], '?' => array('filename' => $image, 'redirection' => 'admin_view')), array('class' => 'btn btn-danger', 'confirm' => 'Are you sure you want to delete this image?')); ?>
 					</td>
 				</tr>
 				<?php

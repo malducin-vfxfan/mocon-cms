@@ -14,7 +14,7 @@ $this->assign('formTitle', 'User');
 $this->start('actions');
 ?>
 		<li><?php echo $this->Html->link('Edit User', array('action' => 'admin_edit', $user['User']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete User', array('class' => 'text-danger')), array('action' => 'admin_delete', $user['User']['id']), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $user['User']['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete User', array('class' => 'text-danger')), array('action' => 'admin_delete', $user['User']['id']), array('escape' => false, 'confirm' => sprintf('Are you sure you want to delete # %s?', $user['User']['id']))); ?> </li>
 		<li><?php echo $this->Html->link('List Users', array('action' => 'admin_index')); ?> </li>
 		<li><?php echo $this->Html->link('New User', array('action' => 'admin_add')); ?> </li>
 <?php
@@ -92,7 +92,7 @@ $this->start('relatedContent');
 					<td>
 						<?php echo $this->Html->link('View', array('controller' => 'posts', 'action' => 'admin_view', $post['Post']['id']), array('class' => 'btn btn-default')); ?>
 						<?php echo $this->Html->link('Edit', array('controller' => 'posts', 'action' => 'admin_edit', $post['Post']['id']), array('class' => 'btn btn-default')); ?>
-						<?php echo $this->Form->postLink('Delete', array('controller' => 'posts', 'action' => 'admin_delete', $post['Post']['id']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $post['Post']['id'])); ?>
+						<?php echo $this->Form->postLink('Delete', array('controller' => 'posts', 'action' => 'admin_delete', $post['Post']['id']), array('class' => 'btn btn-danger', 'confirm' => sprintf('Are you sure you want to delete # %s?', $post['Post']['id']))); ?>
 					</td>
 				</tr>
 				<?php endforeach; ?>

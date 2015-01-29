@@ -44,7 +44,7 @@ $this->start('tableRows');
 							<ul class="dropdown-menu" role="menu">
 								<li><?php echo $this->Html->link('View', array('action' => 'admin_view', $event['Event']['id'])); ?></li>
 								<li><?php echo $this->Html->link('Edit', array('action' => 'admin_edit', $event['Event']['id'])); ?></li>
-								<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $event['Event']['id']), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $event['Event']['id'])); ?></li>
+								<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $event['Event']['id']), array('escape' => false, 'confirm' => sprintf('Are you sure you want to delete # %s?', $event['Event']['id']))); ?></li>
 							</ul>
 						</div>
 					</td>

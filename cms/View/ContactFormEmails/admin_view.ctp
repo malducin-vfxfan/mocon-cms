@@ -14,7 +14,7 @@ $this->assign('formTitle', 'Contact Form Email');
 $this->start('actions');
 ?>
 			<li><?php echo $this->Html->link('Edit Contact Form Email', array('action' => 'admin_edit', $contactFormEmail['ContactFormEmail']['id'])); ?> </li>
-			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete Contact Form Email', array('class' => 'text-danger')), array('action' => 'admin_delete', $contactFormEmail['ContactFormEmail']['id']), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $contactFormEmail['ContactFormEmail']['id'])); ?> </li>
+			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete Contact Form Email', array('class' => 'text-danger')), array('action' => 'admin_delete', $contactFormEmail['ContactFormEmail']['id']), array('escape' => false, 'confirm' => sprintf('Are you sure you want to delete # %s?', $contactFormEmail['ContactFormEmail']['id']))); ?> </li>
 			<li><?php echo $this->Html->link('List Contact Form Emails', array('action' => 'admin_index')); ?> </li>
 			<li><?php echo $this->Html->link('New Contact Form Email', array('action' => 'admin_add')); ?> </li>
 <?php

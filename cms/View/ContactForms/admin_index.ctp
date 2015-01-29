@@ -37,7 +37,7 @@ $this->start('tableRows');
 							</button>
 							<ul class="dropdown-menu" role="menu">
 								<li><?php echo $this->Html->link('View', array('action' => 'admin_view', $contactForm['ContactForm']['id'])); ?></li>
-								<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $contactForm['ContactForm']['id']), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $contactForm['ContactForm']['id'])); ?></li>
+								<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $contactForm['ContactForm']['id']), array('escape' => false, 'confirm' => sprintf('Are you sure you want to delete # %s?', $contactForm['ContactForm']['id']))); ?></li>
 							</ul>
 						</div>
 					</td>

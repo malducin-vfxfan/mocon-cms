@@ -62,10 +62,10 @@ $this->start('tableRows');
 								Action <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" role="menu">
-								<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Switch User Permissions', array('class' => 'text-info')), array('action' => 'admin_edit', $aco_id, 'User', $user['User']['id']), array('escape' => false), 'Are you sure you want to change the permissions?'); ?></li>
-								<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete User Permissions', array('class' => 'text-danger')), array('action' => 'admin_delete', $aco_id, 'User', $user['User']['id']), array('escape' => false), 'Are you sure you want to delete this permission?'); ?></li>
-								<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Switch Group Permissions', array('class' => 'text-info')), array('action' => 'admin_edit', $aco_id, 'Group', $user['Group']['id']), array('escape' => false), 'Are you sure you want to change the permissions?'); ?></li>
-								<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete Group Permissions', array('class' => 'text-danger')), array('action' => 'admin_delete', $aco_id, 'Group', $user['Group']['id']), array('escape' => false), 'Are you sure you want to delete this permission?'); ?></li>
+								<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Switch User Permissions', array('class' => 'text-info')), array('action' => 'admin_edit', $aco_id, 'User', $user['User']['id']), array('escape' => false, 'confirm' => 'Are you sure you want to change the permissions?')); ?></li>
+								<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete User Permissions', array('class' => 'text-danger')), array('action' => 'admin_delete', $aco_id, 'User', $user['User']['id']), array('escape' => false, 'confirm' => 'Are you sure you want to delete this permission?')); ?></li>
+								<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Switch Group Permissions', array('class' => 'text-info')), array('action' => 'admin_edit', $aco_id, 'Group', $user['Group']['id']), array('escape' => false, 'confirm' => 'Are you sure you want to change the permissions?')); ?></li>
+								<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete Group Permissions', array('class' => 'text-danger')), array('action' => 'admin_delete', $aco_id, 'Group', $user['Group']['id']), array('escape' => false, 'confirm' => 'Are you sure you want to delete this permission?')); ?></li>
 							</ul>
 						</div>
 					</td>

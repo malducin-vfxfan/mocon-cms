@@ -66,7 +66,7 @@ $this->start('relatedContent');
 						<?php echo $this->Html->link('Add Slug to Link', '#', array('class' => 'btn btn-info menu-page-slug', 'id' => $page['Page']['slug'])); ?>
 						<?php echo $this->Html->link('View', array('controller' => 'pages', 'action' => 'admin_view', $page['Page']['id']), array('class' => 'btn btn-default')); ?>
 						<?php echo $this->Html->link('Edit', array('controller' => 'pages', 'action' => 'admin_edit', $page['Page']['id']), array('class' => 'btn btn-default')); ?>
-						<?php echo $this->Form->postLink('Delete', array('controller' => 'pages', 'action' => 'admin_delete', $page['Page']['id']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $page['Page']['id'])); ?>
+						<?php echo $this->Form->postLink('Delete', array('controller' => 'pages', 'action' => 'admin_delete', $page['Page']['id']), array('class' => 'btn btn-danger', 'confirm' => sprintf('Are you sure you want to delete # %s?', $page['Page']['id']))); ?>
 					</td>
 				</tr>
 				<?php endforeach; ?>

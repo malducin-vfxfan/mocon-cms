@@ -14,7 +14,7 @@ $this->assign('formTitle', 'Edit a Page');
 $this->start('actions');
 ?>
 			<li><?php echo $this->Html->link('List Pages', array('action' => 'admin_index')); ?></li>
-			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $this->request->data('Page.id')), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $this->request->data('Page.id'))); ?></li>
+			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $this->request->data('Page.id')), array('escape' => false, 'confirm' => sprintf('Are you sure you want to delete # %s?', $this->request->data('Page.id')))); ?></li>
 <?php
 $this->end();
 
@@ -96,7 +96,7 @@ $this->start('relatedContent');
 					<td>
 						<?php echo $this->Html->link('View', array('controller' => 'page_sections', 'action' => 'admin_view', $pageSection['PageSection']['id']), array('class' => 'btn btn-default')); ?>
 						<?php echo $this->Html->link('Edit', array('controller' => 'page_sections', 'action' => 'admin_edit', $pageSection['PageSection']['id']), array('class' => 'btn btn-default')); ?>
-						<?php echo $this->Form->postLink('Delete', array('controller' => 'page_sections', 'action' => 'admin_delete', $pageSection['PageSection']['id']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $pageSection['PageSection']['id'])); ?>
+						<?php echo $this->Form->postLink('Delete', array('controller' => 'page_sections', 'action' => 'admin_delete', $pageSection['PageSection']['id']), array('class' => 'btn btn-danger', 'confirm' => sprintf('Are you sure you want to delete # %s?', $pageSection['PageSection']['id']))); ?>
 					</td>
 				</tr>
 				<?php endforeach; ?>
@@ -118,7 +118,7 @@ $this->start('relatedContent');
 					<td><?php echo $this->Html->link($image, '/img/pages/'.sprintf("%010d", $this->request->data('Page.id')).'/'.$image, array('target' => '_blank')); ?></td>
 					<td>
 						<?php echo $this->Html->link('View', '/img/pages/'.sprintf("%010d", $this->request->data('Page.id')).'/'.$image, array('class' => 'btn btn-default', 'target' => '_blank')); ?>
-						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->request->data('Page.id'), '?' => array('filename' => $image, 'fileType' => 'image', 'redirection' => 'admin_edit')), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this image?'); ?>
+						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->request->data('Page.id'), '?' => array('filename' => $image, 'fileType' => 'image', 'redirection' => 'admin_edit')), array('class' => 'btn btn-danger', 'confirm' => 'Are you sure you want to delete this image?')); ?>
 					</td>
 				</tr>
 				<?php endforeach; ?>
@@ -139,7 +139,7 @@ $this->start('relatedContent');
 					<td><?php echo $this->Html->link($document, '/files/pages/'.sprintf("%010d", $this->request->data('Page.id')).'/'.$document, array('target' => '_blank')); ?></td>
 					<td>
 						<?php echo $this->Html->link('View', '/files/pages/'.sprintf("%010d", $this->request->data('Page.id')).'/'.$document, array('class' => 'btn btn-default', 'target' => '_blank')); ?>
-						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->request->data('Page.id'), '?' => array('filename' => $document, 'fileType' => 'file', 'redirection' => 'admin_edit')), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this image?'); ?>
+						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->request->data('Page.id'), '?' => array('filename' => $document, 'fileType' => 'file', 'redirection' => 'admin_edit')), array('class' => 'btn btn-danger', 'confirm' => 'Are you sure you want to delete this image?')); ?>
 					</td>
 				</tr>
 				<?php endforeach; ?>

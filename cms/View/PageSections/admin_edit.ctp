@@ -18,7 +18,7 @@ $this->assign('formTitle', 'Edit a Page Section');
 $this->start('actions');
 ?>
 			<li><?php echo $this->Html->link('List Page Sections', array('action' => 'admin_index')); ?></li>
-			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $this->request->data('PageSection.id')), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $this->request->data('PageSection.id'))); ?></li>
+			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $this->request->data('PageSection.id')), array('escape' => false, 'confirm' => sprintf('Are you sure you want to delete # %s?', $this->request->data('PageSection.id')))); ?></li>
 <?php
 $this->end();
 

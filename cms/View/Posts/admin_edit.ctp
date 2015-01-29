@@ -18,7 +18,7 @@ $this->assign('formTitle', 'Edit a Post');
 $this->start('actions');
 ?>
 			<li><?php echo $this->Html->link('List Posts', array('action' => 'admin_index')); ?></li>
-			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $this->request->data('Post.id')), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $this->request->data('Post.id'))); ?></li>
+			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete', array('class' => 'text-danger')), array('action' => 'admin_delete', $this->request->data('Post.id')), array('escape' => false, 'confirm' => sprintf('Are you sure you want to delete # %s?', $this->request->data('Post.id')))); ?></li>
 <?php
 $this->end();
 
@@ -78,7 +78,7 @@ $this->start('relatedContent');
 					<td><?php echo $this->Html->link($image, '/img/posts/'.$this->request->data('Post.year').'/'.sprintf("%010d", $this->request->data('Post.id')).'/'.$image, array('target' => '_blank')); ?></td>
 					<td>
 						<?php echo $this->Html->link('View', '/img/posts/'.$this->request->data('Post.year').'/'.sprintf("%010d", $this->request->data('Post.id')).'/'.$image, array('class' => 'btn btn-default', 'target' => '_blank')); ?>
-						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->request->data('Post.id'), '?' => array('filename' => $image, 'redirection' => 'admin_edit')), array('class' => 'btn btn-danger'), 'Are you sure you want to delete this image?'); ?>
+						<?php echo $this->Form->postLink('Delete', array('action' => 'admin_deleteFile', $this->request->data('Post.id'), '?' => array('filename' => $image, 'redirection' => 'admin_edit')), array('class' => 'btn btn-danger', 'confirm' => 'Are you sure you want to delete this image?')); ?>
 					</td>
 				</tr>
 				<?php

@@ -14,7 +14,7 @@ $this->assign('formTitle', 'Group');
 $this->start('actions');
 ?>
 			<li><?php echo $this->Html->link('Edit Group', array('action' => 'admin_edit', $group['Group']['id'])); ?> </li>
-			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete Group', array('class' => 'text-danger')), array('action' => 'admin_delete', $group['Group']['id']), array('escape' => false), sprintf('Are you sure you want to delete # %s?', $group['Group']['id'])); ?> </li>
+			<li><?php echo $this->Form->postLink($this->Html->tag('span', 'Delete Group', array('class' => 'text-danger')), array('action' => 'admin_delete', $group['Group']['id']), array('escape' => false, 'confirm' => sprintf('Are you sure you want to delete # %s?', $group['Group']['id']))); ?> </li>
 			<li><?php echo $this->Html->link('List Groups', array('action' => 'admin_index')); ?> </li>
 			<li><?php echo $this->Html->link('New Group', array('action' => 'admin_add')); ?> </li>
 <?php
@@ -80,7 +80,7 @@ $this->start('relatedContent');
 				<td>
 					<?php echo $this->Html->link('View', array('controller' => 'users', 'action' => 'admin_view', $user['User']['id']), array('class' => 'btn btn-default')); ?>
 					<?php echo $this->Html->link('Edit', array('controller' => 'users', 'action' => 'admin_edit', $user['User']['id']), array('class' => 'btn btn-default')); ?>
-					<?php echo $this->Form->postLink('Delete', array('controller' => 'users', 'action' => 'admin_delete', $user['User']['id']), array('class' => 'btn btn-danger'), sprintf('Are you sure you want to delete # %s?', $user['User']['id'])); ?>
+					<?php echo $this->Form->postLink('Delete', array('controller' => 'users', 'action' => 'admin_delete', $user['User']['id']), array('class' => 'btn btn-danger', 'confirm' => sprintf('Are you sure you want to delete # %s?', $user['User']['id']))); ?>
 				</td>
 			</tr>
 			<?php endforeach; ?>
