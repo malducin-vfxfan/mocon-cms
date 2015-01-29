@@ -16,6 +16,12 @@ module.exports = function(grunt) {
       }
     },
 
+    autoprefixer: {
+      prefixSkin: {
+        src: 'frontend/build/css/skin.css'
+      }
+    },
+
     csslint: {
       options: {
         force: true,
@@ -126,6 +132,7 @@ module.exports = function(grunt) {
   });
 
   // These plugins provide necessary tasks.
+  grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-csslint');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -138,7 +145,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
 
   // CSS task.
-  grunt.registerTask('dist-css', ['less:compileSkin', 'csslint:checkSkin', 'cssmin:compressSkin', 'concat:projectCssMin', 'concat:projectCss', 'copy:projectCss']);
+  grunt.registerTask('dist-css', ['less:compileSkin', 'autoprefixer:prefixSkin', 'csslint:checkSkin', 'cssmin:compressSkin', 'concat:projectCssMin', 'concat:projectCss', 'copy:projectCss']);
 
   // Javascript task.
   grunt.registerTask('dist-js', ['jshint', 'uglify:projectJs', 'copy:projectJs']);
