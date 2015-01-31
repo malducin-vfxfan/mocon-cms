@@ -88,7 +88,7 @@ $this->start('relatedContent');
 					<td><?php echo $this->Html->link($image, '/img/pages/'.sprintf("%010d", $pageSection['Page']['id']).'/'.$image, array('target' => '_blank')); ?></td>
 					<td>
 						<?php echo $this->Html->link('View', '/img/pages/'.sprintf("%010d", $pageSection['Page']['id']).'/'.$image, array('class' => 'btn btn-default', 'target' => '_blank')); ?>
-						<?php echo $this->Form->postLink('Delete', array('controller' => 'pages', 'action' => 'admin_deleteFile', $pageSection['Page']['id'], $image), array('class' => 'btn btn-danger', 'confirm' => 'Are you sure you want to delete this image?')); ?>
+						<?php echo $this->Form->postLink('Delete', array('controller' => 'pages', 'action' => 'admin_deleteFile', $pageSection['Page']['id'], '?' => array('filename' => $image, 'fileType' => 'image', 'redirection' => 'admin_view')), array('class' => 'btn btn-danger', 'confirm' => 'Are you sure you want to delete this image?')); ?>
 					</td>
 				</tr>
 				<?php endforeach; ?>
@@ -109,7 +109,7 @@ $this->start('relatedContent');
 					<td><?php echo $this->Html->link($document, '/files/pages/'.sprintf("%010d", $pageSection['Page']['id']).'/'.$document, array('target' => '_blank')); ?></td>
 					<td>
 						<?php echo $this->Html->link('View', '/files/pages/'.sprintf("%010d", $pageSection['Page']['id']).'/'.$document, array('class' => 'btn btn-default', 'target' => '_blank')); ?>
-						<?php echo $this->Form->postLink('Delete', array('controller' => 'pages', 'action' => 'admin_deleteFile', $pageSection['Page']['id'], $document, 'files'), array('class' => 'btn btn-danger', 'confirm' => 'Are you sure you want to delete this document?')); ?>
+						<?php echo $this->Form->postLink('Delete', array('controller' => 'pages', 'action' => 'admin_deleteFile', $pageSection['Page']['id'], '?' => array('filename' => $document, 'fileType' => 'file', 'redirection' => 'admin_view')), array('class' => 'btn btn-danger', 'confirm' => 'Are you sure you want to delete this document?')); ?>
 					</td>
 				</tr>
 				<?php endforeach; ?>
