@@ -4,7 +4,7 @@
  * Javascript for the project, lightbox to display images.
  *
  * @author        Manuel Alducin
- * @copyright     Copyright (c) 2009-2014, VFXfan (http://vfxfan.com)
+ * @copyright     Copyright (c) 2009-2015, Manuel Alducin (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
  * @package       vfxfan-base.webroot.javascript
  */
