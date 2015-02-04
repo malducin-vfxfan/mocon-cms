@@ -1,5 +1,5 @@
 <?php
 
-Configure::write('Recaptcha.publicKey', 'public key');
-Configure::write('Recaptcha.privateKey', 'private key');
+Configure::write('Recaptcha.publicKey', '');
+Configure::write('Recaptcha.privateKey', '');
 ?>
