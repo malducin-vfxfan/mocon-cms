@@ -335,7 +335,7 @@ class AppModelTest extends CakeTestCase {
         $this->assertEmpty($result);
 
         // Embedded Tab
-        $result = $this->AppModel->purify('<IMG SRC="jav    ascript:alert(\'XSS\');">', $result);
+        $result = $this->AppModel->purify('<IMG SRC="jav	ascript:alert(\'XSS\');">', $result);
         $this->assertEquals('<img src="jav%20ascript%3Aalert(\'XSS\');" alt="jav ascript:alert(\'XSS\');" />', $result);
 
         // Embedded Encoded Tab
@@ -477,7 +477,7 @@ S
         $this->assertEquals('<a href="/">XSS</a>', $result);
 
         // Mixed Encoding
-        $result = $this->AppModel->purify('<A HREF="h tt    p://6&#09;6.000146.0x7.147/">XSS</A>');
+        $result = $this->AppModel->purify('<A HREF="h tt	p://6&#09;6.000146.0x7.147/">XSS</A>');
         $this->assertEquals('<a href="h%20tt%20p%3A//6%206.000146.0x7.147/">XSS</a>', $result);
 
         // Protocol Resolution Bypass
