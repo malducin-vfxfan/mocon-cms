@@ -22,23 +22,23 @@ class SystemInfosController extends AppController {
  *
  * @var array
  */
-	public $uses = array();
+    public $uses = array();
 
 /**
  * admin_index method
  *
  * @return void
  */
-	public function admin_index() {
-		$this->layout = 'default_admin';
+    public function admin_index() {
+        $this->layout = 'default_admin';
 
-		// get system variables
-		$cakephpVersion = Configure::version();
-		$phpVersion = phpversion();
-		$controllersPresent = str_replace('Controller', '', App::objects('Controller'));
+        // get system variables
+        $cakephpVersion = Configure::version();
+        $phpVersion = phpversion();
+        $controllersPresent = str_replace('Controller', '', App::objects('Controller'));
 
-		$this->set('title_for_layout', 'System Info');
-		$this->set(compact('cakephpVersion', 'phpVersion', 'controllersPresent'));
-	}
+        $this->set('title_for_layout', 'System Info');
+        $this->set(compact('cakephpVersion', 'phpVersion', 'controllersPresent'));
+    }
 
 }

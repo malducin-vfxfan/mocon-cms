@@ -20,45 +20,45 @@ class ChangeThemesController extends AppController {
  *
  * @var array
  */
-	public $uses = array();
+    public $uses = array();
 
 /**
  * beforeFilter method
  *
  * @return void
  */
-	public function beforeFilter() {
-		parent::beforeFilter();
-		// always allow the change action
-		$this->Auth->allow('change');
-	}
+    public function beforeFilter() {
+        parent::beforeFilter();
+        // always allow the change action
+        $this->Auth->allow('change');
+    }
 
 /**
  * admin_change method
  *
  * @return void
  */
-	public function admin_change() {
-		if ($this->Session->read('Config.theme') == 'default') {
-			$this->Session->write('Config.theme', 'mobile');
-		} else {
-			$this->Session->write('Config.theme', 'default');
-		}
-		return $this->redirect($this->request->referer());
-	}
+    public function admin_change() {
+        if ($this->Session->read('Config.theme') == 'default') {
+            $this->Session->write('Config.theme', 'mobile');
+        } else {
+            $this->Session->write('Config.theme', 'default');
+        }
+        return $this->redirect($this->request->referer());
+    }
 
 /**
  * change method
  *
  * @return void
  */
-	public function change() {
-		if ($this->Session->read('Config.theme') == 'default') {
-			$this->Session->write('Config.theme', 'mobile');
-		} else {
-			$this->Session->write('Config.theme', 'default');
-		}
-		return $this->redirect($this->request->referer());
-	}
+    public function change() {
+        if ($this->Session->read('Config.theme') == 'default') {
+            $this->Session->write('Config.theme', 'mobile');
+        } else {
+            $this->Session->write('Config.theme', 'default');
+        }
+        return $this->redirect($this->request->referer());
+    }
 
 }

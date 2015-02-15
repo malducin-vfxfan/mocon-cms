@@ -25,19 +25,19 @@ class PagesController extends AppController {
  *
  * @var array
  */
-	public $uses = array('Page', 'Post', 'Event');
+    public $uses = array('Page', 'Post', 'Event');
 /**
  * Helpers
  *
  * @var array
  */
-	public $helpers = array('FormatImage');
+    public $helpers = array('FormatImage');
 /**
  * Components
  *
  * @var array
  */
-	public $components = array('Upload');
+    public $components = array('Upload');
 
 /**
  * beforeFilter method
@@ -52,51 +52,51 @@ class PagesController extends AppController {
  *
  * @return void
  */
-	public function beforeFilter() {
-		parent::beforeFilter();
+    public function beforeFilter() {
+        parent::beforeFilter();
 
-		if ($this->request->action === 'admin_add' || $this->request->action === 'admin_edit') {
-			$unlocked_fields = array();
-			for ($i = 1; $i < 6; $i++) {
-				$unlocked_fields[] = 'PageSection.'.$i.'.title';
-				$unlocked_fields[] = 'PageSection.'.$i.'.section';
-				$unlocked_fields[] = 'PageSection.'.$i.'.content';
-			}
+        if ($this->request->action === 'admin_add' || $this->request->action === 'admin_edit') {
+            $unlocked_fields = array();
+            for ($i = 1; $i < 6; $i++) {
+                $unlocked_fields[] = 'PageSection.'.$i.'.title';
+                $unlocked_fields[] = 'PageSection.'.$i.'.section';
+                $unlocked_fields[] = 'PageSection.'.$i.'.content';
+            }
 
-			$unlocked_fields[] = 'File.image';
-			$unlocked_fields[] = 'File.document';
+            $unlocked_fields[] = 'File.image';
+            $unlocked_fields[] = 'File.document';
 
-			$this->Security->unlockedFields = $unlocked_fields;
-		}
+            $this->Security->unlockedFields = $unlocked_fields;
+        }
 
-		$this->Security->unlockedActions = array('admin_ajaxUploadFiles');
-	}
+        $this->Security->unlockedActions = array('admin_ajaxUploadFiles');
+    }
 
 /**
  * index method
  *
  * @return void
  */
-	public function index() {
-		// get cached latest posts, if expired find the latest
-		$posts = Cache::read('latest_posts');
-		if ($posts === false) {
-			// if cache expired or non-existent, get latest
-			$posts = $this->Post->find('latest');
-		}
+    public function index() {
+        // get cached latest posts, if expired find the latest
+        $posts = Cache::read('latest_posts');
+        if ($posts === false) {
+            // if cache expired or non-existent, get latest
+            $posts = $this->Post->find('latest');
+        }
 
-		// get cached upcoming events, if expired find the upcoming
-		$events = Cache::read('upcoming_events');
-		if ($events === false) {
-			// if cache expired or non-existent, get upcoming
-			$events = $this->Event->find('upcoming');
-		}
+        // get cached upcoming events, if expired find the upcoming
+        $events = Cache::read('upcoming_events');
+        if ($events === false) {
+            // if cache expired or non-existent, get upcoming
+            $events = $this->Event->find('upcoming');
+        }
 
-		$this->set('title_for_layout', 'Home');
-		$this->set(compact('posts', 'events'));
-		$options = array('conditions' => array('Page.main' => 1));
-		$this->set('mainpage', $this->Page->find('first', $options));
-	}
+        $this->set('title_for_layout', 'Home');
+        $this->set(compact('posts', 'events'));
+        $options = array('conditions' => array('Page.main' => 1));
+        $this->set('mainpage', $this->Page->find('first', $options));
+    }
 
 /**
  * view method
@@ -104,41 +104,41 @@ class PagesController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($slug = null) {
-		if (!$slug) {
-			throw new NotFoundException('Invalid Page.');
-		}
-		$this->Page->recursive = -1;
-		$page = $this->Page->findBySlug($slug);
-		if (!$page) {
-			throw new NotFoundException('Invalid Page.');
-		}
-		if (!$page['Page']['published']) {
-			throw new NotFoundException('Invalid Page.');
-		}
-		$this->set('title_for_layout', $page['Page']['title']);
-		$this->set(compact('page'));
+    public function view($slug = null) {
+        if (!$slug) {
+            throw new NotFoundException('Invalid Page.');
+        }
+        $this->Page->recursive = -1;
+        $page = $this->Page->findBySlug($slug);
+        if (!$page) {
+            throw new NotFoundException('Invalid Page.');
+        }
+        if (!$page['Page']['published']) {
+            throw new NotFoundException('Invalid Page.');
+        }
+        $this->set('title_for_layout', $page['Page']['title']);
+        $this->set(compact('page'));
 
-		$this->Paginator->settings = array(
-			'conditions' => array('PageSection.page_id' => $page['Page']['id'], 'PageSection.section >' => 0),
-			'limit' => 1,
-			'recursive' => -1
-		);
-		$this->set('pageSections', $this->Paginator->paginate('PageSection'));
-	}
+        $this->Paginator->settings = array(
+            'conditions' => array('PageSection.page_id' => $page['Page']['id'], 'PageSection.section >' => 0),
+            'limit' => 1,
+            'recursive' => -1
+        );
+        $this->set('pageSections', $this->Paginator->paginate('PageSection'));
+    }
 
 /**
  * admin_index method
  *
  * @return void
  */
-	public function admin_index() {
-		$this->layout = 'default_admin';
-		$this->set('title_for_layout', 'Pages');
+    public function admin_index() {
+        $this->layout = 'default_admin';
+        $this->set('title_for_layout', 'Pages');
 
-		$this->Paginator->settings = array('recursive' => 0);
-		$this->set('pages', $this->Paginator->paginate());
-	}
+        $this->Paginator->settings = array('recursive' => 0);
+        $this->set('pages', $this->Paginator->paginate());
+    }
 
 /**
  * admin_view method
@@ -146,18 +146,18 @@ class PagesController extends AppController {
  * @param string $id
  * @return void
  */
-	public function admin_view($id = null) {
-		$this->layout = 'default_admin';
-		if (!$this->Page->exists($id)) {
-			throw new NotFoundException('Invalid Page.');
-		}
-		$options = array('conditions' => array('Page.id' => $id));
-		$page = $this->Page->find('first', $options);
-		$this->set(compact('page'));
-		$this->set('title_for_layout', 'Page: '.$page['Page']['title']);
-		$this->set('images', $this->Page->listFiles($page['Page']['id'], WWW_ROOT.'img'));
-		$this->set('documents', $this->Page->listFiles($page['Page']['id'], WWW_ROOT.'files'));
-	}
+    public function admin_view($id = null) {
+        $this->layout = 'default_admin';
+        if (!$this->Page->exists($id)) {
+            throw new NotFoundException('Invalid Page.');
+        }
+        $options = array('conditions' => array('Page.id' => $id));
+        $page = $this->Page->find('first', $options);
+        $this->set(compact('page'));
+        $this->set('title_for_layout', 'Page: '.$page['Page']['title']);
+        $this->set('images', $this->Page->listFiles($page['Page']['id'], WWW_ROOT.'img'));
+        $this->set('documents', $this->Page->listFiles($page['Page']['id'], WWW_ROOT.'files'));
+    }
 
 /**
  * admin_add method
@@ -169,44 +169,44 @@ class PagesController extends AppController {
  *
  * @return void
  */
-	public function admin_add() {
-		$this->layout = 'default_admin';
-		if ($this->request->is('post')) {
-			$this->Page->create();
+    public function admin_add() {
+        $this->layout = 'default_admin';
+        if ($this->request->is('post')) {
+            $this->Page->create();
 
-			// do not validate page_id of the page sections
-			unset($this->Page->PageSection->validate['page_id']);
+            // do not validate page_id of the page sections
+            unset($this->Page->PageSection->validate['page_id']);
 
-			// save associated data non-atomically since we're not using transactions
-			// also validate set to true so to validate each record before saving,
-			// instead of trying to validate all records before any are saved, this
-			// way the page is saved first and the page_id can be set for the extra
-			// page sections
-			$result = $this->Page->saveAssociated($this->request->data, array('atomic' => false, 'validate' => true));
-			if ($result['Page']) {
-				$this->Upload->uploadFiles('img'.DS.'pages'.DS.sprintf("%010d", $this->Page->id), $this->request->data['File']['image']);
-				$this->Upload->uploadFiles('files'.DS.'pages'.DS.sprintf("%010d", $this->Page->id), $this->request->data['File']['document'], null, array('file_types' => array('application/pdf')));
+            // save associated data non-atomically since we're not using transactions
+            // also validate set to true so to validate each record before saving,
+            // instead of trying to validate all records before any are saved, this
+            // way the page is saved first and the page_id can be set for the extra
+            // page sections
+            $result = $this->Page->saveAssociated($this->request->data, array('atomic' => false, 'validate' => true));
+            if ($result['Page']) {
+                $this->Upload->uploadFiles('img'.DS.'pages'.DS.sprintf("%010d", $this->Page->id), $this->request->data['File']['image']);
+                $this->Upload->uploadFiles('files'.DS.'pages'.DS.sprintf("%010d", $this->Page->id), $this->request->data['File']['document'], null, array('file_types' => array('application/pdf')));
 
-				// check page sections
-				$page_sections_ok = true;
-				foreach ($result['PageSection'] as $result_page_section) {
-					if (!$result_page_section) {
-						$page_sections_ok = false;
-						break;
-					}
-				}
-				if ($page_sections_ok) {
-					$this->Session->setFlash('The Page has been saved.', 'Flash/success');
-				} else {
-					$this->Session->setFlash('The Page has been saved, but there was a problem saving one or more sections.', 'default', array('class' => 'alert alert-info'));
-				}
-				return $this->redirect(array('action' => 'admin_index'));
-			} else {
-				$this->Session->setFlash('The Page could not be saved. Please, try again.', 'Flash/error');
-			}
-		}
-		$this->set('title_for_layout', 'Add Page');
-	}
+                // check page sections
+                $page_sections_ok = true;
+                foreach ($result['PageSection'] as $result_page_section) {
+                    if (!$result_page_section) {
+                        $page_sections_ok = false;
+                        break;
+                    }
+                }
+                if ($page_sections_ok) {
+                    $this->Session->setFlash('The Page has been saved.', 'Flash/success');
+                } else {
+                    $this->Session->setFlash('The Page has been saved, but there was a problem saving one or more sections.', 'default', array('class' => 'alert alert-info'));
+                }
+                return $this->redirect(array('action' => 'admin_index'));
+            } else {
+                $this->Session->setFlash('The Page could not be saved. Please, try again.', 'Flash/error');
+            }
+        }
+        $this->set('title_for_layout', 'Add Page');
+    }
 
 /**
  * admin_edit method
@@ -216,46 +216,46 @@ class PagesController extends AppController {
  * @param string $id
  * @return void
  */
-	public function admin_edit($id = null) {
-		$this->layout = 'default_admin';
-		if (!$this->Page->exists($id)) {
-			throw new NotFoundException('Invalid Page.');
-		}
-		if ($this->request->is(array('post', 'put'))) {
-			// save associated data non-atomically since we're not using transactions
-			$result = $this->Page->saveAssociated($this->request->data, array('atomic' => false));
-			if ($result['Page']) {
-				$this->Upload->uploadFiles('img'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->data['File']['image']);
-				$this->Upload->uploadFiles('files'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->data['File']['document'], null, array('file_types' => array('application/pdf')));
+    public function admin_edit($id = null) {
+        $this->layout = 'default_admin';
+        if (!$this->Page->exists($id)) {
+            throw new NotFoundException('Invalid Page.');
+        }
+        if ($this->request->is(array('post', 'put'))) {
+            // save associated data non-atomically since we're not using transactions
+            $result = $this->Page->saveAssociated($this->request->data, array('atomic' => false));
+            if ($result['Page']) {
+                $this->Upload->uploadFiles('img'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->data['File']['image']);
+                $this->Upload->uploadFiles('files'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->data['File']['document'], null, array('file_types' => array('application/pdf')));
 
-				// check page sections
-				$page_sections_ok = true;
-				foreach ($result['PageSection'] as $result_page_section) {
-					if (!$result_page_section) {
-						$page_sections_ok = false;
-						break;
-					}
-				}
-				if ($page_sections_ok) {
-					$this->Session->setFlash('The Page has been saved.', 'Flash/success');
-				} else {
-					$this->Session->setFlash('The Page has been saved, but there was a problem saving one or more sections.', 'default', array('class' => 'alert alert-info'));
-				}
-				return $this->redirect(array('action' => 'admin_index'));
-			} else {
-				$this->Session->setFlash('The Page could not be saved. Please, try again.', 'Flash/error');
-			}
-		} else {
-			$options = array('conditions' => array('Page.id' => $id));
-			$this->request->data = $this->Page->find('first', $options);
-		}
-		$options = array('conditions' => array('Page.id' => $id));
-		$pageSections = $this->Page->PageSection->find('all', $options);
-		$this->set('title_for_layout', 'Edit Page');
-		$this->set(compact('pageSections'));
-		$this->set('images', $this->Page->listFiles($id, WWW_ROOT.'img'));
-		$this->set('documents', $this->Page->listFiles($id, WWW_ROOT.'files'));
-	}
+                // check page sections
+                $page_sections_ok = true;
+                foreach ($result['PageSection'] as $result_page_section) {
+                    if (!$result_page_section) {
+                        $page_sections_ok = false;
+                        break;
+                    }
+                }
+                if ($page_sections_ok) {
+                    $this->Session->setFlash('The Page has been saved.', 'Flash/success');
+                } else {
+                    $this->Session->setFlash('The Page has been saved, but there was a problem saving one or more sections.', 'default', array('class' => 'alert alert-info'));
+                }
+                return $this->redirect(array('action' => 'admin_index'));
+            } else {
+                $this->Session->setFlash('The Page could not be saved. Please, try again.', 'Flash/error');
+            }
+        } else {
+            $options = array('conditions' => array('Page.id' => $id));
+            $this->request->data = $this->Page->find('first', $options);
+        }
+        $options = array('conditions' => array('Page.id' => $id));
+        $pageSections = $this->Page->PageSection->find('all', $options);
+        $this->set('title_for_layout', 'Edit Page');
+        $this->set(compact('pageSections'));
+        $this->set('images', $this->Page->listFiles($id, WWW_ROOT.'img'));
+        $this->set('documents', $this->Page->listFiles($id, WWW_ROOT.'files'));
+    }
 
 /**
  * admin_delete method
@@ -265,21 +265,21 @@ class PagesController extends AppController {
  * @param string $id
  * @return void
  */
-	public function admin_delete($id = null) {
-		$this->layout = 'default_admin';
+    public function admin_delete($id = null) {
+        $this->layout = 'default_admin';
 
-		$this->Page->id = $id;
-		if (!$this->Page->exists()) {
-			throw new NotFoundException('Invalid Page.');
-		}
-		$this->request->allowMethod('post', 'delete');
-		if ($this->Page->delete()) {
-			$this->Session->setFlash('Page deleted.', 'Flash/success');
-			return $this->redirect(array('action' => 'admin_index'));
-		}
-		$this->Session->setFlash('Page was not deleted.', 'Flash/error');
-		return $this->redirect(array('action' => 'admin_index'));
-	}
+        $this->Page->id = $id;
+        if (!$this->Page->exists()) {
+            throw new NotFoundException('Invalid Page.');
+        }
+        $this->request->allowMethod('post', 'delete');
+        if ($this->Page->delete()) {
+            $this->Session->setFlash('Page deleted.', 'Flash/success');
+            return $this->redirect(array('action' => 'admin_index'));
+        }
+        $this->Session->setFlash('Page was not deleted.', 'Flash/error');
+        return $this->redirect(array('action' => 'admin_index'));
+    }
 
 /**
  * admin_deleteFile method
@@ -291,53 +291,53 @@ class PagesController extends AppController {
  * @param string $id
  * @return void
  */
-	public function admin_deleteFile($id = null) {
-		$this->autoRender = false;
+    public function admin_deleteFile($id = null) {
+        $this->autoRender = false;
 
-		$filename = $this->request->query('filename');
+        $filename = $this->request->query('filename');
 
-		if (empty($id) || empty($filename)) {
-			$this->Session->setFlash('Invalid Page or image.', 'Flash/error');
-			return $this->redirect(array('action' => 'admin_index'));
-		}
+        if (empty($id) || empty($filename)) {
+            $this->Session->setFlash('Invalid Page or image.', 'Flash/error');
+            return $this->redirect(array('action' => 'admin_index'));
+        }
 
-		if (!$this->Page->exists($id)) {
-			throw new NotFoundException('Invalid Page.');
-		}
+        if (!$this->Page->exists($id)) {
+            throw new NotFoundException('Invalid Page.');
+        }
 
-		$this->request->allowMethod('post', 'delete');
+        $this->request->allowMethod('post', 'delete');
 
-		$options = array('conditions' => array('Page.id' => $id));
-		$page = $this->Page->find('first', $options);
+        $options = array('conditions' => array('Page.id' => $id));
+        $page = $this->Page->find('first', $options);
 
-		if ($page) {
-			switch ($this->request->query('fileType')) {
-				case 'image':
-					$path = WWW_ROOT.'img'.DS.'pages'.DS.sprintf("%010d", $page['Page']['id']).DS.$filename;
-					$result = $this->Page->deleteFile($path);
-					break;
+        if ($page) {
+            switch ($this->request->query('fileType')) {
+                case 'image':
+                    $path = WWW_ROOT.'img'.DS.'pages'.DS.sprintf("%010d", $page['Page']['id']).DS.$filename;
+                    $result = $this->Page->deleteFile($path);
+                    break;
 
-				case 'file':
-					$path = WWW_ROOT.'files'.DS.'pages'.DS.sprintf("%010d", $page['Page']['id']).DS.$filename;
-					$result = $this->Page->deleteFile($path);
-					break;
+                case 'file':
+                    $path = WWW_ROOT.'files'.DS.'pages'.DS.sprintf("%010d", $page['Page']['id']).DS.$filename;
+                    $result = $this->Page->deleteFile($path);
+                    break;
 
-			}
-		}
+            }
+        }
 
-		if ($result) {
-			$this->Session->setFlash('File deleted.', 'Flash/success');
-		} else {
-			$this->Session->setFlash('File was not deleted.', 'Flash/error');
-		}
+        if ($result) {
+            $this->Session->setFlash('File deleted.', 'Flash/success');
+        } else {
+            $this->Session->setFlash('File was not deleted.', 'Flash/error');
+        }
 
-		$redirection = $this->request->query('redirection');
-		if (!$redirection) {
-			return $this->redirect(array('action' => 'admin_index'));
-		} else {
-			return $this->redirect(array('action' => $redirection, $id));
-		}
-	}
+        $redirection = $this->request->query('redirection');
+        if (!$redirection) {
+            return $this->redirect(array('action' => 'admin_index'));
+        } else {
+            return $this->redirect(array('action' => $redirection, $id));
+        }
+    }
 
 /**
  * admin_ajaxUploadFiles method
@@ -348,26 +348,26 @@ class PagesController extends AppController {
  * @param string $uploadType
  * @return void
  */
-	public function admin_ajaxUploadFiles($id = null, $uploadType = 'images') {
-		$this->autoRender = false;
+    public function admin_ajaxUploadFiles($id = null, $uploadType = 'images') {
+        $this->autoRender = false;
 
-		if (empty($id)) {
-			$this->response->statusCode(404);
-			return false;
-		}
+        if (empty($id)) {
+            $this->response->statusCode(404);
+            return false;
+        }
 
-		if ($this->request->is(array('post'))) {
-			switch ($uploadType) {
-				case 'images':
-					$this->Upload->uploadFiles('img'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->form);
-					break;
-				case 'files':
-					$this->Upload->uploadFiles('files'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->form, null, array('file_types' => array('application/pdf')));
-					break;
-			}
+        if ($this->request->is(array('post'))) {
+            switch ($uploadType) {
+                case 'images':
+                    $this->Upload->uploadFiles('img'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->form);
+                    break;
+                case 'files':
+                    $this->Upload->uploadFiles('files'.DS.'pages'.DS.sprintf("%010d", $id), $this->request->form, null, array('file_types' => array('application/pdf')));
+                    break;
+            }
 
-			$this->response->statusCode(200);
-			return true;
-		}
-	}
+            $this->response->statusCode(200);
+            return true;
+        }
+    }
 }

@@ -21,77 +21,77 @@ class Group extends AppModel {
  *
  * @var string
  */
-	public $displayField = 'name';
+    public $displayField = 'name';
 /**
  * Default order
  *
  * @var array
  */
-	public $order = array('Group.name' => 'ASC');
+    public $order = array('Group.name' => 'ASC');
 /**
  * Act as a Requester for ACL. Requires an implementation of
  * parentNode().
  *
  * @var array
  */
-	public $actsAs = array('Acl' => array('type' => 'requester'));
+    public $actsAs = array('Acl' => array('type' => 'requester'));
 /**
  * Validation rules
  *
  * @var array
  */
-	public $validate = array(
-		'name' => array(
-			'notempty' => array(
-				'rule' => array('notEmpty'),
-				'message' => 'This field cannot be left blank.',
-				'required' => true,
-				'last' => true // Stop validation after this rule
-			),
-			'alphanumericextended' => array(
-				'rule' => array('alphaNumericDashUnderscoreSpaceColon'),
-				'message' => 'Names must only contain letters, numbers, spaces, dashes, underscores and colons.',
-				'required' => true,
-				'last' => true // Stop validation after this rule
-			),
-			'maxlength' => array(
-				'rule' => array('maxLength', 64),
-				'message' => 'Names must be no larger than 64 characters long.',
-				'required' => true,
-				'last' => true // Stop validation after this rule
-			),
-			'isunique' => array(
-				'rule' => array('isUnique'),
-				'message' => 'This name has already been taken.',
-				'required' => true,
-				'last' => true // Stop validation after this rule
-			),
-		),
-	);
+    public $validate = array(
+        'name' => array(
+            'notempty' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'This field cannot be left blank.',
+                'required' => true,
+                'last' => true // Stop validation after this rule
+            ),
+            'alphanumericextended' => array(
+                'rule' => array('alphaNumericDashUnderscoreSpaceColon'),
+                'message' => 'Names must only contain letters, numbers, spaces, dashes, underscores and colons.',
+                'required' => true,
+                'last' => true // Stop validation after this rule
+            ),
+            'maxlength' => array(
+                'rule' => array('maxLength', 64),
+                'message' => 'Names must be no larger than 64 characters long.',
+                'required' => true,
+                'last' => true // Stop validation after this rule
+            ),
+            'isunique' => array(
+                'rule' => array('isUnique'),
+                'message' => 'This name has already been taken.',
+                'required' => true,
+                'last' => true // Stop validation after this rule
+            ),
+        ),
+    );
 /**
  * hasMany associations
  *
  * @var array
  */
-	public $hasMany = array(
-		'User' => array(
-			'className' => 'User',
-			'foreignKey' => 'group_id',
-			'dependent' => true,
-		)
-	);
+    public $hasMany = array(
+        'User' => array(
+            'className' => 'User',
+            'foreignKey' => 'group_id',
+            'dependent' => true,
+        )
+    );
 
 /**
  * beforeValidate method
  *
  * @return boolean
  */
-	public function beforeValidate($options = array()) {
-		if (!empty($this->data)) {
-			$this->data = $this->_cleanData($this->data);
-		}
-		return true;
-	}
+    public function beforeValidate($options = array()) {
+        if (!empty($this->data)) {
+            $this->data = $this->_cleanData($this->data);
+        }
+        return true;
+    }
 
 /**
  * parentNode method
@@ -102,10 +102,10 @@ class Group extends AppModel {
  *
  * @return array
  */
-	public function parentNode($type) {
-		// since groups dont have parents
-		return null;
-	}
+    public function parentNode($type) {
+        // since groups dont have parents
+        return null;
+    }
 
 /**
  * _cleanData method
@@ -115,9 +115,9 @@ class Group extends AppModel {
  * @param array $data Array of data to clean.
  * @return array
  */
-	private function _cleanData($data) {
-		$data['Group']['name'] = Group::clean(Group::purify($data['Group']['name']), array('encode' => false));
-		return $data;
-	}
+    private function _cleanData($data) {
+        $data['Group']['name'] = Group::clean(Group::purify($data['Group']['name']), array('encode' => false));
+        return $data;
+    }
 
 }

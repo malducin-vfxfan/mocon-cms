@@ -27,7 +27,7 @@ class BritaComponent extends Component {
  *
  * @var mixed
  */
-	public $controller = null;
+    public $controller = null;
 
 /**
  * startup method
@@ -37,35 +37,35 @@ class BritaComponent extends Component {
  * @param reference $controller
  * @return void
  */
-	public function startup(Controller $controller) {
+    public function startup(Controller $controller) {
 
-		// the next few lines allow the config settings to be cached
-		$config = HTMLPurifier_Config::createDefault();
-		$config->set('HTML.DefinitionID', 'made by malducin');
-		$config->set('HTML.DefinitionRev', 2);
-		// levels describe how aggressive the Tidy module should be when cleaning up html, four levels: none, light, medium, heavy
-		$config->set('HTML.TidyLevel', 'heavy');
-		// check the top of your html file for the next two
-		$config->set('HTML.Doctype', 'XHTML 1.0 Transitional');
-		$config->set('Core.Encoding', 'UTF-8');
+        // the next few lines allow the config settings to be cached
+        $config = HTMLPurifier_Config::createDefault();
+        $config->set('HTML.DefinitionID', 'made by malducin');
+        $config->set('HTML.DefinitionRev', 2);
+        // levels describe how aggressive the Tidy module should be when cleaning up html, four levels: none, light, medium, heavy
+        $config->set('HTML.TidyLevel', 'heavy');
+        // check the top of your html file for the next two
+        $config->set('HTML.Doctype', 'XHTML 1.0 Transitional');
+        $config->set('Core.Encoding', 'UTF-8');
 
-		// enable id attribute in tags
-		$config->set('Attr.EnableID', true);
+        // enable id attribute in tags
+        $config->set('Attr.EnableID', true);
 
-		// check to see if we can get raw definition and add attributes
-		if ($def = $config->maybeGetRawHTMLDefinition()) {
-			// adding target attribute to anchor tag
-			$def->addAttribute('a', 'target', 'Enum#_blank,_self,_target,_top');
-			// adding rel attibute to anchor tag
-			$def->addAttribute('a', 'rel', 'CDATA');
+        // check to see if we can get raw definition and add attributes
+        if ($def = $config->maybeGetRawHTMLDefinition()) {
+            // adding target attribute to anchor tag
+            $def->addAttribute('a', 'target', 'Enum#_blank,_self,_target,_top');
+            // adding rel attibute to anchor tag
+            $def->addAttribute('a', 'rel', 'CDATA');
 
-			// Add HTML5 elements
-			$def->addElement('figure', 'Flow', 'Flow', 'Common', array());
-			$def->addElement('figcaption', 'Flow', 'Flow', 'Common', array());
-		}
+            // Add HTML5 elements
+            $def->addElement('figure', 'Flow', 'Flow', 'Common', array());
+            $def->addElement('figcaption', 'Flow', 'Flow', 'Common', array());
+        }
 
-		// BritaComponent instance of controller is replaced by a htmlpurifier instance
-		$controller->brita = new HTMLPurifier($config);
-		$controller->set('brita', $controller->brita);
+        // BritaComponent instance of controller is replaced by a htmlpurifier instance
+        $controller->brita = new HTMLPurifier($config);
+        $controller->set('brita', $controller->brita);
     }
 }

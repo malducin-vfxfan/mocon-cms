@@ -26,80 +26,80 @@ class Album extends AppModel {
  *
  * @var string
  */
-	public $displayField = 'name';
+    public $displayField = 'name';
 /**
  * Default order
  *
  * @var array
  */
-	public $order = array('Album.created' => 'DESC');
+    public $order = array('Album.created' => 'DESC');
 /**
  * Validation rules
  *
  * @var array
  */
-	public $validate = array(
-		'name' => array(
-			'notempty' => array(
-				'rule' => array('notEmpty'),
-				'message' => 'This field cannot be left blank.',
-				'required' => true,
-				'last' => true, // Stop validation after this rule
-			),
-			'maxlength' => array(
-				'rule' => array('maxLength', 128),
-				'message' => 'Names must be no larger than 128 characters long.',
-				'required' => true,
-				'last' => true, // Stop validation after this rule
-			),
-			'isunique' => array(
-				'rule' => array('isUnique'),
-				'message' => 'This name has already been taken.',
-				'required' => true,
-				'last' => true // Stop validation after this rule
-			),
-		),
-		'description' => array(
-			'notempty' => array(
-				'rule' => array('notEmpty'),
-				'message' => 'This field cannot be left blank.',
-				'required' => true,
-				'last' => true, // Stop validation after this rule
-			),
-			'maxlength' => array(
-				'rule' => array('maxLength', 255),
-				'message' => 'Descriptions must be no larger than 255 characters long.',
-				'required' => true,
-				'last' => true, // Stop validation after this rule
-			),
-		),
-		'slug' => array(
-			'notempty' => array(
-				'rule' => array('notEmpty'),
-				'message' => 'This field cannot be left blank.',
-				'required' => true,
-				'last' => true, // Stop validation after this rule
-			),
-			'alphanumericextended' => array(
-				'rule' => array('alphaNumericDashUnderscoreSpaceColon'),
-				'message' => 'Names must only contain letters, numbers, spaces, dashes, underscores and colons.',
-				'required' => true,
-				'last' => true // Stop validation after this rule
-			),
-			'maxlength' => array(
-				'rule' => array('maxLength', 128),
-				'message' => 'Slugs must be no larger than 128 characters long.',
-				'required' => true,
-				'last' => true, // Stop validation after this rule
-			),
-			'isunique' => array(
-				'rule' => array('isUnique'),
-				'message' => 'This slug has already been taken.',
-				'required' => true,
-				'last' => true // Stop validation after this rule
-			),
-		),
-	);
+    public $validate = array(
+        'name' => array(
+            'notempty' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'This field cannot be left blank.',
+                'required' => true,
+                'last' => true, // Stop validation after this rule
+            ),
+            'maxlength' => array(
+                'rule' => array('maxLength', 128),
+                'message' => 'Names must be no larger than 128 characters long.',
+                'required' => true,
+                'last' => true, // Stop validation after this rule
+            ),
+            'isunique' => array(
+                'rule' => array('isUnique'),
+                'message' => 'This name has already been taken.',
+                'required' => true,
+                'last' => true // Stop validation after this rule
+            ),
+        ),
+        'description' => array(
+            'notempty' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'This field cannot be left blank.',
+                'required' => true,
+                'last' => true, // Stop validation after this rule
+            ),
+            'maxlength' => array(
+                'rule' => array('maxLength', 255),
+                'message' => 'Descriptions must be no larger than 255 characters long.',
+                'required' => true,
+                'last' => true, // Stop validation after this rule
+            ),
+        ),
+        'slug' => array(
+            'notempty' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'This field cannot be left blank.',
+                'required' => true,
+                'last' => true, // Stop validation after this rule
+            ),
+            'alphanumericextended' => array(
+                'rule' => array('alphaNumericDashUnderscoreSpaceColon'),
+                'message' => 'Names must only contain letters, numbers, spaces, dashes, underscores and colons.',
+                'required' => true,
+                'last' => true // Stop validation after this rule
+            ),
+            'maxlength' => array(
+                'rule' => array('maxLength', 128),
+                'message' => 'Slugs must be no larger than 128 characters long.',
+                'required' => true,
+                'last' => true, // Stop validation after this rule
+            ),
+            'isunique' => array(
+                'rule' => array('isUnique'),
+                'message' => 'This slug has already been taken.',
+                'required' => true,
+                'last' => true // Stop validation after this rule
+            ),
+        ),
+    );
 
 /**
  * constructor method
@@ -111,28 +111,28 @@ class Album extends AppModel {
  * @param string $ds The connection name this model is connected to
  * @return void
  */
-	public function __construct($id = false, $table = null, $ds = null) {
-		parent::__construct($id, $table, $ds);
-		$this->virtualFields['year'] = sprintf('YEAR(%s.created)', $this->alias);
-	}
+    public function __construct($id = false, $table = null, $ds = null) {
+        parent::__construct($id, $table, $ds);
+        $this->virtualFields['year'] = sprintf('YEAR(%s.created)', $this->alias);
+    }
 
 /**
  * hasMany associations
  *
  * @var array
  */
-	public $hasMany = array(
-		'AlbumImage' => array(
-			'className' => 'AlbumImage',
-		)
-	);
+    public $hasMany = array(
+        'AlbumImage' => array(
+            'className' => 'AlbumImage',
+        )
+    );
 
 /**
  * Preview images order
  *
  * @var array
  */
-	public $orderPreviewImages = array('md', 'sm', 'xs', 'ml', 'lg');
+    public $orderPreviewImages = array('md', 'sm', 'xs', 'ml', 'lg');
 
 /**
  * beforeValidate method
@@ -142,15 +142,15 @@ class Album extends AppModel {
  *
  * @return boolean
  */
-	public function beforeValidate($options = array()) {
-		if (!empty($this->data)) {
-			if (!$this->id) {
-				$this->data['Album']['slug'] = strtolower(Inflector::slug($this->data['Album']['name'], '-'));
-			}
-			$this->data = $this->_cleanData($this->data);
-		}
-		return true;
-	}
+    public function beforeValidate($options = array()) {
+        if (!empty($this->data)) {
+            if (!$this->id) {
+                $this->data['Album']['slug'] = strtolower(Inflector::slug($this->data['Album']['name'], '-'));
+            }
+            $this->data = $this->_cleanData($this->data);
+        }
+        return true;
+    }
 
 /**
  * afterSave method
@@ -160,21 +160,21 @@ class Album extends AppModel {
  * @param boolean $created
  * @return void
  */
-	public function afterSave($created, $options = array()) {
-		if ($created) {
-			$options = array('conditions' => array('Album.id' => $this->id));
-			$album = $this->find('first', $options);
-			if ($album) {
-				$folder = WWW_ROOT.'img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id);
-				$dir = new Folder();
-				if (!is_file($folder)) {
-					$dir->create($folder);
-				}
-				$dir->create($folder.DS.'thumbnails');
-				$dir->create($folder.DS.'preview');
-			}
-		}
-	}
+    public function afterSave($created, $options = array()) {
+        if ($created) {
+            $options = array('conditions' => array('Album.id' => $this->id));
+            $album = $this->find('first', $options);
+            if ($album) {
+                $folder = WWW_ROOT.'img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id);
+                $dir = new Folder();
+                if (!is_file($folder)) {
+                    $dir->create($folder);
+                }
+                $dir->create($folder.DS.'thumbnails');
+                $dir->create($folder.DS.'preview');
+            }
+        }
+    }
 
 /**
  * beforeDelete method
@@ -187,19 +187,19 @@ class Album extends AppModel {
  * @param boolean $cascade
  * @return boolean
  */
-	public function beforeDelete($cascade = true) {
-		$options = array('conditions' => array('Album.id' => $this->id));
-		$album = $this->find('first', $options);
+    public function beforeDelete($cascade = true) {
+        $options = array('conditions' => array('Album.id' => $this->id));
+        $album = $this->find('first', $options);
 
-		if ($album) {
-			$folder = WWW_ROOT.'img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id);
-			$dir = new Folder($folder);
+        if ($album) {
+            $folder = WWW_ROOT.'img'.DS.'albums'.DS.$album['Album']['year'].DS.sprintf("%010d", $this->id);
+            $dir = new Folder($folder);
 
-			$dir->delete();
-		}
+            $dir->delete();
+        }
 
-		return true;
-	}
+        return true;
+    }
 
 /**
  * afterFind method
@@ -210,21 +210,21 @@ class Album extends AppModel {
  * @param boolean $primary
  * @return array
  */
-	public function afterFind($results, $primary = false) {
-		foreach ($results as $key => $val) {
-			// check to see we have an id key, for example to exclude distinct years list
-			if (isset($results[$key]['Album']['id']) && isset($results[$key]['Album']['year']) && $primary) {
-				$dir = new Folder(WWW_ROOT.'img'.DS.'albums'.DS.$results[$key]['Album']['year'].DS.sprintf("%010d", $results[$key]['Album']['id']).DS.'preview');
-				foreach ($this->orderPreviewImages as $value) {
-					$images[$value] = $dir->find('.*\.'.$value.'\.jpg', true);
-					$results[$key]['Album']['preview_images'] = $images;
-				}
-				$others = $dir->find('.*(?!\.xs|\.sm|\.md|\.ml|\.lg|\.vl|\.xl).{3}\.jpg', true);
-				$results[$key]['Album']['preview_images']['others'] = $others;
-			}
-		}
-		return $results;
-	}
+    public function afterFind($results, $primary = false) {
+        foreach ($results as $key => $val) {
+            // check to see we have an id key, for example to exclude distinct years list
+            if (isset($results[$key]['Album']['id']) && isset($results[$key]['Album']['year']) && $primary) {
+                $dir = new Folder(WWW_ROOT.'img'.DS.'albums'.DS.$results[$key]['Album']['year'].DS.sprintf("%010d", $results[$key]['Album']['id']).DS.'preview');
+                foreach ($this->orderPreviewImages as $value) {
+                    $images[$value] = $dir->find('.*\.'.$value.'\.jpg', true);
+                    $results[$key]['Album']['preview_images'] = $images;
+                }
+                $others = $dir->find('.*(?!\.xs|\.sm|\.md|\.ml|\.lg|\.vl|\.xl).{3}\.jpg', true);
+                $results[$key]['Album']['preview_images']['others'] = $others;
+            }
+        }
+        return $results;
+    }
 
 /**
  * _cleanData method
@@ -234,12 +234,12 @@ class Album extends AppModel {
  * @param array $data Array of data to clean.
  * @return array
  */
-	private function _cleanData($data) {
-		$data['Album']['name'] = Album::clean(Album::purify($data['Album']['name']));
-		$data['Album']['slug'] = Album::clean(Album::purify($data['Album']['slug']), array('encode' => false));
-		$data['Album']['description'] = Album::clean(Album::purify($data['Album']['description']));
-		return $data;
-	}
+    private function _cleanData($data) {
+        $data['Album']['name'] = Album::clean(Album::purify($data['Album']['name']));
+        $data['Album']['slug'] = Album::clean(Album::purify($data['Album']['slug']), array('encode' => false));
+        $data['Album']['description'] = Album::clean(Album::purify($data['Album']['description']));
+        return $data;
+    }
 
 /**
  * getAlbumThumbnails method
@@ -249,14 +249,14 @@ class Album extends AppModel {
  * @param string $id
  * @return array
  */
-	public function getAlbumThumbnails($id = null, $year = null) {
-		if (!$id || !$year) return array();
+    public function getAlbumThumbnails($id = null, $year = null) {
+        if (!$id || !$year) return array();
 
-		$dir = new Folder(WWW_ROOT.'img'.DS.'albums'.DS.$year.DS.sprintf("%010d", $id).DS.'thumbnails');
-		$images = $dir->find('.*', true);
+        $dir = new Folder(WWW_ROOT.'img'.DS.'albums'.DS.$year.DS.sprintf("%010d", $id).DS.'thumbnails');
+        $images = $dir->find('.*', true);
 
-		return $images;
-	}
+        return $images;
+    }
 
 /**
  * deleteFile method
@@ -268,13 +268,13 @@ class Album extends AppModel {
  * @param string $filename
  * @return boolean
  */
-	public function deleteFile($path = null) {
-		if (empty($path)) return false;
+    public function deleteFile($path = null) {
+        if (empty($path)) return false;
 
-		$file = new File($path);
-		$result = $file->delete();
+        $file = new File($path);
+        $result = $file->delete();
 
-		return $result;
-	}
+        return $result;
+    }
 
 }

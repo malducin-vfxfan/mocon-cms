@@ -27,8 +27,8 @@ App::uses('Controller', 'Controller');
  * Add your application-wide methods in the class below, your controllers
  * will inherit them.
  *
- * @package		vfxfan-base.Controller
- * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
+ * @package     vfxfan-base.Controller
+ * @link        http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
 /**
@@ -59,33 +59,33 @@ class AppController extends Controller {
  *
  * @var array
  */
-	public $components = array(
-		'Acl',
-		'Auth' => array(
-			'authenticate' => array(
-				'Form' => array(
-					'passwordHasher' => array(
-						'className' => 'BlowfishAdvanced'
-					)
-				)
-			),
-			'authorize' => array(
-				'Actions' => array('actionPath' => 'controllers'), // use ACL based authorization
-//				'Controller' // use controller based authorization
-			)
-		),
-		'Paginator',
-		'Security',
-		'Session',
-//		'DebugKit.Toolbar',
-	);
+    public $components = array(
+        'Acl',
+        'Auth' => array(
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => array(
+                        'className' => 'BlowfishAdvanced'
+                    )
+                )
+            ),
+            'authorize' => array(
+                'Actions' => array('actionPath' => 'controllers'), // use ACL based authorization
+//              'Controller' // use controller based authorization
+            )
+        ),
+        'Paginator',
+        'Security',
+        'Session',
+//      'DebugKit.Toolbar',
+    );
 
 /**
  * Helpers
  *
  * @var array
  */
-	public $helpers = array('Form', 'Html', 'Menu', 'Session');
+    public $helpers = array('Form', 'Html', 'Menu', 'Session');
 
 /**
  * beforeFilter method
@@ -97,40 +97,40 @@ class AppController extends Controller {
  *
  * @return void
  */
-	public function beforeFilter() {
-		// always allow index and view access
-		$this->Auth->allow(array('index', 'view'));
+    public function beforeFilter() {
+        // always allow index and view access
+        $this->Auth->allow(array('index', 'view'));
 
-		// set the login and logout actions
-		$this->Auth->loginAction = array('controller' => 'users', 'action' => 'admin_login');
-		$this->Auth->loginRedirect = array('controller' => 'posts', 'action' => 'admin_index');
-		$this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'admin_login');
-		$this->Auth->flash['element'] = 'Flash/auth';
+        // set the login and logout actions
+        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'admin_login');
+        $this->Auth->loginRedirect = array('controller' => 'posts', 'action' => 'admin_index');
+        $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'admin_login');
+        $this->Auth->flash['element'] = 'Flash/auth';
 
-		// set security options
-		$this->Security->csrfExpires = '+10 minutes';
-		$this->Security->blackHoleCallback = 'blackhole';
-		$this->Security->requireAuth(array('admin_index', 'admin_view', 'admin_add', 'admin_edit', 'admin_delete'));
-		Security::setHash('sha256');
-		Security::setCost(Configure::read('Security.BlowfishAdvanced.cost'));
+        // set security options
+        $this->Security->csrfExpires = '+10 minutes';
+        $this->Security->blackHoleCallback = 'blackhole';
+        $this->Security->requireAuth(array('admin_index', 'admin_view', 'admin_add', 'admin_edit', 'admin_delete'));
+        Security::setHash('sha256');
+        Security::setCost(Configure::read('Security.BlowfishAdvanced.cost'));
 
-		// check to see if we are on a mobile device
-		if (!$this->Session->check('Config.theme')) {
-			if ($this->request->is('mobile')) {
-				$this->Session->write('Config.theme', 'mobile');
-			} else {
-				$this->Session->write('Config.theme', 'default');
-			}
-		}
+        // check to see if we are on a mobile device
+        if (!$this->Session->check('Config.theme')) {
+            if ($this->request->is('mobile')) {
+                $this->Session->write('Config.theme', 'mobile');
+            } else {
+                $this->Session->write('Config.theme', 'default');
+            }
+        }
 
-		// use the Mobile theme if configured
-		if ($this->Session->read('Config.theme') == 'mobile') {
-			$this->theme = 'Mobile';
-		} else {
-			$this->theme = null;
-		}
-		$this->response->vary('User-Agent');
-	}
+        // use the Mobile theme if configured
+        if ($this->Session->read('Config.theme') == 'mobile') {
+            $this->theme = 'Mobile';
+        } else {
+            $this->theme = null;
+        }
+        $this->response->vary('User-Agent');
+    }
 
 /**
  * isAuthorized method
@@ -141,20 +141,20 @@ class AppController extends Controller {
  *
  * @return boolean
  */
-	public function isAuthorized($user = null) {
-		// Any registered user can access public functions
-		if (empty($this->request->params['admin'])) { // could also check $this->request->prefix
-			return true;
-		}
+    public function isAuthorized($user = null) {
+        // Any registered user can access public functions
+        if (empty($this->request->params['admin'])) { // could also check $this->request->prefix
+            return true;
+        }
 
-		// Only admins can access admin functions
-		if (isset($this->request->params['admin'])) { // could also check $this->request->prefix
-			return (bool)($user['Group']['name'] === 'Administrators'); // could also check $this->Auth->user('Group.name')
-		}
+        // Only admins can access admin functions
+        if (isset($this->request->params['admin'])) { // could also check $this->request->prefix
+            return (bool)($user['Group']['name'] === 'Administrators'); // could also check $this->Auth->user('Group.name')
+        }
 
-		// Default deny
-		return false;
-	}
+        // Default deny
+        return false;
+    }
 
 /**
  * blackhole method
@@ -169,16 +169,16 @@ class AppController extends Controller {
  *
  * @return void
  */
-	public function blackhole($type) {
-		if ($type == 'csrf') {
-			$this->Session->setFlash('The Form has expired, please try again.', 'Flash/error');
-			return $this->redirect(array('action' => $this->request->action));
-		} elseif ($type == 'auth') {
-			$this->Session->setFlash('There was a problem with the action (probably validation), please try again.', 'Flash/error');
-			return $this->redirect(array('action' => $this->request->action));
-		} else {
-			throw new NotFoundException('Invalid action.');
-		}
-	}
+    public function blackhole($type) {
+        if ($type == 'csrf') {
+            $this->Session->setFlash('The Form has expired, please try again.', 'Flash/error');
+            return $this->redirect(array('action' => $this->request->action));
+        } elseif ($type == 'auth') {
+            $this->Session->setFlash('There was a problem with the action (probably validation), please try again.', 'Flash/error');
+            return $this->redirect(array('action' => $this->request->action));
+        } else {
+            throw new NotFoundException('Invalid action.');
+        }
+    }
 
 }

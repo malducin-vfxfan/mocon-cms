@@ -21,15 +21,15 @@ class SearchResultsController extends AppController {
  *
  * @var array
  */
-	public $uses = array();
+    public $uses = array();
 
 /**
  * admin_index method
  *
  * @return void
  */
-	public function index() {
-		$this->set('title_for_layout', 'Search Results');
-	}
+    public function index() {
+        $this->set('title_for_layout', 'Search Results');
+    }
 
 }

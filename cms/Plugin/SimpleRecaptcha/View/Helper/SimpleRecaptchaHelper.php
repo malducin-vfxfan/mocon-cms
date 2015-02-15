@@ -20,7 +20,7 @@ class SimpleRecaptchaHelper extends AppHelper {
  *
  * @var array
  */
-	public $helpers = array('Html');
+    public $helpers = array('Html');
 
 /**
  * widget method
@@ -29,12 +29,12 @@ class SimpleRecaptchaHelper extends AppHelper {
  *
  * @return string
  */
-	public function widget($options = array()) {
-		$default = array(
-			'theme' => 'light',
-		);
-		$options = array_merge($default, $options);
+    public function widget($options = array()) {
+        $default = array(
+            'theme' => 'light',
+        );
+        $options = array_merge($default, $options);
 
-		return $this->Html->tag('div', null, array('class' => 'g-recaptcha', 'data-sitekey' => Configure::read('SimpleRecaptcha.publicKey'), 'data-theme' => $options['theme']));
-	}
+        return $this->Html->tag('div', null, array('class' => 'g-recaptcha', 'data-sitekey' => Configure::read('SimpleRecaptcha.publicKey'), 'data-theme' => $options['theme']));
+    }
 }

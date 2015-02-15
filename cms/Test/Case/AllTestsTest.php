@@ -10,9 +10,9 @@
  * @package       vfxfan-base.Test.Case
  */
 class AllTestsTest extends CakeTestSuite {
-	public static function suite() {
-		$suite = new CakeTestSuite('All tests');
-		$suite->addTestDirectoryRecursive(TESTS . 'Case');
-		return $suite;
-	}
+    public static function suite() {
+        $suite = new CakeTestSuite('All tests');
+        $suite->addTestDirectoryRecursive(TESTS . 'Case');
+        return $suite;
+    }
 }

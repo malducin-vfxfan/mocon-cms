@@ -20,14 +20,14 @@ class SimpleRecaptchaComponent extends Component {
  *
  * @var mixed
  */
-	public $controller = null;
+    public $controller = null;
 
 /**
  * Components
  *
  * @var array
  */
-	public $components = array('Security');
+    public $components = array('Security');
 
 /**
  * Callback
@@ -37,26 +37,26 @@ class SimpleRecaptchaComponent extends Component {
  * @throws Exception Throws an exception if Recaptchas config is not present
  * @return void
  */
-	public function initialize(Controller $controller, $settings = array()) {
-		if ($controller->name === 'CakeError') {
-			return;
-		}
-		$this->privateKey = Configure::read('SimpleRecaptcha.privateKey');
-		$this->Controller = $controller;
+    public function initialize(Controller $controller, $settings = array()) {
+        if ($controller->name === 'CakeError') {
+            return;
+        }
+        $this->privateKey = Configure::read('SimpleRecaptcha.privateKey');
+        $this->Controller = $controller;
 
-		// add the plugin helper to the controller
-		if (!isset($this->Controller->helpers['SimpleRecaptcha.SimpleRecaptcha'])) {
-			$this->Controller->helpers[] = 'SimpleRecaptcha.SimpleRecaptcha';
-		}
+        // add the plugin helper to the controller
+        if (!isset($this->Controller->helpers['SimpleRecaptcha.SimpleRecaptcha'])) {
+            $this->Controller->helpers[] = 'SimpleRecaptcha.SimpleRecaptcha';
+        }
 
-		// unlock the textarea reCAPTCHA field since it's not part of the original form
-		$this->Security->unlockedFields[] = 'g-recaptcha-response';
+        // unlock the textarea reCAPTCHA field since it's not part of the original form
+        $this->Security->unlockedFields[] = 'g-recaptcha-response';
 
-		// throw and exception if the private key is not set
-		if (empty($this->privateKey)) {
-			throw new Exception(__d('recaptcha', "You must set your private reCAPTCHA key using Configure::write('SimpleRecaptcha.privateKey', 'your-key');!", true));
-		}
-	}
+        // throw and exception if the private key is not set
+        if (empty($this->privateKey)) {
+            throw new Exception(__d('recaptcha', "You must set your private reCAPTCHA key using Configure::write('SimpleRecaptcha.privateKey', 'your-key');!", true));
+        }
+    }
 
 /**
  * verify method
@@ -65,15 +65,15 @@ class SimpleRecaptchaComponent extends Component {
  *
  * @return boolean True if the response was correct
  */
-	public function verify($response_string = null) {
-		$HttpSocket = new HttpSocket();
+    public function verify($response_string = null) {
+        $HttpSocket = new HttpSocket();
 
-		// verify the response string
-		$data = array('secret' => Configure::read('SimpleRecaptcha.privateKey'), 'response' => $response_string);
-		$response = $HttpSocket->post('https://www.google.com/recaptcha/api/siteverify', $data);
+        // verify the response string
+        $data = array('secret' => Configure::read('SimpleRecaptcha.privateKey'), 'response' => $response_string);
+        $response = $HttpSocket->post('https://www.google.com/recaptcha/api/siteverify', $data);
 
-		// the response is JSON in a string
-		return json_decode($response->body, true);
-	}
+        // the response is JSON in a string
+        return json_decode($response->body, true);
+    }
 
 }

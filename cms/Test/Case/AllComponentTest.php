@@ -10,9 +10,9 @@
  * @package       vfxfan-base.Test.Case
  */
 class AllComponentTest extends CakeTestSuite {
-	public static function suite() {
-		$suite = new CakeTestSuite('All Component tests');
-		$suite->addTestDirectory(TESTS . 'Case/Controller/Component');
-		return $suite;
-	}
+    public static function suite() {
+        $suite = new CakeTestSuite('All Component tests');
+        $suite->addTestDirectory(TESTS . 'Case/Controller/Component');
+        return $suite;
+    }
 }

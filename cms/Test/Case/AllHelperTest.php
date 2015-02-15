@@ -10,9 +10,9 @@
  * @package       vfxfan-base.Test.Case
  */
 class AllHelperTest extends CakeTestSuite {
-	public static function suite() {
-		$suite = new CakeTestSuite('All Helper tests');
-		$suite->addTestDirectory(TESTS . 'Case/View/Helper');
-		return $suite;
-	}
+    public static function suite() {
+        $suite = new CakeTestSuite('All Helper tests');
+        $suite->addTestDirectory(TESTS . 'Case/View/Helper');
+        return $suite;
+    }
 }

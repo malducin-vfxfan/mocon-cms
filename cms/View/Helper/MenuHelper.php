@@ -24,7 +24,7 @@ class MenuHelper extends AppHelper {
  *
  * @var array
  */
-	public $helpers = array('Html');
+    public $helpers = array('Html');
 
 /**
  * bootstrapMenu method
@@ -34,9 +34,9 @@ class MenuHelper extends AppHelper {
  * @param $menuItems array
  * @return string
  */
-	public function bootstrapMenu($menuItems) {
-		return $this->Html->tag('ul', $this->bootstrapMenuIterator($menuItems), array('class' => 'nav navbar-nav'));
-	}
+    public function bootstrapMenu($menuItems) {
+        return $this->Html->tag('ul', $this->bootstrapMenuIterator($menuItems), array('class' => 'nav navbar-nav'));
+    }
 
 /**
  * bootstrapMenuIterator method
@@ -46,23 +46,23 @@ class MenuHelper extends AppHelper {
  * @param $menuItems array
  * @return string
  */
-	private function bootstrapMenuIterator($menuItems) {
-		if (empty($menuItems)) return;
+    private function bootstrapMenuIterator($menuItems) {
+        if (empty($menuItems)) return;
 
-		$menu = array();
+        $menu = array();
 
-		foreach ($menuItems as $item) {
-			if (!empty($item['children'])) {
-				$menu[] = '<li class="dropdown">' . $this->Html->link($item['Menu']['name'].$this->Html->tag('span', '', array('class' => 'caret')), $item['Menu']['link'], array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'escapeTitle' => false));
-				$menu[] = '<ul class="dropdown-menu">';
-				$menu[] = $this->bootstrapMenuIterator($item['children']);
-				$menu[] = '</ul>';
-			} else {
-				$menu[] = '<li>' . $this->Html->link($item['Menu']['name'], $item['Menu']['link']);
-			}
-			$menu[] = '</li>';
-		}
+        foreach ($menuItems as $item) {
+            if (!empty($item['children'])) {
+                $menu[] = '<li class="dropdown">' . $this->Html->link($item['Menu']['name'].$this->Html->tag('span', '', array('class' => 'caret')), $item['Menu']['link'], array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'escapeTitle' => false));
+                $menu[] = '<ul class="dropdown-menu">';
+                $menu[] = $this->bootstrapMenuIterator($item['children']);
+                $menu[] = '</ul>';
+            } else {
+                $menu[] = '<li>' . $this->Html->link($item['Menu']['name'], $item['Menu']['link']);
+            }
+            $menu[] = '</li>';
+        }
 
-		return implode($menu, "\n");
-	}
+        return implode($menu, "\n");
+    }
 }

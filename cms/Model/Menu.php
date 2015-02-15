@@ -25,98 +25,98 @@ class Menu extends AppModel {
  *
  * @var string
  */
-	public $displayField = 'name';
+    public $displayField = 'name';
 /**
  * Default order
  *
  * @var array
  */
-	public $order = array(
-		'Menu.parent_id' => 'ASC',
-		'Menu.priority' => 'ASC',
-		'Menu.name' => 'ASC',
-	);
+    public $order = array(
+        'Menu.parent_id' => 'ASC',
+        'Menu.priority' => 'ASC',
+        'Menu.name' => 'ASC',
+    );
 /**
  * Validation rules
  *
  * @var array
  */
-	public $validate = array(
-		'name' => array(
-			'notempty' => array(
-				'rule' => array('notEmpty'),
-				'message' => 'This field cannot be left blank.',
-				'required' => false,
-				'last' => true, // Stop validation after this rule
-			),
-			'alphanumericextended' => array(
-				'rule' => array('alphaNumericDashUnderscoreSpaceColon'),
-				'message' => 'Names must only contain letters, numbers, spaces, dashes, underscores and colons.',
-				'required' => true,
-				'last' => true // Stop validation after this rule
-			),
-			'maxlength' => array(
-				'rule' => array('maxLength', 128),
-				'message' => 'Names must be no larger than 128 characters long.',
-				'required' => false,
-				'last' => true, // Stop validation after this rule
-			),
-		),
-		'link' => array(
-			'notempty' => array(
-				'rule' => array('notEmpty'),
-				'message' => 'This field cannot be left blank.',
-				'required' => false,
-				'last' => true, // Stop validation after this rule
-			),
-			'maxlength' => array(
-				'rule' => array('maxLength', 255),
-				'message' => 'Links must be no larger than 255 characters long.',
-				'required' => false,
-				'last' => true, // Stop validation after this rule
-			),
-		),
-		'parent_id' => array(
-			'notempty' => array(
-				'rule' => array('notEmpty'),
-				'message' => 'This field cannot be left blank.',
-				'required' => false,
-				'last' => true, // Stop validation after this rule
-			),
-			'numeric' => array(
-				'rule' => array('numeric'),
-				'message' => 'This field is numeric.',
-				'required' => false,
-				'last' => true, // Stop validation after this rule
-			),
-		),
-		'priority' => array(
-			'notempty' => array(
-				'rule' => array('notEmpty'),
-				'message' => 'This field cannot be left blank.',
-				'required' => false,
-				'last' => true, // Stop validation after this rule
-			),
-			'numeric' => array(
-				'rule' => array('numeric'),
-				'message' => 'This field is numeric.',
-				'required' => false,
-				'last' => true, // Stop validation after this rule
-			),
-		),
-	);
+    public $validate = array(
+        'name' => array(
+            'notempty' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'This field cannot be left blank.',
+                'required' => false,
+                'last' => true, // Stop validation after this rule
+            ),
+            'alphanumericextended' => array(
+                'rule' => array('alphaNumericDashUnderscoreSpaceColon'),
+                'message' => 'Names must only contain letters, numbers, spaces, dashes, underscores and colons.',
+                'required' => true,
+                'last' => true // Stop validation after this rule
+            ),
+            'maxlength' => array(
+                'rule' => array('maxLength', 128),
+                'message' => 'Names must be no larger than 128 characters long.',
+                'required' => false,
+                'last' => true, // Stop validation after this rule
+            ),
+        ),
+        'link' => array(
+            'notempty' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'This field cannot be left blank.',
+                'required' => false,
+                'last' => true, // Stop validation after this rule
+            ),
+            'maxlength' => array(
+                'rule' => array('maxLength', 255),
+                'message' => 'Links must be no larger than 255 characters long.',
+                'required' => false,
+                'last' => true, // Stop validation after this rule
+            ),
+        ),
+        'parent_id' => array(
+            'notempty' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'This field cannot be left blank.',
+                'required' => false,
+                'last' => true, // Stop validation after this rule
+            ),
+            'numeric' => array(
+                'rule' => array('numeric'),
+                'message' => 'This field is numeric.',
+                'required' => false,
+                'last' => true, // Stop validation after this rule
+            ),
+        ),
+        'priority' => array(
+            'notempty' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'This field cannot be left blank.',
+                'required' => false,
+                'last' => true, // Stop validation after this rule
+            ),
+            'numeric' => array(
+                'rule' => array('numeric'),
+                'message' => 'This field is numeric.',
+                'required' => false,
+                'last' => true, // Stop validation after this rule
+            ),
+        ),
+    );
 
 /**
  * beforeValidate method
  *
  * @return boolean
  */
-	public function beforeValidate($options = array()) {
-		if (!empty($this->data)) {
-			$this->data = $this->_cleanData($this->data);
-		}
-		return true;
-	}
+    public function beforeValidate($options = array()) {
+        if (!empty($this->data)) {
+            $this->data = $this->_cleanData($this->data);
+        }
+        return true;
+    }
 
 /**
  * afterSave method
@@ -126,9 +126,9 @@ class Menu extends AppModel {
  * @param boolean $created
  * @return void
  */
-	public function afterSave($created, $options = array()) {
-		Cache::delete('menu');
-	}
+    public function afterSave($created, $options = array()) {
+        Cache::delete('menu');
+    }
 
 /**
  * _cleanData method
@@ -138,12 +138,12 @@ class Menu extends AppModel {
  * @param array $data Array of data to clean.
  * @return array
  */
-	private function _cleanData($data) {
-		$data['Menu']['name'] = Menu::clean(Menu::purify($data['Menu']['name']));
-		$data['Menu']['link'] = Menu::clean(Menu::purify(filter_var($data['Menu']['link'], FILTER_SANITIZE_URL)), array('encode' => false));
-		$data['Menu']['parent_id'] = filter_var($data['Menu']['parent_id'], FILTER_SANITIZE_NUMBER_INT);
-		$data['Menu']['priority'] = filter_var($data['Menu']['priority'], FILTER_SANITIZE_NUMBER_INT);
-		return $data;
-	}
+    private function _cleanData($data) {
+        $data['Menu']['name'] = Menu::clean(Menu::purify($data['Menu']['name']));
+        $data['Menu']['link'] = Menu::clean(Menu::purify(filter_var($data['Menu']['link'], FILTER_SANITIZE_URL)), array('encode' => false));
+        $data['Menu']['parent_id'] = filter_var($data['Menu']['parent_id'], FILTER_SANITIZE_NUMBER_INT);
+        $data['Menu']['priority'] = filter_var($data['Menu']['priority'], FILTER_SANITIZE_NUMBER_INT);
+        return $data;
+    }
 
 }

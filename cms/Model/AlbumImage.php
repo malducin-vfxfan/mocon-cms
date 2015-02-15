@@ -26,16 +26,16 @@ class AlbumImage extends AppModel {
  *
  * @var array
  */
-	public $useDbConfig = 'albums';
+    public $useDbConfig = 'albums';
 
 /**
  * belongsTo associations
  *
  * @var array
  */
-	public $belongsTo = array(
-		'Album' => array(
-			'className' => 'Album',
-		)
-	);
+    public $belongsTo = array(
+        'Album' => array(
+            'className' => 'Album',
+        )
+    );
 }

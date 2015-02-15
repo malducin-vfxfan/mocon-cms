@@ -35,33 +35,33 @@ class BlowfishAdvancedPasswordHasher extends AbstractPasswordHasher {
  * @param mixed $salt false to generate a new salt or an existing salt.
  * @return string The hashed string or an empty string on error.
  */
-	public function hash($password = null, $salt = false) {
-		$cost = Configure::read('Security.BlowfishAdvanced.cost');
-		if (!$cost) $cost = 10;
-		if ($cost < 4 || $cost > 31) {
-			throw new Exception('Invalid value, cost must be between 4 and 31');
-		}
+    public function hash($password = null, $salt = false) {
+        $cost = Configure::read('Security.BlowfishAdvanced.cost');
+        if (!$cost) $cost = 10;
+        if ($cost < 4 || $cost > 31) {
+            throw new Exception('Invalid value, cost must be between 4 and 31');
+        }
 
-		if ($salt === false) {
-			$salt = self::_salt(22);
-			$salt = vsprintf('$%s$%02d$%s', array(Configure::read('Security.BlowfishAdvanced.salt_prefix'), $cost, $salt));
-		}
-		if (!strlen($salt) == 29) {
-			throw new Exception('Error generating the salt.');
-		}
+        if ($salt === false) {
+            $salt = self::_salt(22);
+            $salt = vsprintf('$%s$%02d$%s', array(Configure::read('Security.BlowfishAdvanced.salt_prefix'), $cost, $salt));
+        }
+        if (!strlen($salt) == 29) {
+            throw new Exception('Error generating the salt.');
+        }
 
-		$hash = crypt($password, $salt);
-		if (strlen($hash) != 60) {
-			throw new Exception('Error hashing the password.');
-		}
+        $hash = crypt($password, $salt);
+        if (strlen($hash) != 60) {
+            throw new Exception('Error hashing the password.');
+        }
 
-		return $hash;
-	}
+        return $hash;
+    }
 
-	public function check($password = null, $hashedPassword = null) {
-		if (!$password || !$hashedPassword) return false;
-		else return $hashedPassword === $this->hash($password, $hashedPassword);
-	}
+    public function check($password = null, $hashedPassword = null) {
+        if (!$password || !$hashedPassword) return false;
+        else return $hashedPassword === $this->hash($password, $hashedPassword);
+    }
 
 /**
  * Generates a pseudo random salt suitable for use with the PHP crypt() function.
@@ -71,13 +71,12 @@ class BlowfishAdvancedPasswordHasher extends AbstractPasswordHasher {
  * @param integer $length The length of the returned salt
  * @return string The generated salt
  */
-	private static function _salt($length = 22) {
-		if (defined('MCRYPT_DEV_URANDOM')) {
-			return substr(strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.'), 0, $length);
-		} else {
-			throw new Exception('The MCRYPT_DEV_URANDOM source is required (PHP 5.3+).');
-		}
-	}
+    private static function _salt($length = 22) {
+        if (defined('MCRYPT_DEV_URANDOM')) {
+            return substr(strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.'), 0, $length);
+        } else {
+            throw new Exception('The MCRYPT_DEV_URANDOM source is required (PHP 5.3+).');
+        }
+    }
 
 }
-?>
