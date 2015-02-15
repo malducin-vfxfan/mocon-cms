@@ -26,7 +26,7 @@ class ContactForm extends AppModel {
  *
  * @var array
  */
- 	public $order = array('ContactForm.created' => 'DESC');
+	public $order = array('ContactForm.created' => 'DESC');
 /**
  * Validation rules
  *

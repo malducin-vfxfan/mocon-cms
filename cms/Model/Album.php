@@ -32,7 +32,7 @@ class Album extends AppModel {
  *
  * @var array
  */
- 	public $order = array('Album.created' => 'DESC');
+	public $order = array('Album.created' => 'DESC');
 /**
  * Validation rules
  *

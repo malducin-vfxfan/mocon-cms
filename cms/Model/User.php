@@ -29,7 +29,7 @@ class User extends AppModel {
  *
  * @var array
  */
- 	public $order = array('User.username' => 'ASC');
+	public $order = array('User.username' => 'ASC');
 /**
  * Act as a Requester for ACL. Requires an implementation of
  * parentNode().

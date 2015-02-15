@@ -29,16 +29,16 @@ class Event extends AppModel {
  *
  * @var array
  */
- 	public $order = array(
- 		'Event.date_start' => 'ASC',
- 		'Event.name' => 'ASC'
- 	);
+	public $order = array(
+		'Event.date_start' => 'ASC',
+		'Event.name' => 'ASC'
+	);
 /**
  * Custom find methods
  *
  * @var array
  */
- 	public $findMethods = array('upcoming' =>  true);
+	public $findMethods = array('upcoming' =>  true);
 /**
  * Validation rules
  *
@@ -244,7 +244,7 @@ class Event extends AppModel {
  * @param boolean $primary
  * @return array
  */
- 	public function afterFind($results, $primary = false) {
+	public function afterFind($results, $primary = false) {
 		foreach ($results as $key => $val) {
 			// check to see we have an id key, for example to exclude distinct years list
 			if (isset($results[$key]['Event']['id']) && $primary) {

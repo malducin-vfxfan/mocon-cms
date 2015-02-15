@@ -52,25 +52,25 @@ class PagesController extends AppController {
  *
  * @return void
  */
- 	public function beforeFilter() {
- 		parent::beforeFilter();
+	public function beforeFilter() {
+		parent::beforeFilter();
 
- 		if ($this->request->action === 'admin_add' || $this->request->action === 'admin_edit') {
- 			$unlocked_fields = array();
- 			for ($i = 1; $i < 6; $i++) {
- 				$unlocked_fields[] = 'PageSection.'.$i.'.title';
- 				$unlocked_fields[] = 'PageSection.'.$i.'.section';
- 				$unlocked_fields[] = 'PageSection.'.$i.'.content';
- 			}
+		if ($this->request->action === 'admin_add' || $this->request->action === 'admin_edit') {
+			$unlocked_fields = array();
+			for ($i = 1; $i < 6; $i++) {
+				$unlocked_fields[] = 'PageSection.'.$i.'.title';
+				$unlocked_fields[] = 'PageSection.'.$i.'.section';
+				$unlocked_fields[] = 'PageSection.'.$i.'.content';
+			}
 
- 			$unlocked_fields[] = 'File.image';
- 			$unlocked_fields[] = 'File.document';
+			$unlocked_fields[] = 'File.image';
+			$unlocked_fields[] = 'File.document';
 
 			$this->Security->unlockedFields = $unlocked_fields;
 		}
 
 		$this->Security->unlockedActions = array('admin_ajaxUploadFiles');
- 	}
+	}
 
 /**
  * index method

@@ -31,11 +31,11 @@ class Menu extends AppModel {
  *
  * @var array
  */
- 	public $order = array(
- 		'Menu.parent_id' => 'ASC',
- 		'Menu.priority' => 'ASC',
- 		'Menu.name' => 'ASC',
- 	);
+	public $order = array(
+		'Menu.parent_id' => 'ASC',
+		'Menu.priority' => 'ASC',
+		'Menu.name' => 'ASC',
+	);
 /**
  * Validation rules
  *

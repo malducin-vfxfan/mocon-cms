@@ -32,7 +32,7 @@ class Page extends AppModel {
  *
  * @var array
  */
- 	public $order = array('Page.title' => 'ASC');
+	public $order = array('Page.title' => 'ASC');
 /**
  * Validation rules
  *

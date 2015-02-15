@@ -63,7 +63,7 @@ class MenusController extends AppController {
 		}
 
 		return $menuItems;
- 	}
+	}
 
 /**
  * admin_index method

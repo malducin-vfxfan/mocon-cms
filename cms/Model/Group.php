@@ -27,7 +27,7 @@ class Group extends AppModel {
  *
  * @var array
  */
- 	public $order = array('Group.name' => 'ASC');
+	public $order = array('Group.name' => 'ASC');
 /**
  * Act as a Requester for ACL. Requires an implementation of
  * parentNode().

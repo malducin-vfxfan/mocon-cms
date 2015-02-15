@@ -32,7 +32,7 @@ class PageSection extends AppModel {
  *
  * @var array
  */
- 	public $order = array('PageSection.page_id' => 'ASC', 'PageSection.section' => 'ASC', 'PageSection.title' => 'ASC');
+	public $order = array('PageSection.page_id' => 'ASC', 'PageSection.section' => 'ASC', 'PageSection.title' => 'ASC');
 /**
  * Validation rules
  *

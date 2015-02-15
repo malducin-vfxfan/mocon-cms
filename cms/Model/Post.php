@@ -30,13 +30,13 @@ class Post extends AppModel {
  *
  * @var array
  */
- 	public $order = array('Post.created' => 'DESC');
+	public $order = array('Post.created' => 'DESC');
 /**
  * Custom find methods
  *
  * @var array
  */
- 	public $findMethods = array('latest' =>  true);
+	public $findMethods = array('latest' =>  true);
 /**
  * Validation rules
  *
@@ -232,7 +232,7 @@ class Post extends AppModel {
  * @param boolean $primary
  * @return array
  */
- 	public function afterFind($results, $primary = false) {
+	public function afterFind($results, $primary = false) {
 		foreach ($results as $key => $val) {
 			// check to see we have an id key, for example to exclude distinct years list
 			if (isset($results[$key]['Post']['id']) && $primary) {

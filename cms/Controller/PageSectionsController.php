@@ -24,10 +24,10 @@ class PageSectionsController extends AppController {
  *
  * @return void
  */
- 	public function beforeFilter() {
- 		parent::beforeFilter();
- 		$this->Security->requireAuth(array('admin_tinymceImageList'));
- 	}
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->Security->requireAuth(array('admin_tinymceImageList'));
+	}
 
 /**
  * admin_index method

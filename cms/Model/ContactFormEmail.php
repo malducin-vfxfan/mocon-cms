@@ -26,13 +26,13 @@ class ContactFormEmail extends AppModel {
  *
  * @var array
  */
- 	public $order = array('ContactFormEmail.email' => 'ASC');
+	public $order = array('ContactFormEmail.email' => 'ASC');
 /**
  * Custom find methods
  *
  * @var array
  */
- 	public $findMethods = array('active' =>  true);
+	public $findMethods = array('active' =>  true);
 /**
  * Validation rules
  *
