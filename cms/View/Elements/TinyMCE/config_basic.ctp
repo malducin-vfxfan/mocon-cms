@@ -27,7 +27,7 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2015, Manuel Alducin (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       vfxfan-base.View.Elements.TinyMCE
+ * @package       Mocon-CMS.View.Elements.TinyMCE
  */
 $this->Html->script(array('tiny_mce/tiny_mce'), array('inline' => false));
 ?>

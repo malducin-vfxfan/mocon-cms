@@ -7,7 +7,7 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2015, Manuel Alducin (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       vfxfan-base.Controller.ContactFormEmails
+ * @package       Mocon-CMS.Controller.ContactFormEmails
  */
 App::uses('AppController', 'Controller');
 /**

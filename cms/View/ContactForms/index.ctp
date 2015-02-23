@@ -5,7 +5,7 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2015, Manuel Alducin (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       vfxfan-base.View.ContactForms
+ * @package       Mocon-CMS.View.ContactForms
  */
 $this->Html->script('https://www.google.com/recaptcha/api.js', array('inline' => false, 'async', 'defer'));
 ?>

@@ -9,7 +9,7 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2015, Manuel Alducin (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       vfxfan-base.Model.Pages
+ * @package       Mocon-CMS.Model.Pages
  */
 App::uses('AppModel', 'Model');
 App::uses('Folder', 'Utility');

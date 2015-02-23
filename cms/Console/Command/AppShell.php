@@ -23,7 +23,7 @@ App::uses('Shell', 'Console');
  * Add your application-wide methods in the class below, your shells
  * will inherit them.
  *
- * @package       vfxfan-base.Console.Command
+ * @package       Mocon-CMS.Console.Command
  */
 class AppShell extends Shell {
 

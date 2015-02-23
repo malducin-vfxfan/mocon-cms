@@ -4,7 +4,7 @@
  *
  * Custom element for authorization flash messages.
  *
- * @package       vfxfan-base.View.Elements.Flash
+ * @package       Mocon-CMS.View.Elements.Flash
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2015, Manuel Alducin (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan

@@ -5,7 +5,7 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2015, Manuel Alducin (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       vfxfan-base.View.Posts.View.rss
+ * @package       Mocon-CMS.View.Posts.View.rss
  */
 
 $this->set('documentData', array('xmlns:dc' => 'http://purl.org/dc/elements/1.1/'));

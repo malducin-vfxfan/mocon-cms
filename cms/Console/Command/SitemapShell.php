@@ -11,7 +11,7 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2015, Manuel Alducin (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       vfxfan-base.Console.Command
+ * @package       Mocon-CMS.Console.Command
  */
 /**
  * WEBSITE_BASE_URL constant

@@ -5,7 +5,7 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2015, Manuel Alducin (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       vfxfan-base.View.Albums
+ * @package       Mocon-CMS.View.Albums
  */
 echo $this->Html->css('magnific-popup', array('inline' => false));
 echo $this->Html->script(array('jquery.magnific-popup', 'admin-lightbox.min'), array('inline' => false));

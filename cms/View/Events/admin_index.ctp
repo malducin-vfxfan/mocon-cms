@@ -5,7 +5,7 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2015, Manuel Alducin (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       vfxfan-base.View.Events
+ * @package       Mocon-CMS.View.Events
  */
 $this->extend('/Common/admin_index');
 

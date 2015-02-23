@@ -7,7 +7,7 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2015, Manuel Alducin (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       vfxfan-base.View.Elements.Google.Analytics
+ * @package       Mocon-CMS.View.Elements.Google.Analytics
  */
 $ga_code = Configure::read('Google.Analytics.trackerCode');
 $ga_site = Configure::read('Google.Analytics.trackerSite');

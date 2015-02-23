@@ -5,7 +5,7 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2015, Manuel Alducin (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       vfxfan-base.View.Errors
+ * @package       Mocon-CMS.View.Errors
  */
 ?>
 <h1><?php echo $message; ?></h1>
