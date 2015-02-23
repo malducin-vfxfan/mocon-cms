@@ -15,7 +15,8 @@ App::uses('AppController', 'Controller');
  *
  * @property User $User
  */
-class AclPermissionsController extends AppController {
+class AclPermissionsController extends AppController
+{
 /**
  * Models to use
  *
@@ -34,7 +35,8 @@ class AclPermissionsController extends AppController {
  *
  * @return void
  */
-    public function admin_index() {
+    public function admin_index()
+    {
         $this->layout = 'default_admin';
 
         $options = array(
@@ -61,7 +63,8 @@ class AclPermissionsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_methods($aco_id = null) {
+    public function admin_methods($aco_id = null)
+    {
         $this->layout = 'default_admin';
 
         if (!$aco_id) {
@@ -93,7 +96,8 @@ class AclPermissionsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_view($aco_id = null) {
+    public function admin_view($aco_id = null)
+    {
         $this->layout = 'default_admin';
 
         $path = $this->Acl->Aco->getPath($aco_id);
@@ -127,7 +131,8 @@ class AclPermissionsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_edit($aco_id = null, $model = 'User', $id = null) {
+    public function admin_edit($aco_id = null, $model = 'User', $id = null)
+    {
         $this->layout = 'default_admin';
 
         if ($this->request->is(array('post', 'put'))) {
@@ -187,7 +192,8 @@ class AclPermissionsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_delete($aco_id = null, $model = 'User', $id = null) {
+    public function admin_delete($aco_id = null, $model = 'User', $id = null)
+    {
         $this->layout = 'default_admin';
 
         $this->request->allowMethod('post', 'delete');
@@ -236,7 +242,8 @@ class AclPermissionsController extends AppController {
  *
  * @return void
  */
-    public function admin_installed_controllers() {
+    public function admin_installed_controllers()
+    {
         $this->layout = 'default_admin';
 
         // get controllers and plugins
@@ -255,7 +262,8 @@ class AclPermissionsController extends AppController {
  *
  * @return void
  **/
-    public function admin_aco_update() {
+    public function admin_aco_update()
+    {
         $this->layout = 'default_admin';
 
         // check the root node exists
@@ -286,7 +294,8 @@ class AclPermissionsController extends AppController {
  * @param int $parentId
  * @return array Aco Node array
  */
-    private function _checkNode($path, $alias, $parentId = null) {
+    private function _checkNode($path, $alias, $parentId = null)
+    {
         $node = $this->Acl->Aco->node($path);
         if (!$node) {
             $this->Acl->Aco->create(array('parent_id' => $parentId, 'model' => null, 'alias' => $alias));
@@ -305,7 +314,8 @@ class AclPermissionsController extends AppController {
  *
  * @return void
  **/
-    private function initDB() {
+    private function initDB()
+    {
 
         $options = array('conditions' => array('Group.name' => 'Administrators'));
         $adminGroup = $this->User->Group->find('first', $options);
@@ -322,7 +332,8 @@ class AclPermissionsController extends AppController {
  * @param string $plugin Name of plugin to get controllers for
  * @return array
  **/
-    private function getControllerList($plugin = null) {
+    private function getControllerList($plugin = null)
+    {
         if (!$plugin) {
             $controllers = App::objects('Controller', null, false);
         } else {
@@ -339,7 +350,8 @@ class AclPermissionsController extends AppController {
  * @param string $plugin Name of the plugin you are making controllers for.
  * @return void
  */
-    private function _updateControllers($root, $controllers, $plugin = null) {
+    private function _updateControllers($root, $controllers, $plugin = null)
+    {
         $dotPlugin = $pluginPath = $plugin;
         if ($plugin) {
             $dotPlugin .= '.';
@@ -400,7 +412,8 @@ class AclPermissionsController extends AppController {
  * @param string $plugin Name of plugin
  * @return void
  */
-    private function _checkMethods($className, $controllerName, $node, $pluginPath = false) {
+    private function _checkMethods($className, $controllerName, $node, $pluginPath = false)
+    {
         $baseMethods = get_class_methods('Controller'); // base methods in AppController
         $actions = get_class_methods($className);  // methods in the controller
         $methods = array_diff($actions, $baseMethods); // all methods in the controller plus the base methods

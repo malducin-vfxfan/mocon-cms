@@ -26,7 +26,8 @@
  */
 App::uses('AbstractPasswordHasher', 'Controller/Component/Auth');
 
-class BlowfishAdvancedPasswordHasher extends AbstractPasswordHasher {
+class BlowfishAdvancedPasswordHasher extends AbstractPasswordHasher
+{
 
 /**
  * One way encryption using the PHP crypt() function.
@@ -35,7 +36,8 @@ class BlowfishAdvancedPasswordHasher extends AbstractPasswordHasher {
  * @param mixed $salt false to generate a new salt or an existing salt.
  * @return string The hashed string or an empty string on error.
  */
-    public function hash($password = null, $salt = false) {
+    public function hash($password = null, $salt = false)
+    {
         $cost = Configure::read('Security.BlowfishAdvanced.cost');
         if (!$cost) $cost = 10;
         if ($cost < 4 || $cost > 31) {
@@ -58,7 +60,8 @@ class BlowfishAdvancedPasswordHasher extends AbstractPasswordHasher {
         return $hash;
     }
 
-    public function check($password = null, $hashedPassword = null) {
+    public function check($password = null, $hashedPassword = null)
+    {
         if (!$password || !$hashedPassword) return false;
         else return $hashedPassword === $this->hash($password, $hashedPassword);
     }
@@ -71,7 +74,8 @@ class BlowfishAdvancedPasswordHasher extends AbstractPasswordHasher {
  * @param integer $length The length of the returned salt
  * @return string The generated salt
  */
-    private static function _salt($length = 22) {
+    private static function _salt($length = 22)
+    {
         if (defined('MCRYPT_DEV_URANDOM')) {
             return substr(strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.'), 0, $length);
         } else {

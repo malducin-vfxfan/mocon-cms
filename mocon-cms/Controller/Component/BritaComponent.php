@@ -20,7 +20,8 @@ App::import('Vendor', 'HTMLPurifier', array('file' => 'htmlpurifier'.DS.'library
  * @property BritaComponent $BritaComponent
  * @property mixed controller
  */
-class BritaComponent extends Component {
+class BritaComponent extends Component
+{
 
 /**
  * Controller
@@ -37,7 +38,8 @@ class BritaComponent extends Component {
  * @param reference $controller
  * @return void
  */
-    public function startup(Controller $controller) {
+    public function startup(Controller $controller)
+    {
 
         // the next few lines allow the config settings to be cached
         $config = HTMLPurifier_Config::createDefault();

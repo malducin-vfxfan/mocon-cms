@@ -25,6 +25,7 @@ App::uses('Shell', 'Console');
  *
  * @package       Mocon-CMS.Console.Command
  */
-class AppShell extends Shell {
+class AppShell extends Shell
+{
 
 }

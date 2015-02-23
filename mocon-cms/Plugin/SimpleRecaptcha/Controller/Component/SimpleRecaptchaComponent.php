@@ -5,7 +5,7 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2015, Manuel Alducin (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       vfxfan-cms.Plugin.SimpleRecaptcha.Controller.Component
+ * @package       Mocon-CMS.Plugin.SimpleRecaptcha.Controller.Component
  */
 App::uses('HttpSocket', 'Network/Http');
 /**
@@ -14,7 +14,8 @@ App::uses('HttpSocket', 'Network/Http');
  * @property SimpleRecaptchaComponent $SimpleRecaptchaComponent
  * @property-read array
  */
-class SimpleRecaptchaComponent extends Component {
+class SimpleRecaptchaComponent extends Component
+{
 /**
  * Controller
  *
@@ -37,7 +38,8 @@ class SimpleRecaptchaComponent extends Component {
  * @throws Exception Throws an exception if Recaptchas config is not present
  * @return void
  */
-    public function initialize(Controller $controller, $settings = array()) {
+    public function initialize(Controller $controller, $settings = array())
+    {
         if ($controller->name === 'CakeError') {
             return;
         }
@@ -65,7 +67,8 @@ class SimpleRecaptchaComponent extends Component {
  *
  * @return boolean True if the response was correct
  */
-    public function verify($response_string = null) {
+    public function verify($response_string = null)
+    {
         $HttpSocket = new HttpSocket();
 
         // verify the response string

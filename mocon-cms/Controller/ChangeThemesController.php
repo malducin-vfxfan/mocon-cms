@@ -14,7 +14,8 @@ App::uses('AppController', 'Controller');
  * ChangeThemes Controller
  *
  */
-class ChangeThemesController extends AppController {
+class ChangeThemesController extends AppController
+{
 /**
  * Models to use
  *
@@ -27,7 +28,8 @@ class ChangeThemesController extends AppController {
  *
  * @return void
  */
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         parent::beforeFilter();
         // always allow the change action
         $this->Auth->allow('change');
@@ -38,7 +40,8 @@ class ChangeThemesController extends AppController {
  *
  * @return void
  */
-    public function admin_change() {
+    public function admin_change()
+    {
         if ($this->Session->read('Config.theme') == 'default') {
             $this->Session->write('Config.theme', 'mobile');
         } else {
@@ -52,7 +55,8 @@ class ChangeThemesController extends AppController {
  *
  * @return void
  */
-    public function change() {
+    public function change()
+    {
         if ($this->Session->read('Config.theme') == 'default') {
             $this->Session->write('Config.theme', 'mobile');
         } else {

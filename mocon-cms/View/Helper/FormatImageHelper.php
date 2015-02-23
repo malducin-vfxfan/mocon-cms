@@ -21,7 +21,8 @@ App::uses('File', 'Utility');
  * @property array $helpers
  * @property-read array $exts
  */
-class FormatImageHelper extends AppHelper {
+class FormatImageHelper extends AppHelper
+{
 
 /**
  * Helpers
@@ -45,7 +46,8 @@ class FormatImageHelper extends AppHelper {
  * @param $options array
  * @return mixed
  */
-    public function randomImage($location = null, $options = array()) {
+    public function randomImage($location = null, $options = array())
+    {
         $images = array();
 
         $default = array(
@@ -77,7 +79,8 @@ class FormatImageHelper extends AppHelper {
  * @param string $location_default Location of default image, usually an enclosing folder (for example for posts)
  * @return mixed
  */
-    public function idImage($location = null, $id = null, $options = array(), $location_default = null) {
+    public function idImage($location = null, $id = null, $options = array(), $location_default = null)
+    {
         $default = array(
             'alt' => 'Image',
             'class' => 'img-thumbnail',
@@ -137,7 +140,8 @@ class FormatImageHelper extends AppHelper {
  * @param array $options
  * @return string
  */
-    public function getPreviewImage($preview_images = array(), $options = array()) {
+    public function getPreviewImage($preview_images = array(), $options = array())
+    {
         $default = array(
             'size' => '',
         );

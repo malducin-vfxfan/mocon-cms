@@ -20,7 +20,8 @@ App::uses('File', 'Utility');
  *
  * @property PageSection $PageSection
  */
-class Page extends AppModel {
+class Page extends AppModel
+{
 /**
  * Display field
  *
@@ -149,7 +150,8 @@ class Page extends AppModel {
  *
  * @return boolean
  */
-    public function beforeValidate($options = array()) {
+    public function beforeValidate($options = array())
+    {
         if (!empty($this->data)) {
             if (!$this->id) {
                 $this->data['Page']['slug'] = strtolower(Inflector::slug($this->data['Page']['title'], '-'));
@@ -167,7 +169,8 @@ class Page extends AppModel {
  * @param boolean $created
  * @return void
  */
-    public function afterSave($created, $options = array()) {
+    public function afterSave($created, $options = array())
+    {
         if ($created) {
             $dir = new Folder();
             $dir->create(WWW_ROOT.'img'.DS.'pages'.DS.sprintf("%010d", $this->id));
@@ -183,7 +186,8 @@ class Page extends AppModel {
  * @param boolean $cascade
  * @return boolean
  */
-    public function beforeDelete($cascade = true) {
+    public function beforeDelete($cascade = true)
+    {
         $options = array('conditions' => array('Page.id' => $this->id));
         $page = $this->find('first', $options);
 
@@ -206,7 +210,8 @@ class Page extends AppModel {
  * @param array $data Array of data to clean.
  * @return array
  */
-    private function _cleanData($data) {
+    private function _cleanData($data)
+    {
         $data['Page']['title'] = Page::clean(Page::purify($data['Page']['title']));
         $data['Page']['slug'] = Page::clean(Page::purify($data['Page']['slug']), array('encode' => false));
         $data['Page']['published'] = filter_var($data['Page']['published'], FILTER_SANITIZE_NUMBER_INT);
@@ -230,7 +235,8 @@ class Page extends AppModel {
  * @param string $location
  * @return array
  */
-    public function listFiles($id = null, $location = null) {
+    public function listFiles($id = null, $location = null)
+    {
         if (!$id || !$location) return;
 
         $dir = new Folder($location.DS.'pages'.DS.sprintf("%010d", $id));
@@ -248,7 +254,8 @@ class Page extends AppModel {
  * @param string $filename
  * @return boolean
  */
-    public function deleteFile($path = null) {
+    public function deleteFile($path = null)
+    {
         if (empty($path)) return false;
 
         $file = new File($path);

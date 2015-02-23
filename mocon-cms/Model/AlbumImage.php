@@ -17,7 +17,8 @@ App::uses('AppModel', 'Model');
  *
  * @property Album $Album
  */
-class AlbumImage extends AppModel {
+class AlbumImage extends AppModel
+{
 /**
  * useDbConfig
  *

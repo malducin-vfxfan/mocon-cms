@@ -15,7 +15,8 @@ App::uses('AppController', 'Controller');
  *
  * @property SearchResult $SearchResult
  */
-class SearchResultsController extends AppController {
+class SearchResultsController extends AppController
+{
 /**
  * Models to use
  *
@@ -28,7 +29,8 @@ class SearchResultsController extends AppController {
  *
  * @return void
  */
-    public function index() {
+    public function index()
+    {
         $this->set('title_for_layout', 'Search Results');
     }
 

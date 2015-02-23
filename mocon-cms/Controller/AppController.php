@@ -30,7 +30,8 @@ App::uses('Controller', 'Controller');
  * @package     Mocon-CMS.Controller
  * @link        http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
-class AppController extends Controller {
+class AppController extends Controller
+{
 /**
 * VFXfan CMS system authorization
 *
@@ -97,7 +98,8 @@ class AppController extends Controller {
  *
  * @return void
  */
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         // always allow index and view access
         $this->Auth->allow(array('index', 'view'));
 
@@ -141,7 +143,8 @@ class AppController extends Controller {
  *
  * @return boolean
  */
-    public function isAuthorized($user = null) {
+    public function isAuthorized($user = null)
+    {
         // Any registered user can access public functions
         if (empty($this->request->params['admin'])) { // could also check $this->request->prefix
             return true;
@@ -169,7 +172,8 @@ class AppController extends Controller {
  *
  * @return void
  */
-    public function blackhole($type) {
+    public function blackhole($type)
+    {
         if ($type == 'csrf') {
             $this->Session->setFlash('The Form has expired, please try again.', 'Flash/error');
             return $this->redirect(array('action' => $this->request->action));

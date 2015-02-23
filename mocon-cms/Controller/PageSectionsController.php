@@ -15,7 +15,8 @@ App::uses('AppController', 'Controller');
  *
  * @property PageSection $PageSection
  */
-class PageSectionsController extends AppController {
+class PageSectionsController extends AppController
+{
 
 /**
  * beforeFilter method
@@ -24,7 +25,8 @@ class PageSectionsController extends AppController {
  *
  * @return void
  */
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         parent::beforeFilter();
         $this->Security->requireAuth(array('admin_tinymceImageList'));
     }
@@ -34,7 +36,8 @@ class PageSectionsController extends AppController {
  *
  * @return void
  */
-    public function admin_index() {
+    public function admin_index()
+    {
         $this->layout = 'default_admin';
         $this->set('title_for_layout', 'Page Sections');
 
@@ -48,7 +51,8 @@ class PageSectionsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_view($id = null) {
+    public function admin_view($id = null)
+    {
         $this->layout = 'default_admin';
         if (!$this->PageSection->exists($id)) {
             throw new NotFoundException('Invalid Page Section.');
@@ -67,7 +71,8 @@ class PageSectionsController extends AppController {
  * @param string $page_id
  * @return void
  */
-    public function admin_add($page_id = null) {
+    public function admin_add($page_id = null)
+    {
         $this->layout = 'default_admin';
         if ($this->request->is('post')) {
             $this->PageSection->create();
@@ -92,7 +97,8 @@ class PageSectionsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_edit($id = null) {
+    public function admin_edit($id = null)
+    {
         $this->layout = 'default_admin';
         if (!$this->PageSection->exists($id)) {
             throw new NotFoundException('Invalid Page Section.');
@@ -123,7 +129,8 @@ class PageSectionsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_delete($id = null) {
+    public function admin_delete($id = null)
+    {
         $this->layout = 'default_admin';
 
         $this->PageSection->id = $id;
@@ -148,7 +155,8 @@ class PageSectionsController extends AppController {
  * @param string $id
  * @return mixed
  */
-    public function admin_tinymceImageList($id = null) {
+    public function admin_tinymceImageList($id = null)
+    {
         $this->layout = 'ajax';
 
          if (!$id) return;

@@ -20,7 +20,8 @@ App::uses('File', 'Utility');
  * Album Model
  *
  */
-class Album extends AppModel {
+class Album extends AppModel
+{
 /**
  * Display field
  *
@@ -111,7 +112,8 @@ class Album extends AppModel {
  * @param string $ds The connection name this model is connected to
  * @return void
  */
-    public function __construct($id = false, $table = null, $ds = null) {
+    public function __construct($id = false, $table = null, $ds = null)
+    {
         parent::__construct($id, $table, $ds);
         $this->virtualFields['year'] = sprintf('YEAR(%s.created)', $this->alias);
     }
@@ -142,7 +144,8 @@ class Album extends AppModel {
  *
  * @return boolean
  */
-    public function beforeValidate($options = array()) {
+    public function beforeValidate($options = array())
+    {
         if (!empty($this->data)) {
             if (!$this->id) {
                 $this->data['Album']['slug'] = strtolower(Inflector::slug($this->data['Album']['name'], '-'));
@@ -160,7 +163,8 @@ class Album extends AppModel {
  * @param boolean $created
  * @return void
  */
-    public function afterSave($created, $options = array()) {
+    public function afterSave($created, $options = array())
+    {
         if ($created) {
             $options = array('conditions' => array('Album.id' => $this->id));
             $album = $this->find('first', $options);
@@ -187,7 +191,8 @@ class Album extends AppModel {
  * @param boolean $cascade
  * @return boolean
  */
-    public function beforeDelete($cascade = true) {
+    public function beforeDelete($cascade = true)
+    {
         $options = array('conditions' => array('Album.id' => $this->id));
         $album = $this->find('first', $options);
 
@@ -210,7 +215,8 @@ class Album extends AppModel {
  * @param boolean $primary
  * @return array
  */
-    public function afterFind($results, $primary = false) {
+    public function afterFind($results, $primary = false)
+    {
         foreach ($results as $key => $val) {
             // check to see we have an id key, for example to exclude distinct years list
             if (isset($results[$key]['Album']['id']) && isset($results[$key]['Album']['year']) && $primary) {
@@ -234,7 +240,8 @@ class Album extends AppModel {
  * @param array $data Array of data to clean.
  * @return array
  */
-    private function _cleanData($data) {
+    private function _cleanData($data)
+    {
         $data['Album']['name'] = Album::clean(Album::purify($data['Album']['name']));
         $data['Album']['slug'] = Album::clean(Album::purify($data['Album']['slug']), array('encode' => false));
         $data['Album']['description'] = Album::clean(Album::purify($data['Album']['description']));
@@ -249,7 +256,8 @@ class Album extends AppModel {
  * @param string $id
  * @return array
  */
-    public function getAlbumThumbnails($id = null, $year = null) {
+    public function getAlbumThumbnails($id = null, $year = null)
+    {
         if (!$id || !$year) return array();
 
         $dir = new Folder(WWW_ROOT.'img'.DS.'albums'.DS.$year.DS.sprintf("%010d", $id).DS.'thumbnails');
@@ -268,7 +276,8 @@ class Album extends AppModel {
  * @param string $filename
  * @return boolean
  */
-    public function deleteFile($path = null) {
+    public function deleteFile($path = null)
+    {
         if (empty($path)) return false;
 
         $file = new File($path);

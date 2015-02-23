@@ -20,7 +20,8 @@
  * @property ResizeImageComponent $ResizeImageComponent
  * @property-read array
  */
-class ResizeImageComponent extends Component {
+class ResizeImageComponent extends Component
+{
     // Class variables
     private $image;
     private $width;
@@ -94,7 +95,8 @@ class ResizeImageComponent extends Component {
  * @param $resize string Type of resizing
  * @return array
  */
-    private function getDimensions($newWidth, $newHeight, $resize) {
+    private function getDimensions($newWidth, $newHeight, $resize)
+    {
         switch ($resize)
         {
             case 'exact':
@@ -229,7 +231,8 @@ class ResizeImageComponent extends Component {
  * @param $imageQuality int
  * @return void
  */
-    public function responsiveImages($savePath, $fileType, $imageQuality, $sizes = array()) {
+    public function responsiveImages($savePath, $fileType, $imageQuality, $sizes = array())
+    {
         if (empty($sizes)) {
             return false;
         }

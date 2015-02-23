@@ -17,7 +17,8 @@ App::uses('AppController', 'Controller');
  * @property RequestHandler $RequestHandler
  * @property UploadComponent $Upload
  */
-class PostsController extends AppController {
+class PostsController extends AppController
+{
 
 /**
  * Components
@@ -37,7 +38,8 @@ class PostsController extends AppController {
  *
  * @return void
  */
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         parent::beforeFilter();
 
         $this->Security->unlockedActions = array('admin_ajaxUploadFiles');
@@ -48,7 +50,8 @@ class PostsController extends AppController {
  *
  * @return void
  */
-    public function index() {
+    public function index()
+    {
         if ($this->RequestHandler->isRss()) {
             // get cached results
             $posts = Cache::read('latest_posts');
@@ -71,7 +74,8 @@ class PostsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function view($slug = null) {
+    public function view($slug = null)
+    {
         if (!$slug) {
             throw new NotFoundException('Invalid Post.');
         }
@@ -88,7 +92,8 @@ class PostsController extends AppController {
  *
  * @return void
  */
-    public function admin_index() {
+    public function admin_index()
+    {
         $this->layout = 'default_admin';
         $this->set('title_for_layout', 'Posts');
 
@@ -102,7 +107,8 @@ class PostsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_view($id = null) {
+    public function admin_view($id = null)
+    {
         $this->layout = 'default_admin';
         if (!$this->Post->exists($id)) {
             throw new NotFoundException('Invalid Post.');
@@ -118,7 +124,8 @@ class PostsController extends AppController {
  *
  * @return void
  */
-    public function admin_add() {
+    public function admin_add()
+    {
         $this->layout = 'default_admin';
         if ($this->request->is('post')) {
             $this->Post->create();
@@ -144,7 +151,8 @@ class PostsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_edit($id = null) {
+    public function admin_edit($id = null)
+    {
         $this->layout = 'default_admin';
         if (!$this->Post->exists($id)) {
             throw new NotFoundException('Invalid Post.');
@@ -176,7 +184,8 @@ class PostsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_delete($id = null) {
+    public function admin_delete($id = null)
+    {
         $this->layout = 'default_admin';
 
         $this->Post->id = $id;
@@ -202,7 +211,8 @@ class PostsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_deleteFile($id = null) {
+    public function admin_deleteFile($id = null)
+    {
         $this->autoRender = false;
 
         $filename = $this->request->query('filename');
@@ -249,7 +259,8 @@ class PostsController extends AppController {
  * @param string $uploadType
  * @return void
  */
-    public function admin_ajaxUploadFiles($id = null, $uploadType = 'images') {
+    public function admin_ajaxUploadFiles($id = null, $uploadType = 'images')
+    {
         $this->autoRender = false;
 
         if (empty($id)) {

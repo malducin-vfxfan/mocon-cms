@@ -18,7 +18,8 @@ App::uses('Folder', 'Utility');
  * FilesListSource Data Source
  *
  */
-class FilesListSource extends DataSource {
+class FilesListSource extends DataSource
+{
 /**
  * An optional description of the datasource
  *
@@ -34,7 +35,8 @@ class FilesListSource extends DataSource {
  * listSources() is for caching. You'll likely want to implement caching in
  * your own way with a custom datasource. So just 'return null'.
  */
-    public function listSources($data = null) {
+    public function listSources($data = null)
+    {
         return null;
     }
 
@@ -47,14 +49,16 @@ class FilesListSource extends DataSource {
  * return the string COUNT and check for it in read() where
  * $data['fields'] == 'COUNT'.
  */
-    public function calculate(Model $Model, $func, $params = array()) {
+    public function calculate(Model $Model, $func, $params = array())
+    {
         return 'COUNT';
     }
 
 /**
  * Implement the R in CRUD. Calls to Model::find() arrive here.
  */
-    public function read(Model $Model, $queryData = array(), $recursive = null) {
+    public function read(Model $Model, $queryData = array(), $recursive = null)
+    {
         // check to see if we defined a directory in the paginate conditions
         if (!empty($queryData['conditions']['folder'])) {
             $folder = $queryData['conditions']['folder'];
@@ -106,7 +110,8 @@ class FilesListSource extends DataSource {
  * We use the sort constants defined for standard multi sort
  * arrays, just for the heck of it.
  */
-    private function __sortItems($files, $order) {
+    private function __sortItems($files, $order)
+    {
         if (empty($order)) {
             return $files;
         }
@@ -135,7 +140,8 @@ class FilesListSource extends DataSource {
  * Get a paginated result using array slicing. We also set the
  * default limit to 20, like regular pagination.
  */
-    private function __getPage($files = null, $data = array()) {
+    private function __getPage($files = null, $data = array())
+    {
         if (empty($data['limit'])) {
             return $files;
         }

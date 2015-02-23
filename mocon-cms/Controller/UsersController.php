@@ -15,14 +15,16 @@ App::uses('AppController', 'Controller');
  *
  * @property User $User
  */
-class UsersController extends AppController {
+class UsersController extends AppController
+{
 
 /**
  * admin_login method
  *
  * @return void
  */
-    public function admin_login() {
+    public function admin_login()
+    {
         $this->layout = 'default_login';
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
@@ -39,7 +41,8 @@ class UsersController extends AppController {
  *
  * @return void
  */
-    public function admin_logout() {
+    public function admin_logout()
+    {
         $this->layout = 'default_login';
         $this->Session->destroy();
         return $this->redirect($this->Auth->logout());
@@ -50,7 +53,8 @@ class UsersController extends AppController {
  *
  * @return void
  */
-    public function admin_index() {
+    public function admin_index()
+    {
         $this->layout = 'default_admin';
         $this->set('title_for_layout', 'Users');
 
@@ -64,7 +68,8 @@ class UsersController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_view($id = null) {
+    public function admin_view($id = null)
+    {
         $this->layout = 'default_admin';
 
         if (!$this->User->exists($id)) {
@@ -91,7 +96,8 @@ class UsersController extends AppController {
  *
  * @return void
  */
-    public function admin_add() {
+    public function admin_add()
+    {
         $this->layout = 'default_admin';
         if ($this->request->is('post')) {
             $this->User->create();
@@ -118,7 +124,8 @@ class UsersController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_edit($id = null) {
+    public function admin_edit($id = null)
+    {
         $this->layout = 'default_admin';
         if (!$this->User->exists($id)) {
             throw new NotFoundException('Invalid User.');
@@ -159,7 +166,8 @@ class UsersController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_delete($id = null) {
+    public function admin_delete($id = null)
+    {
         $this->layout = 'default_admin';
 
         $this->User->id = $id;

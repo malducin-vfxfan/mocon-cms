@@ -18,7 +18,8 @@ App::uses('AppController', 'Controller');
  * @property Page $Page
  * @property UploadComponent $Upload
  */
-class PagesController extends AppController {
+class PagesController extends AppController
+{
 
 /**
  * Models
@@ -52,7 +53,8 @@ class PagesController extends AppController {
  *
  * @return void
  */
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         parent::beforeFilter();
 
         if ($this->request->action === 'admin_add' || $this->request->action === 'admin_edit') {
@@ -77,7 +79,8 @@ class PagesController extends AppController {
  *
  * @return void
  */
-    public function index() {
+    public function index()
+    {
         // get cached latest posts, if expired find the latest
         $posts = Cache::read('latest_posts');
         if ($posts === false) {
@@ -104,7 +107,8 @@ class PagesController extends AppController {
  * @param string $id
  * @return void
  */
-    public function view($slug = null) {
+    public function view($slug = null)
+    {
         if (!$slug) {
             throw new NotFoundException('Invalid Page.');
         }
@@ -132,7 +136,8 @@ class PagesController extends AppController {
  *
  * @return void
  */
-    public function admin_index() {
+    public function admin_index()
+    {
         $this->layout = 'default_admin';
         $this->set('title_for_layout', 'Pages');
 
@@ -146,7 +151,8 @@ class PagesController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_view($id = null) {
+    public function admin_view($id = null)
+    {
         $this->layout = 'default_admin';
         if (!$this->Page->exists($id)) {
             throw new NotFoundException('Invalid Page.');
@@ -169,7 +175,8 @@ class PagesController extends AppController {
  *
  * @return void
  */
-    public function admin_add() {
+    public function admin_add()
+    {
         $this->layout = 'default_admin';
         if ($this->request->is('post')) {
             $this->Page->create();
@@ -216,7 +223,8 @@ class PagesController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_edit($id = null) {
+    public function admin_edit($id = null)
+    {
         $this->layout = 'default_admin';
         if (!$this->Page->exists($id)) {
             throw new NotFoundException('Invalid Page.');
@@ -265,7 +273,8 @@ class PagesController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_delete($id = null) {
+    public function admin_delete($id = null)
+    {
         $this->layout = 'default_admin';
 
         $this->Page->id = $id;
@@ -291,7 +300,8 @@ class PagesController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_deleteFile($id = null) {
+    public function admin_deleteFile($id = null)
+    {
         $this->autoRender = false;
 
         $filename = $this->request->query('filename');
@@ -348,7 +358,8 @@ class PagesController extends AppController {
  * @param string $uploadType
  * @return void
  */
-    public function admin_ajaxUploadFiles($id = null, $uploadType = 'images') {
+    public function admin_ajaxUploadFiles($id = null, $uploadType = 'images')
+    {
         $this->autoRender = false;
 
         if (empty($id)) {

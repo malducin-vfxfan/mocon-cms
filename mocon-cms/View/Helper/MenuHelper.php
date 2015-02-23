@@ -17,7 +17,8 @@
  * @property MenuImageHelper $MenuHelper
  * @property array $helpers
  */
-class MenuHelper extends AppHelper {
+class MenuHelper extends AppHelper
+{
 
 /**
  * Helpers
@@ -34,7 +35,8 @@ class MenuHelper extends AppHelper {
  * @param $menuItems array
  * @return string
  */
-    public function bootstrapMenu($menuItems) {
+    public function bootstrapMenu($menuItems)
+    {
         return $this->Html->tag('ul', $this->bootstrapMenuIterator($menuItems), array('class' => 'nav navbar-nav'));
     }
 
@@ -46,7 +48,8 @@ class MenuHelper extends AppHelper {
  * @param $menuItems array
  * @return string
  */
-    private function bootstrapMenuIterator($menuItems) {
+    private function bootstrapMenuIterator($menuItems)
+    {
         if (empty($menuItems)) return;
 
         $menu = array();

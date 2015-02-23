@@ -14,7 +14,8 @@ App::uses('AppModel', 'Model');
  * ContactFormEmail Model
  *
  */
-class ContactFormEmail extends AppModel {
+class ContactFormEmail extends AppModel
+{
 /**
  * Display field
  *
@@ -106,7 +107,8 @@ class ContactFormEmail extends AppModel {
  *
  * @return boolean
  */
-    public function beforeValidate($options = array()) {
+    public function beforeValidate($options = array())
+    {
         if (!empty($this->data)) {
             $this->data = $this->_cleanData($this->data);
         }
@@ -120,7 +122,8 @@ class ContactFormEmail extends AppModel {
  *
  * @return array
  */
-    protected function _findActive($state, $query, $results = array()) {
+    protected function _findActive($state, $query, $results = array())
+    {
         // get only active recipients
         if ($state == 'before') {
             $query['conditions']['ContactFormEmail.active'] = true;
@@ -145,7 +148,8 @@ class ContactFormEmail extends AppModel {
  * @param array $data Array of data to clean.
  * @return array
  */
-    private function _cleanData($data) {
+    private function _cleanData($data)
+    {
         $data['ContactFormEmail']['email'] = ContactFormEmail::clean(ContactFormEmail::purify(filter_var($data['ContactFormEmail']['email'], FILTER_SANITIZE_EMAIL)));
         $data['ContactFormEmail']['name'] = ContactFormEmail::clean(ContactFormEmail::purify($data['ContactFormEmail']['name']));
         $data['ContactFormEmail']['active'] = filter_var($data['ContactFormEmail']['active'], FILTER_SANITIZE_NUMBER_INT);

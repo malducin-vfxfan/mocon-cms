@@ -18,7 +18,8 @@
  * @property UploadComponent $UploadComponent
  * @property-read array
  */
-class UploadComponent extends Component {
+class UploadComponent extends Component
+{
 
 /**
  * Components
@@ -55,7 +56,8 @@ class UploadComponent extends Component {
  * @param $options array
  * @return boolean
  */
-    public function uploadFile($folder = null, $data = null, $file_name = null, $options = array()) {
+    public function uploadFile($folder = null, $data = null, $file_name = null, $options = array())
+    {
         $result = false;
         $typeOK = false;
 
@@ -118,7 +120,8 @@ class UploadComponent extends Component {
  * @return boolean
  */
 
-    public function uploadFiles($folder = null, $data = null, $file_name = null, $options = array()) {
+    public function uploadFiles($folder = null, $data = null, $file_name = null, $options = array())
+    {
         foreach ($data as $file) {
             $this->uploadFile($folder, $file, $file_name, $options);
         }
@@ -134,7 +137,8 @@ class UploadComponent extends Component {
  * @param $filename string
  * @return string
  */
-    public function convertFilenameToId($id = null, $filename = null) {
+    public function convertFilenameToId($id = null, $filename = null)
+    {
         $path_parts = pathinfo($filename);
         $newFilename = sprintf("%010d", $id);
 
@@ -160,7 +164,8 @@ class UploadComponent extends Component {
  * @param $file_type array
  * @return boolean
  */
-    private function checkTypes($form_data_type = null, $file_types = array()) {
+    private function checkTypes($form_data_type = null, $file_types = array())
+    {
         $type_ok = false;
 
         if (empty($file_types)) {
@@ -193,7 +198,8 @@ class UploadComponent extends Component {
  * @param $options array
  * @return boolean
  */
-    private function createThumbnail($folder = null, $data = null, $file_name = null, $options = array()) {
+    private function createThumbnail($folder = null, $data = null, $file_name = null, $options = array())
+    {
         if (empty($folder) || empty($data)) {
             return false;
         }
@@ -224,7 +230,8 @@ class UploadComponent extends Component {
  * @param $options array
  * @return boolean
  */
-    private function createResponsiveImages($folder = null, $data = null, $file_name = null, $options = array()) {
+    private function createResponsiveImages($folder = null, $data = null, $file_name = null, $options = array())
+    {
         if (empty($folder) || empty($data)) {
             return false;
         }

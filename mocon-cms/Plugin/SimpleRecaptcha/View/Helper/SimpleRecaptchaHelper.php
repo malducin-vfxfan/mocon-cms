@@ -5,7 +5,7 @@
  * @author        Manuel Alducin
  * @copyright     Copyright (c) 2009-2015, Manuel Alducin (http://vfxfan.com)
  * @link          http://vfxfan.com VFXfan
- * @package       vfxfan-cms.Plugin.SimpleRecaptcha.View.Helper
+ * @package       Mocon-CMS.Plugin.SimpleRecaptcha.View.Helper
  */
 App::uses('AppHelper', 'View/Helper');
 /**
@@ -14,7 +14,8 @@ App::uses('AppHelper', 'View/Helper');
  * @property SimpleRecaptchaHelper $SimpleRecaptchaHelper
  * @property array $helpers
  */
-class SimpleRecaptchaHelper extends AppHelper {
+class SimpleRecaptchaHelper extends AppHelper
+{
 /**
  * Helpers
  *
@@ -29,7 +30,8 @@ class SimpleRecaptchaHelper extends AppHelper {
  *
  * @return string
  */
-    public function widget($options = array()) {
+    public function widget($options = array())
+    {
         $default = array(
             'theme' => 'light',
         );

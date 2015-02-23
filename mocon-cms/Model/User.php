@@ -17,7 +17,8 @@ App::uses('BlowfishAdvancedPasswordHasher', 'Controller/Component/Auth');
  * @property Group $Group
  * @property Post $Post
  */
-class User extends AppModel {
+class User extends AppModel
+{
 /**
  * Display field
  *
@@ -133,7 +134,8 @@ class User extends AppModel {
  *
  * @return boolean
  */
-    public function beforeValidate($options = array()) {
+    public function beforeValidate($options = array())
+    {
         if (!empty($this->data)) {
             $this->data = $this->_cleanData($this->data);
         }
@@ -148,7 +150,8 @@ class User extends AppModel {
  * @param array $options Array of options to use.
  * @return boolean
  */
-    public function beforeSave($options = array()) {
+    public function beforeSave($options = array())
+    {
         $blowfishHasher = new BlowfishAdvancedPasswordHasher();
         $this->data['User']['password'] = $blowfishHasher->hash($this->data['User']['password']);
         return true;
@@ -163,7 +166,8 @@ class User extends AppModel {
  *
  * @return array
  */
-    public function parentNode($type) {
+    public function parentNode($type)
+    {
         if (!$this->id && empty($this->data)) {
             return null;
         }
@@ -187,7 +191,8 @@ class User extends AppModel {
  * @param array $data Array of data to clean.
  * @return array
  */
-    private function _cleanData($data) {
+    private function _cleanData($data)
+    {
         $data['User']['username'] = User::clean(User::purify($data['User']['username']), array('encode' => false));
         $data['User']['password'] = User::clean(User::purify($data['User']['password']), array('encode' => false));
         $data['User']['group_id'] = filter_var($data['User']['group_id'], FILTER_SANITIZE_NUMBER_INT);

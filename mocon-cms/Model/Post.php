@@ -18,7 +18,8 @@ App::uses('File', 'Utility');
  *
  * @property User $User
  */
-class Post extends AppModel {
+class Post extends AppModel
+{
 /**
  * Display field
  *
@@ -156,7 +157,8 @@ class Post extends AppModel {
  * @param string $ds The connection name this model is connected to
  * @return void
  */
-    public function __construct($id = false, $table = null, $ds = null) {
+    public function __construct($id = false, $table = null, $ds = null)
+    {
         parent::__construct($id, $table, $ds);
         $this->virtualFields['year'] = sprintf('YEAR(%s.created)', $this->alias);
     }
@@ -169,7 +171,8 @@ class Post extends AppModel {
  *
  * @return boolean
  */
-    public function beforeValidate($options = array()) {
+    public function beforeValidate($options = array())
+    {
         if (!empty($this->data)) {
             if (!$this->id) {
                 $this->data['Post']['slug'] = strtolower(Inflector::slug($this->data['Post']['title'], '-'));
@@ -187,7 +190,8 @@ class Post extends AppModel {
  * @param boolean $created
  * @return void
  */
-    public function afterSave($created, $options = array()) {
+    public function afterSave($created, $options = array())
+    {
         // check to see if a year folder exists and if not, create one
         if ($created) {
             $options = array('conditions' => array('Post.id' => $this->id), 'recursive' => -1);
@@ -211,7 +215,8 @@ class Post extends AppModel {
  * @param boolean $cascade
  * @return boolean
  */
-    public function beforeDelete($cascade = true) {
+    public function beforeDelete($cascade = true)
+    {
         $options = array('conditions' => array('Post.id' => $this->id), 'recursive' => -1);
         $post = $this->find('first', $options);
 
@@ -232,7 +237,8 @@ class Post extends AppModel {
  * @param boolean $primary
  * @return array
  */
-    public function afterFind($results, $primary = false) {
+    public function afterFind($results, $primary = false)
+    {
         foreach ($results as $key => $val) {
             // check to see we have an id key, for example to exclude distinct years list
             if (isset($results[$key]['Post']['id']) && $primary) {
@@ -255,8 +261,8 @@ class Post extends AppModel {
  *
  * @return array
  */
-    protected function _findLatest($state, $query, $results = array()) {
-
+    protected function _findLatest($state, $query, $results = array())
+    {
         if ($state == 'before') {
             $this->recursive = 0;
             $query['limit'] = Configure::read('Posts.latest_num');
@@ -277,7 +283,8 @@ class Post extends AppModel {
  * @param array $data Array of data to clean.
  * @return array
  */
-    private function _cleanData($data) {
+    private function _cleanData($data)
+    {
         $data['Post']['title'] = Post::clean(Post::purify($data['Post']['title']));
         $data['Post']['summary'] = Post::clean(Post::purify($data['Post']['summary']));
         $data['Post']['content'] = Post::purify($data['Post']['content']);
@@ -295,7 +302,8 @@ class Post extends AppModel {
  * @param string $filename
  * @return boolean
  */
-    public function deleteFile($path = null) {
+    public function deleteFile($path = null)
+    {
         if (empty($path)) return false;
 
         $file = new File($path);

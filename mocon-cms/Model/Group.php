@@ -15,7 +15,8 @@ App::uses('AppModel', 'Model');
  *
  * @property User $User
  */
-class Group extends AppModel {
+class Group extends AppModel
+{
 /**
  * Display field
  *

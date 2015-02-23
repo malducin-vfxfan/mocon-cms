@@ -16,7 +16,8 @@ App::uses('AppController', 'Controller');
  * @property Event $Event
  * @property UploadComponent $Upload
  */
-class EventsController extends AppController {
+class EventsController extends AppController
+{
 
 /**
  * Helpers
@@ -36,7 +37,8 @@ class EventsController extends AppController {
  *
  * @return void
  */
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         parent::beforeFilter();
         $this->Auth->allow('archive');
 
@@ -48,7 +50,8 @@ class EventsController extends AppController {
  *
  * @return void
  */
-    public function index() {
+    public function index()
+    {
         $this->set('title_for_layout', 'Upcoming Events');
 
         $this->Paginator->settings = array(
@@ -64,7 +67,8 @@ class EventsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function view($slug = null) {
+    public function view($slug = null)
+    {
         if (!$slug) {
             throw new NotFoundException('Invalid Event.');
         }
@@ -81,7 +85,8 @@ class EventsController extends AppController {
  *
  * @return void
  */
-    public function archive() {
+    public function archive()
+    {
         $this->set('title_for_layout', 'Past Events');
 
         $this->Paginator->settings = array(
@@ -97,7 +102,8 @@ class EventsController extends AppController {
  *
  * @return void
  */
-    public function admin_index() {
+    public function admin_index()
+    {
         $this->layout = 'default_admin';
         $this->set('title_for_layout', 'Events');
 
@@ -114,7 +120,8 @@ class EventsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_view($id = null) {
+    public function admin_view($id = null)
+    {
         $this->layout = 'default_admin';
         if (!$this->Event->exists($id)) {
             throw new NotFoundException('Invalid Event.');
@@ -130,7 +137,8 @@ class EventsController extends AppController {
  *
  * @return void
  */
-    public function admin_add() {
+    public function admin_add()
+    {
         $this->layout = 'default_admin';
         if ($this->request->is('post')) {
             $this->Event->create();
@@ -155,7 +163,8 @@ class EventsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_edit($id = null) {
+    public function admin_edit($id = null)
+    {
         $this->layout = 'default_admin';
         if (!$this->Event->exists($id)) {
             throw new NotFoundException('Invalid Event.');
@@ -187,7 +196,8 @@ class EventsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_delete($id = null) {
+    public function admin_delete($id = null)
+    {
         $this->layout = 'default_admin';
 
         $this->Event->id = $id;
@@ -213,7 +223,8 @@ class EventsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_deleteFile($id = null) {
+    public function admin_deleteFile($id = null)
+    {
         $this->autoRender = false;
 
         $filename = $this->request->query('filename');
@@ -260,7 +271,8 @@ class EventsController extends AppController {
  * @param string $uploadType
  * @return void
  */
-    public function admin_ajaxUploadFiles($id = null, $uploadType = 'images') {
+    public function admin_ajaxUploadFiles($id = null, $uploadType = 'images')
+    {
         $this->autoRender = false;
 
         if (empty($id)) {

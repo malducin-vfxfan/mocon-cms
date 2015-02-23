@@ -22,7 +22,8 @@
  */
 //define('WEBSITE_BASE_URL', 'http://');
 
-class SitemapShell extends AppShell {
+class SitemapShell extends AppShell
+{
 /**
  * Uses
  *
@@ -34,7 +35,8 @@ class SitemapShell extends AppShell {
  *
  * @return void
  */
-    public function main() {
+    public function main()
+    {
         $this->Post->recursive = -1;
         $this->Event->recursive = -1;
         $this->Page->recursive = -1;

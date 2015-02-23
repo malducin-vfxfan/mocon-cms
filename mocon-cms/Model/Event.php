@@ -17,7 +17,8 @@ App::uses('File', 'Utility');
  * Event Model
  *
  */
-class Event extends AppModel {
+class Event extends AppModel
+{
 /**
  * Display field
  *
@@ -174,7 +175,8 @@ class Event extends AppModel {
  * @param string $ds The connection name this model is connected to
  * @return void
  */
-    public function __construct($id = false, $table = null, $ds = null) {
+    public function __construct($id = false, $table = null, $ds = null)
+    {
         parent::__construct($id, $table, $ds);
         $this->virtualFields['year'] = sprintf('YEAR(%s.created)', $this->alias);
     }
@@ -184,7 +186,8 @@ class Event extends AppModel {
  *
  * @return boolean
  */
-    public function beforeValidate($options = array()) {
+    public function beforeValidate($options = array())
+    {
         if (!empty($this->data)) {
             if (!$this->id) {
                 $this->data['Event']['slug'] = strtolower(Inflector::slug($this->data['Event']['name'].'-'.$this->data['Event']['date_start'], '-'));
@@ -202,7 +205,8 @@ class Event extends AppModel {
  * @param boolean $created
  * @return void
  */
-    public function afterSave($created, $options = array()) {
+    public function afterSave($created, $options = array())
+    {
         // check to see if a year folder exists and if not, create one
         if ($created) {
             $options = array('conditions' => array('Event.id' => $this->id));
@@ -223,7 +227,8 @@ class Event extends AppModel {
  * @param boolean $cascade
  * @return boolean
  */
-    public function beforeDelete($cascade = true) {
+    public function beforeDelete($cascade = true)
+    {
         $options = array('conditions' => array('Event.id' => $this->id));
         $event = $this->find('first', $options);
 
@@ -244,7 +249,8 @@ class Event extends AppModel {
  * @param boolean $primary
  * @return array
  */
-    public function afterFind($results, $primary = false) {
+    public function afterFind($results, $primary = false)
+    {
         foreach ($results as $key => $val) {
             // check to see we have an id key, for example to exclude distinct years list
             if (isset($results[$key]['Event']['id']) && $primary) {
@@ -267,7 +273,8 @@ class Event extends AppModel {
  *
  * @return array
  */
-    protected function _findUpcoming($state, $query, $results = array()) {
+    protected function _findUpcoming($state, $query, $results = array())
+    {
         if ($state == 'before') {
             $this->recursive = 0;
             $query['conditions']['Event.date_end >='] = date('Y-m-d');
@@ -289,7 +296,8 @@ class Event extends AppModel {
  * @param array $data Array of data to clean.
  * @return array
  */
-    private function _cleanData($data) {
+    private function _cleanData($data)
+    {
         $data['Event']['name'] = Event::clean(Event::purify($data['Event']['name']));
         $data['Event']['date_start'] = Event::clean(Event::purify($data['Event']['date_start']), array('encode' => false));
         $data['Event']['date_end'] = Event::clean(Event::purify($data['Event']['date_end']), array('encode' => false));
@@ -309,7 +317,8 @@ class Event extends AppModel {
  * @param string $filename
  * @return boolean
  */
-    public function deleteFile($path = null) {
+    public function deleteFile($path = null)
+    {
         if (empty($path)) return false;
 
         $file = new File($path);

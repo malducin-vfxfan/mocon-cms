@@ -30,7 +30,8 @@ App::import('Vendor', 'HTMLPurifier', array('file' => 'htmlpurifier'.DS.'library
  *
  * @package       Mocon-CMS.Model
  */
-class AppModel extends Model {
+class AppModel extends Model
+{
 
 /**
  * Constants to select which HTML special characters to remove.
@@ -47,7 +48,8 @@ class AppModel extends Model {
  * @param string $str String to sanitize
  * @return string whitespace sanitized string
  */
-    public static function clean($string, $options = array()) {
+    public static function clean($string, $options = array())
+    {
         static $defaultCharset = false;
 
         if ($defaultCharset === false) {
@@ -109,7 +111,8 @@ class AppModel extends Model {
  * @param string $str String to sanitize
  * @return string sanitized string
  */
-    public static function purify($string) {
+    public static function purify($string)
+    {
         // the next few lines allow the config settings to be cached
         $config = HTMLPurifier_Config::createDefault();
         $config->set('HTML.DefinitionID', 'made by malducin');
@@ -150,7 +153,8 @@ class AppModel extends Model {
  * @param array $check array with data to validate
  * @return bool validation check
  */
-    public function alphaNumericDashUnderscoreSpaceColon($check) {
+    public function alphaNumericDashUnderscoreSpaceColon($check)
+    {
         // $data array is passed using the form field name as the key
         // have to extract the value to make the function generic
         $value = array_values($check);
@@ -168,7 +172,8 @@ class AppModel extends Model {
  * @param array $check array with data to validate
  * @return bool validation check
  */
-    public function alphaNumericDashUnderscore($check) {
+    public function alphaNumericDashUnderscore($check)
+    {
         // $data array is passed using the form field name as the key
         // have to extract the value to make the function generic
         $value = array_values($check);

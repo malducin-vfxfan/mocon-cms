@@ -19,7 +19,8 @@ App::uses('AppModel', 'Model');
  * Menu Model
  *
  */
-class Menu extends AppModel {
+class Menu extends AppModel
+{
 /**
  * Display field
  *
@@ -111,7 +112,8 @@ class Menu extends AppModel {
  *
  * @return boolean
  */
-    public function beforeValidate($options = array()) {
+    public function beforeValidate($options = array())
+    {
         if (!empty($this->data)) {
             $this->data = $this->_cleanData($this->data);
         }
@@ -126,7 +128,8 @@ class Menu extends AppModel {
  * @param boolean $created
  * @return void
  */
-    public function afterSave($created, $options = array()) {
+    public function afterSave($created, $options = array())
+    {
         Cache::delete('menu');
     }
 
@@ -138,7 +141,8 @@ class Menu extends AppModel {
  * @param array $data Array of data to clean.
  * @return array
  */
-    private function _cleanData($data) {
+    private function _cleanData($data)
+    {
         $data['Menu']['name'] = Menu::clean(Menu::purify($data['Menu']['name']));
         $data['Menu']['link'] = Menu::clean(Menu::purify(filter_var($data['Menu']['link'], FILTER_SANITIZE_URL)), array('encode' => false));
         $data['Menu']['parent_id'] = filter_var($data['Menu']['parent_id'], FILTER_SANITIZE_NUMBER_INT);

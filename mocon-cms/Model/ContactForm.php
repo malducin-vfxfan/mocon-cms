@@ -14,7 +14,8 @@ App::uses('AppModel', 'Model');
  * ContactForm Model
  *
  */
-class ContactForm extends AppModel {
+class ContactForm extends AppModel
+{
 /**
  * Display field
  *
@@ -88,7 +89,8 @@ class ContactForm extends AppModel {
  *
  * @return boolean
  */
-    public function beforeValidate($options = array()) {
+    public function beforeValidate($options = array())
+    {
         if (!empty($this->data)) {
             $this->data = $this->_cleanData($this->data);
         }
@@ -103,7 +105,8 @@ class ContactForm extends AppModel {
  * @param array $data Array of data to clean.
  * @return array
  */
-    private function _cleanData($data) {
+    private function _cleanData($data)
+    {
         $data['ContactForm']['name'] = ContactForm::clean(ContactForm::purify($data['ContactForm']['name']));
         $data['ContactForm']['email'] = ContactForm::clean(ContactForm::purify(filter_var($data['ContactForm']['email'], FILTER_SANITIZE_EMAIL)));
         $data['ContactForm']['message'] = nl2br(ContactForm::clean(ContactForm::purify($data['ContactForm']['message']), array('clean_whitespace' => false)));

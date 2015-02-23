@@ -18,7 +18,8 @@ App::uses('AppController', 'Controller');
  *
  * @property Menu $Menu
  */
-class MenusController extends AppController {
+class MenusController extends AppController
+{
 /**
  * Models to use
  *
@@ -31,7 +32,8 @@ class MenusController extends AppController {
  *
  * @return void
  */
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         parent::beforeFilter();
         $this->Auth->allow('menu');
     }
@@ -44,7 +46,8 @@ class MenusController extends AppController {
  *
  * @return array
  */
-    public function menu() {
+    public function menu()
+    {
         //  checks to make sure method is actually originating from requestAction()
         if (empty($this->request->params['requested'])) {
             throw new ForbiddenException();
@@ -70,7 +73,8 @@ class MenusController extends AppController {
  *
  * @return void
  */
-    public function admin_index() {
+    public function admin_index()
+    {
         $this->layout = 'default_admin';
         $this->set('title_for_layout', 'Menu Items');
 
@@ -84,7 +88,8 @@ class MenusController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_view($id = null) {
+    public function admin_view($id = null)
+    {
         $this->layout = 'default_admin';
         if (!$this->Menu->exists($id)) {
             throw new NotFoundException('Invalid Menu.');
@@ -100,7 +105,8 @@ class MenusController extends AppController {
  *
  * @return void
  */
-    public function admin_add() {
+    public function admin_add()
+    {
         $this->layout = 'default_admin';
         if ($this->request->is('post')) {
             $this->Menu->create();
@@ -125,7 +131,8 @@ class MenusController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_edit($id = null) {
+    public function admin_edit($id = null)
+    {
         $this->layout = 'default_admin';
         if (!$this->Menu->exists($id)) {
             throw new NotFoundException('Invalid Menu.');
@@ -157,7 +164,8 @@ class MenusController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_delete($id = null) {
+    public function admin_delete($id = null)
+    {
         $this->layout = 'default_admin';
 
         $this->Menu->id = $id;

@@ -15,7 +15,8 @@ App::uses('AppController', 'Controller');
  *
  * @property Group $Group
  */
-class GroupsController extends AppController {
+class GroupsController extends AppController
+{
 
 /**
  * admin_index method
@@ -36,7 +37,8 @@ class GroupsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_view($id = null) {
+    public function admin_view($id = null)
+    {
         $this->layout = 'default_admin';
 
         if (!$this->Group->exists($id)) {
@@ -63,7 +65,8 @@ class GroupsController extends AppController {
  *
  * @return void
  */
-    public function admin_add() {
+    public function admin_add()
+    {
         $this->layout = 'default_admin';
         if ($this->request->is('post')) {
             $this->Group->create();
@@ -83,7 +86,8 @@ class GroupsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_edit($id = null) {
+    public function admin_edit($id = null)
+    {
         $this->layout = 'default_admin';
         if (!$this->Group->exists($id)) {
             throw new NotFoundException('Invalid Group.');
@@ -110,7 +114,8 @@ class GroupsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_delete($id = null) {
+    public function admin_delete($id = null)
+    {
         $this->layout = 'default_admin';
 
         $this->Group->id = $id;

@@ -20,7 +20,8 @@ App::uses('CakeEmail', 'Network/Email');
  * @property ContactForm $ContactForm
  * @property Recaptcha $Recaptcha
  */
-class ContactFormsController extends AppController {
+class ContactFormsController extends AppController
+{
 
 /**
  * Models
@@ -43,7 +44,8 @@ class ContactFormsController extends AppController {
  *
  * @return void
  */
-    public function index() {
+    public function index()
+    {
         if ($this->request->is('post')) {
             $this->ContactForm->create();
 
@@ -68,7 +70,8 @@ class ContactFormsController extends AppController {
  *
  * @return void
  */
-    public function admin_index() {
+    public function admin_index()
+    {
         $this->layout = 'default_admin';
         $this->set('title_for_layout', 'Contact Form messages');
 
@@ -82,7 +85,8 @@ class ContactFormsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_view($id = null) {
+    public function admin_view($id = null)
+    {
         $this->layout = 'default_admin';
         if (!$this->ContactForm->exists($id)) {
             throw new NotFoundException('Invalid Contact Form message.');
@@ -101,7 +105,8 @@ class ContactFormsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_delete($id = null) {
+    public function admin_delete($id = null)
+    {
         $this->layout = 'default_admin';
 
         $this->ContactForm->id = $id;
@@ -125,7 +130,8 @@ class ContactFormsController extends AppController {
  * @param string $id
  * @return void
  */
-    private function _sendContactEmail($id = null) {
+    private function _sendContactEmail($id = null)
+    {
         if (!$this->ContactForm->exists($id)) {
             throw new NotFoundException('Invalid Contact Form.');
         }

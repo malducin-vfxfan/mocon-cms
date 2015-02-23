@@ -16,7 +16,8 @@ App::uses('AppController', 'Controller');
  *
  * @property SystemInfo $SystemInfo
  */
-class SystemInfosController extends AppController {
+class SystemInfosController extends AppController
+{
 /**
  * Models to use
  *
@@ -29,7 +30,8 @@ class SystemInfosController extends AppController {
  *
  * @return void
  */
-    public function admin_index() {
+    public function admin_index()
+    {
         $this->layout = 'default_admin';
 
         // get system variables

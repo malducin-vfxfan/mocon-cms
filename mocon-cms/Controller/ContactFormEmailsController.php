@@ -15,14 +15,16 @@ App::uses('AppController', 'Controller');
  *
  * @property ContactFormEmail $ContactFormEmail
  */
-class ContactFormEmailsController extends AppController {
+class ContactFormEmailsController extends AppController
+{
 
 /**
  * admin_index method
  *
  * @return void
  */
-    public function admin_index() {
+    public function admin_index()
+    {
         $this->layout = 'default_admin';
         $this->set('title_for_layout', 'Contact Form Emails');
 
@@ -36,7 +38,8 @@ class ContactFormEmailsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_view($id = null) {
+    public function admin_view($id = null)
+    {
         $this->layout = 'default_admin';
         if (!$this->ContactFormEmail->exists($id)) {
             throw new NotFoundException('Invalid Contact Form Email.');
@@ -52,7 +55,8 @@ class ContactFormEmailsController extends AppController {
  *
  * @return void
  */
-    public function admin_add() {
+    public function admin_add()
+    {
         $this->layout = 'default_admin';
         if ($this->request->is('post')) {
             $this->ContactFormEmail->create();
@@ -72,7 +76,8 @@ class ContactFormEmailsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_edit($id = null) {
+    public function admin_edit($id = null)
+    {
         $this->layout = 'default_admin';
         if (!$this->ContactFormEmail->exists($id)) {
             throw new NotFoundException('Invalid Contact Form Email.');
@@ -99,7 +104,8 @@ class ContactFormEmailsController extends AppController {
  * @param string $id
  * @return void
  */
-    public function admin_delete($id = null) {
+    public function admin_delete($id = null)
+    {
         $this->layout = 'default_admin';
 
         $this->ContactFormEmail->id = $id;

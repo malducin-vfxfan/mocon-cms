@@ -20,7 +20,8 @@ App::uses('Folder', 'Utility');
  *
  * @property Page $Page
  */
-class PageSection extends AppModel {
+class PageSection extends AppModel
+{
 /**
  * Display field
  *
@@ -108,7 +109,8 @@ class PageSection extends AppModel {
  *
  * @return boolean
  */
-    public function beforeValidate($options = array()) {
+    public function beforeValidate($options = array())
+    {
         if (!empty($this->data)) {
             $this->data = $this->_cleanData($this->data);
         }
@@ -123,7 +125,8 @@ class PageSection extends AppModel {
  * @param array $data Array of data to clean.
  * @return array
  */
-    private function _cleanData($data) {
+    private function _cleanData($data)
+    {
         $data['PageSection']['title'] = PageSection::clean(PageSection::purify($data['PageSection']['title']));
         $data['PageSection']['content'] = PageSection::purify($data['PageSection']['content']);
         $data['PageSection']['page_id'] = filter_var($data['PageSection']['page_id'], FILTER_SANITIZE_NUMBER_INT);
@@ -142,7 +145,8 @@ class PageSection extends AppModel {
  * @param string $location
  * @return array
  */
-    public function listFiles($id = null, $location = null) {
+    public function listFiles($id = null, $location = null)
+    {
         if (!$id || !$location) return;
 
         $dir = new Folder($location.DS.'pages'.DS.sprintf("%010d", $id));
