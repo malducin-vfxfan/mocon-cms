@@ -12,16 +12,16 @@ SET time_zone = "+00:00";
 --
 -- Database: `vfxfan-base`
 --
-CREATE DATABASE IF NOT EXISTS `vfxfan-base` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-USE `vfxfan-base`;
+CREATE DATABASE IF NOT EXISTS `mocon_cms` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `mocon_cms`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vfxfan_acos`
+-- Table structure for table `mocon_acos`
 --
 
-CREATE TABLE IF NOT EXISTS `vfxfan_acos` (
+CREATE TABLE IF NOT EXISTS `mocon_acos` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `parent_id` int(10) DEFAULT NULL,
   `model` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -35,10 +35,10 @@ CREATE TABLE IF NOT EXISTS `vfxfan_acos` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vfxfan_albums`
+-- Table structure for table `mocon_albums`
 --
 
-CREATE TABLE IF NOT EXISTS `vfxfan_albums` (
+CREATE TABLE IF NOT EXISTS `mocon_albums` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
   `description` varchar(255) NOT NULL,
@@ -53,10 +53,10 @@ CREATE TABLE IF NOT EXISTS `vfxfan_albums` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vfxfan_aros`
+-- Table structure for table `mocon_aros`
 --
 
-CREATE TABLE IF NOT EXISTS `vfxfan_aros` (
+CREATE TABLE IF NOT EXISTS `mocon_aros` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `parent_id` int(10) DEFAULT NULL,
   `model` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -67,24 +67,24 @@ CREATE TABLE IF NOT EXISTS `vfxfan_aros` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
-INSERT INTO `vfxfan_aros` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `rght`) VALUES
+INSERT INTO `mocon_aros` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `rght`) VALUES
 (1, NULL, 'Group', 1, NULL, 1, 4),
 (2, 1, 'User', 1, NULL, 2, 3);
 
 /* this indexes will improve acl perfomance */
-CREATE INDEX idx_acos_lft_rght ON `vfxfan_acos` (`lft`, `rght`);
-CREATE INDEX idx_acos_alias ON `vfxfan_acos` (`alias`);
-CREATE INDEX idx_aros_lft_rght ON `vfxfan_aros` (`lft`, `rght`);
-CREATE INDEX idx_aros_alias ON `vfxfan_aros` (`alias`);
-CREATE INDEX idx_aco_id ON `vfxfan_aros_acos` (`aco_id`);
+CREATE INDEX idx_acos_lft_rght ON `mocon_acos` (`lft`, `rght`);
+CREATE INDEX idx_acos_alias ON `mocon_acos` (`alias`);
+CREATE INDEX idx_aros_lft_rght ON `mocon_aros` (`lft`, `rght`);
+CREATE INDEX idx_aros_alias ON `mocon_aros` (`alias`);
+CREATE INDEX idx_aco_id ON `mocon_aros_acos` (`aco_id`);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vfxfan_aros_acos`
+-- Table structure for table `mocon_aros_acos`
 --
 
-CREATE TABLE IF NOT EXISTS `vfxfan_aros_acos` (
+CREATE TABLE IF NOT EXISTS `mocon_aros_acos` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `aro_id` int(10) NOT NULL,
   `aco_id` int(10) NOT NULL,
@@ -96,16 +96,16 @@ CREATE TABLE IF NOT EXISTS `vfxfan_aros_acos` (
   UNIQUE KEY `ARO_ACO_KEY` (`aro_id`,`aco_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
-INSERT INTO `vfxfan_aros_acos` (`id`, `aro_id`, `aco_id`, `_create`, `_read`, `_update`, `_delete`) VALUES
+INSERT INTO `mocon_aros_acos` (`id`, `aro_id`, `aco_id`, `_create`, `_read`, `_update`, `_delete`) VALUES
 (1, 1, 1, '1', '1', '1', '1');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vfxfan_contact_forms`
+-- Table structure for table `mocon_contact_forms`
 --
 
-CREATE TABLE IF NOT EXISTS `vfxfan_contact_forms` (
+CREATE TABLE IF NOT EXISTS `mocon_contact_forms` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
@@ -118,10 +118,10 @@ CREATE TABLE IF NOT EXISTS `vfxfan_contact_forms` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vfxfan_contact_form_emails`
+-- Table structure for table `mocon_contact_form_emails`
 --
 
-CREATE TABLE IF NOT EXISTS `vfxfan_contact_form_emails` (
+CREATE TABLE IF NOT EXISTS `mocon_contact_form_emails` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
@@ -135,10 +135,10 @@ CREATE TABLE IF NOT EXISTS `vfxfan_contact_form_emails` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vfxfan_events`
+-- Table structure for table `mocon_events`
 --
 
-CREATE TABLE IF NOT EXISTS `vfxfan_events` (
+CREATE TABLE IF NOT EXISTS `mocon_events` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `date_start` date NOT NULL,
@@ -157,10 +157,10 @@ CREATE TABLE IF NOT EXISTS `vfxfan_events` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vfxfan_groups`
+-- Table structure for table `mocon_groups`
 --
 
-CREATE TABLE IF NOT EXISTS `vfxfan_groups` (
+CREATE TABLE IF NOT EXISTS `mocon_groups` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `created` datetime DEFAULT NULL,
@@ -169,16 +169,16 @@ CREATE TABLE IF NOT EXISTS `vfxfan_groups` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
-INSERT INTO `vfxfan_groups` (`id`, `name`, `created`, `modified`) VALUES
+INSERT INTO `mocon_groups` (`id`, `name`, `created`, `modified`) VALUES
 (1, 'Administrators', '2013-01-27 09:48:58', '2013-01-27 09:48:58');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vfxfan_menus`
+-- Table structure for table `mocon_menus`
 --
 
-CREATE TABLE IF NOT EXISTS `vfxfan_menus` (
+CREATE TABLE IF NOT EXISTS `mocon_menus` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `link` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -192,10 +192,10 @@ CREATE TABLE IF NOT EXISTS `vfxfan_menus` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vfxfan_pages`
+-- Table structure for table `mocon_pages`
 --
 
-CREATE TABLE IF NOT EXISTS `vfxfan_pages` (
+CREATE TABLE IF NOT EXISTS `mocon_pages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `slug` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
@@ -210,10 +210,10 @@ CREATE TABLE IF NOT EXISTS `vfxfan_pages` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vfxfan_page_sections`
+-- Table structure for table `mocon_page_sections`
 --
 
-CREATE TABLE IF NOT EXISTS `vfxfan_page_sections` (
+CREATE TABLE IF NOT EXISTS `mocon_page_sections` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `content` text COLLATE utf8_unicode_ci NOT NULL,
@@ -227,10 +227,10 @@ CREATE TABLE IF NOT EXISTS `vfxfan_page_sections` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vfxfan_posts`
+-- Table structure for table `mocon_posts`
 --
 
-CREATE TABLE IF NOT EXISTS `vfxfan_posts` (
+CREATE TABLE IF NOT EXISTS `mocon_posts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `summary` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -247,10 +247,10 @@ CREATE TABLE IF NOT EXISTS `vfxfan_posts` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vfxfan_users`
+-- Table structure for table `mocon_users`
 --
 
-CREATE TABLE IF NOT EXISTS `vfxfan_users` (
+CREATE TABLE IF NOT EXISTS `mocon_users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
