@@ -16,14 +16,17 @@ App::uses('ComponentCollection', 'Controller');
 App::uses('UploadComponent', 'Controller/Component');
 
 // A fake controller to test against
-class UploadControllerTest extends Controller {
+class UploadControllerTest extends Controller
+{
 }
 
-class UploadComponentTest extends CakeTestCase {
+class UploadComponentTest extends CakeTestCase
+{
     public $UploafComponent = null;
     public $Controller = null;
 
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
         // Setup our component and fake test controller
         $Collection = new ComponentCollection();
@@ -34,7 +37,8 @@ class UploadComponentTest extends CakeTestCase {
         $this->UploadComponent->startup($this->Controller);
     }
 
-    public function testConvertFilenameToId() {
+    public function testConvertFilenameToId()
+    {
         // Test our convertFilenameToId method with different parameters
         $this->assertEquals('0000000001.jpg', $this->UploadComponent->convertFilenameToId('1', 'star-wars.jpg'));
 
@@ -61,7 +65,8 @@ class UploadComponentTest extends CakeTestCase {
         $this->assertEquals('0000000000', $this->UploadComponent->convertFilenameToId('', ''));
     }
 
-    public function tearDown() {
+    public function tearDown()
+    {
         parent::tearDown();
         // Clean up after we're done
         unset($this->UploadComponent);

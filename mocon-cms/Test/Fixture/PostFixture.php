@@ -9,6 +9,7 @@
  * @link          http://vfxfan.com VFXfan
  * @package       Mocon-CMS.Test.Fixture
  */
-class PostFixture extends CakeTestFixture {
+class PostFixture extends CakeTestFixture
+{
     public $import = array('model' => 'Post');
 }

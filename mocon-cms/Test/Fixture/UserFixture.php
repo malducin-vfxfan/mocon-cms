@@ -9,6 +9,7 @@
  * @link          http://vfxfan.com VFXfan
  * @package       Mocon-CMS.Test.Fixture
  */
-class UserFixture extends CakeTestFixture {
+class UserFixture extends CakeTestFixture
+{
     public $import = array('model' => 'User');
 }

@@ -9,6 +9,7 @@
  * @link          http://vfxfan.com VFXfan
  * @package       Mocon-CMS.Test.Fixture
  */
-class MenuFixture extends CakeTestFixture {
+class MenuFixture extends CakeTestFixture
+{
     public $import = array('model' => 'Menu');
 }

@@ -9,6 +9,7 @@
  * @link          http://vfxfan.com VFXfan
  * @package       Mocon-CMS.Test.Fixture
  */
-class PageSectionFixture extends CakeTestFixture {
+class PageSectionFixture extends CakeTestFixture
+{
     public $import = array('model' => 'PageSection');
 }

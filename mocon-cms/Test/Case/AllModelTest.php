@@ -9,8 +9,10 @@
  * @link          http://vfxfan.com VFXfan
  * @package       Mocon-CMS.Test.Case
  */
-class AllModelTest extends CakeTestSuite {
-    public static function suite() {
+class AllModelTest extends CakeTestSuite
+{
+    public static function suite()
+    {
         $suite = new CakeTestSuite('All Model tests');
         $suite->addTestDirectory(TESTS . 'Case/Model');
         return $suite;

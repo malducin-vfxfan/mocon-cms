@@ -9,6 +9,7 @@
  * @link          http://vfxfan.com VFXfan
  * @package       Mocon-CMS.Test.Fixture
  */
-class GroupFixture extends CakeTestFixture {
+class GroupFixture extends CakeTestFixture
+{
     public $import = array('model' => 'Group', 'records' => true);
 }

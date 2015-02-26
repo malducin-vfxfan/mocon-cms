@@ -9,6 +9,7 @@
  * @link          http://vfxfan.com VFXfan
  * @package       Mocon-CMS.Test.Fixture
  */
-class AlbumFixture extends CakeTestFixture {
+class AlbumFixture extends CakeTestFixture
+{
     public $import = array('model' => 'Album');
 }

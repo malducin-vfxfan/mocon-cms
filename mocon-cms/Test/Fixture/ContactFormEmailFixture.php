@@ -9,6 +9,7 @@
  * @link          http://vfxfan.com VFXfan
  * @package       Mocon-CMS.Test.Fixture
  */
-class ContactFormEmailFixture extends CakeTestFixture {
+class ContactFormEmailFixture extends CakeTestFixture
+{
     public $import = array('model' => 'ContactFormEmail');
 }

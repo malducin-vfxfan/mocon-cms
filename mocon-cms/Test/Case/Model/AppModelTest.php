@@ -11,21 +11,25 @@
  */
 App::uses('AppModel', 'Model');
 
-class AppModelTest extends CakeTestCase {
+class AppModelTest extends CakeTestCase
+{
     public $fixtures = array();
 
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
         $this->AppModel = ClassRegistry::init('AppModel');
     }
 
-    public function tearDown() {
+    public function tearDown()
+    {
         unset($this->AppModel);
         ClassRegistry::flush();
         parent::tearDown();
     }
 
-    public function testAlphaNumericDashUnderscoreSpaceColon() {
+    public function testAlphaNumericDashUnderscoreSpaceColon()
+    {
         $result = $this->AppModel->alphaNumericDashUnderscoreSpaceColon(array('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_: '));
         $this->assertEquals(1, $result);
 
@@ -33,7 +37,8 @@ class AppModelTest extends CakeTestCase {
         $this->assertEquals(false, $result);
 
     }
-    public function testAlphaNumericDashUnderscore() {
+    public function testAlphaNumericDashUnderscore()
+    {
         $result = $this->AppModel->alphaNumericDashUnderscore(array('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_'));
         $this->assertEquals(1, $result);
 
@@ -51,7 +56,8 @@ class AppModelTest extends CakeTestCase {
  * http://htmlpurifier.org/live/smoketests/xssAttacks.php
  * https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet
  */
-    public function testPurify() {
+    public function testPurify()
+    {
 
         // XSS Locator
         $result = $this->AppModel->purify('\';alert(String.fromCharCode(88,83,83))//\\\';alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//\\";alert(String.fromCharCode(88,83,83))//--></SCRIPT>">\'><SCRIPT>alert(String.fromCharCode(88,83,83))</SCRIPT>=&{}');
