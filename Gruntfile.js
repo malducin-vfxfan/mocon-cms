@@ -86,7 +86,7 @@ module.exports = function(grunt) {
             expand: true,
             cwd: 'frontend/build/css/',
             src: '**/*.css',
-            dest: 'cms/webroot/css/',
+            dest: 'mocon-cms/webroot/css/',
             flatten: true,
           },
         ]
@@ -96,7 +96,7 @@ module.exports = function(grunt) {
           {
             expand: true,
             src: ['frontend/src/js/**/*.js', 'frontend/build/js/*.js'],
-            dest: 'cms/webroot/js/',
+            dest: 'mocon-cms/webroot/js/',
             flatten: true,
           },
         ]
@@ -126,7 +126,7 @@ module.exports = function(grunt) {
             cwd: 'C:/work/wamp/apigen'
           }
         },
-        command: 'php apigen.php --source C:/work/projects/vfxfan-cms/cms --destination C:/work/projects/vfxfan-cms/docs/manual-api --extensions "php,ctp" --title "VFXfan CMS API Documentation" --access-levels "public,protected,private"'
+        command: 'php apigen.php --source C:/work/projects/mocon-cms/mocon-cms --destination C:/work/projects/mocon-cms/docs/manual-api --extensions "php,ctp" --title "Mocon CMS API Documentation" --access-levels "public,protected,private"'
       }
     }
   });
