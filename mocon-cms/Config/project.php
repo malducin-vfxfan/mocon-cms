@@ -40,7 +40,7 @@ $config = array(
     ),
     'Bootstrap' => array(
         'css_version' => '', // Bootstrap CDN: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css'
-        'js_version' => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js',
+        'js_version' => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js',
     ),
     'Jquery' => array(
         'version' => 'http://code.jquery.com/jquery-1.11.2.min.js',
@@ -50,7 +50,7 @@ $config = array(
         'theme' => 'https://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css',
     ),
     'FontAwesome' => array(
-        'version' => 'https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css',
+        'version' => 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
     ),
     'Google' => array(
         'Analytics' => array(
